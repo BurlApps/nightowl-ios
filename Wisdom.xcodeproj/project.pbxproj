@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D37A300F1ABDEB9400F80EDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A300E1ABDEB9400F80EDA /* AppDelegate.swift */; };
-		D37A30111ABDEB9400F80EDA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A30101ABDEB9400F80EDA /* ViewController.swift */; };
+		D37A30111ABDEB9400F80EDA /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A30101ABDEB9400F80EDA /* RootController.swift */; };
 		D37A30141ABDEB9400F80EDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D37A30121ABDEB9400F80EDA /* Main.storyboard */; };
 		D37A30161ABDEB9400F80EDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D37A30151ABDEB9400F80EDA /* Images.xcassets */; };
 		D37A30251ABDEB9400F80EDA /* WisdomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A30241ABDEB9400F80EDA /* WisdomTests.swift */; };
@@ -31,6 +31,11 @@
 		D37A30631ABDF15200F80EDA /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D37A305D1ABDF04200F80EDA /* Bolts.framework */; };
 		D37A30641ABDF2B200F80EDA /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D37A30401ABDECDF00F80EDA /* ParseCrashReporting.framework */; };
 		D37A30661ABDF2C400F80EDA /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D37A30651ABDF2C400F80EDA /* libstdc++.6.dylib */; };
+		D3CC41491ABEA89A00FDC150 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CC41481ABEA89A00FDC150 /* User.swift */; };
+		D3CC414B1ABEA8B600FDC150 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CC414A1ABEA8B600FDC150 /* Track.swift */; };
+		D3CC414D1ABEA96400FDC150 /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CC414C1ABEA96400FDC150 /* Installation.swift */; };
+		D3CC414F1ABEB4BD00FDC150 /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CC414E1ABEB4BD00FDC150 /* PageController.swift */; };
+		D3CC41511ABEBFB000FDC150 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CC41501ABEBFB000FDC150 /* CameraController.swift */; };
 		D88440A188102567C8B12F9F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CED68498993D4A411C842CF6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +56,7 @@
 		D37A30091ABDEB9400F80EDA /* Wisdom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wisdom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D37A300D1ABDEB9400F80EDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D37A300E1ABDEB9400F80EDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D37A30101ABDEB9400F80EDA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D37A30101ABDEB9400F80EDA /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		D37A30131ABDEB9400F80EDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D37A30151ABDEB9400F80EDA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D37A301E1ABDEB9400F80EDA /* WisdomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WisdomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +82,11 @@
 		D37A305F1ABDF13700F80EDA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D37A30611ABDF13C00F80EDA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D37A30651ABDF2C400F80EDA /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		D3CC41481ABEA89A00FDC150 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D3CC414A1ABEA8B600FDC150 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		D3CC414C1ABEA96400FDC150 /* Installation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
+		D3CC414E1ABEB4BD00FDC150 /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		D3CC41501ABEBFB000FDC150 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +206,9 @@
 		D37A302F1ABDEBC100F80EDA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D3CC41481ABEA89A00FDC150 /* User.swift */,
+				D3CC414A1ABEA8B600FDC150 /* Track.swift */,
+				D3CC414C1ABEA96400FDC150 /* Installation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -203,7 +216,9 @@
 		D37A30301ABDEBC500F80EDA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D37A30101ABDEB9400F80EDA /* ViewController.swift */,
+				D37A30101ABDEB9400F80EDA /* RootController.swift */,
+				D3CC414E1ABEB4BD00FDC150 /* PageController.swift */,
+				D3CC41501ABEBFB000FDC150 /* CameraController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -378,8 +393,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D37A30111ABDEB9400F80EDA /* ViewController.swift in Sources */,
+				D37A30111ABDEB9400F80EDA /* RootController.swift in Sources */,
+				D3CC414D1ABEA96400FDC150 /* Installation.swift in Sources */,
+				D3CC41511ABEBFB000FDC150 /* CameraController.swift in Sources */,
+				D3CC414F1ABEB4BD00FDC150 /* PageController.swift in Sources */,
 				D37A300F1ABDEB9400F80EDA /* AppDelegate.swift in Sources */,
+				D3CC41491ABEA89A00FDC150 /* User.swift in Sources */,
+				D3CC414B1ABEA8B600FDC150 /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
