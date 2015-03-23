@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Wisdom.xcodeproj">
+      location = "group:Night Owl.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../../Juicy/iOS/Juicy.xcodeproj">

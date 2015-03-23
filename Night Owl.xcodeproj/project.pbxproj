@@ -1,0 +1,628 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		47D911A3208B9A324B0A0A83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A9A7258115935D2425357 /* libPods.a */; };
+		D33EBA221ABFED0A001E637D /* Night_OwlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA211ABFED0A001E637D /* Night_OwlTests.swift */; };
+		D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA461ABFEDBC001E637D /* AppDelegate.swift */; };
+		D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA471ABFEDBC001E637D /* Assignment.swift */; };
+		D33EBA581ABFEDBC001E637D /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA4B1ABFEDBC001E637D /* CameraController.swift */; };
+		D33EBA591ABFEDBC001E637D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D33EBA4C1ABFEDBC001E637D /* Images.xcassets */; };
+		D33EBA5B1ABFEDBC001E637D /* Installation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA4E1ABFEDBC001E637D /* Installation.swift */; };
+		D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA4F1ABFEDBC001E637D /* PageController.swift */; };
+		D33EBA5D1ABFEDBC001E637D /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA501ABFEDBC001E637D /* RootController.swift */; };
+		D33EBA5E1ABFEDBC001E637D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA511ABFEDBC001E637D /* Settings.swift */; };
+		D33EBA5F1ABFEDBC001E637D /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA521ABFEDBC001E637D /* Track.swift */; };
+		D33EBA601ABFEDBC001E637D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA531ABFEDBC001E637D /* User.swift */; };
+		D33EBA6D1ABFEFC8001E637D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA6B1ABFEFC8001E637D /* Parse.framework */; };
+		D33EBA6E1ABFEFC8001E637D /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA6C1ABFEFC8001E637D /* ParseCrashReporting.framework */; };
+		D33EBA701ABFF095001E637D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA6F1ABFF095001E637D /* AudioToolbox.framework */; };
+		D33EBA721ABFF09D001E637D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA711ABFF09D001E637D /* CFNetwork.framework */; };
+		D33EBA741ABFF0A4001E637D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA731ABFF0A4001E637D /* CoreGraphics.framework */; };
+		D33EBA761ABFF0AB001E637D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA751ABFF0AB001E637D /* CoreLocation.framework */; };
+		D33EBA781ABFF0B3001E637D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA771ABFF0B3001E637D /* MobileCoreServices.framework */; };
+		D33EBA7A1ABFF0BA001E637D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA791ABFF0BA001E637D /* QuartzCore.framework */; };
+		D33EBA7C1ABFF0C2001E637D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA7B1ABFF0C2001E637D /* Security.framework */; };
+		D33EBA7E1ABFF0CA001E637D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA7D1ABFF0CA001E637D /* StoreKit.framework */; };
+		D33EBA801ABFF0D5001E637D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA7F1ABFF0D5001E637D /* SystemConfiguration.framework */; };
+		D33EBA821ABFF0E6001E637D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA811ABFF0E6001E637D /* libz.dylib */; };
+		D33EBA841ABFF0F3001E637D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA831ABFF0F3001E637D /* libsqlite3.dylib */; };
+		D33EBA861ABFF113001E637D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA851ABFF113001E637D /* Foundation.framework */; };
+		D33EBA881ABFF124001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA871ABFF124001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D33EBA8A1ABFF148001E637D /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA891ABFF148001E637D /* libstdc++.6.dylib */; };
+		D33EBA8C1ABFF167001E637D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA8B1ABFF167001E637D /* Accounts.framework */; };
+		D33EBA8E1ABFF16D001E637D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA8D1ABFF16D001E637D /* Social.framework */; };
+		D33EBA901ABFF1A3001E637D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA8F1ABFF1A3001E637D /* Bolts.framework */; };
+		D33EBA911ABFF361001E637D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D33EBA491ABFEDBC001E637D /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D33EBA1C1ABFED0A001E637D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D33EB9FE1ABFED0A001E637D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D33EBA051ABFED0A001E637D;
+			remoteInfo = "Night Owl";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1430730C15A9671CCBACB989 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		980A9A7258115935D2425357 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D33EBA061ABFED0A001E637D /* Night Owl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Night Owl.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D33EBA1B1ABFED0A001E637D /* Night OwlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Night OwlTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D33EBA201ABFED0A001E637D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D33EBA211ABFED0A001E637D /* Night_OwlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Night_OwlTests.swift; sourceTree = "<group>"; };
+		D33EBA461ABFEDBC001E637D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D33EBA471ABFEDBC001E637D /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignment.swift; sourceTree = "<group>"; };
+		D33EBA4A1ABFEDBC001E637D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		D33EBA4B1ABFEDBC001E637D /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		D33EBA4C1ABFEDBC001E637D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D33EBA4D1ABFEDBC001E637D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D33EBA4E1ABFEDBC001E637D /* Installation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Installation.swift; sourceTree = "<group>"; };
+		D33EBA4F1ABFEDBC001E637D /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		D33EBA501ABFEDBC001E637D /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
+		D33EBA511ABFEDBC001E637D /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D33EBA521ABFEDBC001E637D /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		D33EBA531ABFEDBC001E637D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D33EBA681ABFEE9A001E637D /* Night Owl-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Night Owl-Bridging-Header.h"; sourceTree = "<group>"; };
+		D33EBA6B1ABFEFC8001E637D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
+		D33EBA6C1ABFEFC8001E637D /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = Frameworks/ParseCrashReporting.framework; sourceTree = "<group>"; };
+		D33EBA6F1ABFF095001E637D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D33EBA711ABFF09D001E637D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D33EBA731ABFF0A4001E637D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D33EBA751ABFF0AB001E637D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D33EBA771ABFF0B3001E637D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D33EBA791ABFF0BA001E637D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D33EBA7B1ABFF0C2001E637D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D33EBA7D1ABFF0CA001E637D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		D33EBA7F1ABFF0D5001E637D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D33EBA811ABFF0E6001E637D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D33EBA831ABFF0F3001E637D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		D33EBA851ABFF113001E637D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D33EBA871ABFF124001E637D /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		D33EBA891ABFF148001E637D /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		D33EBA8B1ABFF167001E637D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		D33EBA8D1ABFF16D001E637D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		D33EBA8F1ABFF1A3001E637D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D33EBA031ABFED0A001E637D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D33EBA901ABFF1A3001E637D /* Bolts.framework in Frameworks */,
+				D33EBA8E1ABFF16D001E637D /* Social.framework in Frameworks */,
+				D33EBA8C1ABFF167001E637D /* Accounts.framework in Frameworks */,
+				D33EBA8A1ABFF148001E637D /* libstdc++.6.dylib in Frameworks */,
+				D33EBA881ABFF124001E637D /* PassKit.framework in Frameworks */,
+				D33EBA861ABFF113001E637D /* Foundation.framework in Frameworks */,
+				D33EBA841ABFF0F3001E637D /* libsqlite3.dylib in Frameworks */,
+				D33EBA821ABFF0E6001E637D /* libz.dylib in Frameworks */,
+				D33EBA801ABFF0D5001E637D /* SystemConfiguration.framework in Frameworks */,
+				D33EBA7E1ABFF0CA001E637D /* StoreKit.framework in Frameworks */,
+				D33EBA7C1ABFF0C2001E637D /* Security.framework in Frameworks */,
+				D33EBA7A1ABFF0BA001E637D /* QuartzCore.framework in Frameworks */,
+				D33EBA781ABFF0B3001E637D /* MobileCoreServices.framework in Frameworks */,
+				D33EBA761ABFF0AB001E637D /* CoreLocation.framework in Frameworks */,
+				D33EBA741ABFF0A4001E637D /* CoreGraphics.framework in Frameworks */,
+				D33EBA721ABFF09D001E637D /* CFNetwork.framework in Frameworks */,
+				D33EBA701ABFF095001E637D /* AudioToolbox.framework in Frameworks */,
+				D33EBA6D1ABFEFC8001E637D /* Parse.framework in Frameworks */,
+				D33EBA6E1ABFEFC8001E637D /* ParseCrashReporting.framework in Frameworks */,
+				47D911A3208B9A324B0A0A83 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D33EBA181ABFED0A001E637D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D33EB9FD1ABFED0A001E637D = {
+			isa = PBXGroup;
+			children = (
+				D33EBA081ABFED0A001E637D /* Night Owl */,
+				D33EBA1E1ABFED0A001E637D /* Night OwlTests */,
+				D33EBA071ABFED0A001E637D /* Products */,
+				D33EBA6A1ABFEFAE001E637D /* Frameworks */,
+				E23F6025443F7B4B4191F6B2 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		D33EBA071ABFED0A001E637D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA061ABFED0A001E637D /* Night Owl.app */,
+				D33EBA1B1ABFED0A001E637D /* Night OwlTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D33EBA081ABFED0A001E637D /* Night Owl */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA611ABFEDF6001E637D /* Core */,
+				D33EBA621ABFEDFE001E637D /* Views */,
+				D33EBA631ABFEE0C001E637D /* Controllers */,
+				D33EBA641ABFEE29001E637D /* Models */,
+				D33EBA651ABFEE38001E637D /* Supporting Files */,
+			);
+			path = "Night Owl";
+			sourceTree = "<group>";
+		};
+		D33EBA1E1ABFED0A001E637D /* Night OwlTests */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA211ABFED0A001E637D /* Night_OwlTests.swift */,
+				D33EBA1F1ABFED0A001E637D /* Supporting Files */,
+			);
+			path = "Night OwlTests";
+			sourceTree = "<group>";
+		};
+		D33EBA1F1ABFED0A001E637D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA201ABFED0A001E637D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D33EBA611ABFEDF6001E637D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA461ABFEDBC001E637D /* AppDelegate.swift */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		D33EBA621ABFEDFE001E637D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA491ABFEDBC001E637D /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D33EBA631ABFEE0C001E637D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA501ABFEDBC001E637D /* RootController.swift */,
+				D33EBA4F1ABFEDBC001E637D /* PageController.swift */,
+				D33EBA4B1ABFEDBC001E637D /* CameraController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		D33EBA641ABFEE29001E637D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA471ABFEDBC001E637D /* Assignment.swift */,
+				D33EBA4E1ABFEDBC001E637D /* Installation.swift */,
+				D33EBA511ABFEDBC001E637D /* Settings.swift */,
+				D33EBA521ABFEDBC001E637D /* Track.swift */,
+				D33EBA531ABFEDBC001E637D /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		D33EBA651ABFEE38001E637D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA4C1ABFEDBC001E637D /* Images.xcassets */,
+				D33EBA4D1ABFEDBC001E637D /* Info.plist */,
+				D33EBA681ABFEE9A001E637D /* Night Owl-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D33EBA6A1ABFEFAE001E637D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA8F1ABFF1A3001E637D /* Bolts.framework */,
+				D33EBA8D1ABFF16D001E637D /* Social.framework */,
+				D33EBA8B1ABFF167001E637D /* Accounts.framework */,
+				D33EBA891ABFF148001E637D /* libstdc++.6.dylib */,
+				D33EBA871ABFF124001E637D /* PassKit.framework */,
+				D33EBA851ABFF113001E637D /* Foundation.framework */,
+				D33EBA831ABFF0F3001E637D /* libsqlite3.dylib */,
+				D33EBA811ABFF0E6001E637D /* libz.dylib */,
+				D33EBA7F1ABFF0D5001E637D /* SystemConfiguration.framework */,
+				D33EBA7D1ABFF0CA001E637D /* StoreKit.framework */,
+				D33EBA7B1ABFF0C2001E637D /* Security.framework */,
+				D33EBA791ABFF0BA001E637D /* QuartzCore.framework */,
+				D33EBA771ABFF0B3001E637D /* MobileCoreServices.framework */,
+				D33EBA751ABFF0AB001E637D /* CoreLocation.framework */,
+				D33EBA731ABFF0A4001E637D /* CoreGraphics.framework */,
+				D33EBA711ABFF09D001E637D /* CFNetwork.framework */,
+				D33EBA6F1ABFF095001E637D /* AudioToolbox.framework */,
+				D33EBA6B1ABFEFC8001E637D /* Parse.framework */,
+				D33EBA6C1ABFEFC8001E637D /* ParseCrashReporting.framework */,
+				980A9A7258115935D2425357 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E23F6025443F7B4B4191F6B2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */,
+				1430730C15A9671CCBACB989 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D33EBA051ABFED0A001E637D /* Night Owl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D33EBA251ABFED0A001E637D /* Build configuration list for PBXNativeTarget "Night Owl" */;
+			buildPhases = (
+				46A78548DB39905351BB0A59 /* Check Pods Manifest.lock */,
+				D33EBA021ABFED0A001E637D /* Sources */,
+				D33EBA031ABFED0A001E637D /* Frameworks */,
+				D33EBA041ABFED0A001E637D /* Resources */,
+				34C025607A34766F208BB989 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Night Owl";
+			productName = "Night Owl";
+			productReference = D33EBA061ABFED0A001E637D /* Night Owl.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D33EBA1A1ABFED0A001E637D /* Night OwlTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D33EBA281ABFED0A001E637D /* Build configuration list for PBXNativeTarget "Night OwlTests" */;
+			buildPhases = (
+				D33EBA171ABFED0A001E637D /* Sources */,
+				D33EBA181ABFED0A001E637D /* Frameworks */,
+				D33EBA191ABFED0A001E637D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D33EBA1D1ABFED0A001E637D /* PBXTargetDependency */,
+			);
+			name = "Night OwlTests";
+			productName = "Night OwlTests";
+			productReference = D33EBA1B1ABFED0A001E637D /* Night OwlTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D33EB9FE1ABFED0A001E637D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Brian Vallelunga";
+				TargetAttributes = {
+					D33EBA051ABFED0A001E637D = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = R5K2X99B7E;
+					};
+					D33EBA1A1ABFED0A001E637D = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = D33EBA051ABFED0A001E637D;
+					};
+				};
+			};
+			buildConfigurationList = D33EBA011ABFED0A001E637D /* Build configuration list for PBXProject "Night Owl" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D33EB9FD1ABFED0A001E637D;
+			productRefGroup = D33EBA071ABFED0A001E637D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D33EBA051ABFED0A001E637D /* Night Owl */,
+				D33EBA1A1ABFED0A001E637D /* Night OwlTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D33EBA041ABFED0A001E637D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D33EBA911ABFF361001E637D /* Main.storyboard in Resources */,
+				D33EBA591ABFEDBC001E637D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D33EBA191ABFED0A001E637D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		34C025607A34766F208BB989 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		46A78548DB39905351BB0A59 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D33EBA021ABFED0A001E637D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D33EBA581ABFEDBC001E637D /* CameraController.swift in Sources */,
+				D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */,
+				D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */,
+				D33EBA5F1ABFEDBC001E637D /* Track.swift in Sources */,
+				D33EBA5B1ABFEDBC001E637D /* Installation.swift in Sources */,
+				D33EBA601ABFEDBC001E637D /* User.swift in Sources */,
+				D33EBA5E1ABFEDBC001E637D /* Settings.swift in Sources */,
+				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
+				D33EBA5D1ABFEDBC001E637D /* RootController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D33EBA171ABFED0A001E637D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D33EBA221ABFED0A001E637D /* Night_OwlTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D33EBA1D1ABFED0A001E637D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D33EBA051ABFED0A001E637D /* Night Owl */;
+			targetProxy = D33EBA1C1ABFED0A001E637D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D33EBA491ABFEDBC001E637D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D33EBA4A1ABFEDBC001E637D /* Base */,
+			);
+			name = Main.storyboard;
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D33EBA231ABFED0A001E637D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D33EBA241ABFED0A001E637D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D33EBA261ABFED0A001E637D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = "Night Owl/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Night Owl/Night Owl-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D33EBA271ABFED0A001E637D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1430730C15A9671CCBACB989 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				INFOPLIST_FILE = "Night Owl/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Night Owl/Night Owl-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		D33EBA291ABFED0A001E637D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Night OwlTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Night Owl.app/Night Owl";
+			};
+			name = Debug;
+		};
+		D33EBA2A1ABFED0A001E637D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Night OwlTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Night Owl.app/Night Owl";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D33EBA011ABFED0A001E637D /* Build configuration list for PBXProject "Night Owl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D33EBA231ABFED0A001E637D /* Debug */,
+				D33EBA241ABFED0A001E637D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D33EBA251ABFED0A001E637D /* Build configuration list for PBXNativeTarget "Night Owl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D33EBA261ABFED0A001E637D /* Debug */,
+				D33EBA271ABFED0A001E637D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D33EBA281ABFED0A001E637D /* Build configuration list for PBXNativeTarget "Night OwlTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D33EBA291ABFED0A001E637D /* Debug */,
+				D33EBA2A1ABFED0A001E637D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D33EB9FE1ABFED0A001E637D /* Project object */;
+}

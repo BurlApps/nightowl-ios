@@ -1,15 +1,15 @@
 //
-//  WisdomTests.swift
-//  WisdomTests
+//  Night_OwlTests.swift
+//  Night OwlTests
 //
-//  Created by Brian Vallelunga on 3/21/15.
+//  Created by Brian Vallelunga on 3/22/15.
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
 import UIKit
 import XCTest
 
-class WisdomTests: XCTestCase {
+class Night_OwlTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

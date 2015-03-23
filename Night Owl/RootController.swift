@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPageViewControllerDataSource {
+class RootController: UIViewController, UIPageViewControllerDataSource {
 
     // MARK: Instance Variables
     private var pageViewController: UIPageViewController!
