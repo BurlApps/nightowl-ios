@@ -39,6 +39,8 @@
 		D33EBA8E1ABFF16D001E637D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA8D1ABFF16D001E637D /* Social.framework */; };
 		D33EBA901ABFF1A3001E637D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA8F1ABFF1A3001E637D /* Bolts.framework */; };
 		D33EBA911ABFF361001E637D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D33EBA491ABFEDBC001E637D /* Main.storyboard */; };
+		D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA921ABFFC31001E637D /* QuestionsController.swift */; };
+		D33EBA951ABFFC3A001E637D /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA941ABFFC3A001E637D /* SettingsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		D33EBA8B1ABFF167001E637D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D33EBA8D1ABFF16D001E637D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D33EBA8F1ABFF1A3001E637D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
+		D33EBA921ABFFC31001E637D /* QuestionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsController.swift; sourceTree = "<group>"; };
+		D33EBA941ABFFC3A001E637D /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +206,8 @@
 				D33EBA501ABFEDBC001E637D /* RootController.swift */,
 				D33EBA4F1ABFEDBC001E637D /* PageController.swift */,
 				D33EBA4B1ABFEDBC001E637D /* CameraController.swift */,
+				D33EBA921ABFFC31001E637D /* QuestionsController.swift */,
+				D33EBA941ABFFC3A001E637D /* SettingsController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -404,9 +410,11 @@
 				D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */,
 				D33EBA5F1ABFEDBC001E637D /* Track.swift in Sources */,
 				D33EBA5B1ABFEDBC001E637D /* Installation.swift in Sources */,
+				D33EBA951ABFFC3A001E637D /* SettingsController.swift in Sources */,
 				D33EBA601ABFEDBC001E637D /* User.swift in Sources */,
 				D33EBA5E1ABFEDBC001E637D /* Settings.swift in Sources */,
 				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
+				D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */,
 				D33EBA5D1ABFEDBC001E637D /* RootController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

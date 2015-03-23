@@ -4,5 +4,6 @@
 
 #import <Parse/Parse.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
+#import <VLBCameraView/VLBCameraView.h>
 #import "Stripe.h"
 #import "PTKView.h"

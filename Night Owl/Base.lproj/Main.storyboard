@@ -17,12 +17,157 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Plz-Mp-UlP"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192" y="365.41333333333336"/>
+            <point key="canvasLocation" x="300" y="395"/>
+        </scene>
+        <!--Questions-->
+        <scene sceneID="XNb-zx-vlH">
+            <objects>
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="uPW-Ng-Qwg" customClass="QuestionsController" customModule="Night_Owl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5yG-Ks-ajC"/>
+                        <viewControllerLayoutGuide type="bottom" id="6Ie-6o-hSE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VHK-rG-ohB">
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Questions" id="dFe-Uf-qB2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="ymc-ao-e0c">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="goToCamera:" destination="uPW-Ng-Qwg" id="7fF-Zi-84Z"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qLn-gp-ZZl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1292" y="-253"/>
+        </scene>
+        <!--Camera Controller-->
+        <scene sceneID="Ie8-AN-sQk">
+            <objects>
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="sjH-h7-Jt3" customClass="CameraController" customModule="Night_Owl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="th9-jk-pms"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bpd-Zj-j1c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0AO-gT-TAb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KdW-Lo-ZHM">
+                        <barButtonItem key="leftBarButtonItem" image="Questions" id="IjC-wE-35q">
+                            <connections>
+                                <action selector="goToQuestions:" destination="sjH-h7-Jt3" id="QMa-OE-29g"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Settings" id="o3Y-lS-AzI">
+                            <connections>
+                                <action selector="goToSettings:" destination="sjH-h7-Jt3" id="biE-Tl-3pu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LSK-hH-YxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1292" y="395"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="qIJ-M9-8ss">
+            <objects>
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="7aC-R2-uaB" customClass="SettingsController" customModule="Night_Owl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="guK-hs-1xm"/>
+                        <viewControllerLayoutGuide type="bottom" id="MIY-Ib-O7t"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uAN-RH-hGa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="C9X-DV-C7X">
+                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="9g5-7l-arO">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="goToCamera:" destination="7aC-R2-uaB" id="k9d-F2-5No"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Nv-fl-z9R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1292" y="1049"/>
+        </scene>
+        <!--Page Controller-->
+        <scene sceneID="CHH-Yu-UyN">
+            <objects>
+                <navigationController storyboardIdentifier="QuestionsController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mgh-gf-W41" customClass="PageController" customModule="Night_Owl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9lu-bd-1pe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="uPW-Ng-Qwg" kind="relationship" relationship="rootViewController" id="cIt-VX-zwg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UI3-eQ-yIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="760" y="-253"/>
+        </scene>
+        <!--Page Controller-->
+        <scene sceneID="6bI-gl-XhD">
+            <objects>
+                <navigationController storyboardIdentifier="CameraController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RXu-qj-q2u" customClass="PageController" customModule="Night_Owl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EuI-fi-2Ox">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sjH-h7-Jt3" kind="relationship" relationship="rootViewController" id="MBO-OC-BKD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="76r-Qm-6Wk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="760" y="395"/>
+        </scene>
+        <!--Page Controller-->
+        <scene sceneID="4nd-Hb-zcr">
+            <objects>
+                <navigationController storyboardIdentifier="SettingsController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7zB-QI-JjW" customClass="PageController" customModule="Night_Owl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2vg-Mf-m2H">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7aC-R2-uaB" kind="relationship" relationship="rootViewController" id="012-sQ-7fh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9P5-HR-EdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="760" y="1049"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Questions" width="60" height="60"/>
+        <image name="Settings" width="60" height="60"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
