@@ -59,13 +59,13 @@ class SettingsController: UITableViewController {
             
             switch(self.selectedRow.row) {
             case 0:
-                viewController.title = "Support"
+                viewController.name = "Support"
                 viewController.website = self.settings.supportUrl
             case 1:
-                viewController.title = "Privacy Policy"
+                viewController.name = "Privacy Policy"
                 viewController.website = self.settings.privacyUrl
             default:
-                viewController.title = "Terms of Use"
+                viewController.name = "Terms of Use"
                 viewController.website = self.settings.termsUrl
             }
         }

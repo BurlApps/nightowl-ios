@@ -6,9 +6,10 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class WebController: UIViewController {
+class WebController: UIViewController, UIWebViewDelegate {
     
     // MARK: Instance Variables
+    var name: String!
     var website: String!
     
     // MARK: IBOutlets
@@ -22,6 +23,12 @@ class WebController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         // Set WebView Url
+        self.webView.delegate = self
         self.webView.loadRequest(NSURLRequest(URL: NSURL(string: self.website)!))
+    }
+    
+    // MARK: UIWebView Delegate
+    func webViewDidFinishLoad(webView: UIWebView) {
+        self.title = self.name
     }
 }
