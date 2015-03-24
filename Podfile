@@ -1,5 +1,6 @@
 pod 'Stripe'
 pod 'PaymentKit'
+pod 'CHTTextView', '~> 0.1'
+pod 'LLSimpleCamera', '~> 2.2'
 
-pod 'VLBCameraView', :git => 'https://github.com/JuicyApp/VLBCameraView.git'
 pod 'THContactPicker', :git => 'https://github.com/JuicyApp/THContactPicker.git'

@@ -41,6 +41,10 @@
 		D33EBA911ABFF361001E637D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D33EBA491ABFEDBC001E637D /* Main.storyboard */; };
 		D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA921ABFFC31001E637D /* QuestionsController.swift */; };
 		D33EBA951ABFFC3A001E637D /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA941ABFFC3A001E637D /* SettingsController.swift */; };
+		D33EBA991AC0E5A8001E637D /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA981AC0E5A8001E637D /* PostController.swift */; };
+		D33EBA9C1AC0EA8A001E637D /* RBResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9B1AC0EA8A001E637D /* RBResizeImage.swift */; };
+		D33EBA9E1AC0EC14001E637D /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9D1AC0EC14001E637D /* NoAnimationSegue.swift */; };
+		D33EBAA01AC0F702001E637D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9F1AC0F701001E637D /* Subject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +99,11 @@
 		D33EBA8F1ABFF1A3001E637D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		D33EBA921ABFFC31001E637D /* QuestionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsController.swift; sourceTree = "<group>"; };
 		D33EBA941ABFFC3A001E637D /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		D33EBA981AC0E5A8001E637D /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		D33EBA9B1AC0EA8A001E637D /* RBResizeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizeImage.swift; sourceTree = "<group>"; };
+		D33EBA9D1AC0EC14001E637D /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimationSegue.swift; sourceTree = "<group>"; };
+		D33EBA9F1AC0F701001E637D /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		D33EBAA11AC13784001E637D /* libPods-CameraManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-CameraManager.a"; path = "Pods/build/Debug-iphoneos/libPods-CameraManager.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,9 +168,10 @@
 			isa = PBXGroup;
 			children = (
 				D33EBA611ABFEDF6001E637D /* Core */,
+				D33EBA641ABFEE29001E637D /* Models */,
 				D33EBA621ABFEDFE001E637D /* Views */,
 				D33EBA631ABFEE0C001E637D /* Controllers */,
-				D33EBA641ABFEE29001E637D /* Models */,
+				D33EBA9A1AC0EA7B001E637D /* Utils */,
 				D33EBA651ABFEE38001E637D /* Supporting Files */,
 			);
 			path = "Night Owl";
@@ -188,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				D33EBA461ABFEDBC001E637D /* AppDelegate.swift */,
+				D33EBA9D1AC0EC14001E637D /* NoAnimationSegue.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -208,6 +219,7 @@
 				D33EBA4B1ABFEDBC001E637D /* CameraController.swift */,
 				D33EBA921ABFFC31001E637D /* QuestionsController.swift */,
 				D33EBA941ABFFC3A001E637D /* SettingsController.swift */,
+				D33EBA981AC0E5A8001E637D /* PostController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -220,6 +232,7 @@
 				D33EBA511ABFEDBC001E637D /* Settings.swift */,
 				D33EBA521ABFEDBC001E637D /* Track.swift */,
 				D33EBA531ABFEDBC001E637D /* User.swift */,
+				D33EBA9F1AC0F701001E637D /* Subject.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -237,6 +250,7 @@
 		D33EBA6A1ABFEFAE001E637D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D33EBAA11AC13784001E637D /* libPods-CameraManager.a */,
 				D33EBA8F1ABFF1A3001E637D /* Bolts.framework */,
 				D33EBA8D1ABFF16D001E637D /* Social.framework */,
 				D33EBA8B1ABFF167001E637D /* Accounts.framework */,
@@ -259,6 +273,14 @@
 				980A9A7258115935D2425357 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D33EBA9A1AC0EA7B001E637D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA9B1AC0EA8A001E637D /* RBResizeImage.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		E23F6025443F7B4B4191F6B2 /* Pods */ = {
@@ -406,10 +428,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33EBA581ABFEDBC001E637D /* CameraController.swift in Sources */,
+				D33EBAA01AC0F702001E637D /* Subject.swift in Sources */,
 				D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */,
 				D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */,
+				D33EBA9E1AC0EC14001E637D /* NoAnimationSegue.swift in Sources */,
+				D33EBA9C1AC0EA8A001E637D /* RBResizeImage.swift in Sources */,
 				D33EBA5F1ABFEDBC001E637D /* Track.swift in Sources */,
 				D33EBA5B1ABFEDBC001E637D /* Installation.swift in Sources */,
+				D33EBA991AC0E5A8001E637D /* PostController.swift in Sources */,
 				D33EBA951ABFFC3A001E637D /* SettingsController.swift in Sources */,
 				D33EBA601ABFEDBC001E637D /* User.swift in Sources */,
 				D33EBA5E1ABFEDBC001E637D /* Settings.swift in Sources */,
@@ -535,13 +561,20 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "Night Owl/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Night Owl/Night Owl-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -555,13 +588,20 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "Night Owl/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Night Owl/Night Owl-Bridging-Header.h";
 			};
 			name = Release;

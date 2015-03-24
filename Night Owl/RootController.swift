@@ -22,6 +22,10 @@ class RootController: UIViewController, UIPageViewControllerDataSource, UIPageVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if User.current() == nil {
+            User.login(nil)
+        }
+        
         // Create Page View Controller
         self.pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
         self.pageViewController.view.backgroundColor = UIColor.clearColor()

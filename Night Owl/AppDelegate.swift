@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //Initialize Parse
         ParseCrashReporting.enable()
+        Parse.enableLocalDatastore()
         Parse.setApplicationId("0bzu64ADBGuHKglFYiCTYKR7tFZVaepLxVT1HXYe", clientKey: "1VcBDc3O8TogJPqCbiZbfz9zezfI9HaYSHKgRLvG")
         
         // Register for Push Notitications

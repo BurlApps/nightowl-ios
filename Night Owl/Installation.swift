@@ -12,10 +12,10 @@ class Installation: NSObject {
     var parse: PFInstallation!
     
     // MARK: Convenience Methods
-    convenience init(_ installation: PFInstallation) {
+    convenience init(_ object: PFInstallation) {
         self.init()
         
-        self.parse = installation
+        self.parse = object
     }
     
     // MARK: Class Methods

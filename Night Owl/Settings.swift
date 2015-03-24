@@ -11,15 +11,17 @@ class Settings: NSObject {
     // MARK: Instance Variables
     var host: String!
     var freeQuestions: Int!
+    var questionNameLimit: Int!
     var parse: PFConfig!
     
     // MARK: Convenience Methods
-    convenience init(_ settings: PFConfig) {
+    convenience init(_ object: PFConfig) {
         self.init()
         
-        self.host = settings["host"] as String
-        self.freeQuestions = settings["freeQuestions"] as Int
-        self.parse = settings
+        self.host = object["host"] as String
+        self.freeQuestions = object["freeQuestions"] as Int
+        self.questionNameLimit = object["questionNameLimit"] as Int
+        self.parse = object
     }
     
     // MARK: Class Methods

@@ -12,22 +12,22 @@ class User: NSObject {
     var parse: PFUser!
     
     // MARK: Convenience Methods
-    convenience init(_ user: PFUser) {
+    convenience init(_ object: PFUser) {
         self.init()
         
-        self.parse = user
+        self.parse = object
     }
     
     // MARK: Class Methods
     class func login(callback: ((user: User) -> Void)!) {
         PFAnonymousUtils.logInWithBlock { (user: PFUser!, error: NSError!) -> Void in
             if error == nil {
-                callback(user: User(user))
+                callback!(user: User(user))
             }
         }
     }
     
-    class func current(relations: Bool = false) -> User! {
+    class func current() -> User! {
         if let user = PFUser.currentUser() {
             return User(user)
         } else {

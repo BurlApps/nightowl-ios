@@ -6,11 +6,23 @@
 // project.
 
 
+// CHTTextView
+#define COCOAPODS_POD_AVAILABLE_CHTTextView
+#define COCOAPODS_VERSION_MAJOR_CHTTextView 0
+#define COCOAPODS_VERSION_MINOR_CHTTextView 1
+#define COCOAPODS_VERSION_PATCH_CHTTextView 0
+
 // CocoaLumberjack
 #define COCOAPODS_POD_AVAILABLE_CocoaLumberjack
 #define COCOAPODS_VERSION_MAJOR_CocoaLumberjack 1
 #define COCOAPODS_VERSION_MINOR_CocoaLumberjack 6
 #define COCOAPODS_VERSION_PATCH_CocoaLumberjack 2
+
+// LLSimpleCamera
+#define COCOAPODS_POD_AVAILABLE_LLSimpleCamera
+#define COCOAPODS_VERSION_MAJOR_LLSimpleCamera 2
+#define COCOAPODS_VERSION_MINOR_LLSimpleCamera 2
+#define COCOAPODS_VERSION_PATCH_LLSimpleCamera 0
 
 // PaymentKit
 #define COCOAPODS_POD_AVAILABLE_PaymentKit

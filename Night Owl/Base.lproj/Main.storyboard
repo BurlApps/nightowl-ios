@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D72i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Root Controller-->
@@ -64,7 +65,28 @@
                     <view key="view" contentMode="scaleToFill" id="0AO-gT-TAb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dg2-6t-2yP">
+                                <rect key="frame" x="120" y="458" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="a4V-pb-DPR"/>
+                                    <constraint firstAttribute="height" constant="80" id="m2p-C6-uGn"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="captureDown:" destination="sjH-h7-Jt3" eventType="touchDown" id="Dy4-PF-3e0"/>
+                                    <action selector="captureExit:" destination="sjH-h7-Jt3" eventType="touchDragExit" id="U28-IB-iTn"/>
+                                    <action selector="captureImage:" destination="sjH-h7-Jt3" eventType="touchUpInside" id="Kg5-RB-yLQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="dg2-6t-2yP" secondAttribute="centerX" id="561-DR-T0g"/>
+                            <constraint firstItem="Bpd-Zj-j1c" firstAttribute="top" secondItem="dg2-6t-2yP" secondAttribute="bottom" constant="30" id="QhE-ac-iUH"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KdW-Lo-ZHM">
                         <barButtonItem key="leftBarButtonItem" image="Questions" id="IjC-wE-35q">
@@ -78,10 +100,65 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="captureButton" destination="dg2-6t-2yP" id="yZc-b7-f3v"/>
+                        <segue destination="set-Iy-g4I" kind="custom" identifier="postSegue" customClass="NoAnimationSegue" id="ASm-fb-ie5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LSK-hH-YxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1292" y="395"/>
+        </scene>
+        <!--Post Controller-->
+        <scene sceneID="rGg-k2-VYh">
+            <objects>
+                <viewController id="set-Iy-g4I" customClass="PostController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="N8e-c0-xUF"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zz4-BR-QGn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uN1-DW-P6h">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzW-lb-ihN">
+                                <rect key="frame" x="0.0" y="388" width="320" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="dFa-gR-ALR"/>
+                                </constraints>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="dzW-lb-ihN" secondAttribute="trailing" constant="-16" id="3yc-0f-AJj"/>
+                            <constraint firstItem="Zz4-BR-QGn" firstAttribute="top" secondItem="dzW-lb-ihN" secondAttribute="bottom" id="D7N-nX-PLL"/>
+                            <constraint firstItem="dzW-lb-ihN" firstAttribute="leading" secondItem="uN1-DW-P6h" secondAttribute="leadingMargin" constant="-16" id="Gr1-x0-eIy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="VWb-69-1Cs">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="mHp-Wf-y77">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="canelPost:" destination="set-Iy-g4I" id="lFu-gZ-a96"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="POST" id="sHz-Hj-j7q">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="createPost:" destination="set-Iy-g4I" id="qVr-1G-joR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="pickerHeight" destination="dFa-gR-ALR" id="1OM-00-sRM"/>
+                        <outlet property="pickerOffset" destination="D7N-nX-PLL" id="deI-Vm-Ehm"/>
+                        <outlet property="subjectPicker" destination="dzW-lb-ihN" id="2DJ-oE-DNg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JJS-Pe-gmQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1762" y="395"/>
         </scene>
         <!--Settings-->
         <scene sceneID="qIJ-M9-8ss">
