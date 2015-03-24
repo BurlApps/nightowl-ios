@@ -49,6 +49,10 @@ class RootController: UIViewController, UIPageViewControllerDataSource, UIPageVi
         
         // Configure Status Bar
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+        
+        // Remove Text From Back Button
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, -1000),
+            forBarMetrics: UIBarMetrics.Default)
     }
     
     override func viewDidAppear(animated: Bool) {

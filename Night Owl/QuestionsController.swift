@@ -12,6 +12,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     private var user: User = User.current()
     private var questions: [Assignment] = []
     private var questionsFiltered: [Assignment] = []
+    private var question: Assignment!
     private var cellIdentifier = "cell"
     
     // MARK: IBOutlets
@@ -52,10 +53,14 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         self.reloadQuestions()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let viewController = segue.destinationViewController as QuestionController
+        viewController.question = self.question
+    }
+    
     // MARK: Instance Methods
     func reloadQuestions() {
         self.user.getAssignments { (assignments) -> Void in
-            self.title = "Questions"
             self.questions = assignments
             self.filterQuestions(self.searchBar.text)
             self.refreshControl?.endRefreshing()
@@ -69,7 +74,10 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
             self.questionsFiltered = self.questions
         } else {
             for question in self.questions {
-                if NSString(string: question.name).containsString(filter) {
+                let containsName = NSString(string: question.name).containsString(filter)
+                let containsSubject = NSString(string: question.subject.name).containsString(filter)
+                
+                if containsName || containsSubject {
                     self.questionsFiltered.append(question)
                 }
             }
@@ -98,12 +106,18 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         return self.questionsFiltered.count
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var company = self.questionsFiltered[indexPath.row]
-        var cell: UITableViewCell! = self.tableView.cellForRowAtIndexPath(indexPath)
-        
+        var question = self.questionsFiltered[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        println(indexPath.row)
+        
+        if question.state >= 3 {
+            self.question = question
+            self.performSegueWithIdentifier("questionSegue", sender: self)
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -111,12 +125,30 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as? UITableViewCell
         
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: self.cellIdentifier)
-            cell.textLabel?.textColor = UIColor.darkGrayColor()
+            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: self.cellIdentifier)
+            cell.textLabel?.textColor = UIColor.blackColor()
             cell.textLabel?.font = UIFont.systemFontOfSize(18)
+            cell.detailTextLabel?.textColor = UIColor.grayColor()
+            cell.detailTextLabel?.font = UIFont.systemFontOfSize(15)
+            cell.imageView?.image = UIImage(named: "Cirlce")
         }
         
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        if question.state >= 3 {
+            cell.selectionStyle = UITableViewCellSelectionStyle.Gray
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        }
+        
+        switch(question.state) {
+        case 1: cell.imageView?.tintColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.25)
+        case 2: cell.imageView?.tintColor = UIColor(red:0.01, green:0.66, blue:0.96, alpha:0.5)
+        case 3: cell.imageView?.tintColor = UIColor(red:0.3, green:0.69, blue:0.31, alpha:0.75)
+        default: cell.imageView?.tintColor = UIColor(red:0.96, green:0.26, blue:0.21, alpha:0.75)
+        }
+
         cell.textLabel?.text = question.name
+        cell.detailTextLabel?.text = question.subject.name
         
         return cell
     }

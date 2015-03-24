@@ -125,10 +125,9 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             return
         }
         
+        Assignment.create(editorText, question: imageResized, creator: self.user, subject: self.subjectChosen)
         self.navigationController?.popViewControllerAnimated(false)
         self.cameraController.slideToQuestions()
-        
-        Assignment.create(editorText, question: imageResized, creator: self.user, subject: self.subjectChosen)
     }
     
     // MARK: NSNotificationCenter

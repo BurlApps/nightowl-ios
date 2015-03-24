@@ -45,6 +45,7 @@
 		D33EBA9C1AC0EA8A001E637D /* RBResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9B1AC0EA8A001E637D /* RBResizeImage.swift */; };
 		D33EBA9E1AC0EC14001E637D /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9D1AC0EC14001E637D /* NoAnimationSegue.swift */; };
 		D33EBAA01AC0F702001E637D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9F1AC0F701001E637D /* Subject.swift */; };
+		D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA31AC16CCB001E637D /* QuestionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		D33EBA9D1AC0EC14001E637D /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimationSegue.swift; sourceTree = "<group>"; };
 		D33EBA9F1AC0F701001E637D /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		D33EBAA11AC13784001E637D /* libPods-CameraManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-CameraManager.a"; path = "Pods/build/Debug-iphoneos/libPods-CameraManager.a"; sourceTree = "<group>"; };
+		D33EBAA31AC16CCB001E637D /* QuestionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 				D33EBA921ABFFC31001E637D /* QuestionsController.swift */,
 				D33EBA941ABFFC3A001E637D /* SettingsController.swift */,
 				D33EBA981AC0E5A8001E637D /* PostController.swift */,
+				D33EBAA31AC16CCB001E637D /* QuestionController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
 				D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */,
 				D33EBA5D1ABFEDBC001E637D /* RootController.swift in Sources */,
+				D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

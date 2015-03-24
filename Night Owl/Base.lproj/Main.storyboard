@@ -36,7 +36,7 @@
                         <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search for your questions..." id="A7O-tr-QeA">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="BgS-2A-L4o">
@@ -63,6 +63,7 @@
                     <connections>
                         <outlet property="searchBar" destination="A7O-tr-QeA" id="dsl-0E-Wq9"/>
                         <outlet property="searchDisplayController" destination="7JI-Yk-PV1" id="L60-xr-6Zy"/>
+                        <segue destination="kbr-vP-UGO" kind="push" identifier="questionSegue" id="50g-j5-rVF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMP-1P-DBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -76,6 +77,26 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1292" y="-253"/>
+        </scene>
+        <!--Question-->
+        <scene sceneID="InM-xr-tZK">
+            <objects>
+                <viewController id="kbr-vP-UGO" customClass="QuestionController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EFw-RJ-Tsg"/>
+                        <viewControllerLayoutGuide type="bottom" id="nAr-KI-pZr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="swG-XT-WV5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Question" id="FVo-66-bL3"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qRM-yE-bdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1762" y="-253"/>
         </scene>
         <!--Camera Controller-->
         <scene sceneID="Ie8-AN-sQk">

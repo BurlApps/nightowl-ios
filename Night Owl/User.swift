@@ -72,10 +72,15 @@ class User: NSObject {
         var assignments: [Assignment] = []
         var query = PFQuery(className: "Assignment")
         
+        query.whereKey("creator", equalTo: self.parse)
+        query.orderByDescending("updatedAt")
+        
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 for object in objects as [PFObject] {
-                    assignments.append(Assignment(object))
+                    var assignment = Assignment(object)
+                    assignment.subject.fetch()
+                    assignments.append(assignment)
                 }
                 
                 callback(assignments: assignments)
