@@ -62,10 +62,19 @@ class CameraController: UIViewController {
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let pageController = self.navigationController as PageController
+        pageController.rootController.unlockPageView()
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         let viewController = segue.destinationViewController as PostController
+        let pageController = self.navigationController as PageController
         viewController.capturedImage = self.capturedImage
         viewController.cameraController = self
+        pageController.rootController.lockPageView()
     }
     
     // MARK: IBActions

@@ -11,4 +11,13 @@ class PageController: UINavigationController {
     // MARK: Instance Variables
     var pageIndex: Int!
     var rootController: RootController!
+    
+    // MARK: Instance Methods
+    func lockPageView() {
+        self.rootController.lockPageView()
+    }
+    
+    func unlockPageView() {
+        self.rootController.unlockPageView()
+    }
 }

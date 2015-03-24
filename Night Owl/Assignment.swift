@@ -52,29 +52,31 @@ class Assignment: NSObject {
     // MARK: Instance Methods
     func getAnswer(callback: (image: UIImage) -> Void) {
         if self.answerCached == nil {
-            let request = NSURLRequest(URL: NSURL(string: self.answer.url)!)
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
-                (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-                if error == nil {
-                    self.answerCached = UIImage(data: data)
-                    
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-                        // Makes a 1x1 graphics context and draws the image into it
-                        UIGraphicsBeginImageContext(CGSizeMake(1,1))
-                        let context = UIGraphicsGetCurrentContext()
-                        CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), self.answerCached.CGImage)
-                        UIGraphicsEndImageContext()
+            if self.answer != nil {
+                let request = NSURLRequest(URL: NSURL(string: self.answer.url)!)
+                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
+                    (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                    if error == nil {
+                        self.answerCached = UIImage(data: data)
                         
-                        // Now the image will have been loaded and decoded
-                        // and is ready to rock for the main thread
-                        dispatch_async(dispatch_get_main_queue(), {
-                            callback(image: self.answerCached)
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+                            // Makes a 1x1 graphics context and draws the image into it
+                            UIGraphicsBeginImageContext(CGSizeMake(1,1))
+                            let context = UIGraphicsGetCurrentContext()
+                            CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), self.answerCached.CGImage)
+                            UIGraphicsEndImageContext()
+                            
+                            // Now the image will have been loaded and decoded
+                            // and is ready to rock for the main thread
+                            dispatch_async(dispatch_get_main_queue(), {
+                                callback(image: self.answerCached)
+                            })
                         })
-                    })
-                } else {
-                    println(error)
-                }
-            })
+                    } else {
+                        println(error)
+                    }
+                })
+            }
         } else {
             callback(image: self.answerCached)
         }

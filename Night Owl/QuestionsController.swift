@@ -53,9 +53,18 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         self.reloadQuestions()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let pageController = self.navigationController as PageController
+        pageController.rootController.unlockPageView()
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let viewController = segue.destinationViewController as QuestionController
+        let pageController = self.navigationController as PageController
         viewController.question = self.question
+        pageController.rootController.lockPageView()
     }
     
     // MARK: Instance Methods

@@ -15,6 +15,7 @@ class RootController: UIViewController, UIPageViewControllerDataSource, UIPageVi
     private let pages = 3
     private let startPage = 1
     private var currentPage = 1
+    private var locked = false
     private var pagesControllers = Dictionary<Int, PageController>()
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     
@@ -63,6 +64,14 @@ class RootController: UIViewController, UIPageViewControllerDataSource, UIPageVi
     }
     
     // MARK: Instance Methods
+    func lockPageView() {
+        self.locked = true
+    }
+    
+    func unlockPageView() {
+        self.locked = false
+    }
+    
     func setActiveChildController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
         self.pageViewController.setViewControllers([self.viewControllerAtIndex(index)],
             direction: direction, animated: animated, completion: { (success: Bool) -> Void in
@@ -124,7 +133,7 @@ class RootController: UIViewController, UIPageViewControllerDataSource, UIPageVi
     
     // MARK: UIScrollView Delegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (self.currentPage == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width) {
+        if (self.locked || (self.currentPage == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width)) {
             scrollView.contentOffset = CGPointMake(scrollView.bounds.size.width, 0)
         } else if (self.currentPage == (self.pages - 1) && scrollView.contentOffset.x > scrollView.bounds.size.width) {
             scrollView.contentOffset = CGPointMake(scrollView.bounds.size.width, 0)
@@ -132,7 +141,7 @@ class RootController: UIViewController, UIPageViewControllerDataSource, UIPageVi
     }
     
     func scrollViewWillEndDragging(scrollView: UIScrollView, var withVelocity velocity: CGPoint, var targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if (self.currentPage == 0 && scrollView.contentOffset.x <= scrollView.bounds.size.width) {
+        if (self.locked || (self.currentPage == 0 && scrollView.contentOffset.x <= scrollView.bounds.size.width)) {
             velocity = CGPointZero
             targetContentOffset.memory.x = scrollView.bounds.size.width
             targetContentOffset.memory.y = 0
