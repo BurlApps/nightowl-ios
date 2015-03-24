@@ -10,6 +10,7 @@ class User: NSObject {
     
     // MARK: Instance Variables
     var name: String!
+    var phone: String!
     var email: String!
     var stripe: String!
     var charges: Int!
@@ -21,6 +22,7 @@ class User: NSObject {
         self.init()
         
         self.name = object["name"] as? String
+        self.phone = object["phone"] as? String
         self.email = object["email"] as? String
         self.stripe = object["stripe"] as? String
         self.charges = object["charges"] as? Int
@@ -56,13 +58,14 @@ class User: NSObject {
         User.logout()
     }
     
-    func fetch() -> User {
+    func fetch(callback: ((user: User) -> Void)!) -> User {
         self.parse.fetchInBackgroundWithBlock { (object: PFObject!, error: NSError!) -> Void in
             self.name = object["name"] as? String
             self.email = object["email"] as? String
             self.stripe = object["stripe"] as? String
             self.charges = object["charges"] as? Int
             self.freeQuestions = object["freeQuestions"] as? Int
+            callback!(user: self)
         }
         
         return self

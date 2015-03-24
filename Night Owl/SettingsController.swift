@@ -12,6 +12,13 @@ class SettingsController: UITableViewController {
     private var selectedRow: NSIndexPath!
     private var themeColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1)
     private var settings: Settings!
+    private var user = User.current()
+    
+    // MARK: IBOutlets
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var freeQuestionsLabel: UILabel!
 
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -21,6 +28,13 @@ class SettingsController: UITableViewController {
         var shadow = NSShadow()
         shadow.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
         shadow.shadowOffset = CGSizeMake(0, 2);
+        
+        // Add Bottom Border To Nav Bar
+        if let frame = self.navigationController?.navigationBar.frame {
+            var navBorder = UIView(frame: CGRectMake(0, frame.height-1, frame.width, 1))
+            navBorder.backgroundColor = UIColor(white: 0, alpha: 0.2)
+            self.navigationController?.navigationBar.addSubview(navBorder)
+        }
         
         // Configure Navigation Bar
         self.navigationController?.navigationBarHidden = false
@@ -36,6 +50,13 @@ class SettingsController: UITableViewController {
                 NSShadowAttributeName: shadow
             ]
         }
+        
+        // Add Refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: Selector("reloadUser"), forControlEvents: UIControlEvents.ValueChanged)
+        
+        // Set Fetch User Info
+        self.reloadUser()
         
         // Get Settings
         Settings.sharedInstance { (settings) -> Void in
@@ -68,6 +89,17 @@ class SettingsController: UITableViewController {
                 viewController.name = "Terms of Use"
                 viewController.website = self.settings.termsUrl
             }
+        }
+    }
+    
+    // MARK: InstanceMethods
+    func reloadUser() {
+        self.user.fetch { (user) -> Void in
+            self.nameLabel.text = self.user.name
+            self.phoneLabel.text = self.user.phone
+            self.emailLabel.text = self.user.email
+            self.freeQuestionsLabel.text = "\(self.user.freeQuestions)"
+            self.refreshControl?.endRefreshing()
         }
     }
     

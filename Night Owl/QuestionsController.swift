@@ -27,6 +27,13 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         shadow.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
         shadow.shadowOffset = CGSizeMake(0, 2);
         
+        // Add Bottom Border To Nav Bar
+        if let frame = self.navigationController?.navigationBar.frame {
+            var navBorder = UIView(frame: CGRectMake(0, frame.height-1, frame.width, 1))
+            navBorder.backgroundColor = UIColor(white: 0, alpha: 0.2)
+            self.navigationController?.navigationBar.addSubview(navBorder)
+        }
+        
         // Configure Navigation Bar
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.shadowImage = nil
@@ -44,6 +51,16 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         
         // Configure Search Bar
         self.searchBar.delegate = self
+        
+        for subview in self.searchBar.subviews {
+            for subSubView in subview.subviews {
+                if subSubView.conformsToProtocol(UITextInputTraits) {
+                    var textField = subSubView as UITextField
+                    textField.returnKeyType = UIReturnKeyType.Done
+                    textField.enablesReturnKeyAutomatically = false
+                }
+            }
+        }
         
         // Add Refresh
         self.refreshControl = UIRefreshControl()
@@ -102,6 +119,10 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     }
     
     // UISearchBar Methods
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
+    }
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         self.filterQuestions(self.searchBar.text)
     }
