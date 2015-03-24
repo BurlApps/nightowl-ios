@@ -9,7 +9,9 @@
 class SettingsController: UITableViewController {
     
     // MARK: Instance Variables
+    private var selectedRow: NSIndexPath!
     private var themeColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1)
+    private var settings: Settings!
 
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -34,6 +36,39 @@ class SettingsController: UITableViewController {
                 NSShadowAttributeName: shadow
             ]
         }
+        
+        // Get Settings
+        Settings.sharedInstance { (settings) -> Void in
+            self.settings = settings
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let pageController = self.navigationController as PageController
+        pageController.rootController.unlockPageView()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let pageController = self.navigationController as PageController
+        pageController.rootController.lockPageView()
+        
+        if self.selectedRow != nil && self.selectedRow.section == 2 {
+            let viewController = segue.destinationViewController as WebController
+            
+            switch(self.selectedRow.row) {
+            case 0:
+                viewController.title = "Support"
+                viewController.website = self.settings.supportUrl
+            case 1:
+                viewController.title = "Privacy Policy"
+                viewController.website = self.settings.privacyUrl
+            default:
+                viewController.title = "Terms of Use"
+                viewController.website = self.settings.termsUrl
+            }
+        }
     }
     
     // MARK: IBActions
@@ -43,6 +78,11 @@ class SettingsController: UITableViewController {
     }
     
     // MARK: UITableViewController Methods
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        self.selectedRow = indexPath
+        return indexPath
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }

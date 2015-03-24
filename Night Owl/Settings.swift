@@ -10,6 +10,9 @@ class Settings: NSObject {
     
     // MARK: Instance Variables
     var host: String!
+    var supportUrl: String!
+    var termsUrl: String!
+    var privacyUrl: String!
     var freeQuestions: Int!
     var questionNameLimit: Int!
     var parse: PFConfig!
@@ -19,6 +22,9 @@ class Settings: NSObject {
         self.init()
         
         self.host = object["host"] as String
+        self.supportUrl = object["supportUrl"] as String
+        self.termsUrl = object["termsUrl"] as String
+        self.privacyUrl = object["privacyUrl"] as String
         self.freeQuestions = object["freeQuestions"] as Int
         self.questionNameLimit = object["questionNameLimit"] as Int
         self.parse = object

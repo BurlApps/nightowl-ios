@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Track User Open
         Track.appOpened(launchOptions)
         
+        // Cache Settings
+        Settings.update(nil)
+        
         // Cache Subjects
         Subject.subjects(false, nil)
 
@@ -49,13 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Track.appOpenedFromNotification(userInfo)
         }
         
-        println(userInfo)
-        
         if let action = userInfo["action"] as? String {
             let rootController = window?.rootViewController as RootController
             
-            if action == "questions.reload" {
-                (rootController.pagesControllers[0]?.topViewController as? QuestionsController)?.reloadQuestions()
+            switch(action) {
+                case "questions.reload": (rootController.pagesControllers[0]?.topViewController as? QuestionsController)?.reloadQuestions()
+                case "settings.reload": Settings.update(nil)
+                default: println(action)
             }
         }
     }

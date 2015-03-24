@@ -310,6 +310,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bXz-2P-jrF" kind="push" identifier="supportSegue" id="utI-gG-TH9"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="TBb-Ia-vZJ" style="IBUITableViewCellStyleDefault" id="3BY-IH-tf7">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -324,6 +327,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bXz-2P-jrF" kind="push" identifier="privacySegue" id="6uB-Uq-OTZ"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="D4g-RG-Zqj" style="IBUITableViewCellStyleDefault" id="Lh0-A8-jhs">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -338,6 +344,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="bXz-2P-jrF" kind="push" identifier="termsSegue" id="Sio-py-pfP"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -360,6 +369,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R49-SA-tJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1292" y="1049"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="wXn-z7-guF">
+            <objects>
+                <viewController id="bXz-2P-jrF" customClass="WebController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="INm-7V-XH6"/>
+                        <viewControllerLayoutGuide type="bottom" id="jlu-z3-39X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FYe-bQ-1Bx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bkc-3G-l41">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jlu-z3-39X" firstAttribute="top" secondItem="Bkc-3G-l41" secondAttribute="bottom" id="ScU-xF-c4D"/>
+                            <constraint firstItem="Bkc-3G-l41" firstAttribute="leading" secondItem="FYe-bQ-1Bx" secondAttribute="leadingMargin" constant="-16" id="d9w-ej-xkx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Bkc-3G-l41" secondAttribute="trailing" constant="-16" id="tIT-rQ-x9j"/>
+                            <constraint firstItem="Bkc-3G-l41" firstAttribute="top" secondItem="INm-7V-XH6" secondAttribute="bottom" id="tw0-Zd-udJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="P2v-Kb-iYu"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="webView" destination="Bkc-3G-l41" id="455-5G-Rls"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C1o-j8-NWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1762" y="1049"/>
         </scene>
         <!--Page Controller-->
         <scene sceneID="CHH-Yu-UyN">
@@ -425,4 +469,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Sio-py-pfP"/>
+    </inferredMetricsTieBreakers>
 </document>
