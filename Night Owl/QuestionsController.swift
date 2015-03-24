@@ -139,9 +139,9 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
             cell.textLabel?.font = UIFont.systemFontOfSize(18)
             cell.detailTextLabel?.textColor = UIColor.grayColor()
             cell.detailTextLabel?.font = UIFont.systemFontOfSize(15)
-            cell.imageView?.image = UIImage(named: "Cirlce")
         }
         
+        cell.imageView?.image = UIImage(named: "Cirlce")
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         if question.state >= 3 {
@@ -150,6 +150,16 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         }
         
         switch(question.state) {
+        case 0:
+            if let size = cell.imageView?.image?.size {
+                var spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+                spinner.frame = CGRectMake(0, 0, size.width, size.height)
+                spinner.hidesWhenStopped = true
+                spinner.startAnimating()
+                cell.imageView?.tintColor = UIColor.whiteColor()
+                cell.imageView?.addSubview(spinner)
+            }
+            break
         case 1: cell.imageView?.tintColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.25)
         case 2: cell.imageView?.tintColor = UIColor(red:0.01, green:0.66, blue:0.96, alpha:0.5)
         case 3: cell.imageView?.tintColor = UIColor(red:0.3, green:0.69, blue:0.31, alpha:0.75)

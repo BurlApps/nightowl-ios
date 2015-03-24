@@ -50,6 +50,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         println(userInfo)
+        
+        if let action = userInfo["action"] as? String {
+            let rootController = window?.rootViewController as RootController
+            
+            if action == "questions.reload" {
+                (rootController.pagesControllers[0]?.topViewController as? QuestionsController)?.reloadQuestions()
+            }
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

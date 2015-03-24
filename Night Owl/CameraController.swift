@@ -102,8 +102,8 @@ class CameraController: UIViewController {
     }
     
     @IBAction func captureDown(sender: UIButton) {
-        self.captureButton.layer.borderColor = UIColor(red:0, green:0.74, blue:0.83, alpha:1).CGColor
-        self.captureButton.backgroundColor = UIColor(red:0, green:0.74, blue:0.83, alpha:0.2)
+        self.captureButton.layer.borderColor = UIColor(red:1, green:0.88, blue:0.2, alpha:1).CGColor
+        self.captureButton.backgroundColor = UIColor(red:1, green:0.88, blue:0.2, alpha:0.2)
     }
     
     @IBAction func captureExit(sender: UIButton) {

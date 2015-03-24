@@ -125,9 +125,10 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             return
         }
         
-        Assignment.create(editorText, question: imageResized, creator: self.user, subject: self.subjectChosen)
-        self.navigationController?.popViewControllerAnimated(false)
-        self.cameraController.slideToQuestions()
+        Assignment.create(editorText, question: imageResized, creator: self.user, subject: self.subjectChosen) { (assignment) -> Void in
+            self.navigationController?.popViewControllerAnimated(false)
+            self.cameraController.slideToQuestions()
+        }
     }
     
     // MARK: NSNotificationCenter
@@ -173,7 +174,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         
         if pickerLabel == nil {
             pickerLabel = UILabel()
-            pickerLabel.backgroundColor = UIColor(red:0, green:0.74, blue:0.83, alpha:0.4)
+            pickerLabel.backgroundColor = UIColor(red:1, green:0.88, blue:0.2, alpha:0.35)
             pickerLabel.textAlignment = .Center
         }
         

@@ -25,10 +25,10 @@ class Assignment: NSObject {
         self.init()
         
         self.name = object["name"] as String
-        self.question = object["question"] as PFFile
+        self.question = object["question"] as? PFFile
         self.answer = object["answer"] as? PFFile
         self.comment = object["comment"] as? String
-        self.state = object["state"] as Int
+        self.state = object["state"] as? Int
         self.rating = object["rating"] as? Int
         self.creator = User(object["creator"] as PFUser)
         self.subject = Subject(object["subject"] as PFObject)
@@ -36,17 +36,27 @@ class Assignment: NSObject {
     }
     
     // MARK: Class Methods
-    class func create(name: String, question: UIImage, creator: User, subject: Subject) {
+    class func create(name: String, question: UIImage, creator: User, subject: Subject, callback: ((assignment: Assignment) -> Void)!) {
         var assignment = PFObject(className: "Assignment")
-        var imageData = UIImagePNGRepresentation(question)
-        var imageFile = PFFile(name: "image.png", data: imageData)
         
         assignment["name"] = name
-        assignment["question"] = imageFile
+        assignment["state"] = 0
         assignment["creator"] = creator.parse
         assignment["subject"] = subject.parse
         
-        assignment.saveInBackgroundWithBlock(nil)
+        callback!(assignment: Assignment(assignment))
+        assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+            if success && error == nil {
+                var imageData = UIImagePNGRepresentation(question)
+                var imageFile = PFFile(name: "image.png", data: imageData)
+                assignment["question"] = imageFile
+                
+                assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+                    assignment["state"] = 1
+                    assignment.saveInBackgroundWithBlock(nil)
+                }
+            }
+        }
     }
     
     // MARK: Instance Methods

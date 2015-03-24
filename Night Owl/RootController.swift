@@ -11,12 +11,12 @@ import UIKit
 class RootController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
 
     // MARK: Instance Variables
+    var pagesControllers = Dictionary<Int, PageController>()
     private var pageViewController: UIPageViewController!
     private let pages = 3
     private let startPage = 1
     private var currentPage = 1
     private var locked = false
-    private var pagesControllers = Dictionary<Int, PageController>()
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     
     // MARK: UIViewController Overrides
