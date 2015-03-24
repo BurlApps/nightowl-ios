@@ -65,8 +65,11 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         // Add Refresh
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: Selector("reloadQuestions"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        // Load Questions
         self.reloadQuestions()
     }
     

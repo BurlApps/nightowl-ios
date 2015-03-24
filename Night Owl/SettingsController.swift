@@ -94,7 +94,7 @@ class SettingsController: UITableViewController {
     
     // MARK: InstanceMethods
     func reloadUser() {
-        self.user.fetch { (user) -> Void in
+        self.user.fetch { (user) -> Void in            
             self.nameLabel.text = self.user.name
             self.phoneLabel.text = self.user.phone
             self.emailLabel.text = self.user.email
