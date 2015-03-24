@@ -167,16 +167,20 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
         var pickerLabel = view as UILabel!
+        var shadow = NSShadow()
+        shadow.shadowColor = UIColor(white: 0, alpha:0.2)
+        shadow.shadowOffset = CGSizeMake(0, 2);
         
         if pickerLabel == nil {
             pickerLabel = UILabel()
-            pickerLabel.backgroundColor = UIColor(red:0, green:0.74, blue:0.83, alpha:0.3)
+            pickerLabel.backgroundColor = UIColor(red:0, green:0.74, blue:0.83, alpha:0.4)
             pickerLabel.textAlignment = .Center
         }
         
         pickerLabel.attributedText = NSAttributedString(string: self.subjects[row].name, attributes: [
             NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 26.0)!,
-            NSForegroundColorAttributeName:UIColor.whiteColor()
+            NSForegroundColorAttributeName:UIColor.whiteColor(),
+            NSShadowAttributeName: shadow
         ])
 
         return pickerLabel
