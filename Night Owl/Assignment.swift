@@ -13,9 +13,7 @@ class Assignment: NSObject {
     var question: PFFile!
     var answer: PFFile!
     var answerCached: UIImage!
-    var comment: String!
     var state: Int!
-    var rating: Int!
     var creator: User!
     var subject: Subject!
     var parse: PFObject!
@@ -27,9 +25,7 @@ class Assignment: NSObject {
         self.name = object["name"] as String
         self.question = object["question"] as? PFFile
         self.answer = object["answer"] as? PFFile
-        self.comment = object["comment"] as? String
         self.state = object["state"] as? Int
-        self.rating = object["rating"] as? Int
         self.creator = User(object["creator"] as PFUser)
         self.subject = Subject(object["subject"] as PFObject)
         self.parse = object
@@ -60,6 +56,21 @@ class Assignment: NSObject {
     }
     
     // MARK: Instance Methods
+    func changeState(state: Int) {
+        self.state = state
+        self.parse["state"] = state
+        
+        if state >= 4 {
+            if var tutor = self.parse["tutor"] as? PFObject {
+                var flaggedAssignments = tutor.relationForKey("flaggedAssignments")
+                flaggedAssignments.addObject(self.parse)
+                tutor.saveInBackgroundWithBlock(nil)
+            }
+        }
+        
+        self.parse.saveInBackgroundWithBlock(nil)
+    }
+    
     func getAnswer(callback: (image: UIImage) -> Void) {
         if self.answerCached == nil {
             if self.answer != nil {

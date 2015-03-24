@@ -147,7 +147,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         var question = self.questionsFiltered[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        if question.state >= 3 {
+        if question.state == 3 {
             self.question = question
             self.performSegueWithIdentifier("questionSegue", sender: self)
         }
@@ -167,8 +167,9 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         
         cell.imageView?.image = UIImage(named: "Cirlce")
         cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.accessoryType = UITableViewCellAccessoryType.None
         
-        if question.state >= 3 {
+        if question.state == 3 {
             cell.selectionStyle = UITableViewCellSelectionStyle.Gray
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         }

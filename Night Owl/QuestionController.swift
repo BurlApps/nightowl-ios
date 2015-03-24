@@ -6,12 +6,13 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class QuestionController: UIViewController, UIScrollViewDelegate {
+class QuestionController: UIViewController, UIScrollViewDelegate, UIActionSheetDelegate {
     
     // MARK: Instance Variable
     var question: Assignment!
     var scrollView: UIScrollView!
     var imageView: UIImageView!
+    var user = User.current()
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -56,7 +57,25 @@ class QuestionController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    // UIScrollView Methods
+    // MARK: IBActions
+    @IBAction func flagAnswer(sender: UIBarButtonItem) {
+        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "Incorrect Answer", "Not Enough Steps", "Messy Handwriting", "Cancel")
+        actionSheet.destructiveButtonIndex = 3
+        actionSheet.cancelButtonIndex = 3
+        actionSheet.actionSheetStyle = UIActionSheetStyle.Automatic
+        actionSheet.showInView(self.view)
+    }
+    
+    // MARK: UIActionSheet Methods
+    func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex != 3 {
+            self.question.changeState(buttonIndex + 4)
+            UIAlertView(title: "Answer Has Been Flagged", message: "We are sorry for the inconvenience. This question have been assigned to a new tutor who will answer it shortly!", delegate: nil, cancelButtonTitle: "Okay").show()
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+    }
+    
+    // MARK: UIScrollView Methods
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return self.imageView
     }

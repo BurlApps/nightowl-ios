@@ -58,6 +58,14 @@ class User: NSObject {
         User.logout()
     }
     
+    func refundQuestion() {
+        self.fetch { (user) -> Void in
+            user.freeQuestions = user.freeQuestions + 1
+            user.parse["freeQuestions"] = user.freeQuestions
+            user.parse.saveInBackgroundWithBlock(nil)
+        }
+    }
+    
     func fetch(callback: ((user: User) -> Void)!) -> User {
         self.parse.fetchInBackgroundWithBlock { (object: PFObject!, error: NSError!) -> Void in
             self.name = object["name"] as? String
