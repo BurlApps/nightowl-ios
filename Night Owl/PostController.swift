@@ -34,12 +34,13 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.subjectPicker.alpha = 0
         
         // Get Subjects
-        Subject.subjects { (subjects) -> Void in
+        Subject.subjects( true, callback: { (subjects) -> Void in
             self.subjects = subjects
             self.subjectChosen = subjects[subjects.count/2]
             self.subjectPicker.reloadAllComponents()
             self.subjectPicker.selectRow(subjects.count/2, inComponent: 0, animated: false)
-        }
+            self.subjectPicker.alpha = 1
+        })
         
         // Set Preview Image
         let imageSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
@@ -69,15 +70,10 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.textEditor.layer.shadowOpacity = 1
         self.textEditor.layer.shadowRadius = 0
         self.view.insertSubview(self.textEditor, belowSubview: self.subjectPicker)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         // Register for keyboard notifications
         var notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
-        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide"), name:UIKeyboardDidHideNotification, object: nil)
         
         // Get Settings
         Settings.sharedInstance { (settings) -> Void in
@@ -96,7 +92,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         if let font = UIFont(name: "HelveticaNeue", size: 20) {
             self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
                 NSFontAttributeName: font
-            ], forState: UIControlState.Normal)
+                ], forState: UIControlState.Normal)
         }
     }
     
@@ -142,13 +138,6 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
                 
         self.pickerHeight.constant = self.view.frame.height - keyboardRect.size.height - 190
         self.pickerOffset.constant = keyboardRect.size.height
-        self.subjectPicker.alpha = 1
-        self.view.layoutIfNeeded()
-    }
-    
-    func keyboardDidHide() {
-        self.pickerOffset.constant = 0
-        self.subjectPicker.alpha = 0
         self.view.layoutIfNeeded()
     }
     
@@ -182,7 +171,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         
         if pickerLabel == nil {
             pickerLabel = UILabel()
-            pickerLabel.backgroundColor = UIColor(red:0, green:0.74, blue:0.83, alpha:0.25)
+            pickerLabel.backgroundColor = UIColor(red:0, green:0.74, blue:0.83, alpha:0.3)
             pickerLabel.textAlignment = .Center
         }
         

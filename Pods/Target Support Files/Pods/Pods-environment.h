@@ -12,12 +12,6 @@
 #define COCOAPODS_VERSION_MINOR_CHTTextView 1
 #define COCOAPODS_VERSION_PATCH_CHTTextView 0
 
-// CocoaLumberjack
-#define COCOAPODS_POD_AVAILABLE_CocoaLumberjack
-#define COCOAPODS_VERSION_MAJOR_CocoaLumberjack 1
-#define COCOAPODS_VERSION_MINOR_CocoaLumberjack 6
-#define COCOAPODS_VERSION_PATCH_CocoaLumberjack 2
-
 // LLSimpleCamera
 #define COCOAPODS_POD_AVAILABLE_LLSimpleCamera
 #define COCOAPODS_VERSION_MAJOR_LLSimpleCamera 2
@@ -47,16 +41,4 @@
 #define COCOAPODS_VERSION_MAJOR_THContactPicker 0
 #define COCOAPODS_VERSION_MINOR_THContactPicker 0
 #define COCOAPODS_VERSION_PATCH_THContactPicker 3
-
-// VLBCameraView
-#define COCOAPODS_POD_AVAILABLE_VLBCameraView
-#define COCOAPODS_VERSION_MAJOR_VLBCameraView 2
-#define COCOAPODS_VERSION_MINOR_VLBCameraView 1
-#define COCOAPODS_VERSION_PATCH_VLBCameraView 0
-
-// VLBFoundation
-#define COCOAPODS_POD_AVAILABLE_VLBFoundation
-#define COCOAPODS_VERSION_MAJOR_VLBFoundation 1
-#define COCOAPODS_VERSION_MINOR_VLBFoundation 0
-#define COCOAPODS_VERSION_PATCH_VLBFoundation 0
 

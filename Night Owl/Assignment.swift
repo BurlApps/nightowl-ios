@@ -25,10 +25,10 @@ class Assignment: NSObject {
         
         self.name = object["name"] as String
         self.question = object["question"] as PFFile
-        self.answer = object["answer"] as PFFile
+        self.answer = object["answer"] as? PFFile
         self.comment = object["comment"] as? String
         self.completed = object["completed"] as Bool
-        self.rating = object["rating"] as Int
+        self.rating = object["rating"] as? Int
         self.creator = User(object["creator"] as PFUser)
         self.subject = Subject(object["subject"] as PFObject)
         self.parse = object

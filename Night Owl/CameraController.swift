@@ -32,8 +32,13 @@ class CameraController: UIViewController {
         self.captureButton.layer.cornerRadius = self.captureButton.frame.width/2
         self.captureButton.backgroundColor = UIColor(white: 1, alpha: 0.2)
         
+        // Configure Navigation Bar
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        // VLBCameraView Set Delegate
+        // Setup Camera
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.cameraView = LLSimpleCamera(quality: CameraQualityHigh, andPosition: CameraPositionBack)
             self.cameraView.view.frame = self.view.frame
@@ -55,12 +60,6 @@ class CameraController: UIViewController {
         if self.cameraView != nil {
             self.cameraView.start()
         }
-        
-        // Configure Navigation Bar
-        self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

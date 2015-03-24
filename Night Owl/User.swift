@@ -9,12 +9,22 @@
 class User: NSObject {
     
     // MARK: Instance Variables
+    var name: String!
+    var email: String!
+    var stripe: String!
+    var charges: Int!
+    var freeQuestions: Int!
     var parse: PFUser!
     
     // MARK: Convenience Methods
     convenience init(_ object: PFUser) {
         self.init()
         
+        self.name = object["name"] as? String
+        self.email = object["email"] as? String
+        self.stripe = object["stripe"] as? String
+        self.charges = object["charges"] as? Int
+        self.freeQuestions = object["freeQuestions"] as? Int
         self.parse = object
     }
     
@@ -22,7 +32,9 @@ class User: NSObject {
     class func login(callback: ((user: User) -> Void)!) {
         PFAnonymousUtils.logInWithBlock { (user: PFUser!, error: NSError!) -> Void in
             if error == nil {
-                callback!(user: User(user))
+                var tempUser = User(user)
+                Installation.current().setUser(tempUser)
+                callback!(user: tempUser)
             }
         }
     }
@@ -42,5 +54,34 @@ class User: NSObject {
     // MARK: Instance Methods
     func logout() {
         User.logout()
+    }
+    
+    func fetch() -> User {
+        self.parse.fetchInBackgroundWithBlock { (object: PFObject!, error: NSError!) -> Void in
+            self.name = object["name"] as? String
+            self.email = object["email"] as? String
+            self.stripe = object["stripe"] as? String
+            self.charges = object["charges"] as? Int
+            self.freeQuestions = object["freeQuestions"] as? Int
+        }
+        
+        return self
+    }
+    
+    func getAssignments(callback: ((assignments: [Assignment]) -> Void)) {
+        var assignments: [Assignment] = []
+        var query = PFQuery(className: "Assignment")
+        
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                for object in objects as [PFObject] {
+                    assignments.append(Assignment(object))
+                }
+                
+                callback(assignments: assignments)
+            } else if error != nil {
+                println(error)
+            }
+        })
     }
 }

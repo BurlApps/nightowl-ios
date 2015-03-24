@@ -28,4 +28,9 @@ class Installation: NSObject {
         self.parse.setDeviceTokenFromData(token)
         self.parse.saveInBackgroundWithBlock(nil)
     }
+    
+    func setUser(user: User) {
+        self.parse["user"] = user.parse
+        self.parse.saveInBackgroundWithBlock(nil)
+    }
 }

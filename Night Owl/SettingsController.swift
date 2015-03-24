@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class SettingsController: UIViewController {
+class SettingsController: UITableViewController {
+    
+    // MARK: Instance Variables
+    private var themeColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1)
 
     // MARK: UIViewController Overrides
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Configure Status Bar
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         // Create Text Shadow
         var shadow = NSShadow()
@@ -24,7 +24,7 @@ class SettingsController: UIViewController {
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1)
+        self.navigationController?.navigationBar.barTintColor = self.themeColor
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
         
         if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
@@ -42,4 +42,8 @@ class SettingsController: UIViewController {
         pageController.rootController.setActiveChildController(1, animated: true, direction: .Reverse)
     }
     
+    // MARK: UITableViewController Methods
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 }

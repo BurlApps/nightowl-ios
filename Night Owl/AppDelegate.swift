@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Track User Open
         Track.appOpened(launchOptions)
+        
+        // Cache Subjects
+        Subject.subjects(false, nil)
 
         return true
     }

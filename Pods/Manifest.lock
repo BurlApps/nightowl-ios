@@ -1,16 +1,11 @@
 PODS:
   - CHTTextView (0.1)
-  - CocoaLumberjack (1.6.2)
   - LLSimpleCamera (2.2.0)
   - PaymentKit (1.1.1)
   - Stripe (3.1.0):
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
   - THContactPicker (0.0.3)
-  - VLBCameraView (2.1):
-    - CocoaLumberjack (= 1.6.2)
-    - VLBFoundation
-  - VLBFoundation (1.0)
 
 DEPENDENCIES:
   - CHTTextView (~> 0.1)
@@ -18,30 +13,21 @@ DEPENDENCIES:
   - PaymentKit
   - Stripe
   - THContactPicker (from `https://github.com/JuicyApp/THContactPicker.git`)
-  - VLBCameraView (from `https://github.com/JuicyApp/VLBCameraView.git`)
 
 EXTERNAL SOURCES:
   THContactPicker:
     :git: https://github.com/JuicyApp/THContactPicker.git
-  VLBCameraView:
-    :git: https://github.com/JuicyApp/VLBCameraView.git
 
 CHECKOUT OPTIONS:
   THContactPicker:
     :commit: dd0b058ac07133281315fe0b726f4e5c647099bf
     :git: https://github.com/JuicyApp/THContactPicker.git
-  VLBCameraView:
-    :commit: ba43c07642703e8c35489b1b4a8ca44fa82b8722
-    :git: https://github.com/JuicyApp/VLBCameraView.git
 
 SPEC CHECKSUMS:
   CHTTextView: 82f171cdde0aa675c4cf642f8f2c54201aef905c
-  CocoaLumberjack: 0a08f3092acaab5f92c139e1186aa255a1e39446
   LLSimpleCamera: 9da9e75d1c164e03c5c66314ffc0f9ec0009d8b8
   PaymentKit: f77b4d5cee45947949429c3d587e8eb160a3c9e2
   Stripe: aaa174b50fac40a16958cbc892457a241d0b4b08
   THContactPicker: 7d1321aed1863cee2ec9df159e94b5cbb46cfb4e
-  VLBCameraView: a15e669e417d8f01befbc708265fb29167c5a4a8
-  VLBFoundation: d5ddef89836c735841390706e136fbbd14a04387
 
 COCOAPODS: 0.35.0
