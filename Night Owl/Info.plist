@@ -40,5 +40,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>ParseApplicationID</key>
+	<string>${PARSE_APPLICATION_ID}</string>
+	<key>ParseClientKey</key>
+	<string>${PARSE_CLIENT_KEY}</string>
+	<key>StripeClientKey</key>
+	<string>${STRIPE_CLIENT_KEY}</string>
 </dict>
 </plist>
