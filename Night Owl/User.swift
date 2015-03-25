@@ -9,24 +9,16 @@
 class User: NSObject {
     
     // MARK: Instance Variables
-    var name: String!
-    var phone: String!
-    var email: String!
-    var stripe: String!
-    var charges: Int!
     var freeQuestions: Int!
+    var card: String!
     var parse: PFUser!
     
     // MARK: Convenience Methods
     convenience init(_ object: PFUser) {
         self.init()
         
-        self.name = object["name"] as? String
-        self.phone = object["phone"] as? String
-        self.email = object["email"] as? String
-        self.stripe = object["stripe"] as? String
-        self.charges = object["charges"] as? Int
         self.freeQuestions = object["freeQuestions"] as? Int
+        self.card = object["card"] as? String
         self.parse = object
     }
     
@@ -36,7 +28,7 @@ class User: NSObject {
             if error == nil {
                 var tempUser = User(user)
                 Installation.current().setUser(tempUser)
-                callback!(user: tempUser)
+                callback?(user: tempUser)
             }
         }
     }
@@ -58,6 +50,47 @@ class User: NSObject {
         User.logout()
     }
     
+    func updateCard(card: PTKCard, callback: ((error: NSError!) -> Void)!) {
+        let number = NSString(string: card.number)
+        self.card = number.substringFromIndex(number.length - 4)
+        self.parse["card"] = self.card
+        self.parse.saveInBackgroundWithBlock(nil)
+        
+        var stCard = STPCard()
+        stCard.number = card.number
+        stCard.expMonth = card.expMonth
+        stCard.expYear = card.expYear
+        stCard.cvc = card.cvc
+        
+        Settings.sharedInstance { (settings) -> Void in
+            STPAPIClient(publishableKey: settings.stripeTestKey).createTokenWithCard(stCard, completion: { (token: STPToken!, error: NSError!) -> Void in
+                callback!(error: error)
+                
+                if token != nil && error == nil {
+                    PFCloud.callFunctionInBackground("addCard", withParameters: ["card":token.tokenId], block: nil)
+                }
+            })
+        }
+    }
+    
+    func chargeQuestion() {
+        Settings.sharedInstance { (settings) -> Void in
+            self.fetch { (user) -> Void in
+                if user.freeQuestions > 0 {
+                    user.freeQuestions = user.freeQuestions - 1
+                    user.parse["freeQuestions"] = user.freeQuestions
+                } else {
+                    let charges = user.parse["charges"] as Float
+                    user.parse["charges"] = charges + settings.questionPrice
+                }
+                
+                user.parse.saveInBackgroundWithBlock(nil)
+            }
+            
+            return ()
+        }
+    }
+    
     func refundQuestion() {
         self.fetch { (user) -> Void in
             user.freeQuestions = user.freeQuestions + 1
@@ -68,12 +101,14 @@ class User: NSObject {
     
     func fetch(callback: ((user: User) -> Void)!) -> User {
         self.parse.fetchInBackgroundWithBlock { (object: PFObject!, error: NSError!) -> Void in
-            self.name = object["name"] as? String
-            self.email = object["email"] as? String
-            self.stripe = object["stripe"] as? String
-            self.charges = object["charges"] as? Int
-            self.freeQuestions = object["freeQuestions"] as? Int
-            callback!(user: self)
+            if object != nil && error == nil {
+                self.freeQuestions = object["freeQuestions"] as? Int
+                self.card = object["card"] as? String
+                callback!(user: self)
+            } else {
+                User.logout()
+                User.login(callback)
+            }
         }
         
         return self

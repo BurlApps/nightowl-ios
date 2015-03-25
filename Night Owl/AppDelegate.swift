@@ -53,10 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if let action = userInfo["action"] as? String {
-            let rootController = window?.rootViewController as RootController
+            let pagesController = (window?.rootViewController as RootController).pagesController
             
             switch(action) {
-                case "questions.reload": (rootController.pagesControllers[0]?.topViewController as? QuestionsController)?.reloadQuestions()
+                case "questions.reload": (pagesController.controllers[0]?.topViewController as? QuestionsController)?.reloadQuestions()
                 case "settings.reload": Settings.update(nil)
                 default: println(action)
             }

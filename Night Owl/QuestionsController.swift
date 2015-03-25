@@ -9,7 +9,7 @@
 class QuestionsController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Instance Variables
-    private var user: User = User.current()
+    private var user = User.current()
     private var questions: [Assignment] = []
     private var questionsFiltered: [Assignment] = []
     private var question: Assignment!

@@ -126,6 +126,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         }
         
         Assignment.create(editorText, question: imageResized, creator: self.user, subject: self.subjectChosen) { (assignment) -> Void in
+            self.user.chargeQuestion()
             self.navigationController?.popViewControllerAnimated(false)
             self.cameraController.slideToQuestions()
         }

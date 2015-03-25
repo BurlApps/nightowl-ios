@@ -15,10 +15,8 @@ class SettingsController: UITableViewController {
     private var user = User.current()
     
     // MARK: IBOutlets
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var freeQuestionsLabel: UILabel!
+    @IBOutlet weak var cardLabel: UILabel!
 
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -55,27 +53,34 @@ class SettingsController: UITableViewController {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: Selector("reloadUser"), forControlEvents: UIControlEvents.ValueChanged)
         
-        // Set Fetch User Info
-        self.reloadUser()
-        
         // Get Settings
         Settings.sharedInstance { (settings) -> Void in
             self.settings = settings
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.hideLabels()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        // Unlock Page View
         let pageController = self.navigationController as PageController
         pageController.rootController.unlockPageView()
+        
+        // Set Fetch User Info
+        self.reloadUser()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let pageController = self.navigationController as PageController
         pageController.rootController.lockPageView()
         
-        if self.selectedRow != nil && self.selectedRow.section == 2 {
+        if self.selectedRow != nil && self.selectedRow.section == 1 {
             let viewController = segue.destinationViewController as WebController
             
             switch(self.selectedRow.row) {
@@ -93,12 +98,25 @@ class SettingsController: UITableViewController {
     }
     
     // MARK: InstanceMethods
+    func hideLabels() {
+        self.cardLabel.textColor = UIColor.clearColor()
+        self.freeQuestionsLabel.textColor = UIColor.clearColor()
+    }
+    
     func reloadUser() {
-        self.user.fetch { (user) -> Void in            
-            self.nameLabel.text = self.user.name
-            self.phoneLabel.text = self.user.phone
-            self.emailLabel.text = self.user.email
-            self.freeQuestionsLabel.text = "\(self.user.freeQuestions)"
+        self.user.fetch { (user) -> Void in
+            self.hideLabels()
+            
+            if self.user.card != nil {
+                self.cardLabel.text = self.user.card
+                self.cardLabel.textColor = UIColor.grayColor()
+            }
+            
+            if self.user.freeQuestions != nil {
+                self.freeQuestionsLabel.text = "\(self.user.freeQuestions)"
+                self.freeQuestionsLabel.textColor = UIColor.grayColor()
+            }
+            
             self.refreshControl?.endRefreshing()
         }
     }
