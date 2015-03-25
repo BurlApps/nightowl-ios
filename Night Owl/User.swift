@@ -24,11 +24,16 @@ class User: NSObject {
     
     // MARK: Class Methods
     class func login(callback: ((user: User) -> Void)!) {
-        PFAnonymousUtils.logInWithBlock { (user: PFUser!, error: NSError!) -> Void in
-            if error == nil {
-                var tempUser = User(user)
-                Installation.current().setUser(tempUser)
-                callback?(user: tempUser)
+        Settings.sharedInstance { (settings) -> Void in
+            PFAnonymousUtils.logInWithBlock { (user: PFUser!, error: NSError!) -> Void in
+                if error == nil {
+                    user["charges"] = 0
+                    user["freeQuestions"] = settings.freeQuestions
+                    
+                    var tempUser = User(user)
+                    Installation.current().setUser(tempUser)
+                    callback?(user: tempUser)
+                }
             }
         }
     }
@@ -62,15 +67,16 @@ class User: NSObject {
         stCard.expYear = card.expYear
         stCard.cvc = card.cvc
         
-        Settings.sharedInstance { (settings) -> Void in
-            STPAPIClient(publishableKey: settings.stripeTestKey).createTokenWithCard(stCard, completion: { (token: STPToken!, error: NSError!) -> Void in
-                callback!(error: error)
-                
-                if token != nil && error == nil {
-                    PFCloud.callFunctionInBackground("addCard", withParameters: ["card":token.tokenId], block: nil)
-                }
-            })
-        }
+        let infoDictionary = NSBundle.mainBundle().infoDictionary!
+        let stripeKey = infoDictionary["StripeClientKey"] as String
+        
+        STPAPIClient(publishableKey: stripeKey).createTokenWithCard(stCard, completion: { (token: STPToken!, error: NSError!) -> Void in
+            callback!(error: error)
+            
+            if token != nil && error == nil {
+                PFCloud.callFunctionInBackground("addCard", withParameters: ["card":token.tokenId], block: nil)
+            }
+        })
     }
     
     func chargeQuestion() {

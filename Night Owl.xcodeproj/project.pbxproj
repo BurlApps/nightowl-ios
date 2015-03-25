@@ -112,6 +112,8 @@
 		D33EBAA51AC1F406001E637D /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
 		D33EBAA71AC21FE5001E637D /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 		D33EBAA91AC2506B001E637D /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
+		D33EBAB11AC28128001E637D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D33EBAB21AC2812F001E637D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 		D33EBA081ABFED0A001E637D /* Night Owl */ = {
 			isa = PBXGroup;
 			children = (
+				D33EBAB01AC28110001E637D /* Config */,
 				D33EBA611ABFEDF6001E637D /* Core */,
 				D33EBA641ABFEE29001E637D /* Models */,
 				D33EBA621ABFEDFE001E637D /* Views */,
@@ -293,6 +296,15 @@
 				D33EBA9B1AC0EA8A001E637D /* RBResizeImage.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		D33EBAB01AC28110001E637D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBAB11AC28128001E637D /* Debug.xcconfig */,
+				D33EBAB21AC2812F001E637D /* Release.xcconfig */,
+			);
+			name = Config;
 			sourceTree = "<group>";
 		};
 		E23F6025443F7B4B4191F6B2 /* Pods */ = {
@@ -494,6 +506,7 @@
 /* Begin XCBuildConfiguration section */
 		D33EBA231ABFED0A001E637D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D33EBAB11AC28128001E637D /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -536,6 +549,7 @@
 		};
 		D33EBA241ABFED0A001E637D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D33EBAB21AC2812F001E637D /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
