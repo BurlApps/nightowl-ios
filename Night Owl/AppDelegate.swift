@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Initialize Parse
         let parseApplicationID = infoDictionary["ParseApplicationID"] as String
         let parseClientKey = infoDictionary["ParseClientKey"] as String
-
+        
+        ParseCrashReporting.enable()
+        Parse.enableLocalDatastore()
         Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
         
         // Register for Push Notitications

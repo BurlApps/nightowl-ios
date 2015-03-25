@@ -226,7 +226,6 @@
                     <connections>
                         <outlet property="pickerHeight" destination="dFa-gR-ALR" id="1OM-00-sRM"/>
                         <outlet property="pickerOffset" destination="D7N-nX-PLL" id="deI-Vm-Ehm"/>
-                        <outlet property="postButton" destination="sHz-Hj-j7q" id="Bnl-o6-GRC"/>
                         <outlet property="subjectPicker" destination="dzW-lb-ihN" id="2DJ-oE-DNg"/>
                     </connections>
                 </viewController>

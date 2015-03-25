@@ -15,8 +15,6 @@ class Settings: NSObject {
     var privacyUrl: String!
     var freeQuestions: Int!
     var questionNameLimit: Int!
-    var stripeTestKey: String!
-    var stripeLiveKey: String!
     var questionPrice: Float!
     var parse: PFConfig!
     
@@ -28,8 +26,6 @@ class Settings: NSObject {
         self.supportUrl = object["supportUrl"] as String
         self.termsUrl = object["termsUrl"] as String
         self.privacyUrl = object["privacyUrl"] as String
-        self.stripeTestKey = object["stripeTestKey"] as String
-        self.stripeLiveKey = object["stripeLiveKey"] as String
         self.freeQuestions = object["freeQuestions"] as Int
         self.questionPrice = object["questionPrice"] as Float
         self.questionNameLimit = object["questionNameLimit"] as Int
