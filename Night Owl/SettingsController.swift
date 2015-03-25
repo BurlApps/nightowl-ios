@@ -57,42 +57,43 @@ class SettingsController: UITableViewController {
         Settings.sharedInstance { (settings) -> Void in
             self.settings = settings
         }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
+        // Hide Labels
         self.hideLabels()
+        
+        // Set Fetch User Info
+        self.reloadUser()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Unlock Page View
         let pageController = self.navigationController as PageController
         pageController.rootController.unlockPageView()
-        
-        // Set Fetch User Info
-        self.reloadUser()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let pageController = self.navigationController as PageController
         pageController.rootController.lockPageView()
         
-        if self.selectedRow != nil && self.selectedRow.section == 1 {
-            let viewController = segue.destinationViewController as WebController
-            
-            switch(self.selectedRow.row) {
-            case 0:
-                viewController.name = "Support"
-                viewController.website = self.settings.supportUrl
-            case 1:
-                viewController.name = "Privacy Policy"
-                viewController.website = self.settings.privacyUrl
-            default:
-                viewController.name = "Terms of Use"
-                viewController.website = self.settings.termsUrl
+        if self.selectedRow != nil {
+            if self.selectedRow.section == 0 {
+                let viewController = segue.destinationViewController as PaymentController
+                viewController.settingsController = self
+            } else if self.selectedRow.section == 1 {
+                let viewController = segue.destinationViewController as WebController
+                
+                switch(self.selectedRow.row) {
+                case 0:
+                    viewController.name = "Support"
+                    viewController.website = self.settings.supportUrl
+                case 1:
+                    viewController.name = "Privacy Policy"
+                    viewController.website = self.settings.privacyUrl
+                default:
+                    viewController.name = "Terms of Use"
+                    viewController.website = self.settings.termsUrl
+                }
             }
         }
     }

@@ -28,12 +28,10 @@
 		D33EBA781ABFF0B3001E637D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA771ABFF0B3001E637D /* MobileCoreServices.framework */; };
 		D33EBA7A1ABFF0BA001E637D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA791ABFF0BA001E637D /* QuartzCore.framework */; };
 		D33EBA7C1ABFF0C2001E637D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA7B1ABFF0C2001E637D /* Security.framework */; };
-		D33EBA7E1ABFF0CA001E637D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA7D1ABFF0CA001E637D /* StoreKit.framework */; };
 		D33EBA801ABFF0D5001E637D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA7F1ABFF0D5001E637D /* SystemConfiguration.framework */; };
 		D33EBA821ABFF0E6001E637D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA811ABFF0E6001E637D /* libz.dylib */; };
 		D33EBA841ABFF0F3001E637D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA831ABFF0F3001E637D /* libsqlite3.dylib */; };
 		D33EBA861ABFF113001E637D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA851ABFF113001E637D /* Foundation.framework */; };
-		D33EBA881ABFF124001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA871ABFF124001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D33EBA8A1ABFF148001E637D /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA891ABFF148001E637D /* libstdc++.6.dylib */; };
 		D33EBA8C1ABFF167001E637D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA8B1ABFF167001E637D /* Accounts.framework */; };
 		D33EBA8E1ABFF16D001E637D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA8D1ABFF16D001E637D /* Social.framework */; };
@@ -91,12 +89,10 @@
 		D33EBA771ABFF0B3001E637D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D33EBA791ABFF0BA001E637D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D33EBA7B1ABFF0C2001E637D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		D33EBA7D1ABFF0CA001E637D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D33EBA7F1ABFF0D5001E637D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D33EBA811ABFF0E6001E637D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D33EBA831ABFF0F3001E637D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D33EBA851ABFF113001E637D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D33EBA871ABFF124001E637D /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		D33EBA891ABFF148001E637D /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		D33EBA8B1ABFF167001E637D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D33EBA8D1ABFF16D001E637D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -114,6 +110,7 @@
 		D33EBAA91AC2506B001E637D /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		D33EBAB11AC28128001E637D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D33EBAB21AC2812F001E637D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		D33EBAB31AC295CD001E637D /* Night Owl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Night Owl.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,12 +122,10 @@
 				D33EBA8E1ABFF16D001E637D /* Social.framework in Frameworks */,
 				D33EBA8C1ABFF167001E637D /* Accounts.framework in Frameworks */,
 				D33EBA8A1ABFF148001E637D /* libstdc++.6.dylib in Frameworks */,
-				D33EBA881ABFF124001E637D /* PassKit.framework in Frameworks */,
 				D33EBA861ABFF113001E637D /* Foundation.framework in Frameworks */,
 				D33EBA841ABFF0F3001E637D /* libsqlite3.dylib in Frameworks */,
 				D33EBA821ABFF0E6001E637D /* libz.dylib in Frameworks */,
 				D33EBA801ABFF0D5001E637D /* SystemConfiguration.framework in Frameworks */,
-				D33EBA7E1ABFF0CA001E637D /* StoreKit.framework in Frameworks */,
 				D33EBA7C1ABFF0C2001E637D /* Security.framework in Frameworks */,
 				D33EBA7A1ABFF0BA001E637D /* QuartzCore.framework in Frameworks */,
 				D33EBA781ABFF0B3001E637D /* MobileCoreServices.framework in Frameworks */,
@@ -270,12 +265,10 @@
 				D33EBA8D1ABFF16D001E637D /* Social.framework */,
 				D33EBA8B1ABFF167001E637D /* Accounts.framework */,
 				D33EBA891ABFF148001E637D /* libstdc++.6.dylib */,
-				D33EBA871ABFF124001E637D /* PassKit.framework */,
 				D33EBA851ABFF113001E637D /* Foundation.framework */,
 				D33EBA831ABFF0F3001E637D /* libsqlite3.dylib */,
 				D33EBA811ABFF0E6001E637D /* libz.dylib */,
 				D33EBA7F1ABFF0D5001E637D /* SystemConfiguration.framework */,
-				D33EBA7D1ABFF0CA001E637D /* StoreKit.framework */,
 				D33EBA7B1ABFF0C2001E637D /* Security.framework */,
 				D33EBA791ABFF0BA001E637D /* QuartzCore.framework */,
 				D33EBA771ABFF0B3001E637D /* MobileCoreServices.framework */,
@@ -301,6 +294,7 @@
 		D33EBAB01AC28110001E637D /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				D33EBAB31AC295CD001E637D /* Night Owl.entitlements */,
 				D33EBAB11AC28128001E637D /* Debug.xcconfig */,
 				D33EBAB21AC2812F001E637D /* Release.xcconfig */,
 			);
@@ -368,6 +362,20 @@
 					D33EBA051ABFED0A001E637D = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = R5K2X99B7E;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Passbook = {
+								enabled = 0;
+							};
+						};
 					};
 					D33EBA1A1ABFED0A001E637D = {
 						CreatedOnToolsVersion = 6.2;
@@ -590,6 +598,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Night Owl/Night Owl.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -597,7 +606,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "Night Owl/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -607,6 +616,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Night Owl/Night Owl-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -617,6 +627,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Night Owl/Night Owl.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -624,7 +635,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "Night Owl/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -633,6 +644,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Night Owl/Night Owl-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

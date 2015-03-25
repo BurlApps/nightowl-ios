@@ -9,6 +9,7 @@
 class PaymentController: UIViewController, PTKViewDelegate {
     
     // MARK: Instance Variables
+    var settingsController: SettingsController!
     private var card: PTKCard!
     private var valid = false
     private var paymentView: PTKView!
@@ -45,9 +46,10 @@ class PaymentController: UIViewController, PTKViewDelegate {
     @IBAction func saveCard(sender: UIBarButtonItem) {
         self.user.updateCard(self.card) { (error) -> Void in
             if error == nil {
+                self.settingsController.reloadUser()
                 self.navigationController?.popViewControllerAnimated(true)
             } else {
-                self.errorLabel.text = error.description
+                self.errorLabel.text = error.localizedDescription
                 self.errorLabel.alpha = 1
             }
         }

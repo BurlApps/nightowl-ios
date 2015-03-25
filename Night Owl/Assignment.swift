@@ -51,6 +51,8 @@ class Assignment: NSObject {
                     assignment["state"] = 1
                     assignment.saveInBackgroundWithBlock(nil)
                 }
+            } else {
+                println(error)
             }
         }
     }
