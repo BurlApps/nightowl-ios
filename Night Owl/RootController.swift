@@ -7,30 +7,37 @@
 //
 
 class RootController: UIViewController {
-    
-    // MARK: Instance Variables
-    var pagesController: PagesController!
-    
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Background Color
         self.view.backgroundColor = UIColor.blackColor()
+        
+        // Create Loading Spinner
+        var spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        spinner.alpha = 0
+        spinner.frame = CGRectMake(0, 0, 40, 40)
+        spinner.center = CGPointMake(self.view.frame.width/2, self.view.frame.height/2)
+        spinner.startAnimating()
+        self.view.addSubview(spinner)
+        
+        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+            spinner.alpha = 1
+        }, completion: nil)
+
     }
     
     override func viewWillAppear(animated: Bool) {
         // Login User
-        if User.current() == nil {
-            User.login({ (user) -> Void in
+        if let user = User.current() {
+            user.fetch({ (user) -> Void in
                 self.performSegueWithIdentifier("loginSegue", sender: self)
             })
         } else {
-            self.performSegueWithIdentifier("loginSegue", sender: self)
+            User.login({ (user) -> Void in
+                self.performSegueWithIdentifier("loginSegue", sender: self)
+            })
         }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        self.pagesController = segue.destinationViewController as PagesController
     }
 }

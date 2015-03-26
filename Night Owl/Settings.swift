@@ -34,7 +34,9 @@ class Settings: NSObject {
     
     // MARK: Class Methods
     class func sharedInstance(callback: ((settings: Settings) -> Void)!) {
-        if let config = PFConfig.currentConfig() {
+        let config = PFConfig.currentConfig()
+        
+        if config["host"] != nil {
             callback?(settings: Settings(config))
         } else {
             Settings.update(callback)
@@ -43,7 +45,7 @@ class Settings: NSObject {
     
     class func update(callback: ((settings: Settings) -> Void)!) {
         PFConfig.getConfigInBackgroundWithBlock { (config: PFConfig!, error: NSError!) -> Void in
-            if error == nil && config != nil {
+            if error == nil && config["host"] != nil {
                 callback?(settings: Settings(config))
             } else if var config = PFConfig.currentConfig() {
                 callback?(settings: Settings(config))

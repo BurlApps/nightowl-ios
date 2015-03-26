@@ -36,9 +36,20 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         // Get Subjects
         Subject.subjects( true, callback: { (subjects) -> Void in
             self.subjects = subjects
-            self.subjectChosen = subjects[subjects.count/2]
+            var index: Int = subjects.count/2
+            
+            if self.user.subject != nil {
+                for (i, subject) in enumerate(subjects) {
+                    if self.user.subject.name == subject.name {
+                        index = i
+                        break
+                    }
+                }
+            }
+            
+            self.subjectChosen = subjects[index]
             self.subjectPicker.reloadAllComponents()
-            self.subjectPicker.selectRow(subjects.count/2, inComponent: 0, animated: false)
+            self.subjectPicker.selectRow(index, inComponent: 0, animated: false)
             self.subjectPicker.alpha = 1
         })
         
@@ -58,7 +69,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.textEditor.delegate = self
         self.textEditor.frame.size.width -= 40
         self.textEditor.frame.origin.x += 20
-        self.textEditor.frame.origin.y += 110
+        self.textEditor.frame.origin.y += 90
         self.textEditor.scrollEnabled = false
         self.textEditor.placeholder = "Give us a description"
         self.textEditor.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
@@ -116,16 +127,16 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     }
     
     @IBAction func createPost(sender: UIBarButtonItem) {
-        let editorText: NSString = self.textEditor.text
+        var editorText: NSString! = self.textEditor.text
         let imageSize = CGSize(width: self.capturedImage.size.width/2, height: self.capturedImage.size.height/2)
         let imageResized = RBResizeImage(self.capturedImage, imageSize)
         
         if editorText.length == 0 {
-            self.textEditor.placeholder = "Please enter a description"
-            return
+            editorText = nil
         }
         
         Assignment.create(editorText, question: imageResized, creator: self.user, subject: self.subjectChosen) { (assignment) -> Void in
+            self.user.setSubject(self.subjectChosen)
             self.user.chargeQuestion()
             self.navigationController?.popViewControllerAnimated(false)
             self.cameraController.slideToQuestions()
@@ -137,7 +148,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         let userInfo = NSDictionary(dictionary: notification.userInfo!)
         let keyboardRect = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue).CGRectValue()
                 
-        self.pickerHeight.constant = self.view.frame.height - keyboardRect.size.height - 190
+        self.pickerHeight.constant = self.view.frame.height - keyboardRect.size.height - 200
         self.pickerOffset.constant = keyboardRect.size.height
         self.view.layoutIfNeeded()
     }

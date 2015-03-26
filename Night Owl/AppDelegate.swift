@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
         
@@ -58,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if let action = userInfo["action"] as? String {
-            let pagesController = (window?.rootViewController as RootController).pagesController
+            let pagesController = window?.rootViewController?.childViewControllers[1] as PagesController
             
             switch(action) {
                 case "questions.reload": (pagesController.controllers[0]?.topViewController as? QuestionsController)?.reloadQuestions()

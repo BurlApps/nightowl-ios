@@ -58,6 +58,7 @@ class CameraController: UIViewController {
         
         // Start Camera View
         if self.cameraView != nil {
+            self.cameraView.view.frame = self.view.frame
             self.cameraView.start()
         }
     }

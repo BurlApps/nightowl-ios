@@ -8,11 +8,11 @@
 
 import UIKit
 
-class PagesController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
+class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
 
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
-    private var pageViewController: UIPageViewController!
+    //private var pageViewController: UIPageViewController!
     private let pages = 3
     private let startPage = 1
     private var currentPage = 1
@@ -24,21 +24,18 @@ class PagesController: UIViewController, UIPageViewControllerDataSource, UIPageV
         super.viewDidLoad()
         
         // Create Page View Controller
-        self.pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
-        self.pageViewController.view.backgroundColor = UIColor.clearColor()
-        self.pageViewController.view.frame = self.view.frame
-        self.pageViewController.dataSource = self
-        self.pageViewController.delegate = self
+        //self.pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
+        self.view.backgroundColor = UIColor.clearColor()
+        self.dataSource = self
+        self.delegate = self
         
-        for controller in self.pageViewController.view.subviews {
+        for controller in self.view.subviews {
             if let scrollView = controller as? UIScrollView {
                 scrollView.delegate = self
             }
         }
         
-        self.addChildViewController(self.pageViewController)
-        self.view.addSubview(self.pageViewController.view)
-        self.pageViewController.didMoveToParentViewController(self)
+        self.didMoveToParentViewController(self)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -69,7 +66,7 @@ class PagesController: UIViewController, UIPageViewControllerDataSource, UIPageV
     }
     
     func setActiveChildController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
-        self.pageViewController.setViewControllers([self.viewControllerAtIndex(index)],
+        self.setViewControllers([self.viewControllerAtIndex(index)],
             direction: direction, animated: animated, completion: { (success: Bool) -> Void in
                 self.currentPage = index
             })

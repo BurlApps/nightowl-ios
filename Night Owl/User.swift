@@ -6,12 +6,15 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
+private var lastSubject: Subject!
+
 class User: NSObject {
     
     // MARK: Instance Variables
     var freeQuestions: Int!
     var card: String!
     var parse: PFUser!
+    var subject: Subject!
     
     // MARK: Convenience Methods
     convenience init(_ object: PFUser) {
@@ -20,6 +23,7 @@ class User: NSObject {
         self.freeQuestions = object["freeQuestions"] as? Int
         self.card = object["card"] as? String
         self.parse = object
+        self.subject = lastSubject
     }
     
     // MARK: Class Methods
@@ -53,6 +57,10 @@ class User: NSObject {
     // MARK: Instance Methods
     func logout() {
         User.logout()
+    }
+    
+    func setSubject(subject: Subject) {
+        lastSubject = subject
     }
     
     func updateCard(card: PTKCard, callback: ((error: NSError!) -> Void)!) {

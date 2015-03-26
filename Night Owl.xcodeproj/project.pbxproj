@@ -47,6 +47,7 @@
 		D33EBAA61AC1F406001E637D /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA51AC1F406001E637D /* WebController.swift */; };
 		D33EBAA81AC21FE5001E637D /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA71AC21FE5001E637D /* PaymentController.swift */; };
 		D33EBAAA1AC2506B001E637D /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA91AC2506B001E637D /* RootController.swift */; };
+		D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBAB61AC32C9D001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		D33EBAB11AC28128001E637D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D33EBAB21AC2812F001E637D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D33EBAB31AC295CD001E637D /* Night Owl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Night Owl.entitlements"; sourceTree = "<group>"; };
+		D33EBAB61AC32C9D001E637D /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */,
 				D33EBA901ABFF1A3001E637D /* Bolts.framework in Frameworks */,
 				D33EBA8E1ABFF16D001E637D /* Social.framework in Frameworks */,
 				D33EBA8C1ABFF167001E637D /* Accounts.framework in Frameworks */,
@@ -260,6 +263,7 @@
 		D33EBA6A1ABFEFAE001E637D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D33EBAB61AC32C9D001E637D /* PassKit.framework */,
 				D33EBAA11AC13784001E637D /* libPods-CameraManager.a */,
 				D33EBA8F1ABFF1A3001E637D /* Bolts.framework */,
 				D33EBA8D1ABFF16D001E637D /* Social.framework */,
@@ -373,7 +377,7 @@
 								enabled = 1;
 							};
 							com.apple.Passbook = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};

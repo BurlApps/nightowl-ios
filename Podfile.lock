@@ -1,5 +1,25 @@
 PODS:
+  - CardIO (5.0.3)
   - CHTTextView (0.1)
+  - FormatterKit (1.8.0):
+    - FormatterKit/AddressFormatter (= 1.8.0)
+    - FormatterKit/ArrayFormatter (= 1.8.0)
+    - FormatterKit/ColorFormatter (= 1.8.0)
+    - FormatterKit/LocationFormatter (= 1.8.0)
+    - FormatterKit/NameFormatter (= 1.8.0)
+    - FormatterKit/OrdinalNumberFormatter (= 1.8.0)
+    - FormatterKit/TimeIntervalFormatter (= 1.8.0)
+    - FormatterKit/UnitOfInformationFormatter (= 1.8.0)
+    - FormatterKit/URLRequestFormatter (= 1.8.0)
+  - FormatterKit/AddressFormatter (1.8.0)
+  - FormatterKit/ArrayFormatter (1.8.0)
+  - FormatterKit/ColorFormatter (1.8.0)
+  - FormatterKit/LocationFormatter (1.8.0)
+  - FormatterKit/NameFormatter (1.8.0)
+  - FormatterKit/OrdinalNumberFormatter (1.8.0)
+  - FormatterKit/TimeIntervalFormatter (1.8.0)
+  - FormatterKit/UnitOfInformationFormatter (1.8.0)
+  - FormatterKit/URLRequestFormatter (1.8.0)
   - LLSimpleCamera (2.2.0)
   - PaymentKit (1.1.1)
   - Stripe (3.1.0):
@@ -8,7 +28,9 @@ PODS:
   - THContactPicker (0.0.3)
 
 DEPENDENCIES:
+  - CardIO (~> 5.0)
   - CHTTextView (~> 0.1)
+  - FormatterKit (~> 1.8)
   - LLSimpleCamera (~> 2.2)
   - PaymentKit
   - Stripe
@@ -24,7 +46,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/JuicyApp/THContactPicker.git
 
 SPEC CHECKSUMS:
+  CardIO: 3b0cc447bd0dd3d9552159365ba5c7b7f1db586a
   CHTTextView: 82f171cdde0aa675c4cf642f8f2c54201aef905c
+  FormatterKit: 547a808c41172136a3f3acb424ac9361d38bb32f
   LLSimpleCamera: 9da9e75d1c164e03c5c66314ffc0f9ec0009d8b8
   PaymentKit: f77b4d5cee45947949429c3d587e8eb160a3c9e2
   Stripe: aaa174b50fac40a16958cbc892457a241d0b4b08

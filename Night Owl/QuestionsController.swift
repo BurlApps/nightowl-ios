@@ -189,8 +189,15 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         case 3: cell.imageView?.tintColor = UIColor(red:0.3, green:0.69, blue:0.31, alpha:0.75)
         default: cell.imageView?.tintColor = UIColor(red:0.96, green:0.26, blue:0.21, alpha:0.75)
         }
-
-        cell.textLabel?.text = question.name
+        
+        if question.name != nil && !question.name.isEmpty {
+            cell.textLabel?.text = question.name
+        } else {
+            let timeInterval = TTTTimeIntervalFormatter()
+            let interval = NSDate().timeIntervalSinceDate(question.created)
+            cell.textLabel?.text = timeInterval.stringForTimeInterval(-interval)
+        }
+        
         cell.detailTextLabel?.text = question.subject.name
         
         return cell

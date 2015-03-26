@@ -34,7 +34,7 @@ class PaymentController: UIViewController, PTKViewDelegate {
         
         // Set Payment View Delegate
         let xCol = (self.view.frame.size.width - 290)/2
-        self.paymentView = PTKView(frame: CGRectMake(xCol, 200, 290, 55))
+        self.paymentView = PTKView(frame: CGRectMake(xCol, 100, 290, 55))
         self.paymentView.delegate = self
         self.view.addSubview(self.paymentView)
         

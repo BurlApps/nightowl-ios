@@ -16,26 +16,31 @@ class Assignment: NSObject {
     var state: Int!
     var creator: User!
     var subject: Subject!
+    var created: NSDate!
     var parse: PFObject!
     
     // MARK: Convenience Methods
     convenience init(_ object: PFObject) {
         self.init()
         
-        self.name = object["name"] as String
+        self.name = object["name"] as? String
         self.question = object["question"] as? PFFile
         self.answer = object["answer"] as? PFFile
         self.state = object["state"] as? Int
         self.creator = User(object["creator"] as PFUser)
         self.subject = Subject(object["subject"] as PFObject)
+        self.created = object.createdAt
         self.parse = object
     }
     
     // MARK: Class Methods
-    class func create(name: String, question: UIImage, creator: User, subject: Subject, callback: ((assignment: Assignment) -> Void)!) {
+    class func create(name: String!, question: UIImage, creator: User, subject: Subject, callback: ((assignment: Assignment) -> Void)!) {
         var assignment = PFObject(className: "Assignment")
         
-        assignment["name"] = name
+        if name != nil {
+            assignment["name"] = name
+        }
+        
         assignment["state"] = 0
         assignment["creator"] = creator.parse
         assignment["subject"] = subject.parse
