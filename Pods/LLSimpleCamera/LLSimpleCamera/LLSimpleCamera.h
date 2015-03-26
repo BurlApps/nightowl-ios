@@ -68,6 +68,11 @@ typedef enum : NSUInteger {
 @property (nonatomic) BOOL tapToFocus;
 
 /**
+ * Camera Session
+ */
+@property (strong, nonatomic) AVCaptureSession *session;
+
+/**
  * Set YES if you your view controller does not allow autorotation,
  * however you want to take the device rotation into account no matter what. Disabled by default.
  */

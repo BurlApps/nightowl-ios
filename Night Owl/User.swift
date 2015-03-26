@@ -63,17 +63,17 @@ class User: NSObject {
         lastSubject = subject
     }
     
-    func updateCard(card: PTKCard, callback: ((error: NSError!) -> Void)!) {
-        let number = NSString(string: card.number)
+    func updateCard(card: CardIOCreditCardInfo, callback: ((error: NSError!) -> Void)!) {
+        let number = NSString(string: card.redactedCardNumber)
         self.card = number.substringFromIndex(number.length - 4)
         self.parse["card"] = self.card
         self.parse.saveInBackgroundWithBlock(nil)
         
         var stCard = STPCard()
-        stCard.number = card.number
-        stCard.expMonth = card.expMonth
-        stCard.expYear = card.expYear
-        stCard.cvc = card.cvc
+        stCard.number = card.cardNumber
+        stCard.expMonth = card.expiryMonth
+        stCard.expYear = card.expiryYear
+        stCard.cvc = card.cvv
         
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
         let stripeKey = infoDictionary["StripeClientKey"] as String

@@ -12,7 +12,7 @@ class CameraController: UIViewController {
     @IBOutlet weak var captureButton: UIButton!
     
     // MARK: Instance Variables
-    private var cameraView: LLSimpleCamera!
+    var cameraView: LLSimpleCamera!
     private var capturedImage: UIImage!
     
     // MARK: UIViewController Overrides
@@ -88,7 +88,7 @@ class CameraController: UIViewController {
     }
     
     @IBAction func captureImage(sender: UIButton) {
-        self.cameraView.capture { (camera: LLSimpleCamera!, image: UIImage!, metaInfo:[NSObject : AnyObject]!, error: NSError!) -> Void in
+        self.cameraView.capture ({ (camera: LLSimpleCamera!, image: UIImage!, metaInfo:[NSObject : AnyObject]!, error: NSError!) -> Void in
             if image != nil && error == nil {
                 self.capturedImage = image
                 self.performSegueWithIdentifier("postSegue", sender: self)
@@ -99,7 +99,7 @@ class CameraController: UIViewController {
             
             self.captureButton.layer.borderColor = UIColor.whiteColor().CGColor
             self.captureButton.backgroundColor = UIColor(white: 1, alpha: 0.2)
-        }
+        }, exactSeenImage: true)
     }
     
     @IBAction func captureDown(sender: UIButton) {

@@ -17,6 +17,7 @@ class SettingsController: UITableViewController {
     // MARK: IBOutlets
     @IBOutlet weak var freeQuestionsLabel: UILabel!
     @IBOutlet weak var cardLabel: UILabel!
+    @IBOutlet weak var questionPrice: UILabel!
 
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -56,6 +57,12 @@ class SettingsController: UITableViewController {
         // Get Settings
         Settings.sharedInstance { (settings) -> Void in
             self.settings = settings
+            
+            if settings.questionPrice == 0 {
+                self.questionPrice.text = "Free"
+            } else {
+                self.questionPrice.text = String(format: "$%.2f", settings.questionPrice)
+            }
         }
         
         // Hide Labels
@@ -78,8 +85,7 @@ class SettingsController: UITableViewController {
         
         if self.selectedRow != nil {
             if self.selectedRow.section == 0 {
-                let viewController = segue.destinationViewController as PaymentController
-                viewController.settingsController = self
+                (pageController.rootController.controllers[1]?.viewControllers[0] as CameraController).cameraView.stop()
             } else if self.selectedRow.section == 1 {
                 let viewController = segue.destinationViewController as WebController
                 

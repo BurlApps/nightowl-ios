@@ -23,7 +23,6 @@
 		D33EBA6E1ABFEFC8001E637D /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA6C1ABFEFC8001E637D /* ParseCrashReporting.framework */; };
 		D33EBA701ABFF095001E637D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA6F1ABFF095001E637D /* AudioToolbox.framework */; };
 		D33EBA721ABFF09D001E637D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA711ABFF09D001E637D /* CFNetwork.framework */; };
-		D33EBA741ABFF0A4001E637D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA731ABFF0A4001E637D /* CoreGraphics.framework */; };
 		D33EBA761ABFF0AB001E637D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA751ABFF0AB001E637D /* CoreLocation.framework */; };
 		D33EBA781ABFF0B3001E637D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA771ABFF0B3001E637D /* MobileCoreServices.framework */; };
 		D33EBA7A1ABFF0BA001E637D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA791ABFF0BA001E637D /* QuartzCore.framework */; };
@@ -45,9 +44,10 @@
 		D33EBAA01AC0F702001E637D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9F1AC0F701001E637D /* Subject.swift */; };
 		D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA31AC16CCB001E637D /* QuestionController.swift */; };
 		D33EBAA61AC1F406001E637D /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA51AC1F406001E637D /* WebController.swift */; };
-		D33EBAA81AC21FE5001E637D /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA71AC21FE5001E637D /* PaymentController.swift */; };
 		D33EBAAA1AC2506B001E637D /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA91AC2506B001E637D /* RootController.swift */; };
 		D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBAB61AC32C9D001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D3BCE0791AC4053500824004 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE0781AC4053500824004 /* PaymentController.swift */; };
+		D3BCE07B1AC47E7900824004 /* ManualEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE07A1AC47E7900824004 /* ManualEntryController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,12 +107,18 @@
 		D33EBAA11AC13784001E637D /* libPods-CameraManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-CameraManager.a"; path = "Pods/build/Debug-iphoneos/libPods-CameraManager.a"; sourceTree = "<group>"; };
 		D33EBAA31AC16CCB001E637D /* QuestionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionController.swift; sourceTree = "<group>"; };
 		D33EBAA51AC1F406001E637D /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
-		D33EBAA71AC21FE5001E637D /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 		D33EBAA91AC2506B001E637D /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		D33EBAB11AC28128001E637D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D33EBAB21AC2812F001E637D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D33EBAB31AC295CD001E637D /* Night Owl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Night Owl.entitlements"; sourceTree = "<group>"; };
 		D33EBAB61AC32C9D001E637D /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		D3BCE06C1AC3F2A400824004 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D3BCE06E1AC3F2C600824004 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		D3BCE0701AC3F2D200824004 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		D3BCE0721AC3F2E900824004 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		D3BCE0741AC3F2F900824004 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D3BCE0781AC4053500824004 /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
+		D3BCE07A1AC47E7900824004 /* ManualEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualEntryController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +139,6 @@
 				D33EBA7A1ABFF0BA001E637D /* QuartzCore.framework in Frameworks */,
 				D33EBA781ABFF0B3001E637D /* MobileCoreServices.framework in Frameworks */,
 				D33EBA761ABFF0AB001E637D /* CoreLocation.framework in Frameworks */,
-				D33EBA741ABFF0A4001E637D /* CoreGraphics.framework in Frameworks */,
 				D33EBA721ABFF09D001E637D /* CFNetwork.framework in Frameworks */,
 				D33EBA701ABFF095001E637D /* AudioToolbox.framework in Frameworks */,
 				D33EBA6D1ABFEFC8001E637D /* Parse.framework in Frameworks */,
@@ -232,7 +237,8 @@
 				D33EBA981AC0E5A8001E637D /* PostController.swift */,
 				D33EBAA31AC16CCB001E637D /* QuestionController.swift */,
 				D33EBAA51AC1F406001E637D /* WebController.swift */,
-				D33EBAA71AC21FE5001E637D /* PaymentController.swift */,
+				D3BCE0781AC4053500824004 /* PaymentController.swift */,
+				D3BCE07A1AC47E7900824004 /* ManualEntryController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -263,6 +269,11 @@
 		D33EBA6A1ABFEFAE001E637D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3BCE0741AC3F2F900824004 /* UIKit.framework */,
+				D3BCE0721AC3F2E900824004 /* OpenGLES.framework */,
+				D3BCE0701AC3F2D200824004 /* CoreVideo.framework */,
+				D3BCE06E1AC3F2C600824004 /* CoreMedia.framework */,
+				D3BCE06C1AC3F2A400824004 /* AVFoundation.framework */,
 				D33EBAB61AC32C9D001E637D /* PassKit.framework */,
 				D33EBAA11AC13784001E637D /* libPods-CameraManager.a */,
 				D33EBA8F1ABFF1A3001E637D /* Bolts.framework */,
@@ -466,11 +477,12 @@
 				D33EBA581ABFEDBC001E637D /* CameraController.swift in Sources */,
 				D33EBAAA1AC2506B001E637D /* RootController.swift in Sources */,
 				D33EBAA01AC0F702001E637D /* Subject.swift in Sources */,
-				D33EBAA81AC21FE5001E637D /* PaymentController.swift in Sources */,
 				D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */,
 				D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */,
 				D33EBA9E1AC0EC14001E637D /* NoAnimationSegue.swift in Sources */,
+				D3BCE07B1AC47E7900824004 /* ManualEntryController.swift in Sources */,
 				D33EBA9C1AC0EA8A001E637D /* RBResizeImage.swift in Sources */,
+				D3BCE0791AC4053500824004 /* PaymentController.swift in Sources */,
 				D33EBA5F1ABFEDBC001E637D /* Track.swift in Sources */,
 				D33EBAA61AC1F406001E637D /* WebController.swift in Sources */,
 				D33EBA5B1ABFEDBC001E637D /* Installation.swift in Sources */,

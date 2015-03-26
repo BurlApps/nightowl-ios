@@ -2,63 +2,59 @@
 //  PaymentController.swift
 //  Night Owl
 //
-//  Created by Brian Vallelunga on 3/24/15.
+//  Created by Brian Vallelunga on 3/26/15.
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class PaymentController: UIViewController, PTKViewDelegate {
+class PaymentController: UIViewController, CardIOViewDelegate {
     
     // MARK: Instance Variables
-    var settingsController: SettingsController!
-    private var card: PTKCard!
-    private var valid = false
-    private var paymentView: PTKView!
     private var user = User.current()
     
     // MARK: IBOutlets
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var cardView: CardIOView!
+    @IBOutlet weak var manualButton: UIButton!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set Edge For Layout
-        self.edgesForExtendedLayout = UIRectEdge.None;
-        
-        // Hide Error Label
-        self.errorLabel.alpha = 0
-        
         // Set Back Button Color
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
-        // Set Payment View Delegate
-        let xCol = (self.view.frame.size.width - 290)/2
-        self.paymentView = PTKView(frame: CGRectMake(xCol, 100, 290, 55))
-        self.paymentView.delegate = self
-        self.view.addSubview(self.paymentView)
+        // Set Background Color
+        self.view.backgroundColor = UIColor.blackColor()
         
-        // Disable Save Button
-        self.saveButton.enabled = false
-    }
-    
-    // MARK: IBActions
-    @IBAction func saveCard(sender: UIBarButtonItem) {
-        self.user.updateCard(self.card) { (error) -> Void in
-            if error == nil {
-                self.settingsController.reloadUser()
-                self.navigationController?.popViewControllerAnimated(true)
-            } else {
-                self.errorLabel.text = error.localizedDescription
-                self.errorLabel.alpha = 1
-            }
+        // Add Create Button Top Border
+        var buttonBorder = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 2))
+        buttonBorder.backgroundColor = UIColor(white: 1, alpha: 0.2)
+        self.manualButton.addSubview(buttonBorder)
+        
+        // Add CardView Delegate
+        if CardIOUtilities.canReadCardWithCamera() {
+            self.cardView.delegate = self
+        } else {
+            self.performSegueWithIdentifier("manualSegue", sender: self)
         }
     }
     
-    // PTKView Methods
-    func paymentView(paymentView: PTKView!, withCard card: PTKCard!, isValid valid: Bool) {
-        self.card = card
-        self.valid = valid
-        self.saveButton.enabled = valid
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        CardIOUtilities.preload()
+    }
+    
+    // MARK: CardIOView Methods
+    func cardIOView(cardIOView: CardIOView!, didScanCard cardInfo: CardIOCreditCardInfo!) {
+        if cardInfo != nil {
+            self.user.updateCard(cardInfo, callback: { (error) -> Void in
+                if error == nil {
+                    self.navigationController?.popViewControllerAnimated(true)
+                } else {
+                    UIAlertView(title: "Credit Card Error", message: error.localizedDescription,
+                        delegate: self, cancelButtonTitle: "Rescan Card").show()
+                }
+            })
+        }
     }
 }
