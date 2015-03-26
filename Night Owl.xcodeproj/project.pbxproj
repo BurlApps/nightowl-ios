@@ -44,7 +44,6 @@
 		D33EBAA01AC0F702001E637D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9F1AC0F701001E637D /* Subject.swift */; };
 		D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA31AC16CCB001E637D /* QuestionController.swift */; };
 		D33EBAA61AC1F406001E637D /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA51AC1F406001E637D /* WebController.swift */; };
-		D33EBAAA1AC2506B001E637D /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA91AC2506B001E637D /* RootController.swift */; };
 		D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBAB61AC32C9D001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D3BCE0791AC4053500824004 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE0781AC4053500824004 /* ScanController.swift */; };
 		D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE07A1AC47E7900824004 /* PaymentController.swift */; };
@@ -107,7 +106,6 @@
 		D33EBAA11AC13784001E637D /* libPods-CameraManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-CameraManager.a"; path = "Pods/build/Debug-iphoneos/libPods-CameraManager.a"; sourceTree = "<group>"; };
 		D33EBAA31AC16CCB001E637D /* QuestionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionController.swift; sourceTree = "<group>"; };
 		D33EBAA51AC1F406001E637D /* WebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebController.swift; sourceTree = "<group>"; };
-		D33EBAA91AC2506B001E637D /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		D33EBAB11AC28128001E637D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D33EBAB21AC2812F001E637D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D33EBAB31AC295CD001E637D /* Night Owl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Night Owl.entitlements"; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 		D33EBA631ABFEE0C001E637D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D33EBAA91AC2506B001E637D /* RootController.swift */,
 				D33EBA501ABFEDBC001E637D /* PagesController.swift */,
 				D33EBA4F1ABFEDBC001E637D /* PageController.swift */,
 				D33EBA4B1ABFEDBC001E637D /* CameraController.swift */,
@@ -475,7 +472,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33EBA581ABFEDBC001E637D /* CameraController.swift in Sources */,
-				D33EBAAA1AC2506B001E637D /* RootController.swift in Sources */,
 				D33EBAA01AC0F702001E637D /* Subject.swift in Sources */,
 				D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */,
 				D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */,

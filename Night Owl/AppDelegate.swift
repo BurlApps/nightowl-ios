@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if let action = userInfo["action"] as? String {
-            let pagesController = window?.rootViewController?.childViewControllers[1] as PagesController
+            let pagesController = window?.rootViewController as PagesController
             
             switch(action) {
                 case "questions.reload": (pagesController.controllers[0]?.topViewController as? QuestionsController)?.reloadQuestions()

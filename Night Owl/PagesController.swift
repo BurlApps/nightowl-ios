@@ -12,19 +12,64 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
 
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
-    //private var pageViewController: UIPageViewController!
+    private let onboardTime: NSTimeInterval = 4
     private let pages = 3
     private let startPage = 1
     private var currentPage = 1
     private var locked = false
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
+    private var onboarding: UIView!
+    private var startDate = NSDate()
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Onboard User
+        self.onboarding = UIView(frame: self.view.frame)
+        self.onboarding.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        
+        // Create Onboarding Label
+        var onboardLabel = UILabel(frame: CGRectMake(10, 10, self.view.bounds.width - 40, self.view.bounds.height - 40))
+        onboardLabel.textAlignment = NSTextAlignment.Center
+        onboardLabel.textColor = UIColor.whiteColor()
+        onboardLabel.shadowColor = UIColor(white: 0, alpha: 0.2)
+        onboardLabel.shadowOffset = CGSize(width: 0, height: 2)
+        onboardLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
+        onboardLabel.numberOfLines = 0
+        onboardLabel.adjustsFontSizeToFitWidth = true
+        
+        Settings.sharedInstance { (settings) -> Void in
+            var price = "Free"
+            var text = "Take a photo of a math question and we'll send you the answer. "
+            
+            if settings.questionPrice > 0 {
+                if settings.questionPrice < 1 {
+                    price = String(format: "%.0f cents", settings.questionPrice * 100)
+                } else {
+                    price = String(format: "%.0f dollars", settings.questionPrice)
+                }
+            }
+            
+            text += "Get \(settings.freeQuestions) answers free on us, every question after is \(price)."
+            onboardLabel.text = text
+        }
+        
+        self.onboarding.addSubview(onboardLabel)
+        self.view.addSubview(self.onboarding)
+        
+        // Login User
+        if let user = User.current() {
+            user.fetch({ (user) -> Void in
+                self.hideOnboarding()
+            })
+        } else {
+            User.login({ (user) -> Void in
+                self.hideOnboarding()
+            })
+        }
+        
         // Create Page View Controller
-        //self.pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
         self.view.backgroundColor = UIColor.clearColor()
         self.dataSource = self
         self.delegate = self
@@ -57,6 +102,16 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     }
     
     // MARK: Instance Methods
+    func hideOnboarding() {
+        var delay = self.onboardTime - NSDate().timeIntervalSinceDate(self.startDate)
+        
+        UIView.animateWithDuration(0.5, delay: max(delay, 0), options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.onboarding.alpha = 0
+        }) { (success:Bool) -> Void in
+            self.onboarding.removeFromSuperview()
+        }
+    }
+    
     func lockPageView() {
         self.locked = true
     }

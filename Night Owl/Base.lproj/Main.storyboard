@@ -5,28 +5,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Root Controller-->
-        <scene sceneID="pEi-6U-FQr">
-            <objects>
-                <viewController id="Yw4-xD-an9" customClass="RootController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ljz-Uy-gjL"/>
-                        <viewControllerLayoutGuide type="bottom" id="1ez-CX-m0v"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tv4-38-F1P">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="yqL-Wu-stC"/>
-                    <connections>
-                        <segue destination="2KH-bD-tFs" kind="custom" identifier="loginSegue" customClass="NoAnimationSegue" id="eug-y5-IqJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H1j-Kf-YdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="420" y="395"/>
-        </scene>
         <!--Questions-->
         <scene sceneID="qMy-9B-1cF">
             <objects>
@@ -535,7 +513,9 @@
         <!--Pages Controller-->
         <scene sceneID="5oL-8a-vWQ">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="2" navigationOrientation="horizontal" spineLocation="none" id="2KH-bD-tFs" customClass="PagesController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="2" navigationOrientation="horizontal" spineLocation="none" id="2KH-bD-tFs" customClass="PagesController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="kH1-hh-OOz"/>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gqF-dQ-J8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="876" y="395"/>
@@ -605,12 +585,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Yw4-xD-an9" kind="relationship" relationship="rootViewController" id="9D1-vw-qbL"/>
+                        <segue destination="2KH-bD-tFs" kind="relationship" relationship="rootViewController" id="hb9-h0-l8j"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="94Y-5z-6Mm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-33" y="395"/>
+            <point key="canvasLocation" x="427" y="395"/>
         </scene>
     </scenes>
     <resources>
