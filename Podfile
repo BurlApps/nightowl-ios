@@ -1,4 +1,5 @@
 pod 'Stripe'
+pod 'PaymentKit'
 pod 'CHTTextView', '~> 0.1'
 pod 'LLSimpleCamera', '~> 2.2'
 pod 'FormatterKit', '~> 1.8'

@@ -53,21 +53,18 @@ class CameraController: UIViewController {
         })
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Unlock Page Controller
+        let pageController = self.navigationController as PageController
+        pageController.rootController.unlockPageView()
         
         // Start Camera View
         if self.cameraView != nil {
             self.cameraView.view.frame = self.view.frame
             self.cameraView.start()
         }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let pageController = self.navigationController as PageController
-        pageController.rootController.unlockPageView()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

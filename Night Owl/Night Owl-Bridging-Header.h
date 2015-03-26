@@ -8,6 +8,9 @@
 #import <LLSimpleCamera/LLSimpleCamera.h>
 
 #import "Stripe.h"
+#import "PTKCardExpiry.h"
+#import "PTKCardCVC.h"
+#import "PTKCardNumber.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "CardIO.h"
 

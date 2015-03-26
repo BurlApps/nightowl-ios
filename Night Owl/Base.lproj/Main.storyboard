@@ -284,7 +284,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="wTR-2P-oip" kind="push" identifier="paymentSegue" id="unX-46-aZ0"/>
+                                            <segue destination="RHD-wK-Peo" kind="push" identifier="paymentSegue" id="RVy-O1-lad"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -369,10 +369,10 @@
             </objects>
             <point key="canvasLocation" x="1762" y="1049"/>
         </scene>
-        <!--Credit Card-->
+        <!--Scanner-->
         <scene sceneID="Hnz-M0-REc">
             <objects>
-                <viewController id="wTR-2P-oip" customClass="PaymentController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wTR-2P-oip" customClass="ScanController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="muo-9d-2Io"/>
                         <viewControllerLayoutGuide type="bottom" id="pYJ-ci-3hS"/>
@@ -382,50 +382,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTK-HF-hcq" customClass="CardIOView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="424"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDP-mg-SvY">
-                                <rect key="frame" x="0.0" y="488" width="320" height="80"/>
-                                <color key="backgroundColor" red="0.27058823529999998" green="0.61960784310000006" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="hWq-oN-wQY"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Manual Enter">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="RHD-wK-Peo" kind="push" identifier="manualSegue" id="CHZ-RK-xhC"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xTK-HF-hcq" firstAttribute="top" secondItem="muo-9d-2Io" secondAttribute="bottom" id="5ea-iO-s2W"/>
                             <constraint firstItem="xTK-HF-hcq" firstAttribute="leading" secondItem="sg8-0L-QGg" secondAttribute="leadingMargin" constant="-16" id="A8S-9O-eLg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xTK-HF-hcq" secondAttribute="trailing" constant="-16" id="HOA-qJ-KcU"/>
-                            <constraint firstItem="tDP-mg-SvY" firstAttribute="leading" secondItem="sg8-0L-QGg" secondAttribute="leadingMargin" constant="-16" id="VpJ-Yg-fA7"/>
-                            <constraint firstItem="tDP-mg-SvY" firstAttribute="top" secondItem="xTK-HF-hcq" secondAttribute="bottom" id="eGg-hp-i2S"/>
-                            <constraint firstItem="pYJ-ci-3hS" firstAttribute="top" secondItem="tDP-mg-SvY" secondAttribute="bottom" id="i11-Lc-4g9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="tDP-mg-SvY" secondAttribute="trailing" constant="-16" id="uhp-fw-DEw"/>
+                            <constraint firstItem="pYJ-ci-3hS" firstAttribute="top" secondItem="xTK-HF-hcq" secondAttribute="bottom" id="eIx-Dc-PTq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Credit Card" id="0Ma-Gx-OJe"/>
+                    <navigationItem key="navigationItem" title="Scanner" id="0Ma-Gx-OJe"/>
                     <connections>
                         <outlet property="cardView" destination="xTK-HF-hcq" id="L6C-5u-dHc"/>
-                        <outlet property="manualButton" destination="tDP-mg-SvY" id="989-QC-qwm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cxU-JD-G93" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1762" y="1766"/>
+            <point key="canvasLocation" x="2210" y="1772"/>
         </scene>
-        <!--Manual Entry-->
+        <!--Credit Card-->
         <scene sceneID="Deh-dA-dcf">
             <objects>
-                <viewController id="RHD-wK-Peo" customClass="ManualEntryController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="RHD-wK-Peo" customClass="PaymentController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Ki-vE-jt2"/>
                         <viewControllerLayoutGuide type="bottom" id="oND-2C-17y"/>
@@ -434,25 +415,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Card Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PdE-9d-SXY">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="1234 5678 9012 3456" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PdE-9d-SXY">
                                 <rect key="frame" x="-1" y="63" width="322" height="70"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="22u-Mo-mpn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                <connections>
+                                    <action selector="cardNumberChanged:" destination="RHD-wK-Peo" eventType="editingChanged" id="AWB-wE-QoD"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="CVC" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="62K-D7-Lq3">
-                                <rect key="frame" x="178" y="132" width="143" height="70"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="0ic-wE-kLA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" Expiration" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IU8-20-sPi">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="MM/YY" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IU8-20-sPi">
                                 <rect key="frame" x="-1" y="132" width="180" height="70"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -460,7 +435,32 @@
                                     <constraint firstAttribute="width" constant="180" id="W2E-LL-3Mp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                <connections>
+                                    <action selector="cardExpirationChanged:" destination="RHD-wK-Peo" eventType="editingChanged" id="mjn-50-Pm7"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCb-qa-5Fj">
+                                <rect key="frame" x="95" y="219" width="130" height="35"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <state key="normal" title="scan your card">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="wTR-2P-oip" kind="push" identifier="scanSegue" id="g80-nd-aIy"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="CVC" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="62K-D7-Lq3">
+                                <rect key="frame" x="178" y="132" width="143" height="70"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="0ic-wE-kLA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="cardCVCChanged:" destination="RHD-wK-Peo" eventType="editingChanged" id="kWY-AH-bfo"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -469,22 +469,33 @@
                             <constraint firstAttribute="trailingMargin" secondItem="PdE-9d-SXY" secondAttribute="trailing" constant="-17" id="780-w7-7lO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="62K-D7-Lq3" secondAttribute="trailing" constant="-17" id="84M-Sp-05z"/>
                             <constraint firstItem="62K-D7-Lq3" firstAttribute="leading" secondItem="IU8-20-sPi" secondAttribute="trailing" constant="-1" id="91e-9z-cqE"/>
+                            <constraint firstItem="sCb-qa-5Fj" firstAttribute="top" secondItem="62K-D7-Lq3" secondAttribute="bottom" constant="17" id="9cv-4o-M9l"/>
                             <constraint firstItem="PdE-9d-SXY" firstAttribute="leading" secondItem="bl3-aR-LZT" secondAttribute="leadingMargin" constant="-17" id="ERc-DB-Tdj"/>
                             <constraint firstItem="IU8-20-sPi" firstAttribute="leading" secondItem="bl3-aR-LZT" secondAttribute="leadingMargin" constant="-17" id="MTv-1d-JCF"/>
                             <constraint firstItem="IU8-20-sPi" firstAttribute="top" secondItem="PdE-9d-SXY" secondAttribute="bottom" constant="-1" id="x7n-X4-1cp"/>
+                            <constraint firstAttribute="centerX" secondItem="sCb-qa-5Fj" secondAttribute="centerX" id="xHj-uI-Bdo"/>
                             <constraint firstItem="62K-D7-Lq3" firstAttribute="top" secondItem="PdE-9d-SXY" secondAttribute="bottom" constant="-1" id="yVb-Wi-6y1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Manual Entry" id="E98-oS-Jkf"/>
+                    <navigationItem key="navigationItem" title="Credit Card" id="E98-oS-Jkf">
+                        <barButtonItem key="rightBarButtonItem" title="SAVE" id="ABx-Ka-Hfo">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="saveCard:" destination="RHD-wK-Peo" id="pZZ-dq-WA1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cardInput" destination="PdE-9d-SXY" id="11U-Wy-D8j"/>
                         <outlet property="cvcInput" destination="62K-D7-Lq3" id="at1-mw-K1e"/>
                         <outlet property="expirationInput" destination="IU8-20-sPi" id="NDL-nQ-BOG"/>
+                        <outlet property="saveButton" destination="ABx-Ka-Hfo" id="zwU-m5-TMl"/>
+                        <outlet property="scanButton" destination="sCb-qa-5Fj" id="ift-Nj-vJx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFA-pi-ohb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2210" y="1766"/>
+            <point key="canvasLocation" x="1762" y="1772"/>
         </scene>
         <!--loading...-->
         <scene sceneID="wXn-z7-guF">

@@ -46,8 +46,8 @@
 		D33EBAA61AC1F406001E637D /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA51AC1F406001E637D /* WebController.swift */; };
 		D33EBAAA1AC2506B001E637D /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA91AC2506B001E637D /* RootController.swift */; };
 		D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBAB61AC32C9D001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		D3BCE0791AC4053500824004 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE0781AC4053500824004 /* PaymentController.swift */; };
-		D3BCE07B1AC47E7900824004 /* ManualEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE07A1AC47E7900824004 /* ManualEntryController.swift */; };
+		D3BCE0791AC4053500824004 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE0781AC4053500824004 /* ScanController.swift */; };
+		D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE07A1AC47E7900824004 /* PaymentController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,8 +117,8 @@
 		D3BCE0701AC3F2D200824004 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		D3BCE0721AC3F2E900824004 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		D3BCE0741AC3F2F900824004 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D3BCE0781AC4053500824004 /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
-		D3BCE07A1AC47E7900824004 /* ManualEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualEntryController.swift; sourceTree = "<group>"; };
+		D3BCE0781AC4053500824004 /* ScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanController.swift; sourceTree = "<group>"; };
+		D3BCE07A1AC47E7900824004 /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,8 +237,8 @@
 				D33EBA981AC0E5A8001E637D /* PostController.swift */,
 				D33EBAA31AC16CCB001E637D /* QuestionController.swift */,
 				D33EBAA51AC1F406001E637D /* WebController.swift */,
-				D3BCE0781AC4053500824004 /* PaymentController.swift */,
-				D3BCE07A1AC47E7900824004 /* ManualEntryController.swift */,
+				D3BCE0781AC4053500824004 /* ScanController.swift */,
+				D3BCE07A1AC47E7900824004 /* PaymentController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -480,9 +480,9 @@
 				D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */,
 				D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */,
 				D33EBA9E1AC0EC14001E637D /* NoAnimationSegue.swift in Sources */,
-				D3BCE07B1AC47E7900824004 /* ManualEntryController.swift in Sources */,
+				D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */,
 				D33EBA9C1AC0EA8A001E637D /* RBResizeImage.swift in Sources */,
-				D3BCE0791AC4053500824004 /* PaymentController.swift in Sources */,
+				D3BCE0791AC4053500824004 /* ScanController.swift in Sources */,
 				D33EBA5F1ABFEDBC001E637D /* Track.swift in Sources */,
 				D33EBAA61AC1F406001E637D /* WebController.swift in Sources */,
 				D33EBA5B1ABFEDBC001E637D /* Installation.swift in Sources */,
