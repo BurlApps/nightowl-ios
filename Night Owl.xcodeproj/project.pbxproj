@@ -235,7 +235,7 @@
 		D33EBA631ABFEE0C001E637D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D39FC6A01AC64AC100B6416B /* Root Page Navigation */,
+				D39FC6A01AC64AC100B6416B /* Page Navigation */,
 				D39FC6A11AC64AE300B6416B /* Camera Page */,
 				D39FC6A21AC64AFB00B6416B /* Questions Page */,
 				D39FC6A31AC64B0700B6416B /* Settings Page */,
@@ -318,13 +318,13 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
-		D39FC6A01AC64AC100B6416B /* Root Page Navigation */ = {
+		D39FC6A01AC64AC100B6416B /* Page Navigation */ = {
 			isa = PBXGroup;
 			children = (
 				D33EBA501ABFEDBC001E637D /* PagesController.swift */,
 				D33EBA4F1ABFEDBC001E637D /* PageController.swift */,
 			);
-			name = "Root Page Navigation";
+			name = "Page Navigation";
 			sourceTree = "<group>";
 		};
 		D39FC6A11AC64AE300B6416B /* Camera Page */ = {

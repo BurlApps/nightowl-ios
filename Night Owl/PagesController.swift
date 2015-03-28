@@ -12,7 +12,7 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
 
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
-    private let onboardTime: NSTimeInterval = 4
+    private let onboardTime: NSTimeInterval = 2
     private let pages = 3
     private let startPage = 1
     private var currentPage = 1

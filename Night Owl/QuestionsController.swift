@@ -197,7 +197,15 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         }
         
         if question.name != nil && !question.name.isEmpty {
-            cell.textLabel?.text = question.name
+            let title = NSString(string: question.name)
+            let length = min(20, title.length)
+            var text: NSString = title.substringToIndex(length)
+            
+            if title.length > 20 {
+                text = text + "..."
+            }
+            
+            cell.textLabel?.text = text
         } else {
             let timeInterval = TTTTimeIntervalFormatter()
             let interval = NSDate().timeIntervalSinceDate(question.created)

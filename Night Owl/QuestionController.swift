@@ -30,10 +30,10 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         // Update Title
         if self.question.name != nil {
             let title = NSString(string: self.question.name)
-            let length = min(15, title.length)
+            let length = min(10, title.length)
             self.title = title.substringToIndex(length)
             
-            if title.length > 15 {
+            if title.length > 10 {
                 self.title = self.title! + "..."
             }
         }  else {
