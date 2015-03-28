@@ -167,7 +167,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     func cardAdded() {
         self.alertMode = .ThankYou
         UIAlertView(title: "Thank You For Trusting Us!",
-            message: "As promised, \(self.settings.freeQuestionsCard) free questions have been added to your account!",
+            message: "As promised, \(self.settings.freeQuestionsCard) free solutions have been added to your account!",
             delegate: self, cancelButtonTitle: "Okay").show()
     }
 
@@ -177,10 +177,11 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     }
     
     @IBAction func createPost(sender: UIBarButtonItem) {
-        if self.user.freeQuestions < 2 && self.user.card == nil {
+        if self.user.freeQuestions < 1 && self.user.card == nil {
             self.alertMode = .AskForCard
-            UIAlertView(title: "Get \(self.settings.freeQuestionsCard) Free Questions",
-                message: "Add your credit card and get free questions! We won't charge your card until you buy a solution.",
+            
+            UIAlertView(title: "Get \(self.settings.freeQuestionsCard) Free Solutions",
+                message: "Want this answer free? Add your credit card to get this and the next on us! Don't worry, we won't charge your card until you buy a solution.",
                 delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Card").show()
         } else {
             self.createAssignment()
@@ -200,11 +201,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
         if self.alertMode == .AskForCard {
             if buttonIndex == 0 {
-                if self.user.freeQuestions > 0 {
-                    self.createAssignment()
-                } else {
-                    self.navigationController?.popViewControllerAnimated(false)
-                }
+                self.navigationController?.popViewControllerAnimated(false)
             } else {
                 var paymentController = self.storyBoard.instantiateViewControllerWithIdentifier("PaymentController") as? PaymentController
                 paymentController?.postController = self
