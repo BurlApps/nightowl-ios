@@ -34,7 +34,7 @@ class Assignment: NSObject {
     }
     
     // MARK: Class Methods
-    class func create(name: String!, question: UIImage, creator: User, subject: Subject, callback: ((assignment: Assignment) -> Void)!) {
+    class func create(name: String!, question: UIImage, creator: User, subject: Subject) {
         var assignment = PFObject(className: "Assignment")
         
         if name != nil {
@@ -45,16 +45,17 @@ class Assignment: NSObject {
         assignment["creator"] = creator.parse
         assignment["subject"] = subject.parse
         
-        callback!(assignment: Assignment(assignment))
         assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
             if success && error == nil {
                 var imageData = UIImagePNGRepresentation(question)
                 var imageFile = PFFile(name: "image.png", data: imageData)
                 assignment["question"] = imageFile
+                creator.pushReloadQuestions()
                 
                 assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
                     assignment["state"] = 1
                     assignment.saveInBackgroundWithBlock(nil)
+                    creator.pushReloadQuestions()
                 }
             } else {
                 println(error)

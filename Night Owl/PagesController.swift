@@ -25,9 +25,20 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Login User
+        if let user = User.current() {
+            user.fetch({ (user) -> Void in
+                self.hideOnboarding()
+            })
+        } else {            
+            User.login({ (user) -> Void in
+                self.hideOnboarding()
+            })
+        }
+        
         // Onboard User
         self.onboarding = UIView(frame: self.view.frame)
-        self.onboarding.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        self.onboarding.backgroundColor = UIColor(white: 0, alpha: 0.7)
         
         // Create Onboarding Label
         var onboardLabel = UILabel(frame: CGRectMake(10, 10, self.view.bounds.width - 40, self.view.bounds.height - 40))
@@ -35,13 +46,13 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         onboardLabel.textColor = UIColor.whiteColor()
         onboardLabel.shadowColor = UIColor(white: 0, alpha: 0.2)
         onboardLabel.shadowOffset = CGSize(width: 0, height: 2)
-        onboardLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
+        onboardLabel.font = UIFont(name: "HelveticaNeue", size: 22)
         onboardLabel.numberOfLines = 0
         onboardLabel.adjustsFontSizeToFitWidth = true
         
         Settings.sharedInstance { (settings) -> Void in
             var price = "Free"
-            var text = "Take a photo of a math question and we'll send you the answer. "
+            var text = "Take a photo\nSend us a math question and we'll solve it.\n\n"
             
             if settings.questionPrice > 0 {
                 if settings.questionPrice < 1 {
@@ -52,22 +63,20 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
             }
             
             text += "Get \(settings.freeQuestions) answers free on us, every question after is \(price)."
-            onboardLabel.text = text
+            
+            var attributedText = NSMutableAttributedString(string: text)
+            var style = NSMutableParagraphStyle()
+            
+            style.lineSpacing = 8
+            style.alignment = .Center
+
+            attributedText.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedText.length))
+            attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Bold", size: 30)!, range: NSMakeRange(0, 12))
+            onboardLabel.attributedText = attributedText
         }
         
         self.onboarding.addSubview(onboardLabel)
         self.view.addSubview(self.onboarding)
-        
-        // Login User
-        if let user = User.current() {
-            user.fetch({ (user) -> Void in
-                self.hideOnboarding()
-            })
-        } else {
-            User.login({ (user) -> Void in
-                self.hideOnboarding()
-            })
-        }
         
         // Create Page View Controller
         self.view.backgroundColor = UIColor.clearColor()

@@ -9,6 +9,7 @@
 class PaymentController: UIViewController {
     
     // MARK: Instance Variables
+    var settingsController: SettingsController!
     private var user = User.current()
     
     // MARK: IBoutlets
@@ -127,6 +128,7 @@ class PaymentController: UIViewController {
         
         self.user.updateCard(card, callback: { (error) -> Void in
             if error == nil {
+                self.settingsController.reloadUser()
                 self.navigationController?.popViewControllerAnimated(true)
             } else {
                 UIAlertView(title: "Credit Card Error", message: error.localizedDescription,

@@ -16,13 +16,10 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     private var previewImageView: UIImageView!
     private var subjects: [Subject] = []
     private var subjectChosen: Subject!
-    private var settings: Settings!
     private var user: User = User.current()
     
     // MARK: IBOutlets
     @IBOutlet weak var subjectPicker: UIPickerView!
-    @IBOutlet weak var pickerOffset: NSLayoutConstraint!
-    @IBOutlet weak var pickerHeight: NSLayoutConstraint!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -80,17 +77,13 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.textEditor.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.textEditor.layer.shadowOpacity = 1
         self.textEditor.layer.shadowRadius = 0
+        self.textEditor.returnKeyType = .Done
         self.view.insertSubview(self.textEditor, belowSubview: self.subjectPicker)
         
         // Register for keyboard notifications
         var notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
-        
-        // Get Settings
-        Settings.sharedInstance { (settings) -> Void in
-            self.settings = settings
-            self.navigationItem.title = "0/\(settings.questionNameLimit)"
-        }
+        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
         
         // Configure Navigation Bar
         if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
@@ -106,21 +99,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
                 ], forState: UIControlState.Normal)
         }
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Make Text Editor Active
-        self.textEditor.becomeFirstResponder()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Make Text Editor Active
-        self.textEditor.resignFirstResponder()
-    }
-    
+
     // MARK: IBActions
     @IBAction func canelPost(sender: UIBarButtonItem) {
         self.navigationController?.popViewControllerAnimated(false)
@@ -135,22 +114,21 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             editorText = nil
         }
         
-        Assignment.create(editorText, question: imageResized, creator: self.user, subject: self.subjectChosen) { (assignment) -> Void in
-            self.user.setSubject(self.subjectChosen)
-            self.user.chargeQuestion()
-            self.navigationController?.popViewControllerAnimated(false)
-            self.cameraController.slideToQuestions()
-        }
+        Assignment.create(editorText, question: imageResized, creator: self.user, subject: self.subjectChosen)
+        
+        self.user.setSubject(self.subjectChosen)
+        self.user.chargeQuestion()
+        self.navigationController?.popViewControllerAnimated(false)
+        self.cameraController.slideToQuestions()
     }
     
     // MARK: NSNotificationCenter
     func keyboardDidShow(notification: NSNotification) {
-        let userInfo = NSDictionary(dictionary: notification.userInfo!)
-        let keyboardRect = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue).CGRectValue()
-                
-        self.pickerHeight.constant = self.view.frame.height - keyboardRect.size.height - 200
-        self.pickerOffset.constant = keyboardRect.size.height
-        self.view.layoutIfNeeded()
+        self.subjectPicker.hidden = true
+    }
+    
+    func keyboardDidHide(notification: NSNotification) {
+        self.subjectPicker.hidden = false
     }
     
     // MARK: UIPickerView Methods
@@ -200,27 +178,12 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     }
     
     // MARK: UITextView Methods
-    func textView(textView: UITextView!, shouldChangeTextInRange range: NSRange, replacementText text: String!) -> Bool {
-        return textView.text.utf16Count + (text.utf16Count - range.length) <= self.settings.questionNameLimit;
-    }
-    
-    func textViewDidChange(textView: UITextView!) {
-        var textColor = UIColor.whiteColor()
-        var mutalableText = NSMutableAttributedString(attributedString: textView.attributedText)
-        
-        if mutalableText.length >= self.settings.questionNameLimit {
-            textColor = UIColor(red:0.95, green:0.24, blue:0.31, alpha:1)
-        } else if mutalableText.length >= self.settings.questionNameLimit/2 {
-            textColor = UIColor(red:1, green:0.6, blue:0, alpha:1)
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            self.textEditor.resignFirstResponder()
+            return false
         }
         
-        self.navigationItem.title = "\(textView.attributedText.length)/\(self.settings.questionNameLimit)"
-        
-        if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
-            self.navigationController?.navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName: textColor,
-                NSFontAttributeName: font
-            ]
-        }
+        return true
     }
 }

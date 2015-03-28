@@ -59,6 +59,16 @@ class User: NSObject {
         User.logout()
     }
     
+    func pushReloadQuestions() {
+        let push = PFPush()
+        let pushQuery = PFInstallation.query()
+        pushQuery.whereKey("user", equalTo: self.parse)
+        
+        push.setQuery(pushQuery)
+        push.setData(["action": "questions.reload"])
+        push.sendPushInBackgroundWithBlock(nil)
+    }
+    
     func setSubject(subject: Subject) {
         lastSubject = subject
     }

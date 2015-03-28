@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
+        let userDefaults = NSUserDefaults.standardUserDefaults()
         
         //Initialize Parse
         let parseApplicationID = infoDictionary["ParseApplicationID"] as String
@@ -41,6 +42,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Cache Subjects
         Subject.subjects(false, nil)
+        
+        // Configure Settings Panel
+        let buildType = infoDictionary["BuildType"] as String
+        let version = infoDictionary["CFBundleShortVersionString"] as NSString
+        let build = infoDictionary[kCFBundleVersionKey] as NSString
+        var versionBuild = "\(version) (\(build))" as NSString
+        let previousVersionBuild = userDefaults.objectForKey("VersionNumber") as? NSString
+        var devBuild = false
+        
+        if buildType == "debug" {
+            versionBuild = versionBuild + " - Debug"
+            devBuild = true
+        } else if buildType == "staging" {
+            versionBuild = versionBuild + " - Staging"
+            devBuild = true
+        }
+        
+        if devBuild && versionBuild != previousVersionBuild {
+            User.logout()
+        }
+        
+        userDefaults.setValue(versionBuild, forKey: "VersionNumber")
+        userDefaults.synchronize()
 
         return true
     }

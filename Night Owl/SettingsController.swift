@@ -60,6 +60,8 @@ class SettingsController: UITableViewController {
             
             if settings.questionPrice == 0 {
                 self.questionPrice.text = "Free"
+            } else if settings.questionPrice < 1 {
+                self.questionPrice.text = String(format: "%.2f", settings.questionPrice)
             } else {
                 self.questionPrice.text = String(format: "$%.2f", settings.questionPrice)
             }
@@ -85,6 +87,9 @@ class SettingsController: UITableViewController {
         
         if self.selectedRow != nil {
             if self.selectedRow.section == 0 {
+                let viewController = segue.destinationViewController as PaymentController
+                
+                viewController.settingsController = self
                 (pageController.rootController.controllers[1]?.viewControllers[0] as CameraController).cameraView.stop()
             } else if self.selectedRow.section == 1 {
                 let viewController = segue.destinationViewController as WebController
