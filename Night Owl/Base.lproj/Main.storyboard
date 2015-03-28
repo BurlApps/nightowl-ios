@@ -69,7 +69,32 @@
                     <view key="view" contentMode="scaleToFill" id="swG-XT-WV5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaJ-R8-bFb">
+                                <rect key="frame" x="0.0" y="64" width="320" height="45"/>
+                                <color key="backgroundColor" red="0.27058823529999998" green="0.61960784310000006" blue="0.70196078429999997" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="2TK-Qk-WZE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oC-HJ-Zq3">
+                                <rect key="frame" x="0.0" y="109" width="320" height="459"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="nAr-KI-pZr" firstAttribute="top" secondItem="6oC-HJ-Zq3" secondAttribute="bottom" id="38l-PL-TBK"/>
+                            <constraint firstItem="6oC-HJ-Zq3" firstAttribute="leading" secondItem="swG-XT-WV5" secondAttribute="leadingMargin" constant="-16" id="FE9-5y-Iih"/>
+                            <constraint firstItem="vaJ-R8-bFb" firstAttribute="leading" secondItem="swG-XT-WV5" secondAttribute="leadingMargin" constant="-16" id="Kws-RF-l7e"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vaJ-R8-bFb" secondAttribute="trailing" constant="-16" id="Ljg-S6-PK8"/>
+                            <constraint firstItem="vaJ-R8-bFb" firstAttribute="top" secondItem="EFw-RJ-Tsg" secondAttribute="bottom" id="RKl-R2-THS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6oC-HJ-Zq3" secondAttribute="trailing" constant="-16" id="nBf-nU-mxh"/>
+                            <constraint firstItem="6oC-HJ-Zq3" firstAttribute="top" secondItem="vaJ-R8-bFb" secondAttribute="bottom" id="zVK-Dd-49d"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Question" id="FVo-66-bL3">
                         <barButtonItem key="rightBarButtonItem" image="Flag" id="gr1-UD-s7x">
@@ -80,6 +105,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="flagButton" destination="gr1-UD-s7x" id="PRS-Rn-dj5"/>
+                        <outlet property="imageLabel" destination="vaJ-R8-bFb" id="ouK-DS-rV2"/>
+                        <outlet property="pagesContainer" destination="6oC-HJ-Zq3" id="bHG-dr-0Ws"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRM-yE-bdg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

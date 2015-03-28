@@ -11,6 +11,7 @@ class Assignment: NSObject {
     // MARK: Instance Variables
     var name: String!
     var question: PFFile!
+    var questionCached: UIImage!
     var answer: PFFile!
     var answerCached: UIImage!
     var state: Int!
@@ -18,6 +19,11 @@ class Assignment: NSObject {
     var subject: Subject!
     var created: NSDate!
     var parse: PFObject!
+    
+    // MARK: Enum
+    enum ImageType {
+        case Question, Answer
+    }
     
     // MARK: Convenience Methods
     convenience init(_ object: PFObject) {
@@ -79,35 +85,55 @@ class Assignment: NSObject {
         self.parse.saveInBackgroundWithBlock(nil)
     }
     
-    func getAnswer(callback: (image: UIImage) -> Void) {
-        if self.answerCached == nil {
-            if self.answer != nil {
-                let request = NSURLRequest(URL: NSURL(string: self.answer.url)!)
-                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
-                    (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-                    if error == nil {
-                        self.answerCached = UIImage(data: data)
-                        
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-                            // Makes a 1x1 graphics context and draws the image into it
-                            UIGraphicsBeginImageContext(CGSizeMake(1,1))
-                            let context = UIGraphicsGetCurrentContext()
-                            CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), self.answerCached.CGImage)
-                            UIGraphicsEndImageContext()
-                            
-                            // Now the image will have been loaded and decoded
-                            // and is ready to rock for the main thread
-                            dispatch_async(dispatch_get_main_queue(), {
-                                callback(image: self.answerCached)
-                            })
-                        })
-                    } else {
-                        println(error)
-                    }
-                })
-            }
+    
+    
+    func getImage(type: ImageType, callback: (image: UIImage) -> Void) {
+        var tmpImage: PFFile!
+        var tmpCache: UIImage!
+        
+        if type == .Question {
+            tmpImage = self.question
+            tmpCache = self.questionCached
         } else {
-            callback(image: self.answerCached)
+            tmpImage = self.answer
+            tmpCache = self.answerCached
+        }
+        
+        if tmpCache != nil {
+            callback(image: tmpCache)
+            return
+        }
+        
+        if tmpImage != nil {
+            let request = NSURLRequest(URL: NSURL(string: tmpImage.url)!)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
+                (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                if error == nil {
+                    tmpCache = UIImage(data: data)
+                    
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+                        // Makes a 1x1 graphics context and draws the image into it
+                        UIGraphicsBeginImageContext(CGSizeMake(1,1))
+                        let context = UIGraphicsGetCurrentContext()
+                        CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), tmpCache.CGImage)
+                        UIGraphicsEndImageContext()
+                        
+                        // Now the image will have been loaded and decoded
+                        // and is ready to rock for the main thread
+                        dispatch_async(dispatch_get_main_queue(), {
+                            callback(image: tmpCache)
+                        })
+                        
+                        if type == .Question {
+                            self.questionCached = tmpCache
+                        } else {
+                            self.answerCached = tmpCache
+                        }
+                    })
+                } else {
+                    println(error)
+                }
+            })
         }
     }
 

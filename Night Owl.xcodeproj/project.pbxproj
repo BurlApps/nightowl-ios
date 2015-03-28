@@ -48,6 +48,7 @@
 		D39FC69B1AC645F800B6416B /* Pods.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D39FC69A1AC645F800B6416B /* Pods.staging.xcconfig */; };
 		D39FC69C1AC6461D00B6416B /* Pods.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */; };
 		D39FC69D1AC6461F00B6416B /* Pods.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1430730C15A9671CCBACB989 /* Pods.release.xcconfig */; };
+		D39FC69F1AC64A8900B6416B /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39FC69E1AC64A8900B6416B /* ImageController.swift */; };
 		D3BCE0791AC4053500824004 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE0781AC4053500824004 /* ScanController.swift */; };
 		D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE07A1AC47E7900824004 /* PaymentController.swift */; };
 		D3BCE0811AC636FE00824004 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3BCE0801AC636FE00824004 /* Settings.bundle */; };
@@ -115,6 +116,7 @@
 		D33EBAB31AC295CD001E637D /* Night Owl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Night Owl.entitlements"; sourceTree = "<group>"; };
 		D33EBAB61AC32C9D001E637D /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		D39FC69A1AC645F800B6416B /* Pods.staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Pods.staging.xcconfig; path = "Pods/Target Support Files/Pods/Pods.staging.xcconfig"; sourceTree = "<group>"; };
+		D39FC69E1AC64A8900B6416B /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		D3BCE06C1AC3F2A400824004 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D3BCE06E1AC3F2C600824004 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D3BCE0701AC3F2D200824004 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -233,16 +235,10 @@
 		D33EBA631ABFEE0C001E637D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D33EBA501ABFEDBC001E637D /* PagesController.swift */,
-				D33EBA4F1ABFEDBC001E637D /* PageController.swift */,
-				D33EBA4B1ABFEDBC001E637D /* CameraController.swift */,
-				D33EBA921ABFFC31001E637D /* QuestionsController.swift */,
-				D33EBA941ABFFC3A001E637D /* SettingsController.swift */,
-				D33EBA981AC0E5A8001E637D /* PostController.swift */,
-				D33EBAA31AC16CCB001E637D /* QuestionController.swift */,
-				D33EBAA51AC1F406001E637D /* WebController.swift */,
-				D3BCE0781AC4053500824004 /* ScanController.swift */,
-				D3BCE07A1AC47E7900824004 /* PaymentController.swift */,
+				D39FC6A01AC64AC100B6416B /* Root Page Navigation */,
+				D39FC6A11AC64AE300B6416B /* Camera Page */,
+				D39FC6A21AC64AFB00B6416B /* Questions Page */,
+				D39FC6A31AC64B0700B6416B /* Settings Page */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -320,6 +316,45 @@
 				D33EBAB21AC2812F001E637D /* Release.xcconfig */,
 			);
 			name = Config;
+			sourceTree = "<group>";
+		};
+		D39FC6A01AC64AC100B6416B /* Root Page Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA501ABFEDBC001E637D /* PagesController.swift */,
+				D33EBA4F1ABFEDBC001E637D /* PageController.swift */,
+			);
+			name = "Root Page Navigation";
+			sourceTree = "<group>";
+		};
+		D39FC6A11AC64AE300B6416B /* Camera Page */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA4B1ABFEDBC001E637D /* CameraController.swift */,
+				D33EBA981AC0E5A8001E637D /* PostController.swift */,
+			);
+			name = "Camera Page";
+			sourceTree = "<group>";
+		};
+		D39FC6A21AC64AFB00B6416B /* Questions Page */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA921ABFFC31001E637D /* QuestionsController.swift */,
+				D33EBAA31AC16CCB001E637D /* QuestionController.swift */,
+				D39FC69E1AC64A8900B6416B /* ImageController.swift */,
+			);
+			name = "Questions Page";
+			sourceTree = "<group>";
+		};
+		D39FC6A31AC64B0700B6416B /* Settings Page */ = {
+			isa = PBXGroup;
+			children = (
+				D33EBA941ABFFC3A001E637D /* SettingsController.swift */,
+				D33EBAA51AC1F406001E637D /* WebController.swift */,
+				D3BCE0781AC4053500824004 /* ScanController.swift */,
+				D3BCE07A1AC47E7900824004 /* PaymentController.swift */,
+			);
+			name = "Settings Page";
 			sourceTree = "<group>";
 		};
 		E23F6025443F7B4B4191F6B2 /* Pods */ = {
@@ -500,6 +535,7 @@
 				D33EBA951ABFFC3A001E637D /* SettingsController.swift in Sources */,
 				D33EBA601ABFEDBC001E637D /* User.swift in Sources */,
 				D33EBA5E1ABFEDBC001E637D /* Settings.swift in Sources */,
+				D39FC69F1AC64A8900B6416B /* ImageController.swift in Sources */,
 				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
 				D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */,
 				D33EBA5D1ABFEDBC001E637D /* PagesController.swift in Sources */,

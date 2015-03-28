@@ -80,7 +80,9 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let viewController = segue.destinationViewController as QuestionController
         let pageController = self.navigationController as PageController
+        
         viewController.question = self.question
+        viewController.questionController = self
         pageController.rootController.lockPageView()
     }
     
@@ -144,7 +146,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         var question = self.questionsFiltered[indexPath.row]
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        if question.state == 3 {
+        if question.state > 0 {
             self.question = question
             self.performSegueWithIdentifier("questionSegue", sender: self)
         }
@@ -162,11 +164,10 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
             cell.detailTextLabel?.font = UIFont.systemFontOfSize(15)
         }
         
-        cell.imageView?.image = UIImage(named: "Cirlce")
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.accessoryType = UITableViewCellAccessoryType.None
         
-        if question.state == 3 {
+        if question.state > 0 {
             cell.selectionStyle = UITableViewCellSelectionStyle.Gray
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         }
@@ -181,10 +182,18 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
                 cell.imageView?.tintColor = UIColor.whiteColor()
                 cell.imageView?.addSubview(spinner)
             }
-        case 1: cell.imageView?.tintColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.25)
-        case 2: cell.imageView?.tintColor = UIColor(red:0.01, green:0.66, blue:0.96, alpha:0.5)
-        case 3: cell.imageView?.tintColor = UIColor(red:0.3, green:0.69, blue:0.31, alpha:0.75)
-        default: cell.imageView?.tintColor = UIColor(red:0.96, green:0.26, blue:0.21, alpha:0.75)
+        case 1:
+            cell.imageView?.image = UIImage(named: "Box")
+            cell.imageView?.tintColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.25)
+        case 2:
+            cell.imageView?.image = UIImage(named: "Fullbox")
+            cell.imageView?.tintColor = UIColor(red:0.1, green:0.61, blue:0.89, alpha:1)
+        case 3:
+            cell.imageView?.image = UIImage(named: "Checkbox")
+            cell.imageView?.tintColor = UIColor(red:0.3, green:0.69, blue:0.31, alpha:0.75)
+        default:
+            cell.imageView?.image = UIImage(named: "Crossbox")
+            cell.imageView?.tintColor = UIColor(red:0.96, green:0.26, blue:0.21, alpha:0.75)
         }
         
         if question.name != nil && !question.name.isEmpty {
