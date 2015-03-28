@@ -160,6 +160,8 @@ class PaymentController: UIViewController {
         card.expiryYear = expiration.year
         card.cvv = self.cvcInput.text
         
+        self.saveButton.enabled = false
+        
         self.user.updateCard(card, callback: { (error) -> Void in
             if error == nil {
                 self.user.pushReloadSettings()
@@ -168,6 +170,7 @@ class PaymentController: UIViewController {
             } else {
                 UIAlertView(title: "Credit Card Error", message: error.localizedDescription,
                     delegate: self, cancelButtonTitle: "Okay").show()
+                self.saveButton.enabled = true
             }
         })
     }
