@@ -16,10 +16,10 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     private let pages = 3
     private let startPage = 1
     private var currentPage = 1
-    private var locked = false
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var onboarding: UIView!
     private var startDate = NSDate()
+    private var scrollView: UIScrollView!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -50,30 +50,19 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         onboardLabel.numberOfLines = 0
         onboardLabel.adjustsFontSizeToFitWidth = true
         
-        Settings.sharedInstance { (settings) -> Void in
-            var price = "Free"
-            var text = "Take a photo\nSend us a math question and we'll solve it.\n\n"
-            
-            if settings.questionPrice > 0 {
-                if settings.questionPrice < 1 {
-                    price = String(format: "%.0f cents", settings.questionPrice * 100)
-                } else {
-                    price = String(format: "%.0f dollars", settings.questionPrice)
-                }
-            }
-            
-            text += "Get \(settings.freeQuestions) answers free on us, every question after is \(price)."
-            
-            var attributedText = NSMutableAttributedString(string: text)
-            var style = NSMutableParagraphStyle()
-            
-            style.lineSpacing = 8
-            style.alignment = .Center
+        var price = "Free"
+        var text = "Take a photo\nSend us a math question and we'll solve it.\n\n"
+        text += "Get a couple answers free on us, every question after you buy."
+        
+        var attributedText = NSMutableAttributedString(string: text)
+        var style = NSMutableParagraphStyle()
+        
+        style.lineSpacing = 8
+        style.alignment = .Center
 
-            attributedText.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedText.length))
-            attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Bold", size: 30)!, range: NSMakeRange(0, 12))
-            onboardLabel.attributedText = attributedText
-        }
+        attributedText.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedText.length))
+        attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Bold", size: 30)!, range: NSMakeRange(0, 12))
+        onboardLabel.attributedText = attributedText
         
         self.onboarding.addSubview(onboardLabel)
         self.view.addSubview(self.onboarding)
@@ -85,7 +74,8 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         
         for controller in self.view.subviews {
             if let scrollView = controller as? UIScrollView {
-                scrollView.delegate = self
+                self.scrollView = scrollView
+                self.scrollView.delegate = self
             }
         }
         
@@ -122,11 +112,11 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     }
     
     func lockPageView() {
-        self.locked = true
+        self.scrollView.scrollEnabled = false
     }
     
     func unlockPageView() {
-        self.locked = false
+        self.scrollView.scrollEnabled = true
     }
     
     func setActiveChildController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
@@ -190,19 +180,19 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     
     // MARK: UIScrollView Delegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (self.locked || (self.currentPage == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width)) {
+        if self.currentPage == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width {
             scrollView.contentOffset = CGPointMake(scrollView.bounds.size.width, 0)
-        } else if (self.currentPage == (self.pages - 1) && scrollView.contentOffset.x > scrollView.bounds.size.width) {
+        } else if self.currentPage == (self.pages - 1) && scrollView.contentOffset.x > scrollView.bounds.size.width {
             scrollView.contentOffset = CGPointMake(scrollView.bounds.size.width, 0)
         }
     }
     
     func scrollViewWillEndDragging(scrollView: UIScrollView, var withVelocity velocity: CGPoint, var targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if (self.locked || (self.currentPage == 0 && scrollView.contentOffset.x <= scrollView.bounds.size.width)) {
+        if self.currentPage == 0 && scrollView.contentOffset.x <= scrollView.bounds.size.width {
             velocity = CGPointZero
             targetContentOffset.memory.x = scrollView.bounds.size.width
             targetContentOffset.memory.y = 0
-        } else if (self.currentPage == (self.pages - 1) && scrollView.contentOffset.x >= scrollView.bounds.size.width) {
+        } else if self.currentPage == (self.pages - 1) && scrollView.contentOffset.x >= scrollView.bounds.size.width {
             velocity = CGPointZero
             targetContentOffset.memory.x = scrollView.bounds.size.width
             targetContentOffset.memory.y = 0
