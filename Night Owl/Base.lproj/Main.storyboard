@@ -412,7 +412,7 @@
         <!--Credit Card-->
         <scene sceneID="Deh-dA-dcf">
             <objects>
-                <viewController id="RHD-wK-Peo" customClass="PaymentController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PaymentController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RHD-wK-Peo" customClass="PaymentController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Ki-vE-jt2"/>
                         <viewControllerLayoutGuide type="bottom" id="oND-2C-17y"/>

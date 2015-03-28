@@ -39,17 +39,16 @@ class ScanController: UIViewController, CardIOViewDelegate {
     // MARK: CardIOView Methods
     func cardIOView(cardIOView: CardIOView!, didScanCard cardInfo: CardIOCreditCardInfo!) {
         if cardInfo != nil {
-            println(cardInfo)
-            
             let cardNumber = PTKCardNumber(string: cardInfo.cardNumber)
             let cardExpiration = PTKCardExpiry(string: "\(cardInfo.expiryMonth)/\(cardInfo.expiryYear)")
             self.paymentController.cardInput.text = cardNumber.formattedString()
             self.paymentController.expirationInput.text = cardExpiration.formattedString()
+            self.navigationController?.popViewControllerAnimated(true)
+            self.paymentController.cvcInput.becomeFirstResponder()
         } else {
             UIAlertView(title: "Failed to Scan", message: "We were not able to scan your card :(",
                 delegate: nil, cancelButtonTitle: "Okay").show()
+            self.navigationController?.popViewControllerAnimated(true)
         }
-        
-        self.navigationController?.popViewControllerAnimated(true)
     }
 }

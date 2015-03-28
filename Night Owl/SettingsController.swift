@@ -10,7 +10,6 @@ class SettingsController: UITableViewController {
     
     // MARK: Instance Variables
     private var selectedRow: NSIndexPath!
-    private var themeColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1)
     private var settings: Settings!
     private var user = User.current()
     
@@ -39,7 +38,7 @@ class SettingsController: UITableViewController {
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.barTintColor = self.themeColor
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1)
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
         
         if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
@@ -57,14 +56,7 @@ class SettingsController: UITableViewController {
         // Get Settings
         Settings.sharedInstance { (settings) -> Void in
             self.settings = settings
-            
-            if settings.questionPrice == 0 {
-                self.questionPrice.text = "Free"
-            } else if settings.questionPrice < 1 {
-                self.questionPrice.text = String(format: "%.2f", settings.questionPrice)
-            } else {
-                self.questionPrice.text = String(format: "$%.2f", settings.questionPrice)
-            }
+            self.questionPrice.text = settings.priceFormatted()
         }
         
         // Hide Labels
@@ -87,9 +79,6 @@ class SettingsController: UITableViewController {
         
         if self.selectedRow != nil {
             if self.selectedRow.section == 0 {
-                let viewController = segue.destinationViewController as PaymentController
-                
-                viewController.settingsController = self
                 (pageController.rootController.controllers[1]?.viewControllers[0] as CameraController).cameraView.stop()
             } else if self.selectedRow.section == 1 {
                 let viewController = segue.destinationViewController as WebController

@@ -65,7 +65,17 @@ class User: NSObject {
         pushQuery.whereKey("user", equalTo: self.parse)
         
         push.setQuery(pushQuery)
-        push.setData(["action": "questions.reload"])
+        push.setData(["action": "questionsController.reload"])
+        push.sendPushInBackgroundWithBlock(nil)
+    }
+    
+    func pushReloadSettings() {
+        let push = PFPush()
+        let pushQuery = PFInstallation.query()
+        pushQuery.whereKey("user", equalTo: self.parse)
+        
+        push.setQuery(pushQuery)
+        push.setData(["action": "settingsController.reload"])
         push.sendPushInBackgroundWithBlock(nil)
     }
     
@@ -103,6 +113,7 @@ class User: NSObject {
                 if user.freeQuestions > 0 {
                     user.freeQuestions = user.freeQuestions - 1
                     user.parse["freeQuestions"] = user.freeQuestions
+                    self.pushReloadSettings()
                 } else {
                     let charges = user.parse["charges"] as Float
                     user.parse["charges"] = charges + settings.questionPrice
@@ -112,6 +123,14 @@ class User: NSObject {
             }
             
             return ()
+        }
+    }
+    
+    func cardAdded(freeAmount: Int) {
+        self.fetch { (user) -> Void in
+            user.freeQuestions = user.freeQuestions + freeAmount
+            user.parse["freeQuestions"] = user.freeQuestions
+            user.parse.saveInBackgroundWithBlock(nil)
         }
     }
     

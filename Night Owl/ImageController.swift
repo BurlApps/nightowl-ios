@@ -55,12 +55,6 @@ class ImageController: UIViewController, UIScrollViewDelegate {
     }
     
     func doubleTap(recognizer: UIGestureRecognizer) {
-//        if self.scrollView.zoomScale > self.scrollView.minimumZoomScale {
-//            self.scrollView.setZoomScale(self.scrollView.minimumZoomScale, animated: true)
-//        } else {
-//            self.scrollView.setZoomScale(self.scrollView.zoomScale*2, animated: true)
-//        }
-        
         if self.scrollView.zoomScale == self.scrollView.minimumZoomScale {
             var pointview = recognizer.locationInView(self.imageView)
             var newZoomscal: CGFloat = 3.0;

@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
+var updating = false
+
 class Settings: NSObject {
     
     // MARK: Instance Variables
@@ -14,7 +16,7 @@ class Settings: NSObject {
     var termsUrl: String!
     var privacyUrl: String!
     var freeQuestions: Int!
-    var questionNameLimit: Int!
+    var freeQuestionsCard: Int!
     var questionPrice: Float!
     var parse: PFConfig!
     
@@ -27,8 +29,8 @@ class Settings: NSObject {
         self.termsUrl = object["termsUrl"] as String
         self.privacyUrl = object["privacyUrl"] as String
         self.freeQuestions = object["freeQuestions"] as Int
+        self.freeQuestionsCard = object["freeQuestionsCard"] as Int
         self.questionPrice = object["questionPrice"] as Float
-        self.questionNameLimit = object["questionNameLimit"] as Int
         self.parse = object
     }
     
@@ -36,7 +38,7 @@ class Settings: NSObject {
     class func sharedInstance(callback: ((settings: Settings) -> Void)!) {
         let config = PFConfig.currentConfig()
         
-        if config["host"] != nil {
+        if !updating && config["host"] != nil {
             callback?(settings: Settings(config))
         } else {
             Settings.update(callback)
@@ -44,12 +46,27 @@ class Settings: NSObject {
     }
     
     class func update(callback: ((settings: Settings) -> Void)!) {
+        updating = true
+        
         PFConfig.getConfigInBackgroundWithBlock { (config: PFConfig!, error: NSError!) -> Void in
+            updating = false
+            
             if error == nil && config["host"] != nil {
                 callback?(settings: Settings(config))
             } else if var config = PFConfig.currentConfig() {
                 callback?(settings: Settings(config))
             }
+        }
+    }
+    
+    // MARK: Instance Variables
+    func priceFormatted() -> String {
+        if self.questionPrice == 0 {
+            return "Free"
+        } else if self.questionPrice < 1 {
+            return String(format: "%.0f¢", self.questionPrice*100)
+        } else {
+            return String(format: "$%.2f", self.questionPrice)
         }
     }
 }

@@ -6,17 +6,26 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate {
     
     // MARK: Instance Variables
     var capturedImage: UIImage!
     var cameraController: CameraController!
+    var cardWasAdded = false
     private var cityLocation: String!
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
     private var subjects: [Subject] = []
     private var subjectChosen: Subject!
     private var user: User = User.current()
+    private var settings: Settings!
+    private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
+    private var alertMode: AlertMode!
+    
+    // MARK: Enums
+    enum AlertMode {
+        case AskForCard, ThankYou
+    }
     
     // MARK: IBOutlets
     @IBOutlet weak var subjectPicker: UIPickerView!
@@ -85,12 +94,17 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
         
-        // Configure Navigation Bar
-        if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
-            self.navigationController?.navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName: UIColor.whiteColor(),
-                NSFontAttributeName: font
-            ]
+        // Set Current Price
+        Settings.sharedInstance { (settings) -> Void in
+            self.settings = settings
+
+            if self.user.freeQuestions > 0 {
+                self.title = "\(self.user.freeQuestions) Free Left"
+            } else if settings.questionPrice == 0 {
+                self.title = "Free Right Now!"
+            } else {
+                self.title = "Price: \(settings.priceFormatted())"
+            }
         }
         
         if let font = UIFont(name: "HelveticaNeue", size: 20) {
@@ -99,13 +113,40 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
                 ], forState: UIControlState.Normal)
         }
     }
-
-    // MARK: IBActions
-    @IBAction func canelPost(sender: UIBarButtonItem) {
-        self.navigationController?.popViewControllerAnimated(false)
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Configure Navigation Bar
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // Create Text Shadow
+        var shadow = NSShadow()
+        shadow.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
+        shadow.shadowOffset = CGSizeMake(0, 2);
+        
+        if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor(red:0.16, green:0.71, blue:0.96, alpha:1),
+                NSFontAttributeName: font,
+                NSShadowAttributeName: shadow
+            ]
+        }
     }
     
-    @IBAction func createPost(sender: UIBarButtonItem) {
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.cardWasAdded {
+            self.cardAdded()
+        }
+    }
+    
+    // MARK: Instance Methods
+    func createAssignment() {
         var editorText: NSString! = self.textEditor.text
         let imageSize = CGSize(width: self.capturedImage.size.width/2, height: self.capturedImage.size.height/2)
         let imageResized = RBResizeImage(self.capturedImage, imageSize)
@@ -120,6 +161,30 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.user.chargeQuestion()
         self.navigationController?.popViewControllerAnimated(false)
         self.cameraController.slideToQuestions()
+
+    }
+    
+    func cardAdded() {
+        self.alertMode = .ThankYou
+        UIAlertView(title: "Thank You For Trusting Us!",
+            message: "As promised, \(self.settings.freeQuestionsCard) free questions have been added to your account!",
+            delegate: self, cancelButtonTitle: "Okay").show()
+    }
+
+    // MARK: IBActions
+    @IBAction func canelPost(sender: UIBarButtonItem) {
+        self.navigationController?.popViewControllerAnimated(false)
+    }
+    
+    @IBAction func createPost(sender: UIBarButtonItem) {
+        if self.user.freeQuestions < 2 && self.user.card == nil {
+            self.alertMode = .AskForCard
+            UIAlertView(title: "Get \(self.settings.freeQuestionsCard) Free Questions",
+                message: "Add your credit card and get free questions! We won't charge your card until you buy a solution.",
+                delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Card").show()
+        } else {
+            self.createAssignment()
+        }
     }
     
     // MARK: NSNotificationCenter
@@ -129,6 +194,28 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     
     func keyboardDidHide(notification: NSNotification) {
         self.subjectPicker.hidden = false
+    }
+    
+    // MARK: UIAlertView Methods
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
+        if self.alertMode == .AskForCard {
+            if buttonIndex == 0 {
+                if self.user.freeQuestions > 0 {
+                    self.createAssignment()
+                } else {
+                    self.navigationController?.popViewControllerAnimated(false)
+                }
+            } else {
+                var paymentController = self.storyBoard.instantiateViewControllerWithIdentifier("PaymentController") as? PaymentController
+                paymentController?.postController = self
+                self.navigationController?.pushViewController(paymentController!, animated: true)
+            }
+        } else {
+            self.user.cardAdded(self.settings.freeQuestionsCard)
+            self.createAssignment()
+        }
+        
+        self.alertMode = nil
     }
     
     // MARK: UIPickerView Methods

@@ -190,7 +190,6 @@
 				D33EBAB01AC28110001E637D /* Config */,
 				D33EBA611ABFEDF6001E637D /* Core */,
 				D33EBA641ABFEE29001E637D /* Models */,
-				D33EBA621ABFEDFE001E637D /* Views */,
 				D33EBA631ABFEE0C001E637D /* Controllers */,
 				D33EBA9A1AC0EA7B001E637D /* Utils */,
 				D33EBA651ABFEE38001E637D /* Supporting Files */,
@@ -218,18 +217,11 @@
 		D33EBA611ABFEDF6001E637D /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				D33EBA491ABFEDBC001E637D /* Main.storyboard */,
 				D33EBA461ABFEDBC001E637D /* AppDelegate.swift */,
 				D33EBA9D1AC0EC14001E637D /* NoAnimationSegue.swift */,
 			);
 			name = Core;
-			sourceTree = "<group>";
-		};
-		D33EBA621ABFEDFE001E637D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D33EBA491ABFEDBC001E637D /* Main.storyboard */,
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 		D33EBA631ABFEE0C001E637D /* Controllers */ = {

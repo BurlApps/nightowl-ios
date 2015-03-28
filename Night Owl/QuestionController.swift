@@ -91,7 +91,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
             self.imageLabel.text = "Question"
         } else {
             self.flagButton.enabled = true
-            self.imageLabel.text = "Answer"
+            self.imageLabel.text = "Solution"
         }
     }
     
@@ -173,7 +173,9 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex != 3 {
             self.question.changeState(buttonIndex + 4)
-            UIAlertView(title: "Answer Has Been Flagged", message: "We are sorry for the inconvenience. This question have been assigned to a new tutor who will answer it shortly!", delegate: nil, cancelButtonTitle: "Okay").show()
+            UIAlertView(title: "Answer Has Been Flagged",
+                message: "We are sorry for the inconvenience. This question have been assigned to a new tutor who will answer it shortly!",
+                delegate: nil, cancelButtonTitle: "Okay").show()
             self.navigationController?.popViewControllerAnimated(true)
             self.questionController.reloadQuestions()
         }

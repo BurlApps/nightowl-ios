@@ -9,8 +9,9 @@
 class PaymentController: UIViewController {
     
     // MARK: Instance Variables
-    var settingsController: SettingsController!
+    var postController: PostController!
     private var user = User.current()
+    private var navBorder: UIView!
     
     // MARK: IBoutlets
     @IBOutlet weak var cardInput: UITextField!
@@ -28,6 +29,33 @@ class PaymentController: UIViewController {
         
         // Disable Save Button
         self.saveButton.enabled = false
+        
+        // Configure Navigation Bar
+        var shadow = NSShadow()
+        shadow.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
+        shadow.shadowOffset = CGSizeMake(0, 2);
+        
+        // Add Bottom Border To Nav Bar
+        if let frame = self.navigationController?.navigationBar.frame {
+            self.navBorder = UIView(frame: CGRectMake(0, frame.height-1, frame.width, 1))
+            self.navBorder.backgroundColor = UIColor(white: 0, alpha: 0.2)
+            self.navigationController?.navigationBar.addSubview(self.navBorder)
+        }
+        
+        // Configure Navigation Bar
+        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1)
+        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
+        
+        if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.whiteColor(),
+                NSFontAttributeName: font,
+                NSShadowAttributeName: shadow
+            ]
+        }
         
         // Configure Inputs
         self.cardInput.borderStyle = .None
@@ -63,6 +91,12 @@ class PaymentController: UIViewController {
         super.viewWillAppear(animated)
         
         CardIOUtilities.preload()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navBorder.removeFromSuperview()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -128,7 +162,8 @@ class PaymentController: UIViewController {
         
         self.user.updateCard(card, callback: { (error) -> Void in
             if error == nil {
-                self.settingsController.reloadUser()
+                self.user.pushReloadSettings()
+                self.postController?.cardWasAdded = true
                 self.navigationController?.popViewControllerAnimated(true)
             } else {
                 UIAlertView(title: "Credit Card Error", message: error.localizedDescription,
