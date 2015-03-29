@@ -88,10 +88,12 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Instance Methods
     func reloadQuestions() {
-        self.user.getAssignments { (assignments) -> Void in
-            self.questions = assignments
-            self.filterQuestions(self.searchBar.text)
-            self.refreshControl?.endRefreshing()
+        if self.searchBar != nil {
+            self.user.getAssignments { (assignments) -> Void in
+                self.questions = assignments
+                self.filterQuestions(self.searchBar.text)
+                self.refreshControl?.endRefreshing()
+            }
         }
     }
     
@@ -102,7 +104,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
             self.questionsFiltered = self.questions
         } else {
             for question in self.questions {
-                let containsName = NSString(string: question.name).containsString(filter)
+                let containsName = NSString(string: question.nameFormatted()).containsString(filter)
                 let containsSubject = NSString(string: question.subject.name).containsString(filter)
                 
                 if containsName || containsSubject {
@@ -174,11 +176,14 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         
         switch(question.state) {
         case 0:
+            cell.imageView?.image = UIImage(named: "Box")
+            
             if let size = cell.imageView?.image?.size {
                 var spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
                 spinner.frame = CGRectMake(0, 0, size.width, size.height)
                 spinner.hidesWhenStopped = true
                 spinner.startAnimating()
+                
                 cell.imageView?.tintColor = UIColor.whiteColor()
                 cell.imageView?.addSubview(spinner)
             }
@@ -196,22 +201,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
             cell.imageView?.tintColor = UIColor(red:0.96, green:0.26, blue:0.21, alpha:0.75)
         }
         
-        if question.name != nil && !question.name.isEmpty {
-            let title = NSString(string: question.name)
-            let length = min(20, title.length)
-            var text: NSString = title.substringToIndex(length)
-            
-            if title.length > 20 {
-                text = text + "..."
-            }
-            
-            cell.textLabel?.text = text
-        } else {
-            let timeInterval = TTTTimeIntervalFormatter()
-            let interval = NSDate().timeIntervalSinceDate(question.created)
-            cell.textLabel?.text = timeInterval.stringForTimeInterval(-interval)
-        }
-        
+        cell.textLabel?.text = question.nameFormatted()
         cell.detailTextLabel?.text = question.subject.name
         
         return cell

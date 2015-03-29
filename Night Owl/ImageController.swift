@@ -30,13 +30,13 @@ class ImageController: UIViewController, UIScrollViewDelegate {
         self.view.addSubview(self.spinner)
         
         // Create Scroll View
-        self.scrollView = UIScrollView(frame: self.view.frame)
+        self.scrollView = UIScrollView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         self.scrollView.delegate = self
         self.scrollView.maximumZoomScale = 10
         self.view.addSubview(self.scrollView)
         
         // Create Image View
-        self.imageView = UIImageView(frame: CGRectMake(10, 10, self.view.frame.width-20, self.view.frame.height-20))
+        self.imageView = UIImageView(frame: self.view.frame)
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.scrollView.addSubview(self.imageView)
         
@@ -49,7 +49,11 @@ class ImageController: UIViewController, UIScrollViewDelegate {
     // MARK: Instance Methods
     func loadImage() {        
         self.question.getImage(self.imageType) { (image) -> Void in
+            var width = min(image.size.width, self.view.frame.width)
+            var height = min(image.size.height, self.view.frame.height)
+            
             self.imageView.image = image
+            self.imageView.frame = CGRectMake(10, 10, width-20, height-20)
             self.spinner.stopAnimating()
         }
     }

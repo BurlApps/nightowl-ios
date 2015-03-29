@@ -6,19 +6,25 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
+var cachedImages: Dictionary<String, Assignment.CachedImage> = [:]
+
 class Assignment: NSObject {
     
     // MARK: Instance Variables
     var name: String!
     var question: PFFile!
-    var questionCached: UIImage!
     var answer: PFFile!
-    var answerCached: UIImage!
     var state: Int!
     var creator: User!
     var subject: Subject!
     var created: NSDate!
     var parse: PFObject!
+    
+    // MARK: Internal Class
+    class CachedImage {
+        var question: UIImage!
+        var answer: UIImage!
+    }
     
     // MARK: Enum
     enum ImageType {
@@ -32,7 +38,7 @@ class Assignment: NSObject {
         self.name = object["name"] as? String
         self.question = object["question"] as? PFFile
         self.answer = object["answer"] as? PFFile
-        self.state = object["state"] as? Int
+        self.state = object["state"] as Int
         self.creator = User(object["creator"] as PFUser)
         self.subject = Subject(object["subject"] as PFObject)
         self.created = object.createdAt
@@ -53,10 +59,15 @@ class Assignment: NSObject {
         
         assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
             if success && error == nil {
+                var instance = Assignment(assignment)
+                var cachedImages = instance.getCachedImages()
                 var imageData = UIImagePNGRepresentation(question)
                 var imageFile = PFFile(name: "image.png", data: imageData)
+               
                 assignment["question"] = imageFile
                 creator.pushReloadQuestions()
+                cachedImages.question = question
+                instance.setCachedImages(cachedImages)
                 
                 assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
                     assignment["state"] = 1
@@ -67,9 +78,28 @@ class Assignment: NSObject {
                 println(error)
             }
         }
+        
     }
     
     // MARK: Instance Methods
+    func nameFormatted(limit: Int = 20) -> String {
+        if self.name != nil && !self.name.isEmpty {
+            let title = NSString(string: question.name)
+            let length = min(limit, title.length)
+            var text: NSString = title.substringToIndex(length)
+            
+            if title.length > limit {
+                text = text + "..."
+            }
+            
+            return text
+        } else {
+            let timeInterval = TTTTimeIntervalFormatter()
+            let interval = NSDate().timeIntervalSinceDate(self.created)
+            return timeInterval.stringForTimeInterval(-interval)
+        }
+    }
+    
     func changeState(state: Int) {
         self.state = state
         self.parse["state"] = state
@@ -85,18 +115,32 @@ class Assignment: NSObject {
         self.parse.saveInBackgroundWithBlock(nil)
     }
     
+    func getCachedImages() -> CachedImage {
+        var cache = cachedImages[self.parse.objectId]
+        
+        if cache == nil {
+            cache = CachedImage()
+            cachedImages[self.parse.objectId] = cache
+        }
+        
+        return cache!
+    }
     
+    func setCachedImages(cache: CachedImage) {
+        cachedImages[self.parse.objectId] = cache
+    }
     
     func getImage(type: ImageType, callback: (image: UIImage) -> Void) {
         var tmpImage: PFFile!
         var tmpCache: UIImage!
+        var tmpCacheImages = self.getCachedImages()
         
         if type == .Question {
             tmpImage = self.question
-            tmpCache = self.questionCached
+            tmpCache = tmpCacheImages.question
         } else {
             tmpImage = self.answer
-            tmpCache = self.answerCached
+            tmpCache = tmpCacheImages.answer
         }
         
         if tmpCache != nil {
@@ -125,10 +169,12 @@ class Assignment: NSObject {
                         })
                         
                         if type == .Question {
-                            self.questionCached = tmpCache
+                            tmpCacheImages.question = tmpCache
                         } else {
-                            self.answerCached = tmpCache
+                            tmpCacheImages.answer = tmpCache
                         }
+                        
+                        self.setCachedImages(tmpCacheImages)
                     })
                 } else {
                     println(error)

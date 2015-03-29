@@ -28,19 +28,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         super.viewDidLoad()
         
         // Update Title
-        if self.question.name != nil {
-            let title = NSString(string: self.question.name)
-            let length = min(10, title.length)
-            self.title = title.substringToIndex(length)
-            
-            if title.length > 10 {
-                self.title = self.title! + "..."
-            }
-        }  else {
-            let timeInterval = TTTTimeIntervalFormatter()
-            let interval = NSDate().timeIntervalSinceDate(question.created)
-            self.title = timeInterval.stringForTimeInterval(-interval)
-        }
+        self.title = self.question.nameFormatted(limit: 10)
         
         // Set Back Button Color
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
@@ -63,6 +51,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         self.pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
         self.pageController.dataSource = self
         self.pageController.delegate = self
+        self.pageController.view.backgroundColor = UIColor.blackColor()
         self.pageController.view.frame = CGRectMake(0, 0, self.pagesContainer.frame.width, self.pagesContainer.frame.height)
         self.addChildViewController(self.pageController)
         self.pagesContainer.addSubview(self.pageController.view)
@@ -74,7 +63,6 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
 
         // Customize Page Control
         var pageControl = UIPageControl.appearance()
-        pageControl.sizeForNumberOfPages(50)
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = UIColor.whiteColor()
         pageControl.backgroundColor = UIColor.clearColor()
@@ -105,7 +93,6 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         
         if page == nil {
             page = ImageController()
-            page?.view.frame = self.pageController.view.frame
             page?.pageIndex = index
             page?.question = self.question
             page?.user = self.user

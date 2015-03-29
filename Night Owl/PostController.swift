@@ -29,15 +29,21 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     
     // MARK: IBOutlets
     @IBOutlet weak var subjectPicker: UIPickerView!
+    @IBOutlet weak var postButton: UIBarButtonItem!
+    @IBOutlet weak var postBigButton: UIButton!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Disable Post Buttons
+        self.postButton.enabled = false
+        self.postBigButton.enabled = false
+        
+        
         // Configure Subject Picker
         self.subjectPicker.delegate = self
         self.subjectPicker.dataSource = self
-        self.subjectPicker.alpha = 0
         
         // Get Subjects
         Subject.subjects( true, callback: { (subjects) -> Void in
@@ -56,8 +62,13 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             self.subjectChosen = subjects[index]
             self.subjectPicker.reloadAllComponents()
             self.subjectPicker.selectRow(index, inComponent: 0, animated: false)
-            self.subjectPicker.alpha = 1
         })
+        
+        // Add Post Button Style
+        var buttonBorder = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, 3))
+        buttonBorder.backgroundColor = UIColor(white: 0, alpha: 0.1)
+        self.postBigButton.addSubview(buttonBorder)
+        self.postBigButton.backgroundColor = UIColor(red:0.27, green:0.62, blue:0.7, alpha:0.8)
         
         // Set Preview Image
         let imageSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
@@ -89,14 +100,12 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.textEditor.returnKeyType = .Done
         self.view.insertSubview(self.textEditor, belowSubview: self.subjectPicker)
         
-        // Register for keyboard notifications
-        var notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
-        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
-        
         // Set Current Price
         Settings.sharedInstance { (settings) -> Void in
             self.settings = settings
+            
+            self.postButton.title = "POST"
+            self.postBigButton.setTitle("POST QUESTION", forState: UIControlState.Normal)
 
             if self.user.freeQuestions > 0 {
                 self.title = "\(self.user.freeQuestions) Free Left"
@@ -104,7 +113,13 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
                 self.title = "Free Right Now!"
             } else {
                 self.title = "Price: \(settings.priceFormatted())"
+                self.postButton.title = "BUY"
+                self.postBigButton.setTitle("BUY SOLUTION", forState: UIControlState.Normal)
             }
+            
+            self.postButton.tintColor = UIColor(white: 1, alpha: 1)
+            self.postButton.enabled = true
+            self.postBigButton.enabled = true
         }
         
         if let font = UIFont(name: "HelveticaNeue", size: 20) {
@@ -176,7 +191,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.navigationController?.popViewControllerAnimated(false)
     }
     
-    @IBAction func createPost(sender: UIBarButtonItem) {
+    @IBAction func createPost(sender: AnyObject) {
         if self.user.freeQuestions < 1 && self.user.card == nil {
             self.alertMode = .AskForCard
             
@@ -186,15 +201,6 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         } else {
             self.createAssignment()
         }
-    }
-    
-    // MARK: NSNotificationCenter
-    func keyboardDidShow(notification: NSNotification) {
-        self.subjectPicker.hidden = true
-    }
-    
-    func keyboardDidHide(notification: NSNotification) {
-        self.subjectPicker.hidden = false
     }
     
     // MARK: UIAlertView Methods
@@ -243,12 +249,12 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
         var pickerLabel = view as UILabel!
         var shadow = NSShadow()
-        shadow.shadowColor = UIColor(white: 0, alpha:0.2)
+        shadow.shadowColor = UIColor(white: 0, alpha:0.1)
         shadow.shadowOffset = CGSizeMake(0, 2);
         
         if pickerLabel == nil {
             pickerLabel = UILabel()
-            pickerLabel.backgroundColor = UIColor(red:1, green:0.88, blue:0.2, alpha:0.35)
+            pickerLabel.backgroundColor = UIColor(red:1, green:0.88, blue:0.2, alpha:0.8)
             pickerLabel.textAlignment = .Center
         }
         

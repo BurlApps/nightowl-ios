@@ -105,20 +105,22 @@ class SettingsController: UITableViewController {
     }
     
     func reloadUser() {
-        self.user.fetch { (user) -> Void in
-            self.hideLabels()
-            
-            if self.user.card != nil {
-                self.cardLabel.text = self.user.card
-                self.cardLabel.textColor = UIColor.grayColor()
+        if self.cardLabel != nil {
+            self.user.fetch { (user) -> Void in
+                self.hideLabels()
+                
+                if self.user.card != nil {
+                    self.cardLabel.text = self.user.card
+                    self.cardLabel.textColor = UIColor.grayColor()
+                }
+                
+                if self.user.freeQuestions != nil {
+                    self.freeQuestionsLabel.text = "\(self.user.freeQuestions)"
+                    self.freeQuestionsLabel.textColor = UIColor.grayColor()
+                }
+                
+                self.refreshControl?.endRefreshing()
             }
-            
-            if self.user.freeQuestions != nil {
-                self.freeQuestionsLabel.text = "\(self.user.freeQuestions)"
-                self.freeQuestionsLabel.textColor = UIColor.grayColor()
-            }
-            
-            self.refreshControl?.endRefreshing()
         }
     }
     

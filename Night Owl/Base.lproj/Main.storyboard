@@ -183,17 +183,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzW-lb-ihN">
-                                <rect key="frame" x="0.0" y="258" width="320" height="180"/>
+                                <rect key="frame" x="0.0" y="218" width="320" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="dFa-gR-ALR"/>
                                 </constraints>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nmi-Nt-GEc">
+                                <rect key="frame" x="0.0" y="478" width="320" height="90"/>
+                                <color key="backgroundColor" red="0.27058823529999998" green="0.61960784310000006" blue="0.70196078429999997" alpha="0.94999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="qCI-DN-8b7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="loading...">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createPost:" destination="set-Iy-g4I" eventType="touchUpInside" id="LYT-SU-XJb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Nmi-Nt-GEc" secondAttribute="trailing" constant="-16" id="0Fh-bl-Ijr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dzW-lb-ihN" secondAttribute="trailing" constant="-16" id="3yc-0f-AJj"/>
-                            <constraint firstItem="Zz4-BR-QGn" firstAttribute="top" secondItem="dzW-lb-ihN" secondAttribute="bottom" constant="130" id="D7N-nX-PLL"/>
+                            <constraint firstItem="Zz4-BR-QGn" firstAttribute="top" secondItem="Nmi-Nt-GEc" secondAttribute="bottom" id="Erw-Yw-E0y"/>
                             <constraint firstItem="dzW-lb-ihN" firstAttribute="leading" secondItem="uN1-DW-P6h" secondAttribute="leadingMargin" constant="-16" id="Gr1-x0-eIy"/>
+                            <constraint firstItem="Nmi-Nt-GEc" firstAttribute="top" secondItem="dzW-lb-ihN" secondAttribute="bottom" constant="80" id="gfq-uZ-I3s"/>
+                            <constraint firstItem="Nmi-Nt-GEc" firstAttribute="leading" secondItem="uN1-DW-P6h" secondAttribute="leadingMargin" constant="-16" id="sJm-Ay-wUi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VWb-69-1Cs">
@@ -204,7 +222,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="POST" id="sHz-Hj-j7q">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="createPost:" destination="set-Iy-g4I" id="qVr-1G-joR"/>
                             </connections>
@@ -212,6 +230,8 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="postBigButton" destination="Nmi-Nt-GEc" id="jp1-Ae-nIL"/>
+                        <outlet property="postButton" destination="sHz-Hj-j7q" id="2y2-2p-BFu"/>
                         <outlet property="subjectPicker" destination="dzW-lb-ihN" id="2DJ-oE-DNg"/>
                     </connections>
                 </viewController>

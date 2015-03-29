@@ -54,9 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if buildType == "debug" {
             versionBuild = versionBuild + " - Debug"
             devBuild = true
-        } else if buildType == "staging" {
-            versionBuild = versionBuild + " - Staging"
-            devBuild = true
         }
         
         if devBuild && versionBuild != previousVersionBuild {
