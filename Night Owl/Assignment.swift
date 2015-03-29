@@ -84,7 +84,7 @@ class Assignment: NSObject {
     // MARK: Instance Methods
     func nameFormatted(limit: Int = 20) -> String {
         if self.name != nil && !self.name.isEmpty {
-            let title = NSString(string: question.name)
+            let title = NSString(string: self.name)
             let length = min(limit, title.length)
             var text: NSString = title.substringToIndex(length)
             

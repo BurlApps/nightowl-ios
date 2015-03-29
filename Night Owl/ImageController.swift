@@ -33,6 +33,9 @@ class ImageController: UIViewController, UIScrollViewDelegate {
         self.scrollView = UIScrollView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
         self.scrollView.delegate = self
         self.scrollView.maximumZoomScale = 10
+        self.scrollView.clipsToBounds = true
+        self.scrollView.scrollEnabled = true
+        self.scrollView.bounces = true
         self.view.addSubview(self.scrollView)
         
         // Create Image View
