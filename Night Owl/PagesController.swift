@@ -12,7 +12,7 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
 
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
-    private let onboardTime: NSTimeInterval = 5
+    private let onboardTime: NSTimeInterval = 4
     private let pages = 3
     private let startPage = 1
     private var currentPage = 1
@@ -50,9 +50,8 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         onboardLabel.numberOfLines = 0
         onboardLabel.adjustsFontSizeToFitWidth = true
         
-        var price = "Free"
         var text = "Take a photo\nSend us a math question and we'll solve it.\n\n"
-        text += "Get a couple answers free on us, every question after you buy."
+        text += "You get several answers (with steps) free on us. Enjoy!"
         
         var attributedText = NSMutableAttributedString(string: text)
         var style = NSMutableParagraphStyle()

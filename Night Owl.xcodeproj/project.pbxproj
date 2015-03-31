@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47D911A3208B9A324B0A0A83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A9A7258115935D2425357 /* libPods.a */; };
+		D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */; };
 		D33EBA221ABFED0A001E637D /* Night_OwlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA211ABFED0A001E637D /* Night_OwlTests.swift */; };
 		D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA461ABFEDBC001E637D /* AppDelegate.swift */; };
 		D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA471ABFEDBC001E637D /* Assignment.swift */; };
@@ -68,6 +69,8 @@
 		1430730C15A9671CCBACB989 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		980A9A7258115935D2425357 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D319352E1ACA5C5B00E2B236 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		D33EBA061ABFED0A001E637D /* Night Owl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Night Owl.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33EBA1B1ABFED0A001E637D /* Night OwlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Night OwlTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33EBA201ABFED0A001E637D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -294,6 +297,8 @@
 			isa = PBXGroup;
 			children = (
 				D33EBA9B1AC0EA8A001E637D /* RBResizeImage.swift */,
+				D319352E1ACA5C5B00E2B236 /* UIImage+fixOrientation.h */,
+				D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -525,6 +530,7 @@
 				D33EBA951ABFFC3A001E637D /* SettingsController.swift in Sources */,
 				D33EBA601ABFEDBC001E637D /* User.swift in Sources */,
 				D33EBA5E1ABFEDBC001E637D /* Settings.swift in Sources */,
+				D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */,
 				D39FC69F1AC64A8900B6416B /* ImageController.swift in Sources */,
 				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
 				D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */,
@@ -658,7 +664,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "Night Owl/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -687,7 +693,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "Night Owl/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

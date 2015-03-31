@@ -85,12 +85,13 @@ class CameraController: UIViewController {
     }
     
     @IBAction func captureImage(sender: UIButton) {
-        self.cameraView.capture ({ (camera: LLSimpleCamera!, image: UIImage!, metaInfo:[NSObject : AnyObject]!, error: NSError!) -> Void in
+        self.cameraView.capture ({ (camera: LLSimpleCamera!, var image: UIImage!, metaInfo:[NSObject : AnyObject]!, error: NSError!) -> Void in
             if image != nil && error == nil {
-                self.capturedImage = image
+                self.capturedImage = image.fixOrientation()
                 self.performSegueWithIdentifier("postSegue", sender: self)
             } else {
-                UIAlertView(title: "Capture Image", message: "Sorry! We failed to take the image.", delegate: nil, cancelButtonTitle: "Ok").show()
+                UIAlertView(title: "Aww Snap!", message: "Sorry! We failed to take the picture.", delegate: nil, cancelButtonTitle: "Try Again").show()
+                self.cameraView.stop()
                 self.cameraView.start()
             }
             

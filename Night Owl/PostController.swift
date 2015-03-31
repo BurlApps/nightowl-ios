@@ -113,8 +113,8 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
                 self.title = "Free Right Now!"
             } else {
                 self.title = "Price: \(settings.priceFormatted())"
-                self.postButton.title = "BUY"
-                self.postBigButton.setTitle("BUY SOLUTION", forState: UIControlState.Normal)
+                self.postButton.title = "REQUEST"
+                self.postBigButton.setTitle("REQUEST SOLUTION", forState: UIControlState.Normal)
             }
             
             self.postButton.tintColor = UIColor(white: 1, alpha: 1)
@@ -163,13 +163,15 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     // MARK: Instance Methods
     func createAssignment() {
         var editorText: NSString! = self.textEditor.text
-        let imageSize = CGSize(width: self.capturedImage.size.width/2, height: self.capturedImage.size.height/2)
+        let width = self.capturedImage.size.width - self.capturedImage.size.width/4
+        let height = self.capturedImage.size.height - self.capturedImage.size.height/4
+        let tmpImage =  RBResizeImage(self.capturedImage, CGSizeMake(width, height))
         
         if editorText.length == 0 {
             editorText = nil
         }
         
-        Assignment.create(editorText, question: self.capturedImage, creator: self.user, subject: self.subjectChosen)
+        Assignment.create(editorText, question: tmpImage, creator: self.user, subject: self.subjectChosen)
         
         self.user.setSubject(self.subjectChosen)
         self.user.chargeQuestion()
@@ -180,7 +182,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     
     func cardAdded() {
         self.alertMode = .ThankYou
-        UIAlertView(title: "Thank You For Trusting Us!",
+        UIAlertView(title: "Thank You For Adding Your Card!",
             message: "As promised, \(self.settings.freeQuestionsCard) free solutions have been added to your account!",
             delegate: self, cancelButtonTitle: "Okay").show()
     }
@@ -195,7 +197,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             self.alertMode = .AskForCard
             
             UIAlertView(title: "Get \(self.settings.freeQuestionsCard) Free Solutions",
-                message: "Want this answer free? Add your credit card to get this and the next on us! Don't worry, we won't charge your card until you buy a solution.",
+                message: "Want this answer free? Add your credit card to get this and the next on us! Don't worry, we won't charge your card until you use up your free questions.",
                 delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Card").show()
         } else {
             self.createAssignment()
