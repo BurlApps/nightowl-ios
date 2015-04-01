@@ -22,6 +22,9 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set Back Button Color
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
         // Create Text Shadow
         var shadow = NSShadow()
         shadow.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.1)

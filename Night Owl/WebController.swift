@@ -19,9 +19,6 @@ class WebController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set Back Button Color
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
         // Set WebView Url
         self.webView.delegate = self
         self.webView.loadRequest(NSURLRequest(URL: NSURL(string: self.website)!))

@@ -7,6 +7,7 @@
 //
 
 var updating = false
+var isInRelease = false
 
 class Settings: NSObject {
     
@@ -35,6 +36,14 @@ class Settings: NSObject {
     }
     
     // MARK: Class Methods
+    class func setRelease(data: Bool) {
+        isInRelease = data
+    }
+    
+    class func getRelease() -> Bool {
+        return isInRelease
+    }
+    
     class func sharedInstance(callback: ((settings: Settings) -> Void)!) {
         let config = PFConfig.currentConfig()
         

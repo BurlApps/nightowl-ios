@@ -78,6 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             User.logout()
         }
         
+        Settings.setRelease(!devBuild)
         userDefaults.setValue(versionBuild, forKey: "VersionNumber")
         userDefaults.synchronize()
 

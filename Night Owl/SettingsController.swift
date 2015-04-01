@@ -12,6 +12,7 @@ class SettingsController: UITableViewController {
     private var selectedRow: NSIndexPath!
     private var settings: Settings!
     private var user = User.current()
+    private var numberOfSections = 3
     
     // MARK: IBOutlets
     @IBOutlet weak var freeQuestionsLabel: UILabel!
@@ -21,6 +22,9 @@ class SettingsController: UITableViewController {
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set Back Button Color
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
         // Create Text Shadow
         var shadow = NSShadow()
@@ -64,6 +68,15 @@ class SettingsController: UITableViewController {
         
         // Set Fetch User Info
         self.reloadUser()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if Settings.getRelease() && self.numberOfSections == 3  {
+            self.numberOfSections -= 1
+            self.tableView.deleteSections(NSIndexSet(index: 2), withRowAnimation: UITableViewRowAnimation.None)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -138,5 +151,10 @@ class SettingsController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    // MARK: UITableViewController Methods
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return self.numberOfSections
     }
 }

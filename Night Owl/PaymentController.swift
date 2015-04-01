@@ -24,9 +24,6 @@ class PaymentController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set Back Button Color
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
         // Disable Save Button
         self.saveButton.enabled = false
         

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		47D911A3208B9A324B0A0A83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A9A7258115935D2425357 /* libPods.a */; };
 		D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */; };
+		D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB031ACC82E400FA554B /* DebugAccount.swift */; };
 		D33EBA221ABFED0A001E637D /* Night_OwlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA211ABFED0A001E637D /* Night_OwlTests.swift */; };
 		D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA461ABFEDBC001E637D /* AppDelegate.swift */; };
 		D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA471ABFEDBC001E637D /* Assignment.swift */; };
@@ -71,6 +72,7 @@
 		980A9A7258115935D2425357 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D319352E1ACA5C5B00E2B236 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
+		D327FB031ACC82E400FA554B /* DebugAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugAccount.swift; sourceTree = "<group>"; };
 		D33EBA061ABFED0A001E637D /* Night Owl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Night Owl.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33EBA1B1ABFED0A001E637D /* Night OwlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Night OwlTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33EBA201ABFED0A001E637D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				D33EBA521ABFEDBC001E637D /* Track.swift */,
 				D33EBA531ABFEDBC001E637D /* User.swift */,
 				D33EBA9F1AC0F701001E637D /* Subject.swift */,
+				D327FB031ACC82E400FA554B /* DebugAccount.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */,
 				D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */,
 				D33EBA9E1AC0EC14001E637D /* NoAnimationSegue.swift in Sources */,
+				D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */,
 				D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */,
 				D33EBA9C1AC0EA8A001E637D /* RBResizeImage.swift in Sources */,
 				D3BCE0791AC4053500824004 /* ScanController.swift in Sources */,

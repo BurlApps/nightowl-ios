@@ -30,9 +30,6 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         // Update Title
         self.title = self.question.nameFormatted(limit: 10)
         
-        // Set Back Button Color
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
         // Set Background Color
         self.view.backgroundColor = UIColor.blackColor()
         
