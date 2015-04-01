@@ -48,12 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let noPushPayload = (launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] == nil)
             
             if preBackgroundPush || oldPushHandlerOnly || noPushPayload {
-                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+                Track.appOpened(launchOptions)
             }
         }
-        
-        // Track User Open
-        Track.appOpened(launchOptions)
         
         // Cache Settings
         Settings.update(nil)

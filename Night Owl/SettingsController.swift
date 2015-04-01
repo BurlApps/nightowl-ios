@@ -119,6 +119,8 @@ class SettingsController: UITableViewController {
     
     func reloadUser() {
         if self.cardLabel != nil {
+            self.user = User.current()
+            
             self.user.fetch { (user) -> Void in
                 self.hideLabels()
                 

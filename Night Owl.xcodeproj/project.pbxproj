@@ -10,6 +10,7 @@
 		47D911A3208B9A324B0A0A83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A9A7258115935D2425357 /* libPods.a */; };
 		D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */; };
 		D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB031ACC82E400FA554B /* DebugAccount.swift */; };
+		D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB051ACC848B00FA554B /* AccountsController.swift */; };
 		D33EBA221ABFED0A001E637D /* Night_OwlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA211ABFED0A001E637D /* Night_OwlTests.swift */; };
 		D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA461ABFEDBC001E637D /* AppDelegate.swift */; };
 		D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA471ABFEDBC001E637D /* Assignment.swift */; };
@@ -73,6 +74,7 @@
 		D319352E1ACA5C5B00E2B236 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		D327FB031ACC82E400FA554B /* DebugAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugAccount.swift; sourceTree = "<group>"; };
+		D327FB051ACC848B00FA554B /* AccountsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsController.swift; sourceTree = "<group>"; };
 		D33EBA061ABFED0A001E637D /* Night Owl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Night Owl.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33EBA1B1ABFED0A001E637D /* Night OwlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Night OwlTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33EBA201ABFED0A001E637D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				D33EBAA51AC1F406001E637D /* WebController.swift */,
 				D3BCE0781AC4053500824004 /* ScanController.swift */,
 				D3BCE07A1AC47E7900824004 /* PaymentController.swift */,
+				D327FB051ACC848B00FA554B /* AccountsController.swift */,
 			);
 			name = "Settings Page";
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */,
 				D39FC69F1AC64A8900B6416B /* ImageController.swift in Sources */,
 				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
+				D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */,
 				D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */,
 				D33EBA5D1ABFEDBC001E637D /* PagesController.swift in Sources */,
 				D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */,

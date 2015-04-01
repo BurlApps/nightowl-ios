@@ -454,7 +454,7 @@
         <!--Debug Accounts-->
         <scene sceneID="n5N-2G-whS">
             <objects>
-                <tableViewController id="snY-vX-TOZ" sceneMemberID="viewController">
+                <tableViewController id="snY-vX-TOZ" customClass="AccountsController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qS3-Zn-gqr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
