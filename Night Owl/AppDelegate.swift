@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.enableLocalDatastore()
         Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
         
+        // Initialize Stripe
+        let stripeKey = infoDictionary["StripeClientKey"] as String
+        Stripe.setDefaultPublishableKey(stripeKey)
+        
         // Register for Push Notitications, if running iOS 8
         if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
             let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound

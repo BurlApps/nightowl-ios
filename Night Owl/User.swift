@@ -95,14 +95,13 @@ class User: NSObject {
         stCard.expYear = card.expiryYear
         stCard.cvc = card.cvv
         
-        let infoDictionary = NSBundle.mainBundle().infoDictionary!
-        let stripeKey = infoDictionary["StripeClientKey"] as String
-        
-        STPAPIClient(publishableKey: stripeKey).createTokenWithCard(stCard, completion: { (token: STPToken!, error: NSError!) -> Void in
+        STPAPIClient.sharedClient().createTokenWithCard(stCard, completion: { (token: STPToken!, error: NSError!) -> Void in
             callback!(error: error)
             
             if token != nil && error == nil {
-                PFCloud.callFunctionInBackground("addCard", withParameters: ["card":token.tokenId], block: nil)
+                PFCloud.callFunctionInBackground("addCard", withParameters: [
+                    "card":token.tokenId
+                ], block: nil)
             }
         })
     }

@@ -39,13 +39,14 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
             self.title = "loading..."
             
             Parse.setApplicationId(self.account.appID, clientKey: self.account.appSecret)
-            
+
             Settings.update { (settings) -> Void in
                 User.logout()
                 User.login { (user) -> Void in
                     user.pushReloadQuestions()
                     user.pushReloadSettings()
                     self.navigationController?.popViewControllerAnimated(true)
+                    return ()
                 }
             }
         }
@@ -65,7 +66,7 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         UIAlertView(title: "Confirm Change",
-            message: "This will logout out the current user and create a new account on the selected debug account.\n\nWARNING: Push Notifications will not work from now on. To renable push notifications, force the close app and reopen.",
+            message: "This will logout the current user and create a new user account on the selected debug account.\n\nWARNING: Push Notifications will not work from now on. To renable push notifications, force the close app and reopen.",
             delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Confirm ").show()
     }
     
