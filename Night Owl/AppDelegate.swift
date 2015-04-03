@@ -56,6 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        // Set Global Window
+        Global.setWindow(window)
+        
         // Cache Settings
         Settings.update(nil)
         
@@ -98,12 +101,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if let action = userInfo["action"] as? String {
-            let pagesController = window?.rootViewController as PagesController
-            
             switch(action) {
-                case "questionsController.reload": (pagesController.controllers[0]?.topViewController as? QuestionsController)?.reloadQuestions()
-                case "settingsController.reload": (pagesController.controllers[2]?.topViewController as? SettingsController)?.reloadUser()
+                case "questionsController.reload": Global.reloadQuestionsController()
+                case "settingsController.reload":
+                    Settings.update(nil)
+                    Global.reloadSettingsController()
                 case "settings.reload": Settings.update(nil)
+                case "user.reload": User.current().fetch(nil)
                 default: println(action)
             }
         }

@@ -59,26 +59,6 @@ class User: NSObject {
         User.logout()
     }
     
-    func pushReloadQuestions() {
-        let push = PFPush()
-        let pushQuery = PFInstallation.query()
-        pushQuery.whereKey("user", equalTo: self.parse)
-        
-        push.setQuery(pushQuery)
-        push.setData(["action": "questionsController.reload"])
-        push.sendPushInBackgroundWithBlock(nil)
-    }
-    
-    func pushReloadSettings() {
-        let push = PFPush()
-        let pushQuery = PFInstallation.query()
-        pushQuery.whereKey("user", equalTo: self.parse)
-        
-        push.setQuery(pushQuery)
-        push.setData(["action": "settingsController.reload"])
-        push.sendPushInBackgroundWithBlock(nil)
-    }
-    
     func setSubject(subject: Subject) {
         lastSubject = subject
     }
@@ -112,7 +92,7 @@ class User: NSObject {
                 if user.freeQuestions > 0 {
                     user.freeQuestions = user.freeQuestions - 1
                     user.parse["freeQuestions"] = user.freeQuestions
-                    self.pushReloadSettings()
+                    Global.reloadSettingsController()
                 } else {
                     let charges = user.parse["charges"] as Float
                     user.parse["charges"] = charges + settings.questionPrice

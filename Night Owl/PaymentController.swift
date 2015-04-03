@@ -161,7 +161,7 @@ class PaymentController: UIViewController {
         
         self.user.updateCard(card, callback: { (error) -> Void in
             if error == nil {
-                self.user.pushReloadSettings()
+                Global.reloadSettingsController()
                 self.postController?.cardWasAdded = true
                 self.navigationController?.popViewControllerAnimated(true)
             } else {
