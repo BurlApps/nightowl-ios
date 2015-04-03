@@ -43,10 +43,9 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
             Settings.update { (settings) -> Void in
                 User.logout()
                 User.login { (user) -> Void in
+                    self.navigationController?.popViewControllerAnimated(true)
                     Global.reloadQuestionsController()
                     Global.reloadSettingsController()
-                    self.navigationController?.popViewControllerAnimated(true)
-                    return ()
                 }
             }
         }

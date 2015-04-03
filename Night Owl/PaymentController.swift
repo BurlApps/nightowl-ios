@@ -161,9 +161,9 @@ class PaymentController: UIViewController {
         
         self.user.updateCard(card, callback: { (error) -> Void in
             if error == nil {
-                Global.reloadSettingsController()
                 self.postController?.cardWasAdded = true
                 self.navigationController?.popViewControllerAnimated(true)
+                Global.reloadSettingsController()
             } else {
                 UIAlertView(title: "Credit Card Error", message: error.localizedDescription,
                     delegate: self, cancelButtonTitle: "Okay").show()
