@@ -39,8 +39,6 @@ class Assignment: NSObject {
         self.question = object["question"] as? PFFile
         self.answer = object["answer"] as? PFFile
         self.state = object["state"] as Int
-        self.creator = User(object["creator"] as PFUser)
-        self.subject = Subject(object["subject"] as PFObject)
         self.created = object.createdAt
         self.parse = object
     }
@@ -82,6 +80,26 @@ class Assignment: NSObject {
     }
     
     // MARK: Instance Methods
+    func getCreator(callback: ((creator: User) -> Void)!) {
+        var user = self.parse["creator"] as PFUser
+        
+        if !user.isDataAvailable() {
+            user.fetchIfNeededInBackgroundWithBlock { (object: PFObject!, error: NSError!) -> Void in
+                self.creator = User(object as PFUser)
+                callback?(creator: self.creator)
+            }
+        } else {
+            self.creator = User(user)
+            callback?(creator: self.creator)
+        }
+    }
+    
+    func getSubject(callback: ((subject: Subject) -> Void)!) {
+        var subject = self.parse["subject"] as PFObject
+        self.subject = Subject.subject(subject.objectId)
+        callback?(subject: self.subject)
+    }
+    
     func nameFormatted(limit: Int = 20) -> String {
         if self.name != nil && !self.name.isEmpty {
             let title = NSString(string: self.name)

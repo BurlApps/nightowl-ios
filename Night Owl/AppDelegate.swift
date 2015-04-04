@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let parseClientKey = infoDictionary["ParseClientKey"] as String
         
         ParseCrashReporting.enable()
-        Parse.enableLocalDatastore()
         Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
         
         // Initialize Stripe
@@ -108,6 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     Global.reloadSettingsController()
                 case "settings.reload": Settings.update(nil)
                 case "user.reload": User.current().fetch(nil)
+                case "subjects.reload": Subject.subjects(false, callback: nil)
                 default: println(action)
             }
         }

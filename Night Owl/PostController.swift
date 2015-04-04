@@ -12,7 +12,6 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     var capturedImage: UIImage!
     var cameraController: CameraController!
     var cardWasAdded = false
-    private var cityLocation: String!
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
     private var subjects: [Subject] = []
@@ -40,13 +39,12 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.postButton.enabled = false
         self.postBigButton.enabled = false
         
-        
         // Configure Subject Picker
         self.subjectPicker.delegate = self
         self.subjectPicker.dataSource = self
         
         // Get Subjects
-        Subject.subjects( true, callback: { (subjects) -> Void in
+        Subject.subjects(true, callback: { (subjects) -> Void in
             self.subjects = subjects
             var index: Int = subjects.count/2
             

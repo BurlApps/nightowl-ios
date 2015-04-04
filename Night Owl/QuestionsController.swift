@@ -207,7 +207,11 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         }
         
         cell.textLabel?.text = question.nameFormatted()
-        cell.detailTextLabel?.text = question.subject.name
+        
+        question.getSubject { (subject) -> Void in
+            cell.detailTextLabel?.text = subject.name
+            return ()
+        }
         
         return cell
     }

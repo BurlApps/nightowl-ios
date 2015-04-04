@@ -59,7 +59,7 @@ class User: NSObject {
         User.logout()
     }
     
-    func setSubject(subject: Subject) {
+    func setSubject(subject: Subject!) {
         lastSubject = subject
     }
     
@@ -147,7 +147,6 @@ class User: NSObject {
             if error == nil {
                 for object in objects as [PFObject] {
                     var assignment = Assignment(object)
-                    assignment.subject.fetch()
                     assignments.append(assignment)
                 }
                 

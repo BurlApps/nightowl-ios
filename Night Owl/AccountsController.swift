@@ -38,11 +38,12 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
         if buttonIndex == 1 {
             self.title = "loading..."
             
+            User.logout()
             Parse.setApplicationId(self.account.appID, clientKey: self.account.appSecret)
-
+            Subject.subjects(false, callback: nil)
             Settings.update { (settings) -> Void in
-                User.logout()
                 User.login { (user) -> Void in
+                    user.setSubject(nil)
                     self.navigationController?.popViewControllerAnimated(true)
                     Global.reloadQuestionsController()
                     Global.reloadSettingsController()
