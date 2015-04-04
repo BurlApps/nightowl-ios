@@ -63,14 +63,15 @@ class Assignment: NSObject {
                 var imageFile = PFFile(name: "image.png", data: imageData)
                
                 assignment["question"] = imageFile
-                Global.reloadQuestionsController()
                 cachedImages.question = question
                 instance.setCachedImages(cachedImages)
+                Global.reloadQuestionsController()
                 
                 assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
                     assignment["state"] = 1
-                    assignment.saveInBackgroundWithBlock(nil)
-                    Global.reloadQuestionsController()
+                    assignment.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+                        Global.reloadQuestionsController()
+                    })
                 }
             } else {
                 println(error)
