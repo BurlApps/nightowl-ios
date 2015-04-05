@@ -11,7 +11,6 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     // MARK: Instance Variable
     var question: Assignment!
     var user = User.current()
-    var questionController: QuestionsController!
     private var pages = 1
     private let startPage = 1
     private var currentPage = 1
@@ -161,7 +160,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
                 message: "We are sorry for the inconvenience. This question have been assigned to a new tutor who will answer it shortly!",
                 delegate: nil, cancelButtonTitle: "Okay").show()
             self.navigationController?.popViewControllerAnimated(true)
-            self.questionController.reloadQuestions()
+            Global.reloadQuestionsController()
         }
     }
 }

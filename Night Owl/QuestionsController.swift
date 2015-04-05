@@ -85,7 +85,6 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         let pageController = self.navigationController as PageController
         
         viewController.question = self.question
-        viewController.questionController = self
         pageController.rootController.lockPageView()
     }
     

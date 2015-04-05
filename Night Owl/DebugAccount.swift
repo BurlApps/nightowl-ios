@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
+var alternateDebugEnabled = false
+
 class DebugAccount: NSObject {
     
     // MARK: Instance Variables
@@ -40,5 +42,13 @@ class DebugAccount: NSObject {
                 println(error)
             }
         })
+    }
+    
+    class func alternateDebug() -> Bool {
+        return alternateDebugEnabled
+    }
+    
+    class func setAlternateDebug() {
+        alternateDebugEnabled = true
     }
 }

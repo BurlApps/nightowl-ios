@@ -45,6 +45,7 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
                 User.login { (user) -> Void in
                     user.setSubject(nil)
                     self.navigationController?.popViewControllerAnimated(true)
+                    DebugAccount.setAlternateDebug()
                     Global.reloadQuestionsController()
                     Global.reloadSettingsController()
                 }
