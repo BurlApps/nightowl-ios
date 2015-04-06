@@ -161,6 +161,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var question = self.questionsFiltered[indexPath.row]
         var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as? UITableViewCell
+        var image: UIImage! = UIImage(named: "Box")
         
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: self.cellIdentifier)
@@ -180,31 +181,27 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         
         switch(question.state) {
         case 0:
-            cell.imageView?.image = UIImage(named: "Box")
+            var spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+            spinner.frame = CGRectMake(0, 0, image.size.width, image.size.height)
+            spinner.hidesWhenStopped = true
+            spinner.startAnimating()
             
-            if let size = cell.imageView?.image?.size {
-                var spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-                spinner.frame = CGRectMake(0, 0, size.width, size.height)
-                spinner.hidesWhenStopped = true
-                spinner.startAnimating()
-                
-                cell.imageView?.tintColor = UIColor.whiteColor()
-                cell.imageView?.addSubview(spinner)
-            }
+            cell.imageView?.tintColor = UIColor.whiteColor()
+            cell.imageView?.addSubview(spinner)
         case 1:
-            cell.imageView?.image = UIImage(named: "Box")
             cell.imageView?.tintColor = UIColor(red:0.62, green:0.62, blue:0.62, alpha:0.25)
         case 2:
-            cell.imageView?.image = UIImage(named: "Fullbox")
+            image = UIImage(named: "Fullbox")
             cell.imageView?.tintColor = UIColor(red:0.1, green:0.61, blue:0.89, alpha:1)
         case 3:
-            cell.imageView?.image = UIImage(named: "Checkbox")
+            image = UIImage(named: "Checkbox")
             cell.imageView?.tintColor = UIColor(red:0.3, green:0.69, blue:0.31, alpha:0.75)
         default:
-            cell.imageView?.image = UIImage(named: "Crossbox")
+            image = UIImage(named: "Crossbox")
             cell.imageView?.tintColor = UIColor(red:0.96, green:0.26, blue:0.21, alpha:0.75)
         }
         
+        cell.imageView?.image = image.imageWithRenderingMode(.AlwaysTemplate)
         cell.textLabel?.text = question.nameFormatted()
         
         question.getSubject { (subject) -> Void in

@@ -67,7 +67,7 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         UIAlertView(title: "Confirm Change",
-            message: "This will logout the current user and create a new user account on the selected debug account.\n\nWARNING: Push Notifications will not work from now on. To renable push notifications, force the close app and reopen.",
+            message: "This will logout the current user and create a new user account on the selected debug account.",
             delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Confirm ").show()
     }
     

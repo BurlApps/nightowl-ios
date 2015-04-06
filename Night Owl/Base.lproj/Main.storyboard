@@ -152,11 +152,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="KdW-Lo-ZHM">
                         <barButtonItem key="leftBarButtonItem" image="Questions" id="IjC-wE-35q">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="goToQuestions:" destination="sjH-h7-Jt3" id="QMa-OE-29g"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="Settings" id="o3Y-lS-AzI">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="goToSettings:" destination="sjH-h7-Jt3" id="biE-Tl-3pu"/>
                             </connections>
