@@ -14,6 +14,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     private var pages = 1
     private let startPage = 1
     private var currentPage = 1
+    private var buttonState: Int!
     private var controllers = Dictionary<Int, ImageController>()
     private var pageController: UIPageViewController!
     
@@ -153,14 +154,13 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     }
     
     // MARK: UIActionSheet Methods
-    func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
+    func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
         if buttonIndex != 3 {
-            self.question.changeState(buttonIndex + 4)
             UIAlertView(title: "Answer Has Been Flagged",
                 message: "We are sorry for the inconvenience. This question have been assigned to a new tutor who will answer it shortly!",
                 delegate: nil, cancelButtonTitle: "Okay").show()
             self.navigationController?.popViewControllerAnimated(true)
-            Global.reloadQuestionsController()
+            self.question.changeState(buttonIndex + 4)
         }
     }
 }

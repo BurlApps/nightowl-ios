@@ -124,14 +124,20 @@ class Assignment: NSObject {
         self.parse["state"] = state
         
         if state >= 4 {
+            cachedImages[self.parse.objectId]?.answer = nil
+            
             if var tutor = self.parse["tutor"] as? PFObject {
-                var flaggedAssignments = tutor.relationForKey("flaggedAssignments")
-                flaggedAssignments.addObject(self.parse)
-                tutor.saveInBackgroundWithBlock(nil)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+                    var flaggedAssignments = tutor.relationForKey("flaggedAssignments")
+                    flaggedAssignments.addObject(self.parse)
+                    tutor.saveInBackgroundWithBlock(nil)
+                })
             }
         }
-        
-        self.parse.saveInBackgroundWithBlock(nil)
+
+        self.parse.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+            Global.reloadQuestionsController()
+        }
     }
     
     func getCachedImages() -> CachedImage {
