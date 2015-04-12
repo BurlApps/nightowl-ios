@@ -22,6 +22,9 @@ class CameraController: UIViewController {
         // Configure Background
         self.view.backgroundColor = UIColor.blackColor()
         
+        // Set Back Button Color
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
         // Style Capture Button
         self.captureButton.layer.borderColor = UIColor.whiteColor().CGColor
         self.captureButton.layer.borderWidth = 6

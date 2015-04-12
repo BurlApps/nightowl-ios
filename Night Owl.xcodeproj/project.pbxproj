@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		47D911A3208B9A324B0A0A83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A9A7258115935D2425357 /* libPods.a */; };
+		D318A6D51AD471E7001B9957 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D318A6D41AD471E7001B9957 /* CoreTelephony.framework */; };
+		D318A6D71AD47202001B9957 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D318A6D61AD47202001B9957 /* libc++.dylib */; };
+		D318A6D91AD473C4001B9957 /* PZSpeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D318A6D81AD473C4001B9957 /* PZSpeed.framework */; };
 		D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */; };
 		D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB031ACC82E400FA554B /* DebugAccount.swift */; };
 		D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB051ACC848B00FA554B /* AccountsController.swift */; };
@@ -72,6 +75,9 @@
 		1430730C15A9671CCBACB989 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		980A9A7258115935D2425357 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D318A6D41AD471E7001B9957 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D318A6D61AD47202001B9957 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		D318A6D81AD473C4001B9957 /* PZSpeed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PZSpeed.framework; path = Frameworks/PZSpeed.framework; sourceTree = "<group>"; };
 		D319352E1ACA5C5B00E2B236 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		D327FB031ACC82E400FA554B /* DebugAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugAccount.swift; sourceTree = "<group>"; };
@@ -141,6 +147,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D318A6D91AD473C4001B9957 /* PZSpeed.framework in Frameworks */,
+				D318A6D71AD47202001B9957 /* libc++.dylib in Frameworks */,
+				D318A6D51AD471E7001B9957 /* CoreTelephony.framework in Frameworks */,
 				D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */,
 				D33EBA901ABFF1A3001E637D /* Bolts.framework in Frameworks */,
 				D33EBA8E1ABFF16D001E637D /* Social.framework in Frameworks */,
@@ -272,6 +281,9 @@
 		D33EBA6A1ABFEFAE001E637D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D318A6D81AD473C4001B9957 /* PZSpeed.framework */,
+				D318A6D61AD47202001B9957 /* libc++.dylib */,
+				D318A6D41AD471E7001B9957 /* CoreTelephony.framework */,
 				D3BCE0741AC3F2F900824004 /* UIKit.framework */,
 				D3BCE0721AC3F2E900824004 /* OpenGLES.framework */,
 				D3BCE0701AC3F2D200824004 /* CoreVideo.framework */,
@@ -682,6 +694,43 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"CardIO\"",
+					"-l\"Pods-CHTTextView\"",
+					"-l\"Pods-CardIO\"",
+					"-l\"Pods-FormatterKit\"",
+					"-l\"Pods-LLSimpleCamera\"",
+					"-l\"Pods-PaymentKit\"",
+					"-l\"Pods-Stripe\"",
+					"-l\"c++\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"AddressBookUI\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Night Owl/Night Owl-Bridging-Header.h";
@@ -710,6 +759,43 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"CardIO\"",
+					"-l\"Pods-CHTTextView\"",
+					"-l\"Pods-CardIO\"",
+					"-l\"Pods-FormatterKit\"",
+					"-l\"Pods-LLSimpleCamera\"",
+					"-l\"Pods-PaymentKit\"",
+					"-l\"Pods-Stripe\"",
+					"-l\"c++\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AddressBook\"",
+					"-framework",
+					"\"AddressBookUI\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"UIKit\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

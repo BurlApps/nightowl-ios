@@ -45,7 +45,7 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
                 User.login { (user) -> Void in
                     user.setSubject(nil)
                     self.navigationController?.popViewControllerAnimated(true)
-                    DebugAccount.setAlternateDebug()
+                    DebugAccount.setAlternateDebug(self.account.name)
                     Global.reloadQuestionsController()
                     Global.reloadSettingsController()
                 }
@@ -79,6 +79,10 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: self.cellIdentifier)
             cell.textLabel?.textColor = UIColor.blackColor()
             cell.textLabel?.font = UIFont.systemFontOfSize(18)
+        }
+        
+        if account.name == DebugAccount.accountActive() {
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
         
         cell.textLabel?.text = account.name

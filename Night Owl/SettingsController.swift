@@ -18,6 +18,7 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var freeQuestionsLabel: UILabel!
     @IBOutlet weak var cardLabel: UILabel!
     @IBOutlet weak var questionPrice: UILabel!
+    @IBOutlet weak var debugAccount: UILabel!
 
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -76,6 +77,8 @@ class SettingsController: UITableViewController {
         if Settings.getRelease() && self.numberOfSections == 3  {
             self.numberOfSections -= 1
             self.tableView.deleteSections(NSIndexSet(index: 2), withRowAnimation: UITableViewRowAnimation.None)
+        } else {
+            self.debugAccount.text = DebugAccount.accountActive()
         }
     }
     

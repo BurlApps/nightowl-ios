@@ -3,6 +3,7 @@
 //
 
 #import <Parse/Parse.h>
+#import <PZSpeed/PZSpeed.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import <CHTTextView/CHTTextView.h>
 #import <LLSimpleCamera/LLSimpleCamera.h>

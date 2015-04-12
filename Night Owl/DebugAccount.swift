@@ -7,6 +7,7 @@
 //
 
 var alternateDebugEnabled = false
+var alternateAccountActive = "Debug"
 
 class DebugAccount: NSObject {
     
@@ -48,7 +49,12 @@ class DebugAccount: NSObject {
         return alternateDebugEnabled
     }
     
-    class func setAlternateDebug() {
+    class func accountActive() -> String {
+        return alternateAccountActive
+    }
+    
+    class func setAlternateDebug(account: String) {
         alternateDebugEnabled = true
+        alternateAccountActive = account
     }
 }
