@@ -38,7 +38,7 @@ class Assignment: NSObject {
         self.name = object["name"] as? String
         self.question = object["question"] as? PFFile
         self.answer = object["answer"] as? PFFile
-        self.state = object["state"] as Int
+        self.state = object["state"] as? Int
         self.created = object.createdAt
         self.parse = object
     }
@@ -55,7 +55,7 @@ class Assignment: NSObject {
         assignment["creator"] = creator.parse
         assignment["subject"] = subject.parse
         
-        assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+        assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if success && error == nil {
                 var instance = Assignment(assignment)
                 var cachedImages = instance.getCachedImages()
@@ -67,9 +67,9 @@ class Assignment: NSObject {
                 instance.setCachedImages(cachedImages)
                 Global.reloadQuestionsController()
                 
-                assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+                assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                     assignment["state"] = 1
-                    assignment.saveInBackgroundWithBlock({ (success: Bool, error: NSError!) -> Void in
+                    assignment.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         Global.reloadQuestionsController()
                     })
                 }
@@ -82,22 +82,22 @@ class Assignment: NSObject {
     
     // MARK: Instance Methods
     func getCreator(callback: ((creator: User) -> Void)!) {
-        var user = self.parse["creator"] as PFUser
+        var user = self.parse["creator"] as? PFUser
         
-        if !user.isDataAvailable() {
-            user.fetchIfNeededInBackgroundWithBlock { (object: PFObject!, error: NSError!) -> Void in
-                self.creator = User(object as PFUser)
+        if !user!.isDataAvailable() {
+            user!.fetchIfNeededInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
+                self.creator = User(object as! PFUser)
                 callback?(creator: self.creator)
             }
         } else {
-            self.creator = User(user)
+            self.creator = User(user!)
             callback?(creator: self.creator)
         }
     }
     
     func getSubject(callback: ((subject: Subject) -> Void)!) {
-        var subject = self.parse["subject"] as PFObject
-        self.subject = Subject.subject(subject.objectId)
+        var subject = self.parse["subject"] as? PFObject
+        self.subject = Subject.subject(subject!.objectId!)
         callback?(subject: self.subject)
     }
     
@@ -105,7 +105,7 @@ class Assignment: NSObject {
         if self.name != nil && !self.name.isEmpty {
             let title = NSString(string: self.name)
             let length = min(limit, title.length)
-            var text: NSString = title.substringToIndex(length)
+            var text: String = title.substringToIndex(length)
             
             if title.length > limit {
                 text = text + "..."
@@ -124,7 +124,7 @@ class Assignment: NSObject {
         self.parse["state"] = state
         
         if state >= 4 {
-            cachedImages[self.parse.objectId]?.answer = nil
+            cachedImages[self.parse.objectId!]?.answer = nil
             
             if var tutor = self.parse["tutor"] as? PFObject {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
@@ -135,24 +135,24 @@ class Assignment: NSObject {
             }
         }
 
-        self.parse.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+        self.parse.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             Global.reloadQuestionsController()
         }
     }
     
     func getCachedImages() -> CachedImage {
-        var cache = cachedImages[self.parse.objectId]
+        var cache = cachedImages[self.parse.objectId!]
         
         if cache == nil {
             cache = CachedImage()
-            cachedImages[self.parse.objectId] = cache
+            cachedImages[self.parse.objectId!] = cache
         }
         
         return cache!
     }
     
     func setCachedImages(cache: CachedImage) {
-        cachedImages[self.parse.objectId] = cache
+        cachedImages[self.parse.objectId!] = cache
     }
     
     func getImage(type: ImageType, callback: (image: UIImage) -> Void) {
@@ -174,7 +174,7 @@ class Assignment: NSObject {
         }
         
         if tmpImage != nil {
-            let request = NSURLRequest(URL: NSURL(string: tmpImage.url)!)
+            let request = NSURLRequest(URL: NSURL(string: tmpImage.url!)!)
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
                 (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
                 if error == nil {

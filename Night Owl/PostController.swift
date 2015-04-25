@@ -169,9 +169,9 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             editorText = nil
         }
         
-        Assignment.create(editorText, question: tmpImage, creator: self.user, subject: self.subjectChosen)
+        Assignment.create(editorText as? String, question: tmpImage, creator: self.user, subject: self.subjectChosen)
         
-        self.user.setSubject(self.subjectChosen)
+        self.user.updateSubject(self.subjectChosen)
         self.user.chargeQuestion()
         self.navigationController?.popViewControllerAnimated(false)
         self.cameraController.slideToQuestions()
@@ -246,7 +246,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
-        var pickerLabel = view as UILabel!
+        var pickerLabel = view as! UILabel!
         var shadow = NSShadow()
         shadow.shadowColor = UIColor(white: 0, alpha:0.1)
         shadow.shadowOffset = CGSizeMake(0, 2);

@@ -85,19 +85,19 @@ class SettingsController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let pageController = self.navigationController as PageController
+        let pageController = self.navigationController as! PageController
         pageController.rootController.unlockPageView()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let pageController = self.navigationController as PageController
+        let pageController = self.navigationController as! PageController
         pageController.rootController.lockPageView()
         
         if self.selectedRow != nil {
             if self.selectedRow.section == 0 {
-                (pageController.rootController.controllers[1]?.viewControllers[0] as CameraController).cameraView.stop()
+                (pageController.rootController.controllers[1]?.viewControllers[0] as! CameraController).cameraView.stop()
             } else if self.selectedRow.section == 1 {
-                let viewController = segue.destinationViewController as WebController
+                let viewController = segue.destinationViewController as! WebController
                 
                 switch(self.selectedRow.row) {
                 case 0:
@@ -144,7 +144,7 @@ class SettingsController: UITableViewController {
     
     // MARK: IBActions
     @IBAction func goToCamera(sender: UIBarButtonItem) {
-        let pageController = self.navigationController as PageController
+        let pageController = self.navigationController as! PageController
         pageController.rootController.setActiveChildController(1, animated: true, direction: .Reverse)
     }
     

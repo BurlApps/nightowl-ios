@@ -45,11 +45,11 @@ class Subject: NSObject {
         
         subjectsCached = [:]
         query.orderByAscending("rank")
-        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil && objects.count > 0 {
-                for object in objects as [PFObject] {
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil && objects!.count > 0 {
+                for object in objects as! [PFObject] {
                     var subject = Subject(object)
-                    subjectsCached[object.objectId] = subject
+                    subjectsCached[object.objectId!] = subject
                     subjects.append(subject)
                 }
                 
@@ -62,7 +62,7 @@ class Subject: NSObject {
     
     // MARK: Instance Methods
     func fetch() -> Subject {
-        self.name = subjectsCached[self.parse.objectId]?.name
+        self.name = subjectsCached[self.parse.objectId!]?.name
         return self
     }
 }

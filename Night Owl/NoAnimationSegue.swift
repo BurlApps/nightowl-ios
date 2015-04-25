@@ -9,8 +9,8 @@
 @objc(NoAnimationSegue)
 class NoAnimationSegue: UIStoryboardSegue {
     override func perform () {
-        let source = self.sourceViewController as UIViewController
-        let destination = self.destinationViewController as UIViewController
-        source.navigationController?.pushViewController(destination, animated:false)
+        let source = self.sourceViewController as? UIViewController
+        let destination = self.destinationViewController as? UIViewController
+        source!.navigationController?.pushViewController(destination!, animated:false)
     }
 }

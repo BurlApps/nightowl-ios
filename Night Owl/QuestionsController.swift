@@ -58,7 +58,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         for subview in self.searchBar.subviews {
             for subSubView in subview.subviews {
                 if subSubView.conformsToProtocol(UITextInputTraits) {
-                    var textField = subSubView as UITextField
+                    var textField = subSubView as! UITextField
                     textField.returnKeyType = UIReturnKeyType.Done
                     textField.enablesReturnKeyAutomatically = false
                 }
@@ -76,13 +76,13 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let pageController = self.navigationController as PageController
+        let pageController = self.navigationController as! PageController
         pageController.rootController.unlockPageView()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let viewController = segue.destinationViewController as QuestionController
-        let pageController = self.navigationController as PageController
+        let viewController = segue.destinationViewController as! QuestionController
+        let pageController = self.navigationController as! PageController
         
         viewController.question = self.question
         pageController.rootController.lockPageView()
@@ -122,7 +122,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     
     // MARK: IBActions
     @IBAction func goToCamera(sender: UIBarButtonItem) {
-        let pageController = self.navigationController as PageController
+        let pageController = self.navigationController as! PageController
         pageController.rootController.setActiveChildController(1, animated: true, direction: .Forward)
     }
     

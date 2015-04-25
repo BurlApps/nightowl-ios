@@ -110,14 +110,14 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     
     // MARK: Page View Controller Data Source
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-        var index = (previousViewControllers[0] as ImageController).pageIndex
+        var index = (previousViewControllers[0] as! ImageController).pageIndex
         index = 1 - index
         
         self.updateLabel(index)
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        var index = (viewController as ImageController).pageIndex
+        var index = (viewController as! ImageController).pageIndex
         
         if index == 0 || index == NSNotFound {
             return nil
@@ -127,7 +127,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        var index = (viewController as ImageController).pageIndex
+        var index = (viewController as! ImageController).pageIndex
         
         if index == NSNotFound || (index + 1) == self.pages {
             return nil
@@ -156,7 +156,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     // MARK: UIActionSheet Methods
     func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
         if buttonIndex != 3 {
-            UIAlertView(title: "Answer Has Been Flagged",
+            UIAlertView(title: "Answer Has! Been Flagged",
                 message: "We are sorry for the inconvenience. This question have been assigned to a new tutor who will answer it shortly!",
                 delegate: nil, cancelButtonTitle: "Okay").show()
             self.navigationController?.popViewControllerAnimated(true)

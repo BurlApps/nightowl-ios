@@ -21,14 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //PZSpeedController(appID: "5229c6329af5988befff70bc91509d31", apiKey: "6d3ab14244454e1f25319696a5fccd09655864ff")
         
         //Initialize Parse
-        let parseApplicationID = infoDictionary["ParseApplicationID"] as String
-        let parseClientKey = infoDictionary["ParseClientKey"] as String
+        let parseApplicationID = infoDictionary["ParseApplicationID"] as! String
+        let parseClientKey = infoDictionary["ParseClientKey"] as! String
         
         ParseCrashReporting.enable()
         Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
         
         // Initialize Stripe
-        let stripeKey = infoDictionary["StripeClientKey"] as String
+        let stripeKey = infoDictionary["StripeClientKey"] as! String
         Stripe.setDefaultPublishableKey(stripeKey)
         
         // Register for Push Notitications, if running iOS 8
@@ -65,18 +65,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Settings.update(nil)
         
         // Cache Subjects
-        Subject.subjects(false, nil)
+        Subject.subjects(false, callback: nil)
         
         // Configure Settings Panel
-        let buildType = infoDictionary["BuildType"] as String
-        let version = infoDictionary["CFBundleShortVersionString"] as NSString
-        let build = infoDictionary[kCFBundleVersionKey] as NSString
+        let buildType = infoDictionary["BuildType"] as! String
+        let version = infoDictionary["CFBundleShortVersionString"] as! NSString
+        let build = infoDictionary[kCFBundleVersionKey] as! NSString
         var versionBuild = "\(version) (\(build))" as NSString
         let previousVersionBuild = userDefaults.objectForKey("VersionNumber") as? NSString
         var devBuild = false
         
         if buildType == "debug" {
-            versionBuild = versionBuild + " - Debug"
+            versionBuild = (versionBuild as String) + " - Debug"
             devBuild = true
         }
         

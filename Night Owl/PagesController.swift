@@ -153,12 +153,12 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
         
         if completed {
-            self.currentPage = (pageViewController.viewControllers.last as PageController).pageIndex
+            self.currentPage = (pageViewController.viewControllers.last as! PageController).pageIndex
         }
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        var index = (viewController as PageController).pageIndex
+        var index = (viewController as! PageController).pageIndex
         
         if index == 0 || index == NSNotFound {
             return nil
@@ -168,7 +168,7 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {        
-        var index = (viewController as PageController).pageIndex
+        var index = (viewController as! PageController).pageIndex
         
         if index == NSNotFound || (index + 1) == self.pages {
             return nil

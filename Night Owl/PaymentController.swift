@@ -97,7 +97,7 @@ class PaymentController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let viewController = segue.destinationViewController as ScanController
+        let viewController = segue.destinationViewController as! ScanController
         viewController.paymentController = self
     }
     

@@ -25,13 +25,13 @@ class Settings: NSObject {
     convenience init(_ object: PFConfig) {
         self.init()
         
-        self.host = object["host"] as String
-        self.supportUrl = object["supportUrl"] as String
-        self.termsUrl = object["termsUrl"] as String
-        self.privacyUrl = object["privacyUrl"] as String
-        self.freeQuestions = object["freeQuestions"] as Int
-        self.freeQuestionsCard = object["freeQuestionsCard"] as Int
-        self.questionPrice = object["questionPrice"] as Float
+        self.host = object["host"] as? String
+        self.supportUrl = object["supportUrl"] as? String
+        self.termsUrl = object["termsUrl"] as? String
+        self.privacyUrl = object["privacyUrl"] as? String
+        self.freeQuestions = object["freeQuestions"] as? Int
+        self.freeQuestionsCard = object["freeQuestionsCard"] as? Int
+        self.questionPrice = object["questionPrice"] as? Float
         self.parse = object
     }
     
@@ -57,13 +57,13 @@ class Settings: NSObject {
     class func update(callback: ((settings: Settings) -> Void)!) {
         updating = true
         
-        PFConfig.getConfigInBackgroundWithBlock { (config: PFConfig!, error: NSError!) -> Void in
+        PFConfig.getConfigInBackgroundWithBlock { (config: PFConfig?, error: NSError?) -> Void in
             updating = false
             
-            if error == nil && config["host"] != nil {
-                callback?(settings: Settings(config))
-            } else if var config = PFConfig.currentConfig() {
-                callback?(settings: Settings(config))
+            if config != nil {
+                callback?(settings: Settings(config!))
+            } else {
+                callback?(settings: Settings(PFConfig.currentConfig()))
             }
         }
     }

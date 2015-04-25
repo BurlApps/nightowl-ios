@@ -32,9 +32,9 @@ class DebugAccount: NSObject {
         var accounts: [DebugAccount] = []
         var query = PFQuery(className: "DebugAccount")
         
-        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-                for object in objects as [PFObject] {
+                for object in objects as! [PFObject] {
                     accounts.append(DebugAccount(object))
                 }
                 

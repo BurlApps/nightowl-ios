@@ -15,8 +15,8 @@ class Global {
     }
     
     class func topViewController(index: Int) -> UIViewController? {
-        let pagesController = window?.rootViewController as PagesController
-        return pagesController.controllers[index]?.topViewController?
+        let pagesController = window?.rootViewController as? PagesController
+        return pagesController!.controllers[index]?.topViewController
     }
 
     class func reloadQuestionsController() {

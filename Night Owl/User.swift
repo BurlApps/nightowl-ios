@@ -29,14 +29,14 @@ class User: NSObject {
     // MARK: Class Methods
     class func login(callback: ((user: User) -> Void)!) {
         Settings.sharedInstance { (settings) -> Void in
-            PFAnonymousUtils.logInWithBlock { (user: PFUser!, error: NSError!) -> Void in
-                if error == nil {
-                    user["charges"] = 0
-                    user["freeQuestions"] = settings.freeQuestions
+            PFAnonymousUtils.logInWithBlock { (user: PFUser?, error: NSError?) -> Void in
+                if var tempUser = user {
+                    tempUser["charges"] = 0
+                    tempUser["freeQuestions"] = settings.freeQuestions
                     
-                    var tempUser = User(user)
-                    Installation.current().setUser(tempUser)
-                    callback?(user: tempUser)
+                    var userTemp = User(user!)
+                    Installation.current().setUser(userTemp)
+                    callback?(user: userTemp)
                 }
             }
         }
@@ -59,7 +59,7 @@ class User: NSObject {
         User.logout()
     }
     
-    func setSubject(subject: Subject!) {
+    func updateSubject(subject: Subject!) {
         lastSubject = subject
     }
     
@@ -94,7 +94,7 @@ class User: NSObject {
                     user.parse["freeQuestions"] = user.freeQuestions
                     Global.reloadSettingsController()
                 } else {
-                    let charges = user.parse["charges"] as Float
+                    let charges = user.parse["charges"] as! Float
                     user.parse["charges"] = charges + settings.questionPrice
                 }
                 
@@ -122,10 +122,10 @@ class User: NSObject {
     }
     
     func fetch(callback: ((user: User) -> Void)!) -> User {
-        self.parse.fetchInBackgroundWithBlock { (object: PFObject!, error: NSError!) -> Void in
-            if object != nil && error == nil {
-                self.freeQuestions = object["freeQuestions"] as? Int
-                self.card = object["card"] as? String
+        self.parse.fetchInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
+            if var tempObject = object {
+                self.freeQuestions = tempObject["freeQuestions"] as? Int
+                self.card = tempObject["card"] as? String
                 callback!(user: self)
             } else {
                 User.logout()
@@ -143,9 +143,9 @@ class User: NSObject {
         query.whereKey("creator", equalTo: self.parse)
         query.orderByDescending("updatedAt")
         
-        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-                for object in objects as [PFObject] {
+                for object in objects as! [PFObject] {
                     var assignment = Assignment(object)
                     assignments.append(assignment)
                 }
