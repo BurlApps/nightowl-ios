@@ -17,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
-        // Initialize PZSpeed (DOESNT SUPPORT HTTPS YET)
-        //PZSpeedController(appID: "5229c6329af5988befff70bc91509d31", apiKey: "6d3ab14244454e1f25319696a5fccd09655864ff")
-        
         //Initialize Parse
         let parseApplicationID = infoDictionary["ParseApplicationID"] as! String
         let parseClientKey = infoDictionary["ParseClientKey"] as! String
@@ -95,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Installation.current().setDeviceToken(deviceToken)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         if application.applicationState == UIApplicationState.Inactive {
             // The application was just brought from the background to the foreground,
             // so we consider the app as having been "opened by a push notification."
@@ -111,9 +108,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case "settings.reload": Settings.update(nil)
                 case "user.reload": User.current().fetch(nil)
                 case "subjects.reload": Subject.subjects(false, callback: nil)
+                case "support.message": Global.supportMessage(userInfo["message"] as! String)
                 default: println(action)
             }
         }
+        
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
 
     func applicationWillResignActive(application: UIApplication) {

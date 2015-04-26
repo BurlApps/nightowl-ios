@@ -20,6 +20,9 @@ PODS:
   - FormatterKit/TimeIntervalFormatter (1.8.0)
   - FormatterKit/UnitOfInformationFormatter (1.8.0)
   - FormatterKit/URLRequestFormatter (1.8.0)
+  - JSQMessagesViewController (5.3.2):
+    - JSQSystemSoundPlayer (= 1.5.2)
+  - JSQSystemSoundPlayer (1.5.2)
   - LLSimpleCamera (2.2.0)
   - PaymentKit (1.1.1)
   - Stripe (3.1.0):
@@ -30,16 +33,29 @@ DEPENDENCIES:
   - CardIO (~> 5.0)
   - CHTTextView (~> 0.1)
   - FormatterKit (~> 1.8)
+  - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController`, branch `version_5.3.2_patch`)
   - LLSimpleCamera (~> 2.2)
   - PaymentKit
   - Stripe
 
+EXTERNAL SOURCES:
+  JSQMessagesViewController:
+    :branch: version_5.3.2_patch
+    :git: https://github.com/jessesquires/JSQMessagesViewController
+
+CHECKOUT OPTIONS:
+  JSQMessagesViewController:
+    :commit: 78b1797bc0ae273cf7a104853c8293acfaed174b
+    :git: https://github.com/jessesquires/JSQMessagesViewController
+
 SPEC CHECKSUMS:
   CardIO: 3b0cc447bd0dd3d9552159365ba5c7b7f1db586a
-  CHTTextView: 82f171cdde0aa675c4cf642f8f2c54201aef905c
-  FormatterKit: 547a808c41172136a3f3acb424ac9361d38bb32f
-  LLSimpleCamera: 9da9e75d1c164e03c5c66314ffc0f9ec0009d8b8
-  PaymentKit: f77b4d5cee45947949429c3d587e8eb160a3c9e2
-  Stripe: aaa174b50fac40a16958cbc892457a241d0b4b08
+  CHTTextView: ceca52ee4c0a6e05c05a919c7135b82acdf8ed3f
+  FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
+  JSQMessagesViewController: 91a954081b78120c4b8899cb2df2813e0ed98b4a
+  JSQSystemSoundPlayer: 443466bd5f4537d0b7f15a0184244169ae65f8e5
+  LLSimpleCamera: 360c9647008f3cc8062748dbe7e4ebc7b4fbde04
+  PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
+  Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
 
 COCOAPODS: 0.35.0

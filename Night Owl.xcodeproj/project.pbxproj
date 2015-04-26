@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		47D911A3208B9A324B0A0A83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A9A7258115935D2425357 /* libPods.a */; };
 		D318A6D51AD471E7001B9957 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D318A6D41AD471E7001B9957 /* CoreTelephony.framework */; };
-		D318A6D71AD47202001B9957 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D318A6D61AD47202001B9957 /* libc++.dylib */; };
-		D318A6D91AD473C4001B9957 /* PZSpeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D318A6D81AD473C4001B9957 /* PZSpeed.framework */; };
 		D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */; };
 		D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB031ACC82E400FA554B /* DebugAccount.swift */; };
 		D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB051ACC848B00FA554B /* AccountsController.swift */; };
@@ -51,7 +49,7 @@
 		D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA31AC16CCB001E637D /* QuestionController.swift */; };
 		D33EBAA61AC1F406001E637D /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA51AC1F406001E637D /* WebController.swift */; };
 		D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBAB61AC32C9D001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		D39FC69B1AC645F800B6416B /* Pods.staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D39FC69A1AC645F800B6416B /* Pods.staging.xcconfig */; };
+		D37373831AEC606B0060EE9A /* SupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37373821AEC606B0060EE9A /* SupportController.swift */; };
 		D39FC69C1AC6461D00B6416B /* Pods.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */; };
 		D39FC69D1AC6461F00B6416B /* Pods.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1430730C15A9671CCBACB989 /* Pods.release.xcconfig */; };
 		D39FC69F1AC64A8900B6416B /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39FC69E1AC64A8900B6416B /* ImageController.swift */; };
@@ -129,7 +127,7 @@
 		D33EBAB21AC2812F001E637D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D33EBAB31AC295CD001E637D /* Night Owl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Night Owl.entitlements"; sourceTree = "<group>"; };
 		D33EBAB61AC32C9D001E637D /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
-		D39FC69A1AC645F800B6416B /* Pods.staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Pods.staging.xcconfig; path = "Pods/Target Support Files/Pods/Pods.staging.xcconfig"; sourceTree = "<group>"; };
+		D37373821AEC606B0060EE9A /* SupportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportController.swift; sourceTree = "<group>"; };
 		D39FC69E1AC64A8900B6416B /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		D3AF38771ACE241900B762B7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		D3BCE06C1AC3F2A400824004 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -147,8 +145,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D318A6D91AD473C4001B9957 /* PZSpeed.framework in Frameworks */,
-				D318A6D71AD47202001B9957 /* libc++.dylib in Frameworks */,
 				D318A6D51AD471E7001B9957 /* CoreTelephony.framework in Frameworks */,
 				D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */,
 				D33EBA901ABFF1A3001E637D /* Bolts.framework in Frameworks */,
@@ -245,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				D39FC6A01AC64AC100B6416B /* Page Navigation */,
+				D37373811AEC5FC40060EE9A /* Support Page */,
 				D39FC6A11AC64AE300B6416B /* Camera Page */,
 				D39FC6A21AC64AFB00B6416B /* Questions Page */,
 				D39FC6A31AC64B0700B6416B /* Settings Page */,
@@ -333,6 +330,14 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
+		D37373811AEC5FC40060EE9A /* Support Page */ = {
+			isa = PBXGroup;
+			children = (
+				D37373821AEC606B0060EE9A /* SupportController.swift */,
+			);
+			name = "Support Page";
+			sourceTree = "<group>";
+		};
 		D39FC6A01AC64AC100B6416B /* Page Navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,7 +381,6 @@
 		E23F6025443F7B4B4191F6B2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D39FC69A1AC645F800B6416B /* Pods.staging.xcconfig */,
 				3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */,
 				1430730C15A9671CCBACB989 /* Pods.release.xcconfig */,
 			);
@@ -481,7 +485,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D33EBA911ABFF361001E637D /* Main.storyboard in Resources */,
-				D39FC69B1AC645F800B6416B /* Pods.staging.xcconfig in Resources */,
 				D39FC69C1AC6461D00B6416B /* Pods.debug.xcconfig in Resources */,
 				D39FC69D1AC6461F00B6416B /* Pods.release.xcconfig in Resources */,
 				D3BCE0811AC636FE00824004 /* Settings.bundle in Resources */,
@@ -558,6 +561,7 @@
 				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
 				D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */,
 				D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */,
+				D37373831AEC606B0060EE9A /* SupportController.swift in Sources */,
 				D33EBA5D1ABFEDBC001E637D /* PagesController.swift in Sources */,
 				D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */,
 			);
@@ -694,43 +698,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-l\"CardIO\"",
-					"-l\"Pods-CHTTextView\"",
-					"-l\"Pods-CardIO\"",
-					"-l\"Pods-FormatterKit\"",
-					"-l\"Pods-LLSimpleCamera\"",
-					"-l\"Pods-PaymentKit\"",
-					"-l\"Pods-Stripe\"",
-					"-l\"c++\"",
-					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
-					"\"AddressBook\"",
-					"-framework",
-					"\"AddressBookUI\"",
-					"-framework",
-					"\"AudioToolbox\"",
-					"-framework",
-					"\"CoreLocation\"",
-					"-framework",
-					"\"CoreMedia\"",
-					"-framework",
-					"\"CoreVideo\"",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"OpenGLES\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"UIKit\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LIBTOOLFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Night Owl/Night Owl-Bridging-Header.h";
@@ -760,43 +729,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-l\"CardIO\"",
-					"-l\"Pods-CHTTextView\"",
-					"-l\"Pods-CardIO\"",
-					"-l\"Pods-FormatterKit\"",
-					"-l\"Pods-LLSimpleCamera\"",
-					"-l\"Pods-PaymentKit\"",
-					"-l\"Pods-Stripe\"",
-					"-l\"c++\"",
-					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
-					"\"AddressBook\"",
-					"-framework",
-					"\"AddressBookUI\"",
-					"-framework",
-					"\"AudioToolbox\"",
-					"-framework",
-					"\"CoreLocation\"",
-					"-framework",
-					"\"CoreMedia\"",
-					"-framework",
-					"\"CoreVideo\"",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"OpenGLES\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"UIKit\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_LIBTOOLFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Night Owl/Night Owl-Bridging-Header.h";

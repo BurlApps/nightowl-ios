@@ -13,9 +13,9 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
     private let onboardTime: NSTimeInterval = 4
-    private let pages = 3
-    private let startPage = 1
-    private var currentPage = 1
+    private let pages = 4
+    private let startPage = 2
+    private var currentPage = 2
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var onboarding: UIView!
     private var startDate = NSDate()
@@ -135,8 +135,9 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         
         if page == nil {
             switch(index) {
-            case 0: page = storyBoard.instantiateViewControllerWithIdentifier("QuestionsController") as? PageController
-            case 1: page = storyBoard.instantiateViewControllerWithIdentifier("CameraController") as? PageController
+            case 0: page = storyBoard.instantiateViewControllerWithIdentifier("SupportController") as? PageController
+            case 1: page = storyBoard.instantiateViewControllerWithIdentifier("QuestionsController") as? PageController
+            case 2: page = storyBoard.instantiateViewControllerWithIdentifier("CameraController") as? PageController
             default: page = storyBoard.instantiateViewControllerWithIdentifier("SettingsController") as? PageController
             }
             
@@ -186,13 +187,11 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         }
     }
     
-    func scrollViewWillEndDragging(scrollView: UIScrollView, var withVelocity velocity: CGPoint, var targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if self.currentPage == 0 && scrollView.contentOffset.x <= scrollView.bounds.size.width {
-            velocity = CGPointZero
             targetContentOffset.memory.x = scrollView.bounds.size.width
             targetContentOffset.memory.y = 0
         } else if self.currentPage == (self.pages - 1) && scrollView.contentOffset.x >= scrollView.bounds.size.width {
-            velocity = CGPointZero
             targetContentOffset.memory.x = scrollView.bounds.size.width
             targetContentOffset.memory.y = 0
         }

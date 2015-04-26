@@ -1,11 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D127a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2KH-bD-tFs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2KH-bD-tFs">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Page Controller-->
+        <scene sceneID="mFT-4h-fwn">
+            <objects>
+                <navigationController storyboardIdentifier="SupportController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zbS-aZ-wbf" customClass="PageController" customModule="Night_Owl" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GQE-jq-YBQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="PbA-54-tyH" kind="relationship" relationship="rootViewController" id="QHe-AT-gR5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ub3-9e-2U3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1292" y="-943"/>
+        </scene>
+        <!--Support-->
+        <scene sceneID="BRs-BW-9Ii">
+            <objects>
+                <viewController id="PbA-54-tyH" customClass="SupportController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EeU-2T-wEw"/>
+                        <viewControllerLayoutGuide type="bottom" id="MNs-n3-zeu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uSs-9A-1re">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Support" id="UWk-Tf-nD4">
+                        <barButtonItem key="rightBarButtonItem" image="QuestionsSmall" id="zjW-NW-7Rv">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="goToQuestions:" destination="PbA-54-tyH" id="x0k-i8-Vdt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bX1-Wy-TPn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1762" y="-943"/>
+        </scene>
         <!--Questions-->
         <scene sceneID="qMy-9B-1cF">
             <objects>
@@ -33,10 +75,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Questions" id="RBq-OB-fXu">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="BcH-zp-5Aj">
+                        <barButtonItem key="leftBarButtonItem" image="Support" id="soP-VA-uhp">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="goToSupport:" destination="Vmm-QT-md0" id="TaV-xe-hnZ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="V3B-hq-ESN">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="goToCamera:" destination="Vmm-QT-md0" id="WG9-p0-9jH"/>
+                                <action selector="goToCamera:" destination="Vmm-QT-md0" id="sS5-Gc-S80"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -320,23 +368,6 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Additional Information" id="cRC-pE-WQ0">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="SRX-2K-YkL" style="IBUITableViewCellStyleDefault" id="SvU-Iy-c4i">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SvU-Iy-c4i" id="bBP-WX-j1G">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Support" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SRX-2K-YkL">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="bXz-2P-jrF" kind="push" identifier="supportSegue" id="utI-gG-TH9"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="TBb-Ia-vZJ" style="IBUITableViewCellStyleDefault" id="3BY-IH-tf7">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3BY-IH-tf7" id="0gg-f3-xJm">
@@ -684,7 +715,9 @@
     <resources>
         <image name="Flag" width="360" height="360"/>
         <image name="Questions" width="60" height="60"/>
+        <image name="QuestionsSmall" width="50" height="50"/>
         <image name="Settings" width="60" height="60"/>
+        <image name="Support" width="55" height="55"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -14,16 +14,32 @@ class Global {
         window = tempWindow
     }
     
-    class func topViewController(index: Int) -> UIViewController? {
+    class func viewControllers() -> [Int: PageController] {
         let pagesController = window?.rootViewController as? PagesController
-        return pagesController!.controllers[index]?.topViewController
+        return pagesController!.controllers
     }
 
     class func reloadQuestionsController() {
-        (Global.topViewController(0) as? QuestionsController)?.reloadQuestions()
+        for (index, parent) in self.viewControllers() {
+            if let controller = parent.topViewController as? QuestionsController {
+                controller.reloadQuestions()
+            }
+        }
     }
     
     class func reloadSettingsController() {
-        (Global.topViewController(2) as? SettingsController)?.reloadUser()
+        for (index, parent) in self.viewControllers() {
+            if let controller = parent.topViewController as? SettingsController {
+                controller.reloadUser()
+            }
+        }
+    }
+    
+    class func supportMessage(text: String) {
+        for (index, parent) in self.viewControllers() {
+            if let controller = parent.topViewController as? SupportController {
+                controller.recievedMessage(text)
+            }
+        }
     }
 }

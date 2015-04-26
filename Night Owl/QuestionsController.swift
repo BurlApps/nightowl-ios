@@ -121,9 +121,14 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     }
     
     // MARK: IBActions
+    @IBAction func goToSupport(sender: UIBarButtonItem) {
+        let pageController = self.navigationController as! PageController
+        pageController.rootController.setActiveChildController(0, animated: true, direction: .Reverse)
+    }
+    
     @IBAction func goToCamera(sender: UIBarButtonItem) {
         let pageController = self.navigationController as! PageController
-        pageController.rootController.setActiveChildController(1, animated: true, direction: .Forward)
+        pageController.rootController.setActiveChildController(2, animated: true, direction: .Forward)
     }
     
     // UISearchBar Methods

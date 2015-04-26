@@ -69,6 +69,10 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
             direction: .Forward, animated: false, completion: nil)
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
     // MARK: Instance Methods
     func updateLabel(index: Int) {
         if self.pages == 1 || index == 1  {
@@ -100,7 +104,6 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
                 page?.imageType = .Answer
             }
             
-            page?.loadImage()
             self.controllers[index] = page
         }
         
@@ -110,10 +113,12 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     
     // MARK: Page View Controller Data Source
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-        var index = (previousViewControllers[0] as! ImageController).pageIndex
-        index = 1 - index
+        if finished && completed {
+            var index = (previousViewControllers[0] as! ImageController).pageIndex
+            index = 1 - index
         
-        self.updateLabel(index)
+            self.updateLabel(index)
+        }
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {

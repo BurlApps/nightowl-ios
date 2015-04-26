@@ -95,18 +95,14 @@ class SettingsController: UITableViewController {
         
         if self.selectedRow != nil {
             if self.selectedRow.section == 0 {
-                (pageController.rootController.controllers[1]?.viewControllers[0] as! CameraController).cameraView.stop()
+                (pageController.rootController.controllers[2]?.viewControllers[0] as! CameraController).cameraView.stop()
             } else if self.selectedRow.section == 1 {
                 let viewController = segue.destinationViewController as! WebController
                 
-                switch(self.selectedRow.row) {
-                case 0:
-                    viewController.name = "Support"
-                    viewController.website = self.settings.supportUrl
-                case 1:
+                if self.selectedRow.row == 0 {
                     viewController.name = "Privacy Policy"
                     viewController.website = self.settings.privacyUrl
-                default:
+                } else {
                     viewController.name = "Terms of Use"
                     viewController.website = self.settings.termsUrl
                 }
@@ -145,7 +141,7 @@ class SettingsController: UITableViewController {
     // MARK: IBActions
     @IBAction func goToCamera(sender: UIBarButtonItem) {
         let pageController = self.navigationController as! PageController
-        pageController.rootController.setActiveChildController(1, animated: true, direction: .Reverse)
+        pageController.rootController.setActiveChildController(2, animated: true, direction: .Reverse)
     }
     
     // MARK: UITableViewController Methods

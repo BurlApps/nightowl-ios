@@ -49,6 +49,10 @@ class ImageController: UIViewController, UIScrollViewDelegate {
         self.scrollView.addGestureRecognizer(tapGesture)
     }
     
+    override func viewDidLayoutSubviews() {
+        self.loadImage()
+    }
+    
     // MARK: Instance Methods
     func loadImage() {        
         self.question.getImage(self.imageType) { (image) -> Void in

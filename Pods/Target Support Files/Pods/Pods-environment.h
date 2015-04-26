@@ -78,6 +78,18 @@
 #define COCOAPODS_VERSION_MINOR_FormatterKit_UnitOfInformationFormatter 8
 #define COCOAPODS_VERSION_PATCH_FormatterKit_UnitOfInformationFormatter 0
 
+// JSQMessagesViewController
+#define COCOAPODS_POD_AVAILABLE_JSQMessagesViewController
+#define COCOAPODS_VERSION_MAJOR_JSQMessagesViewController 5
+#define COCOAPODS_VERSION_MINOR_JSQMessagesViewController 3
+#define COCOAPODS_VERSION_PATCH_JSQMessagesViewController 2
+
+// JSQSystemSoundPlayer
+#define COCOAPODS_POD_AVAILABLE_JSQSystemSoundPlayer
+#define COCOAPODS_VERSION_MAJOR_JSQSystemSoundPlayer 1
+#define COCOAPODS_VERSION_MINOR_JSQSystemSoundPlayer 5
+#define COCOAPODS_VERSION_PATCH_JSQSystemSoundPlayer 2
+
 // LLSimpleCamera
 #define COCOAPODS_POD_AVAILABLE_LLSimpleCamera
 #define COCOAPODS_VERSION_MAJOR_LLSimpleCamera 2
