@@ -78,6 +78,22 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
             }
         }
         
+        // Create Controllers
+        for index in 0...self.pages {
+            var page: PageController!
+            
+            switch(index) {
+            case 0: page = storyBoard.instantiateViewControllerWithIdentifier("SupportController") as? PageController
+            case 1: page = storyBoard.instantiateViewControllerWithIdentifier("QuestionsController") as? PageController
+            case 2: page = storyBoard.instantiateViewControllerWithIdentifier("CameraController") as? PageController
+            default: page = storyBoard.instantiateViewControllerWithIdentifier("SettingsController") as? PageController
+            }
+            
+            page?.view.frame = self.view.frame
+            page?.pageIndex = index
+            self.controllers[index] = page
+        }
+        
         self.didMoveToParentViewController(self)
     }
     
@@ -130,24 +146,7 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
             return nil
         }
         
-        // Create PageViewController
-        var page = self.controllers[index]
-        
-        if page == nil {
-            switch(index) {
-            case 0: page = storyBoard.instantiateViewControllerWithIdentifier("SupportController") as? PageController
-            case 1: page = storyBoard.instantiateViewControllerWithIdentifier("QuestionsController") as? PageController
-            case 2: page = storyBoard.instantiateViewControllerWithIdentifier("CameraController") as? PageController
-            default: page = storyBoard.instantiateViewControllerWithIdentifier("SettingsController") as? PageController
-            }
-            
-            page?.view.frame = self.view.frame
-            page?.pageIndex = index
-            page?.rootController = self
-            self.controllers[index] = page
-        }
-
-        return page
+        return self.controllers[index]
     }
     
     // MARK: Page View Controller Data Source

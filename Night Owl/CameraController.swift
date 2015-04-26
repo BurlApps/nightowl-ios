@@ -60,8 +60,7 @@ class CameraController: UIViewController {
         super.viewDidAppear(animated)
         
         // Unlock Page Controller
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.unlockPageView()
+        Global.unlockPageView()
         
         // Start Camera View
         if self.cameraView != nil {
@@ -72,10 +71,11 @@ class CameraController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         let viewController = segue.destinationViewController as! PostController
-        let pageController = self.navigationController as! PageController
+        
         viewController.capturedImage = self.capturedImage
         viewController.cameraController = self
-        pageController.rootController.lockPageView()
+        
+        Global.lockPageView()
     }
     
     // MARK: IBActions
@@ -115,12 +115,10 @@ class CameraController: UIViewController {
     
     // MARK: Instance Methods
     func slideToQuestions() {
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.setActiveChildController(1, animated: true, direction: .Reverse)
+        Global.slideToController(1, animated: true, direction: .Reverse)
     }
     
     func slideToSettings() {
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.setActiveChildController(3, animated: true, direction: .Forward)
+        Global.slideToController(3, animated: true, direction: .Forward)
     }
 }

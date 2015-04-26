@@ -18,6 +18,33 @@ class Global {
         let pagesController = window?.rootViewController as? PagesController
         return pagesController!.controllers
     }
+    
+    class func slideToController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
+        let pagesController = window?.rootViewController as? PagesController
+        pagesController?.setActiveChildController(index, animated: animated, direction: direction)
+    }
+    
+    class func lockPageView() {
+        let pagesController = window?.rootViewController as? PagesController
+        pagesController?.lockPageView()
+    }
+    
+    class func unlockPageView() {
+        let pagesController = window?.rootViewController as? PagesController
+        pagesController?.unlockPageView()
+    }
+    
+    class func cameraController(start: Bool) {
+        for (index, parent) in self.viewControllers() {
+            if let controller = parent.topViewController as? CameraController {
+                if start {
+                    controller.cameraView.start()
+                } else {
+                    controller.cameraView.stop()
+                }
+            }
+        }
+    }
 
     class func reloadQuestionsController() {
         for (index, parent) in self.viewControllers() {

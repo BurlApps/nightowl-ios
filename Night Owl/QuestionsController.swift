@@ -76,16 +76,14 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.unlockPageView()
+        Global.unlockPageView()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let viewController = segue.destinationViewController as! QuestionController
-        let pageController = self.navigationController as! PageController
-        
         viewController.question = self.question
-        pageController.rootController.lockPageView()
+        
+        Global.lockPageView()
     }
     
     // MARK: Instance Methods
@@ -122,13 +120,11 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     
     // MARK: IBActions
     @IBAction func goToSupport(sender: UIBarButtonItem) {
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.setActiveChildController(0, animated: true, direction: .Reverse)
+        Global.slideToController(0, animated: true, direction: .Reverse)
     }
     
     @IBAction func goToCamera(sender: UIBarButtonItem) {
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.setActiveChildController(2, animated: true, direction: .Forward)
+        Global.slideToController(2, animated: true, direction: .Forward)
     }
     
     // UISearchBar Methods

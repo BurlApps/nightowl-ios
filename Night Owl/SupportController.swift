@@ -87,8 +87,7 @@ class SupportController: JSQMessagesViewController {
     
     // MARK: IBActions
     @IBAction func goToQuestions(sender: UIBarButtonItem) {
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.setActiveChildController(1, animated: true, direction: .Forward)
+        Global.slideToController(1, animated: true, direction: .Forward)
     }
     
     // MARK: MessageViewController Methods

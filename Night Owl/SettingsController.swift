@@ -85,17 +85,16 @@ class SettingsController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.unlockPageView()
+        Global.unlockPageView()
+        Global.cameraController(true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.lockPageView()
+        Global.lockPageView()
         
         if self.selectedRow != nil {
             if self.selectedRow.section == 0 {
-                (pageController.rootController.controllers[2]?.viewControllers[0] as! CameraController).cameraView.stop()
+                Global.cameraController(false)
             } else if self.selectedRow.section == 1 {
                 let viewController = segue.destinationViewController as! WebController
                 
@@ -140,8 +139,7 @@ class SettingsController: UITableViewController {
     
     // MARK: IBActions
     @IBAction func goToCamera(sender: UIBarButtonItem) {
-        let pageController = self.navigationController as! PageController
-        pageController.rootController.setActiveChildController(2, animated: true, direction: .Reverse)
+        Global.slideToController(2, animated: true, direction: .Reverse)
     }
     
     // MARK: UITableViewController Methods
