@@ -20,7 +20,6 @@ PODS:
   - FormatterKit/TimeIntervalFormatter (1.8.0)
   - FormatterKit/UnitOfInformationFormatter (1.8.0)
   - FormatterKit/URLRequestFormatter (1.8.0)
-  - Helpshift (4.10.2)
   - JSQMessagesViewController (5.3.2):
     - JSQSystemSoundPlayer (= 1.5.2)
   - JSQSystemSoundPlayer (1.5.2)
@@ -34,7 +33,6 @@ DEPENDENCIES:
   - CardIO (~> 5.0)
   - CHTTextView (~> 0.1)
   - FormatterKit (~> 1.8)
-  - Helpshift (~> 4.10.2)
   - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController`, branch `version_5.3.2_patch`)
   - LLSimpleCamera (~> 2.2)
   - PaymentKit
@@ -54,7 +52,6 @@ SPEC CHECKSUMS:
   CardIO: 3b0cc447bd0dd3d9552159365ba5c7b7f1db586a
   CHTTextView: ceca52ee4c0a6e05c05a919c7135b82acdf8ed3f
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
-  Helpshift: 9c84a5e4ffd881c7e7eb395c2afc8d6a46eb2187
   JSQMessagesViewController: 91a954081b78120c4b8899cb2df2813e0ed98b4a
   JSQSystemSoundPlayer: 443466bd5f4537d0b7f15a0184244169ae65f8e5
   LLSimpleCamera: 360c9647008f3cc8062748dbe7e4ebc7b4fbde04

@@ -74,10 +74,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## Helpshift
-
-See http://www.helpshift.com/terms/
-
 ## JSQMessagesViewController
 
 
