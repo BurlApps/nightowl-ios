@@ -139,6 +139,26 @@ class SupportController: JSQMessagesViewController {
         return self.messages[indexPath.item]
     }
     
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        let message = self.messages[indexPath.item]
+        var showTime = false
+        
+        if indexPath.item == 0 {
+            showTime = true
+        } else {
+            let prevMessage = self.messages[indexPath.item - 1]
+            let interval = message.date().timeIntervalSinceDate(prevMessage.date())
+            
+            showTime = floor(interval/3600) > 0
+        }
+        
+        if(showTime) {
+            return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date())
+        } else {
+            return nil
+        }
+    }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.messages.count
     }
@@ -161,5 +181,25 @@ class SupportController: JSQMessagesViewController {
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         return 0;
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        let message = self.messages[indexPath.item]
+        var showTime = false
+        
+        if indexPath.item == 0 {
+            showTime = true
+        } else {
+            let prevMessage = self.messages[indexPath.item - 1]
+            let interval = message.date().timeIntervalSinceDate(prevMessage.date())
+            
+            showTime = floor(interval/3600) > 0
+        }
+        
+        if(showTime) {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault + 10
+        } else {
+            return CGFloat(0.0)
+        }
     }
 }
