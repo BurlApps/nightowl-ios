@@ -106,7 +106,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case "settings.reload": Settings.update(nil)
                 case "user.reload": User.current().fetch(nil)
                 case "subjects.reload": Subject.subjects(false, callback: nil)
-                case "support.message": Global.supportMessage(userInfo["message"] as! String)
+                case "support.message":
+                    if application.applicationState == UIApplicationState.Inactive {
+                        Global.slideToController(0, animated: true, direction: .Reverse)
+                    }
+                
+                    Global.supportMessage(userInfo["message"] as! String)
                 default: println(action)
             }
         }

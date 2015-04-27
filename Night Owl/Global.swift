@@ -19,6 +19,8 @@ class Global {
     
     class func slideToController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
         let pagesController = window?.rootViewController as? PagesController
+        
+        pagesController?.unlockPageView()
         pagesController?.setActiveChildController(index, animated: animated, direction: direction)
     }
     
