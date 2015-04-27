@@ -78,6 +78,12 @@
 #define COCOAPODS_VERSION_MINOR_FormatterKit_UnitOfInformationFormatter 8
 #define COCOAPODS_VERSION_PATCH_FormatterKit_UnitOfInformationFormatter 0
 
+// Helpshift
+#define COCOAPODS_POD_AVAILABLE_Helpshift
+#define COCOAPODS_VERSION_MAJOR_Helpshift 4
+#define COCOAPODS_VERSION_MINOR_Helpshift 10
+#define COCOAPODS_VERSION_PATCH_Helpshift 2
+
 // JSQMessagesViewController
 #define COCOAPODS_POD_AVAILABLE_JSQMessagesViewController
 #define COCOAPODS_VERSION_MAJOR_JSQMessagesViewController 5

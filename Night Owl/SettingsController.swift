@@ -150,6 +150,10 @@ class SettingsController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if(indexPath.section == 1 && indexPath.row == 0) {
+            Global.slideToController(0, animated: true, direction: .Reverse)
+        }
     }
     
     // MARK: UITableViewController Methods

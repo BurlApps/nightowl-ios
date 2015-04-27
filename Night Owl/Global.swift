@@ -6,14 +6,12 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-var window: UIWindow!
-
 class Global {
     
-    class func setWindow(tempWindow: UIWindow!) {
-        window = tempWindow
-    }
+    // MARK: Instance Variables
+    static var window: UIWindow!
     
+    // MARK: Class Methods
     class func viewControllers() -> [Int: PageController] {
         let pagesController = window?.rootViewController as? PagesController
         return pagesController!.controllers

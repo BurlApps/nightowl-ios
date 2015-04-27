@@ -49,6 +49,7 @@
 		D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA31AC16CCB001E637D /* QuestionController.swift */; };
 		D33EBAA61AC1F406001E637D /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA51AC1F406001E637D /* WebController.swift */; };
 		D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBAB61AC32C9D001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D3504A981AEE0261002D91D0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3504A971AEE0261002D91D0 /* Message.swift */; };
 		D37373831AEC606B0060EE9A /* SupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37373821AEC606B0060EE9A /* SupportController.swift */; };
 		D39FC69C1AC6461D00B6416B /* Pods.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */; };
 		D39FC69D1AC6461F00B6416B /* Pods.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1430730C15A9671CCBACB989 /* Pods.release.xcconfig */; };
@@ -127,6 +128,9 @@
 		D33EBAB21AC2812F001E637D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D33EBAB31AC295CD001E637D /* Night Owl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Night Owl.entitlements"; sourceTree = "<group>"; };
 		D33EBAB61AC32C9D001E637D /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		D3504A921AED8DA2002D91D0 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		D3504A951AED8DC1002D91D0 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		D3504A971AEE0261002D91D0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		D37373821AEC606B0060EE9A /* SupportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportController.swift; sourceTree = "<group>"; };
 		D39FC69E1AC64A8900B6416B /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		D3AF38771ACE241900B762B7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 				D33EBA511ABFEDBC001E637D /* Settings.swift */,
 				D33EBA521ABFEDBC001E637D /* Track.swift */,
 				D33EBA531ABFEDBC001E637D /* User.swift */,
+				D3504A971AEE0261002D91D0 /* Message.swift */,
 				D33EBA9F1AC0F701001E637D /* Subject.swift */,
 				D327FB031ACC82E400FA554B /* DebugAccount.swift */,
 				D3AF38771ACE241900B762B7 /* Global.swift */,
@@ -278,6 +283,8 @@
 		D33EBA6A1ABFEFAE001E637D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3504A951AED8DC1002D91D0 /* QuickLook.framework */,
+				D3504A921AED8DA2002D91D0 /* CoreText.framework */,
 				D318A6D81AD473C4001B9957 /* PZSpeed.framework */,
 				D318A6D61AD47202001B9957 /* libc++.dylib */,
 				D318A6D41AD471E7001B9957 /* CoreTelephony.framework */,
@@ -548,6 +555,7 @@
 				D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */,
 				D33EBA9C1AC0EA8A001E637D /* RBResizeImage.swift in Sources */,
 				D3AF38781ACE241900B762B7 /* Global.swift in Sources */,
+				D3504A981AEE0261002D91D0 /* Message.swift in Sources */,
 				D3BCE0791AC4053500824004 /* ScanController.swift in Sources */,
 				D33EBA5F1ABFEDBC001E637D /* Track.swift in Sources */,
 				D33EBAA61AC1F406001E637D /* WebController.swift in Sources */,
