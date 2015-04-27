@@ -23,7 +23,7 @@ class SupportController: JSQMessagesViewController {
         self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
         self.inputToolbar.contentView.leftBarButtonItem = nil
-        self.inputToolbar.contentView.textView.placeHolder = "Message support..."
+        self.inputToolbar.contentView.textView.placeHolder = "Tell us how we can help..."
         
         // Create Text Shadow
         var shadow = NSShadow()
