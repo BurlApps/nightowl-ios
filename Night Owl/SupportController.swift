@@ -83,6 +83,8 @@ class SupportController: JSQMessagesViewController {
     
     // MARK: Instance Methods
     func reloadMessages() {
+        self.user = User.current()
+        
         Message.messages(self.user, callback: { (messages) -> Void in
             self.messages = []
             

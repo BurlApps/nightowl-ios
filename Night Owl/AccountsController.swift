@@ -44,10 +44,13 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
             Settings.update { (settings) -> Void in
                 User.login { (user) -> Void in
                     user.updateSubject(nil)
-                    self.navigationController?.popViewControllerAnimated(true)
+                
                     DebugAccount.setAlternateDebug(self.account.name)
                     Global.reloadQuestionsController()
                     Global.reloadSettingsController()
+                    Global.reloadSupportController()
+                    
+                    self.navigationController?.popViewControllerAnimated(true)
                 }
             }
         }

@@ -60,6 +60,14 @@ class Global {
         }
     }
     
+    class func reloadSupportController() {
+        for (index, parent) in self.viewControllers() {
+            if let controller = parent.topViewController as? SupportController {
+                controller.reloadMessages()
+            }
+        }
+    }
+    
     class func supportMessage(text: String) {
         for (index, parent) in self.viewControllers() {
             if let controller = parent.topViewController as? SupportController {
