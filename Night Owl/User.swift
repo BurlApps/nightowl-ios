@@ -140,6 +140,7 @@ class User: NSObject {
         var assignments: [Assignment] = []
         var query = PFQuery(className: "Assignment")
         
+        query.whereKey("state", notEqualTo: 9)
         query.whereKey("creator", equalTo: self.parse)
         query.orderByDescending("updatedAt")
         

@@ -11,6 +11,7 @@ class SupportController: JSQMessagesViewController {
     // MARK: Instance Variables
     var messages: [JSQMessageData] = []
     private var user = User.current()
+    private var spinner: UIActivityIndicatorView!
     private var outgoingBubbleImageView = JSQMessagesBubbleImageFactory.outgoingMessageBubbleImageViewWithColor(UIColor(red:0.13, green:0.59, blue:0.95, alpha:1))
     private var incomingBubbleImageView = JSQMessagesBubbleImageFactory.incomingMessageBubbleImageViewWithColor(UIColor(red:0.93, green:0.94, blue:0.95, alpha:1))
     
@@ -52,6 +53,11 @@ class SupportController: JSQMessagesViewController {
             ]
         }
         
+        // Add Spinner
+        self.spinner = UIActivityIndicatorView(frame: CGRectMake(0, 0, 20, 20))
+        self.spinner.center = CGPointMake(self.view.frame.width/2, self.view.frame.height/2)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.spinner)
+        
         // Load Messages
         self.reloadMessages()
     }
@@ -84,6 +90,7 @@ class SupportController: JSQMessagesViewController {
     // MARK: Instance Methods
     func reloadMessages() {
         self.user = User.current()
+        self.spinner.startAnimating()
         
         Message.messages(self.user, callback: { (messages) -> Void in
             self.messages = []
@@ -100,6 +107,7 @@ class SupportController: JSQMessagesViewController {
             }
             
             self.finishReceivingMessage()
+            self.spinner.stopAnimating()
         })
     }
     

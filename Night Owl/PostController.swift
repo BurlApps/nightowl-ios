@@ -161,15 +161,12 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     // MARK: Instance Methods
     func createAssignment() {
         var editorText: NSString! = self.textEditor.text
-        let width = self.capturedImage.size.width - self.capturedImage.size.width/4
-        let height = self.capturedImage.size.height - self.capturedImage.size.height/4
-        let tmpImage =  RBResizeImage(self.capturedImage, CGSizeMake(width, height))
         
         if editorText.length == 0 {
             editorText = nil
         }
         
-        Assignment.create(editorText as? String, question: tmpImage, creator: self.user, subject: self.subjectChosen)
+        Assignment.create(editorText as? String, question: self.capturedImage, creator: self.user, subject: self.subjectChosen)
         
         self.user.updateSubject(self.subjectChosen)
         self.user.chargeQuestion()

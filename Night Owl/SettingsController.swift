@@ -98,7 +98,7 @@ class SettingsController: UITableViewController {
             } else if self.selectedRow.section == 1 {
                 let viewController = segue.destinationViewController as! WebController
                 
-                if self.selectedRow.row == 0 {
+                if self.selectedRow.row == 1 {
                     viewController.name = "Privacy Policy"
                     viewController.website = self.settings.privacyUrl
                 } else {

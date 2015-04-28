@@ -28,6 +28,7 @@ PODS:
   - Stripe (3.1.0):
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
+  - UIImage+ImageCompress (0.0.1)
 
 DEPENDENCIES:
   - CardIO (~> 5.0)
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - LLSimpleCamera (~> 2.2)
   - PaymentKit
   - Stripe
+  - UIImage+ImageCompress
 
 EXTERNAL SOURCES:
   JSQMessagesViewController:
@@ -57,5 +59,6 @@ SPEC CHECKSUMS:
   LLSimpleCamera: 360c9647008f3cc8062748dbe7e4ebc7b4fbde04
   PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
+  UIImage+ImageCompress: 6b38489f38075d569d9f25d72af7ecf5c84c1057
 
 COCOAPODS: 0.35.0

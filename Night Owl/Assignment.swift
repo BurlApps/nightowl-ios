@@ -59,8 +59,8 @@ class Assignment: NSObject {
             if success && error == nil {
                 var instance = Assignment(assignment)
                 var cachedImages = instance.getCachedImages()
-                var imageData = UIImagePNGRepresentation(question)
-                var imageFile = PFFile(name: "image.png", data: imageData)
+                var imageData = UIImageJPEGRepresentation(question, 0.7)
+                var imageFile = PFFile(name: "image.jpeg", data: imageData)
                
                 assignment["question"] = imageFile
                 cachedImages.question = question

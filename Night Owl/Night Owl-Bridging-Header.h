@@ -22,3 +22,4 @@
 #import "TTTTimeIntervalFormatter.h"
 #import "CardIO.h"
 #import "UIImage+fixOrientation.h"
+#import "UIImage+ImageCompress.h"

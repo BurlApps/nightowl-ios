@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47D911A3208B9A324B0A0A83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A9A7258115935D2425357 /* libPods.a */; };
+		D3156E281AEF090900101215 /* RBResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3156E271AEF090900101215 /* RBResizeImage.swift */; };
 		D318A6D51AD471E7001B9957 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D318A6D41AD471E7001B9957 /* CoreTelephony.framework */; };
 		D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */; };
 		D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB031ACC82E400FA554B /* DebugAccount.swift */; };
@@ -43,7 +44,6 @@
 		D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA921ABFFC31001E637D /* QuestionsController.swift */; };
 		D33EBA951ABFFC3A001E637D /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA941ABFFC3A001E637D /* SettingsController.swift */; };
 		D33EBA991AC0E5A8001E637D /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA981AC0E5A8001E637D /* PostController.swift */; };
-		D33EBA9C1AC0EA8A001E637D /* RBResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9B1AC0EA8A001E637D /* RBResizeImage.swift */; };
 		D33EBA9E1AC0EC14001E637D /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9D1AC0EC14001E637D /* NoAnimationSegue.swift */; };
 		D33EBAA01AC0F702001E637D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9F1AC0F701001E637D /* Subject.swift */; };
 		D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA31AC16CCB001E637D /* QuestionController.swift */; };
@@ -74,6 +74,7 @@
 		1430730C15A9671CCBACB989 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		980A9A7258115935D2425357 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3156E271AEF090900101215 /* RBResizeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizeImage.swift; sourceTree = "<group>"; };
 		D318A6D41AD471E7001B9957 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D318A6D61AD47202001B9957 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		D318A6D81AD473C4001B9957 /* PZSpeed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PZSpeed.framework; path = Frameworks/PZSpeed.framework; sourceTree = "<group>"; };
@@ -118,7 +119,6 @@
 		D33EBA921ABFFC31001E637D /* QuestionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsController.swift; sourceTree = "<group>"; };
 		D33EBA941ABFFC3A001E637D /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		D33EBA981AC0E5A8001E637D /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
-		D33EBA9B1AC0EA8A001E637D /* RBResizeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizeImage.swift; sourceTree = "<group>"; };
 		D33EBA9D1AC0EC14001E637D /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimationSegue.swift; sourceTree = "<group>"; };
 		D33EBA9F1AC0F701001E637D /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		D33EBAA11AC13784001E637D /* libPods-CameraManager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-CameraManager.a"; path = "Pods/build/Debug-iphoneos/libPods-CameraManager.a"; sourceTree = "<group>"; };
@@ -320,9 +320,9 @@
 		D33EBA9A1AC0EA7B001E637D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				D33EBA9B1AC0EA8A001E637D /* RBResizeImage.swift */,
 				D319352E1ACA5C5B00E2B236 /* UIImage+fixOrientation.h */,
 				D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */,
+				D3156E271AEF090900101215 /* RBResizeImage.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -553,7 +553,7 @@
 				D33EBA9E1AC0EC14001E637D /* NoAnimationSegue.swift in Sources */,
 				D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */,
 				D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */,
-				D33EBA9C1AC0EA8A001E637D /* RBResizeImage.swift in Sources */,
+				D3156E281AEF090900101215 /* RBResizeImage.swift in Sources */,
 				D3AF38781ACE241900B762B7 /* Global.swift in Sources */,
 				D3504A981AEE0261002D91D0 /* Message.swift in Sources */,
 				D3BCE0791AC4053500824004 /* ScanController.swift in Sources */,
