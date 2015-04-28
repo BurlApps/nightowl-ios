@@ -20,7 +20,6 @@ class SupportController: JSQMessagesViewController {
         super.viewDidLoad()
         
         // Configure Chat Room
-        self.sender = self.user.parse.objectId
         self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
         self.inputToolbar.contentView.leftBarButtonItem = nil
@@ -90,6 +89,7 @@ class SupportController: JSQMessagesViewController {
     // MARK: Instance Methods
     func reloadMessages() {
         self.user = User.current()
+        self.sender = self.user.parse.objectId
         self.spinner.startAnimating()
         
         Message.messages(self.user, callback: { (messages) -> Void in

@@ -31,7 +31,7 @@ class Message: NSObject {
         query.whereKey("user", equalTo: user.parse)
         query.orderByAscending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error: NSError?) -> Void in
-            if error == nil && objects!.count > 0 {
+            if error == nil {
                 for object in objects as! [PFObject] {
                     var message = Message(object)
                     messages.append(message)
