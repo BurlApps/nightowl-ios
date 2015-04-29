@@ -10,7 +10,7 @@ class Message: NSObject {
     
     // MARK: Instance Variables
     var text: String!
-    var byUser: Bool!
+    var type: Int!
     var created: NSDate!
     var parse: PFObject!
     
@@ -19,7 +19,7 @@ class Message: NSObject {
         self.init()
         
         self.text = object["text"] as? String
-        self.byUser = object["byUser"] as? Bool
+        self.type = object["type"] as? Int
         self.created = object.createdAt
         self.parse = object
     }
@@ -49,7 +49,7 @@ class Message: NSObject {
         
         message["text"] = text
         message["user"] = user.parse
-        message["byUser"] = true
+        message["type"] = 2
         
         message.saveInBackgroundWithBlock(nil)
     }

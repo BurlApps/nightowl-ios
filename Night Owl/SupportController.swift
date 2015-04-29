@@ -98,7 +98,7 @@ class SupportController: JSQMessagesViewController {
             for message in messages {
                 var sender = "support"
                 
-                if message.byUser == true {
+                if message.type == 2 {
                     sender = self.sender
                 }
                 
