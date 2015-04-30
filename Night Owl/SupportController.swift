@@ -92,7 +92,7 @@ class SupportController: JSQMessagesViewController {
         self.sender = self.user.parse.objectId
         self.spinner.startAnimating()
         
-        Message.messages(self.user, callback: { (messages) -> Void in
+        self.user.messages({ (messages) -> Void in
             self.messages = []
             
             for message in messages {

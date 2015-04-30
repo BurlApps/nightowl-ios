@@ -13,8 +13,8 @@ class User: NSObject {
     // MARK: Instance Variables
     var freeQuestions: Int!
     var card: String!
-    var parse: PFUser!
     var subject: Subject!
+    var parse: PFUser!
     
     // MARK: Convenience Methods
     convenience init(_ object: PFUser) {
@@ -22,8 +22,8 @@ class User: NSObject {
         
         self.freeQuestions = object["freeQuestions"] as? Int
         self.card = object["card"] as? String
-        self.parse = object
         self.subject = lastSubject
+        self.parse = object
     }
     
     // MARK: Class Methods
@@ -136,13 +136,14 @@ class User: NSObject {
         return self
     }
     
-    func getAssignments(callback: ((assignments: [Assignment]) -> Void)) {
+    func assignments(callback: ((assignments: [Assignment]) -> Void)) {
         var assignments: [Assignment] = []
         var query = PFQuery(className: "Assignment")
         
         query.whereKey("state", notEqualTo: 9)
         query.whereKey("creator", equalTo: self.parse)
         query.orderByDescending("updatedAt")
+        query.cachePolicy = .NetworkElseCache
         
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
@@ -153,6 +154,28 @@ class User: NSObject {
                 
                 callback(assignments: assignments)
             } else if error != nil {
+                println(error)
+            }
+        })
+    }
+    
+    func messages(callback: ((messages: [Message]) -> Void)!) {
+        var messages: [Message] = []
+        var query = PFQuery(className: "Message")
+        
+        query.whereKey("user", equalTo: self.parse)
+        query.orderByAscending("createdAt")
+        query.cachePolicy = .NetworkElseCache
+        
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                for object in objects as! [PFObject] {
+                    var message = Message(object)
+                    messages.append(message)
+                }
+                
+                callback?(messages: messages)
+            } else {
                 println(error)
             }
         })

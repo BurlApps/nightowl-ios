@@ -24,26 +24,6 @@ class Message: NSObject {
         self.parse = object
     }
     
-    class func messages(user: User, callback: ((messages: [Message]) -> Void)!) {
-        var messages: [Message] = []
-        var query = PFQuery(className: "Message")
-        
-        query.whereKey("user", equalTo: user.parse)
-        query.orderByAscending("createdAt")
-        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]?, error: NSError?) -> Void in
-            if error == nil {
-                for object in objects as! [PFObject] {
-                    var message = Message(object)
-                    messages.append(message)
-                }
-                
-                callback?(messages: messages)
-            } else {
-                println(error)
-            }
-        })
-    }
-    
     class func create(text: String!, user: User) {
         var message = PFObject(className: "Message")
         
