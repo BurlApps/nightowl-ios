@@ -34,7 +34,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         self.view.backgroundColor = UIColor.blackColor()
         
         // Check To See If Answer Is Available
-        if self.question.answer != nil && self.question.state < 4 {
+        if self.question.answer != nil && contains([3, 7, 8], self.question.state) {
             self.pages += 1
         }
         
