@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class CameraController: UIViewController {
+class CameraController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     // MARK: IBOutlets
     @IBOutlet weak var captureButton: UIButton!
@@ -14,6 +14,9 @@ class CameraController: UIViewController {
     // MARK: Instance Variables
     var cameraView: LLSimpleCamera!
     private var capturedImage: UIImage!
+    
+    // MARK: IBOutlets Variables
+    @IBOutlet weak var toolbar: UIToolbar!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -40,6 +43,10 @@ class CameraController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        self.toolbar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.Any)
+        self.toolbar.setBackgroundImage(UIImage(), forToolbarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
+        self.toolbar.backgroundColor = UIColor.clearColor()
         
         // Setup Camera
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -87,6 +94,18 @@ class CameraController: UIViewController {
         self.slideToSettings()
     }
     
+    @IBAction func libraryImage(sender: UIBarButtonItem) {
+        // Configure Status Bar
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+        
+        // Create Image Picker
+        var imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePicker.mediaTypes = ["public.image"]
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
     @IBAction func captureImage(sender: UIButton) {
         self.cameraView.capture ({ (camera: LLSimpleCamera!, var image: UIImage!, metaInfo:[NSObject : AnyObject]!, error: NSError!) -> Void in
             if image != nil && error == nil {
@@ -111,6 +130,27 @@ class CameraController: UIViewController {
     @IBAction func captureExit(sender: UIButton) {
         self.captureButton.layer.borderColor = UIColor.whiteColor().CGColor
         self.captureButton.backgroundColor = UIColor(white: 1, alpha: 0.2)
+    }
+    
+    // MARK: UIImagePickerController Methods
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        // Close Image Picker
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            // Configure Status Bar
+            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+            
+            // Post Segue
+            self.capturedImage = image.fixOrientation()
+            self.performSegueWithIdentifier("postSegue", sender: self)
+        })
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        // Close Image Picker
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            // Configure Status Bar
+            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+        })
     }
     
     // MARK: Instance Methods

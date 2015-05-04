@@ -40,7 +40,7 @@ class ImageController: UIViewController, UIScrollViewDelegate {
         
         // Create Image View
         self.imageView = UIImageView(frame: self.view.frame)
-        self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        self.imageView.contentMode = .Center
         self.scrollView.addSubview(self.imageView)
         
         // Add Double Tap
@@ -56,10 +56,11 @@ class ImageController: UIViewController, UIScrollViewDelegate {
     // MARK: Instance Methods
     func loadImage() {        
         self.question.getImage(self.imageType) { (image) -> Void in
-            var width = min(image.size.width, self.view.frame.width)
-            var height = min(image.size.height, self.view.frame.height)
+            let width = min(image.size.width, self.view.frame.width)
+            let height = min(image.size.height, self.view.frame.height)
+            let imageSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
             
-            self.imageView.image = image
+            self.imageView.image = RBResizeImage(image, imageSize)
             self.imageView.frame = CGRectMake(10, 10, width-20, height-20)
             self.spinner.stopAnimating()
         }

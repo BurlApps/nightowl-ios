@@ -35,6 +35,9 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set Background
+        self.view.backgroundColor = UIColor.blackColor()
+        
         // Disable Post Buttons
         self.postButton.enabled = false
         self.postBigButton.enabled = false
@@ -71,6 +74,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         // Set Preview Image
         let imageSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
         self.previewImageView = UIImageView(frame: self.view.frame)
+        self.previewImageView.contentMode = .Center
         self.previewImageView.image = RBResizeImage(self.capturedImage, imageSize)
         self.view.insertSubview(self.previewImageView, belowSubview: self.subjectPicker)
         

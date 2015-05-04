@@ -191,11 +191,25 @@
                                     <action selector="captureImage:" destination="sjH-h7-Jt3" eventType="touchUpInside" id="Kg5-RB-yLQ"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5qI-6s-4K3">
+                                <rect key="frame" x="0.0" y="509" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem image="Library" id="abv-L1-ZIU">
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="libraryImage:" destination="sjH-h7-Jt3" id="p9D-Uq-Iv4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Bpd-Zj-j1c" firstAttribute="top" secondItem="5qI-6s-4K3" secondAttribute="bottom" constant="15" id="12p-ft-wjx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5qI-6s-4K3" secondAttribute="trailing" constant="-16" id="1VA-Mv-lb9"/>
                             <constraint firstAttribute="centerX" secondItem="dg2-6t-2yP" secondAttribute="centerX" id="561-DR-T0g"/>
                             <constraint firstItem="Bpd-Zj-j1c" firstAttribute="top" secondItem="dg2-6t-2yP" secondAttribute="bottom" constant="50" id="QhE-ac-iUH"/>
+                            <constraint firstItem="5qI-6s-4K3" firstAttribute="leading" secondItem="0AO-gT-TAb" secondAttribute="leadingMargin" constant="-16" id="ebb-3a-9mI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KdW-Lo-ZHM">
@@ -214,6 +228,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="captureButton" destination="dg2-6t-2yP" id="yZc-b7-f3v"/>
+                        <outlet property="toolbar" destination="5qI-6s-4K3" id="wji-dC-XGp"/>
                         <segue destination="set-Iy-g4I" kind="custom" identifier="postSegue" customClass="NoAnimationSegue" id="ASm-fb-ie5"/>
                     </connections>
                 </viewController>
@@ -728,6 +743,7 @@
     </scenes>
     <resources>
         <image name="Flag" width="360" height="360"/>
+        <image name="Library" width="100" height="100"/>
         <image name="Questions" width="60" height="60"/>
         <image name="QuestionsSmall" width="50" height="50"/>
         <image name="Settings" width="60" height="60"/>
