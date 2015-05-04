@@ -95,15 +95,15 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
     
     @IBAction func libraryImage(sender: UIBarButtonItem) {
-        // Configure Status Bar
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
-        
         // Create Image Picker
         var imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         imagePicker.mediaTypes = ["public.image"]
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        self.presentViewController(imagePicker, animated: true, completion: { () -> Void in
+            // Configure Status Bar
+            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+        })
     }
     
     @IBAction func captureImage(sender: UIButton) {
