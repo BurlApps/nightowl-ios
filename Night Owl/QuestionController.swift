@@ -20,15 +20,11 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     
     // MARK: IBOutlets
     @IBOutlet weak var flagButton: UIBarButtonItem!
-    @IBOutlet weak var imageLabel: UILabel!
     @IBOutlet weak var pagesContainer: UIView!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Update Title
-        self.title = self.question.nameFormatted(limit: 10)
         
         // Set Background Color
         self.view.backgroundColor = UIColor.blackColor()
@@ -37,12 +33,6 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         if self.question.answer != nil && contains([3, 7, 8], self.question.state) {
             self.pages += 1
         }
-        
-        // Customize Label
-        var labelBoarder = UIView(frame: CGRectMake(0, self.imageLabel.frame.height-1, self.view.frame.width, 1))
-        labelBoarder.backgroundColor = UIColor(white: 0, alpha: 0.2)
-        self.imageLabel.backgroundColor = UIColor(red:0.06, green:0.44, blue:0.4, alpha:1)
-        self.imageLabel.addSubview(labelBoarder)
         
         // Create Page View Controller
         self.pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
@@ -77,10 +67,10 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     func updateLabel(index: Int) {
         if self.pages == 1 || index == 1  {
             self.flagButton.enabled = false
-            self.imageLabel.text = "Question"
+            self.title = "Question"
         } else {
             self.flagButton.enabled = true
-            self.imageLabel.text = "Solution"
+            self.title = "Solution"
         }
     }
     
