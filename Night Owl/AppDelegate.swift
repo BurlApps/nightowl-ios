@@ -28,6 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let stripeKey = infoDictionary["StripeClientKey"] as! String
         Stripe.setDefaultPublishableKey(stripeKey)
         
+        // Initialize Mave
+        let maveKey = infoDictionary["MaveClientKey"] as! String
+        MaveSDK.setupSharedInstanceWithApplicationID(maveKey)
+        Global.configureMaveShare()
+        
         // Register for Push Notitications, if running iOS 8
         if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
             let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
@@ -54,9 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 Track.appOpened(launchOptions)
             }
         }
-        
-        // Set Global Window
-        Global.window = window
         
         // Cache Settings
         Settings.update(nil)

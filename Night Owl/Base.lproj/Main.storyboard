@@ -186,6 +186,13 @@
                                             <action selector="libraryImage:" destination="sjH-h7-Jt3" id="p9D-Uq-Iv4"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="b84-Ge-UR7"/>
+                                    <barButtonItem image="Gift" id="wXF-pS-cgp">
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="shareFriends:" destination="sjH-h7-Jt3" id="Stq-vS-35U"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -214,7 +221,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="captureButton" destination="dg2-6t-2yP" id="yZc-b7-f3v"/>
-                        <outlet property="toolbar" destination="5qI-6s-4K3" id="wji-dC-XGp"/>
+                        <outlet property="toolbar" destination="5qI-6s-4K3" id="meb-hX-iVe"/>
                         <segue destination="set-Iy-g4I" kind="custom" identifier="postSegue" customClass="NoAnimationSegue" id="ASm-fb-ie5"/>
                     </connections>
                 </viewController>
@@ -367,6 +374,30 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Get Free Questions" id="aaY-h8-qR3">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="cNT-9z-QqD" detailTextLabel="YPQ-eA-Agz" style="IBUITableViewCellStyleValue1" id="FjC-yy-YIB">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FjC-yy-YIB" id="NVd-mE-BR4">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Share With Your Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cNT-9z-QqD">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YPQ-eA-Agz">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Additional Information" id="cRC-pE-WQ0">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="bLd-f7-JnA" style="IBUITableViewCellStyleDefault" id="4yr-B6-gnn">
@@ -504,7 +535,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cxU-JD-G93" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2210" y="1772"/>
+            <point key="canvasLocation" x="2680" y="1816"/>
         </scene>
         <!--Debug Accounts-->
         <scene sceneID="n5N-2G-whS">
@@ -531,7 +562,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hl2-fu-o4l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1292" y="1772"/>
+            <point key="canvasLocation" x="1762" y="1816"/>
         </scene>
         <!--Credit Card-->
         <scene sceneID="Deh-dA-dcf">
@@ -625,7 +656,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFA-pi-ohb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1762" y="1772"/>
+            <point key="canvasLocation" x="2232" y="1816"/>
         </scene>
         <!--loading...-->
         <scene sceneID="wXn-z7-guF">
@@ -729,6 +760,7 @@
     </scenes>
     <resources>
         <image name="Flag" width="360" height="360"/>
+        <image name="Gift" width="65" height="65"/>
         <image name="Library" width="80" height="80"/>
         <image name="Questions" width="60" height="60"/>
         <image name="QuestionsSmall" width="50" height="50"/>

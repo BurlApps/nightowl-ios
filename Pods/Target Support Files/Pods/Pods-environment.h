@@ -6,6 +6,12 @@
 // project.
 
 
+// CCTemplate
+#define COCOAPODS_POD_AVAILABLE_CCTemplate
+#define COCOAPODS_VERSION_MAJOR_CCTemplate 0
+#define COCOAPODS_VERSION_MINOR_CCTemplate 2
+#define COCOAPODS_VERSION_PATCH_CCTemplate 0
+
 // CHTTextView
 #define COCOAPODS_POD_AVAILABLE_CHTTextView
 #define COCOAPODS_VERSION_MAJOR_CHTTextView 0
@@ -96,6 +102,12 @@
 #define COCOAPODS_VERSION_MINOR_LLSimpleCamera 2
 #define COCOAPODS_VERSION_PATCH_LLSimpleCamera 0
 
+// MaveSDK
+#define COCOAPODS_POD_AVAILABLE_MaveSDK
+#define COCOAPODS_VERSION_MAJOR_MaveSDK 0
+#define COCOAPODS_VERSION_MINOR_MaveSDK 6
+#define COCOAPODS_VERSION_PATCH_MaveSDK 2
+
 // PaymentKit
 #define COCOAPODS_POD_AVAILABLE_PaymentKit
 #define COCOAPODS_VERSION_MAJOR_PaymentKit 1
@@ -113,4 +125,10 @@
 #define COCOAPODS_VERSION_MAJOR_Stripe_Core 3
 #define COCOAPODS_VERSION_MINOR_Stripe_Core 1
 #define COCOAPODS_VERSION_PATCH_Stripe_Core 0
+
+// libPhoneNumber-iOS
+#define COCOAPODS_POD_AVAILABLE_libPhoneNumber_iOS
+#define COCOAPODS_VERSION_MAJOR_libPhoneNumber_iOS 0
+#define COCOAPODS_VERSION_MINOR_libPhoneNumber_iOS 8
+#define COCOAPODS_VERSION_PATCH_libPhoneNumber_iOS 4
 

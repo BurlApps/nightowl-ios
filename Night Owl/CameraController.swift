@@ -101,9 +101,12 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         imagePicker.mediaTypes = ["public.image"]
         self.presentViewController(imagePicker, animated: true, completion: { () -> Void in
-            // Configure Status Bar
             UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
         })
+    }
+
+    @IBAction func shareFriends(sender: UIBarButtonItem) {
+        Global.showInvite("cameraController")
     }
     
     @IBAction func captureImage(sender: UIButton) {
@@ -153,7 +156,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
         })
     }
     
-    // MARK: Instance Methods
+    // MARK: Instance Methods    
     func slideToQuestions() {
         Global.slideToController(1, animated: true, direction: .Reverse)
     }

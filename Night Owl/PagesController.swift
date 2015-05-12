@@ -20,19 +20,33 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     private var onboarding: UIView!
     private var startDate = NSDate()
     private var scrollView: UIScrollView!
+    private var inviteController: UINavigationController!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set Global
+        Global.pagesController = self
+        
         // Login User
         if let user = User.current() {
+            user.identifyMave()
             user.fetch({ (user) -> Void in
                 self.hideOnboarding()
             })
         } else {            
-            User.login({ (user) -> Void in
-                self.hideOnboarding()
+            User.register({ (user) -> Void in
+                user.identifyMave()
+                user.isReferral { (referred, credits) -> Void in
+                    if referred {
+                        UIAlertView(title: "You Are Awesome",
+                            message: "You and your friend both get \(credits) more free questions for the referral!",
+                            delegate: nil, cancelButtonTitle: "Okay").show()
+                    }
+                    
+                    self.hideOnboarding()
+                }
             })
         }
         
@@ -116,6 +130,40 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     }
     
     // MARK: Instance Methods
+    func showInvite(source: String) {
+        var goToController = self.currentPage
+        
+        MaveSDK.sharedInstance().presentInvitePageModallyWithBlock({ (viewController: UIViewController!) -> Void in
+            if let inviteController = viewController.childViewControllers[0] as? MAVEInvitePageViewController {
+                self.inviteController = viewController as! UINavigationController
+                
+                self.inviteController.navigationBar.tintColor = UIColor.blackColor()
+                inviteController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action,
+                    target: self, action: Selector("additionalShare"))
+            }
+            
+            self.presentViewController(viewController, animated: true, completion: { () -> Void in
+                UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+            })
+        }, dismissBlock: { (viewController: UIViewController!, numberOfInvitesSent: UInt) -> Void in
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+                self.setActiveChildController(goToController, animated: false, direction: .Forward)
+            })
+        }, inviteContext: source)
+    }
+    
+    func additionalShare() {
+        var controller = MAVECustomSharePageViewController()
+        var invite = self.inviteController.childViewControllers[0] as? MAVEInvitePageViewController
+        
+        self.inviteController.navigationBar.translucent = true
+        self.inviteController.navigationBar.backgroundColor = UIColor.clearColor()
+        self.inviteController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.inviteController.navigationBar.shadowImage = UIImage()
+        self.inviteController.pushViewController(controller, animated: true)
+    }
+    
     func hideOnboarding() {
         var delay = self.onboardTime - NSDate().timeIntervalSinceDate(self.startDate)
         

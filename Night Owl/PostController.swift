@@ -214,7 +214,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
                 self.navigationController?.pushViewController(paymentController!, animated: true)
             }
         } else {
-            self.user.cardAdded(self.settings.freeQuestionsCard)
+            self.user.creditQuestions(self.settings.freeQuestionsCard)
             self.createAssignment()
         }
         

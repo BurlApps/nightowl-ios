@@ -13,7 +13,8 @@
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import <CHTTextView/CHTTextView.h>
 #import <LLSimpleCamera/LLSimpleCamera.h>
-#import <JSQMessagesViewController/JSQMessages.h> 
+#import <JSQMessagesViewController/JSQMessages.h>
+#import <MaveSDK.h>
 
 #import "Stripe.h"
 #import "PTKCardExpiry.h"

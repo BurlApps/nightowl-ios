@@ -19,6 +19,7 @@ class Settings: NSObject {
     var freeQuestions: Int!
     var freeQuestionsCard: Int!
     var questionPrice: Float!
+    var referralQuestions: Int!
     var parse: PFConfig!
     
     // MARK: Convenience Methods
@@ -30,6 +31,7 @@ class Settings: NSObject {
         self.termsUrl = object["termsUrl"] as? String
         self.privacyUrl = object["privacyUrl"] as? String
         self.freeQuestions = object["freeQuestions"] as? Int
+        self.referralQuestions = object["referralQuestions"] as? Int
         self.freeQuestionsCard = object["freeQuestionsCard"] as? Int
         self.questionPrice = object["questionPrice"] as? Float
         self.parse = object

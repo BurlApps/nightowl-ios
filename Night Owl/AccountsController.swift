@@ -42,7 +42,7 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
             Parse.setApplicationId(self.account.appID, clientKey: self.account.appSecret)
             Subject.subjects(false, callback: nil)
             Settings.update { (settings) -> Void in
-                User.login { (user) -> Void in
+                User.register { (user) -> Void in
                     user.updateSubject(nil)
                 
                     DebugAccount.setAlternateDebug(self.account.name)

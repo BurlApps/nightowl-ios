@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-var tokenData: NSData!
-
 class Installation: NSObject {
     
     // MARK: Instance Variables
@@ -27,8 +25,9 @@ class Installation: NSObject {
     
     // MARK: Instance Methods
     func setDeviceToken(token: NSData) {
-        tokenData = token
         self.parse.setDeviceTokenFromData(token)
+        self.parse.setObject(Global.appVersion(), forKey: "appVersionNumber")
+        self.parse.setObject(Global.appBuildVersion(), forKey: "appVersionBuild")
         self.parse.saveInBackgroundWithBlock(nil)
     }
     

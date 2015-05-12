@@ -27,15 +27,17 @@ class User: NSObject {
     }
     
     // MARK: Class Methods
-    class func login(callback: ((user: User) -> Void)!) {
+    class func register(callback: ((user: User) -> Void)!) {
         Settings.sharedInstance { (settings) -> Void in
             PFAnonymousUtils.logInWithBlock { (user: PFUser?, error: NSError?) -> Void in
                 if var tempUser = user {
                     tempUser["charges"] = 0
                     tempUser["freeQuestions"] = settings.freeQuestions
+                    tempUser["source"] = "ios"
                     
                     var userTemp = User(user!)
-                    Installation.current().setUser(userTemp)
+                    userTemp.registerMave()
+                    userTemp.setInstallation()
                     callback?(user: userTemp)
                 }
             }
@@ -46,6 +48,7 @@ class User: NSObject {
         if let user = PFUser.currentUser() {
             return User(user)
         } else {
+            User.register(nil)
             return nil
         }
     }
@@ -57,6 +60,44 @@ class User: NSObject {
     // MARK: Instance Methods
     func logout() {
         User.logout()
+    }
+    
+    func setInstallation() {
+        Installation.current().setUser(self)
+    }
+    
+    func registerMave() {
+        MaveSDK.sharedInstance().trackSignup()
+    }
+    
+    func identifyMave() {
+        Settings.sharedInstance { (settings) -> Void in
+            var maveData = MAVEUserData(automaticallyFromDeviceName: ())
+            maveData.userID = self.parse.objectId
+            maveData.customData = ["credits": settings.referralQuestions]
+            MaveSDK.sharedInstance().identifyUser(maveData)
+        }
+    }
+    
+    func isReferral(callback: (referred: Bool, credits: Int!) -> Void) {
+        MaveSDK.sharedInstance().getReferringData { (data: MAVEReferringData!) -> Void in
+            var referred = false
+            var credits = 0
+            
+            if let user = data.referringUser {
+                referred = true
+                credits = user.customData["credits"] as! Int
+                
+                self.creditQuestions(credits)
+                
+                PFCloud.callFunctionInBackground("referredUser", withParameters: [
+                    user: user.userID,
+                    credits: credits
+                ], block: nil)
+            }
+            
+            callback(referred: referred, credits: credits)
+        }
     }
     
     func updateSubject(subject: Subject!) {
@@ -105,17 +146,9 @@ class User: NSObject {
         }
     }
     
-    func cardAdded(freeAmount: Int) {
+    func creditQuestions(freeAmount: Int) {
         self.fetch { (user) -> Void in
             user.freeQuestions = user.freeQuestions + freeAmount
-            user.parse["freeQuestions"] = user.freeQuestions
-            user.parse.saveInBackgroundWithBlock(nil)
-        }
-    }
-    
-    func refundQuestion() {
-        self.fetch { (user) -> Void in
-            user.freeQuestions = user.freeQuestions + 1
             user.parse["freeQuestions"] = user.freeQuestions
             user.parse.saveInBackgroundWithBlock(nil)
         }
@@ -129,7 +162,7 @@ class User: NSObject {
                 callback!(user: self)
             } else {
                 User.logout()
-                User.login(callback)
+                User.register(callback)
             }
         }
         

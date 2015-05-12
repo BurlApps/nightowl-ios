@@ -12,7 +12,7 @@ class SettingsController: UITableViewController {
     private var selectedRow: NSIndexPath!
     private var settings: Settings!
     private var user = User.current()
-    private var numberOfSections = 3
+    private var numberOfSections = 4
     
     // MARK: IBOutlets
     @IBOutlet weak var freeQuestionsLabel: UILabel!
@@ -74,9 +74,9 @@ class SettingsController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if Settings.getRelease() && self.numberOfSections == 3  {
+        if Settings.getRelease() && self.numberOfSections == 4  {
             self.numberOfSections -= 1
-            self.tableView.deleteSections(NSIndexSet(index: 2), withRowAnimation: UITableViewRowAnimation.None)
+            self.tableView.deleteSections(NSIndexSet(index: 3), withRowAnimation: UITableViewRowAnimation.None)
         } else {
             self.debugAccount.text = DebugAccount.accountActive()
         }
@@ -95,7 +95,7 @@ class SettingsController: UITableViewController {
         if self.selectedRow != nil {
             if self.selectedRow.section == 0 {
                 Global.cameraController(false)
-            } else if self.selectedRow.section == 1 {
+            } else if self.selectedRow.section == 2 {
                 let viewController = segue.destinationViewController as! WebController
                 
                 if self.selectedRow.row == 1 {
@@ -137,6 +137,10 @@ class SettingsController: UITableViewController {
         }
     }
     
+    func showSharing() {
+        Global.showInvite("settingsController")
+    }
+    
     // MARK: IBActions
     @IBAction func goToCamera(sender: UIBarButtonItem) {
         Global.slideToController(2, animated: true, direction: .Reverse)
@@ -151,8 +155,12 @@ class SettingsController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        if(indexPath.section == 1 && indexPath.row == 0) {
-            Global.slideToController(0, animated: true, direction: .Reverse)
+        if indexPath.row == 0 {
+            if indexPath.section == 1 {
+                showSharing()
+            } else if indexPath.section == 2 {
+                Global.slideToController(0, animated: true, direction: .Reverse)
+            }
         }
     }
     

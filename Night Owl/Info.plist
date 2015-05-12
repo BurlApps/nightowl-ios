@@ -24,6 +24,19 @@
 	<string>1.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>nightowl</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -34,6 +47,8 @@
 	<string>${PARSE_CLIENT_KEY}</string>
 	<key>StripeClientKey</key>
 	<string>${STRIPE_CLIENT_KEY}</string>
+	<key>MaveClientKey</key>
+	<string>${MAVE_CLIENT_KEY}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
