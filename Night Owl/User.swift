@@ -193,11 +193,12 @@ class User: NSObject {
         })
     }
     
-    func messages(callback: ((messages: [Message]) -> Void)!) {
+    func messages(skip: Int, callback: ((messages: [Message]) -> Void)!) {
         var messages: [Message] = []
         var query = PFQuery(className: "Message")
         
         query.whereKey("user", equalTo: self.parse)
+        query.skip = skip
         query.orderByAscending("createdAt")
         query.cachePolicy = .NetworkElseCache
         

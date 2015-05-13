@@ -70,7 +70,7 @@ class Global {
     class func reloadSupportController() {
         for (index, parent) in self.pagesController.controllers {
             if let controller = parent.topViewController as? SupportController {
-                controller.reloadMessages()
+                controller.loadMessages()
             }
         }
     }

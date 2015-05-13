@@ -112,11 +112,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case "user.reload": User.current().fetch(nil)
                 case "subjects.reload": Subject.subjects(false, callback: nil)
                 case "support.message":
-                    if application.applicationState == UIApplicationState.Inactive {
-                        Global.slideToController(0, animated: true, direction: .Reverse)
+                    if application.applicationState == UIApplicationState.Active {
+                        Global.supportMessage(userInfo["message"] as! String, buzz: active)
                     }
-                
-                    Global.supportMessage(userInfo["message"] as! String, buzz: active)
                 default: println(action)
             }
         }
@@ -136,6 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        Global.reloadSupportController()
     }
 
     func applicationDidBecomeActive(application: UIApplication) {

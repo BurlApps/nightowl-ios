@@ -58,7 +58,7 @@ class SupportController: JSQMessagesViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.spinner)
         
         // Load Messages
-        self.reloadMessages()
+        self.loadMessages()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -87,13 +87,12 @@ class SupportController: JSQMessagesViewController {
     
     
     // MARK: Instance Methods
-    func reloadMessages() {
+    func loadMessages() {
         self.user = User.current()
         self.sender = self.user.parse.objectId
         self.spinner.startAnimating()
         
-        self.user.messages({ (messages) -> Void in
-            self.messages = []
+        self.user.messages(self.messages.count, callback: { (messages) -> Void in
             
             for message in messages {
                 var sender = "support"
