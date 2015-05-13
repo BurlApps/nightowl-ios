@@ -15,6 +15,7 @@
 #import <LLSimpleCamera/LLSimpleCamera.h>
 #import <JSQMessagesViewController/JSQMessages.h>
 #import <MaveSDK.h>
+#import "CWStatusBarNotification.h"
 
 #import "Stripe.h"
 #import "PTKCardExpiry.h"

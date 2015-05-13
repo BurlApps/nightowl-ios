@@ -95,8 +95,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        var active = true
+        
         if application.applicationState == UIApplicationState.Inactive {
             Track.appOpenedFromNotification(userInfo)
+            active = false
         }
         
         if let action = userInfo["action"] as? String {
@@ -113,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         Global.slideToController(0, animated: true, direction: .Reverse)
                     }
                 
-                    Global.supportMessage(userInfo["message"] as! String)
+                    Global.supportMessage(userInfo["message"] as! String, buzz: active)
                 default: println(action)
             }
         }

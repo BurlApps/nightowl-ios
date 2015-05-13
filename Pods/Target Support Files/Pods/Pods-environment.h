@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_CHTTextView 1
 #define COCOAPODS_VERSION_PATCH_CHTTextView 0
 
+// CWStatusBarNotification
+#define COCOAPODS_POD_AVAILABLE_CWStatusBarNotification
+#define COCOAPODS_VERSION_MAJOR_CWStatusBarNotification 2
+#define COCOAPODS_VERSION_MINOR_CWStatusBarNotification 2
+#define COCOAPODS_VERSION_PATCH_CWStatusBarNotification 6
+
 // CardIO
 #define COCOAPODS_POD_AVAILABLE_CardIO
 #define COCOAPODS_VERSION_MAJOR_CardIO 5

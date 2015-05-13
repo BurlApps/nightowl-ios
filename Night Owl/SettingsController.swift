@@ -138,7 +138,7 @@ class SettingsController: UITableViewController {
     }
     
     func showSharing() {
-        Global.showInvite("settingsController")
+        Global.showInvite("settingsController", dismissed: nil)
     }
     
     // MARK: IBActions

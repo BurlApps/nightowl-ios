@@ -106,7 +106,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
 
     @IBAction func shareFriends(sender: UIBarButtonItem) {
-        Global.showInvite("cameraController")
+        Global.showInvite("cameraController", dismissed: nil)
     }
     
     @IBAction func captureImage(sender: UIButton) {

@@ -2,6 +2,7 @@ PODS:
   - CardIO (5.0.3)
   - CCTemplate (0.2.0)
   - CHTTextView (0.1)
+  - CWStatusBarNotification (2.2.6)
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
     - FormatterKit/ArrayFormatter (= 1.8.0)
@@ -37,6 +38,7 @@ PODS:
 DEPENDENCIES:
   - CardIO (~> 5.0)
   - CHTTextView (~> 0.1)
+  - CWStatusBarNotification (~> 2.2.6)
   - FormatterKit (~> 1.8)
   - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController`, branch `version_5.3.2_patch`)
   - LLSimpleCamera (~> 2.2)
@@ -58,6 +60,7 @@ SPEC CHECKSUMS:
   CardIO: 3b0cc447bd0dd3d9552159365ba5c7b7f1db586a
   CCTemplate: f00efa85dad31e12b8a766b8e8198eb772c71c4f
   CHTTextView: ceca52ee4c0a6e05c05a919c7135b82acdf8ed3f
+  CWStatusBarNotification: b7d08c63bbfcceee08b63cab041560a6f5cdefb6
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   JSQMessagesViewController: 91a954081b78120c4b8899cb2df2813e0ed98b4a
   JSQSystemSoundPlayer: 443466bd5f4537d0b7f15a0184244169ae65f8e5

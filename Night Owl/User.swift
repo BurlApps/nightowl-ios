@@ -35,7 +35,7 @@ class User: NSObject {
                     tempUser["freeQuestions"] = settings.freeQuestions
                     tempUser["source"] = "ios"
                     
-                    var userTemp = User(user!)
+                    var userTemp = User(tempUser)
                     userTemp.registerMave()
                     userTemp.setInstallation()
                     callback?(user: userTemp)
@@ -48,7 +48,6 @@ class User: NSObject {
         if let user = PFUser.currentUser() {
             return User(user)
         } else {
-            User.register(nil)
             return nil
         }
     }
@@ -84,15 +83,17 @@ class User: NSObject {
             var referred = false
             var credits = 0
             
-            if let user = data.referringUser {
+            println(data.referringUser)
+            
+            if data != nil && data.referringUser != nil {
                 referred = true
-                credits = user.customData["credits"] as! Int
+                credits = data.referringUser.customData["credits"] as! Int
                 
                 self.creditQuestions(credits)
                 
                 PFCloud.callFunctionInBackground("referredUser", withParameters: [
-                    user: user.userID,
-                    credits: credits
+                    "user": data.referringUser.userID,
+                    "credits": credits
                 ], block: nil)
             }
             

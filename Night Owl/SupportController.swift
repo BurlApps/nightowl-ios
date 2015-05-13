@@ -111,10 +111,13 @@ class SupportController: JSQMessagesViewController {
         })
     }
     
-    func recievedMessage(text: String) {
+    func recievedMessage(text: String, buzz: Bool) {
         var message = JSQMessage(text: text, sender: "support", date: NSDate())
         
-        JSQSystemSoundPlayer.jsq_playMessageReceivedAlert()
+        if buzz {
+            JSQSystemSoundPlayer.jsq_playMessageReceivedAlert()
+        }
+        
         self.messages.append(message)
         self.finishReceivingMessage()
     }

@@ -75,16 +75,28 @@ class Global {
         }
     }
     
-    class func supportMessage(text: String) {
+    class func supportMessage(text: String, buzz: Bool) {
+        if self.pagesController.currentPage != 0 {
+            var tempText = NSString(string: text)
+            let length = min(20, tempText.length)
+            var notification = tempText.substringToIndex(length)
+            
+            if tempText.length > 20 {
+                notification = notification + "..."
+            }
+            
+            self.pagesController.showNotification("Support: \(notification)")
+        }
+        
         for (index, parent) in self.pagesController.controllers {
             if let controller = parent.topViewController as? SupportController {
-                controller.recievedMessage(text)
+                controller.recievedMessage(text, buzz: buzz)
             }
         }
     }
     
-    class func showInvite(source: String) {
-        self.pagesController.showInvite(source)
+    class func showInvite(source: String, dismissed: ((invites: Int) -> ())!) {
+        self.pagesController.showInvite(source, dismissed: dismissed)
     }
     
     class func configureMaveShare() {

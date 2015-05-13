@@ -12,15 +12,16 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
 
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
+    var currentPage = 2
     private let onboardTime: NSTimeInterval = 4
     private let pages = 4
     private let startPage = 2
-    private var currentPage = 2
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var onboarding: UIView!
     private var startDate = NSDate()
     private var scrollView: UIScrollView!
     private var inviteController: UINavigationController!
+    private var notification: CWStatusBarNotification!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -35,19 +36,35 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
             user.fetch({ (user) -> Void in
                 self.hideOnboarding()
             })
-        } else {            
+        } else {         
             User.register({ (user) -> Void in
+                self.hideOnboarding()
+                
                 user.identifyMave()
                 user.isReferral { (referred, credits) -> Void in
                     if referred {
-                        UIAlertView(title: "You Are Awesome",
-                            message: "You and your friend both get \(credits) more free questions for the referral!",
-                            delegate: nil, cancelButtonTitle: "Okay").show()
+                        dispatch_async(dispatch_get_main_queue(), {
+                            UIAlertView(title: "You Are Awesome",
+                                message: "You and your friend both get \(credits) free questions for the referral!",
+                                delegate: nil, cancelButtonTitle: "Thanks!").show()
+                        })
                     }
-                    
-                    self.hideOnboarding()
                 }
             })
+        }
+        
+        // Create Notification
+        self.notification = CWStatusBarNotification()
+        self.notification.notificationAnimationInStyle = .Top
+        self.notification.notificationAnimationOutStyle = .Top
+        self.notification.notificationAnimationType = .Overlay
+        self.notification.notificationStyle = .NavigationBarNotification
+        self.notification.notificationLabelBackgroundColor = UIColor(red:0.64, green:0.2, blue:0.62, alpha:1)
+        self.notification.notificationLabelTextColor = UIColor.whiteColor()
+        self.notification.notificationLabelFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        self.notification.notificationTappedBlock = {
+            self.notification.dismissNotification()
+            self.setActiveChildController(0, animated: true, direction: .Reverse)
         }
         
         // Onboard User
@@ -130,7 +147,11 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     }
     
     // MARK: Instance Methods
-    func showInvite(source: String) {
+    func showNotification(message: String) {
+        self.notification.displayNotificationWithMessage(message, forDuration: 3)
+    }
+    
+    func showInvite(source: String, dismissed: ((invites: Int) -> ())!) {
         var goToController = self.currentPage
         
         MaveSDK.sharedInstance().presentInvitePageModallyWithBlock({ (viewController: UIViewController!) -> Void in
@@ -149,6 +170,7 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
                 self.setActiveChildController(goToController, animated: false, direction: .Forward)
+                dismissed?(invites: Int(numberOfInvitesSent))
             })
         }, inviteContext: source)
     }
@@ -244,4 +266,3 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         }
     }
 }
-
