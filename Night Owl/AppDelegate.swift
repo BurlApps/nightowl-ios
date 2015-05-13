@@ -95,11 +95,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        var active = true
+        var wasActive = true
         
         if application.applicationState == UIApplicationState.Inactive {
             Track.appOpenedFromNotification(userInfo)
-            active = false
+            wasActive = false
         }
         
         if let action = userInfo["action"] as? String {
@@ -112,13 +112,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case "user.reload": User.current().fetch(nil)
                 case "subjects.reload": Subject.subjects(false, callback: nil)
                 case "support.message":
-                    if application.applicationState == UIApplicationState.Active {
-                        Global.supportMessage(userInfo["message"] as! String, buzz: active)
-                    }
+                    Global.supportMessage(userInfo["message"] as! String, wasActive: wasActive)
                 default: println(action)
             }
         }
         
+        Installation.current().clearBadge()
         completionHandler(UIBackgroundFetchResult.NewData)
     }
 
@@ -135,11 +134,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         Global.reloadSupportController()
+        Installation.current().clearBadge()
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        Installation.current().clearBadge()
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -148,7 +148,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             User.logout()
         }
     }
-
-
 }
 

@@ -54,7 +54,9 @@ class Global {
     class func reloadQuestionsController() {
         for (index, parent) in self.pagesController.controllers {
             if let controller = parent.topViewController as? QuestionsController {
-                controller.reloadQuestions()
+                if controller.loaded {
+                    controller.reloadQuestions()
+                }
             }
         }
     }
@@ -62,7 +64,9 @@ class Global {
     class func reloadSettingsController() {
         for (index, parent) in self.pagesController.controllers {
             if let controller = parent.topViewController as? SettingsController {
-                controller.reloadUser()
+                if controller.loaded {
+                    controller.reloadUser()
+                }
             }
         }
     }
@@ -70,12 +74,30 @@ class Global {
     class func reloadSupportController() {
         for (index, parent) in self.pagesController.controllers {
             if let controller = parent.topViewController as? SupportController {
-                controller.loadMessages()
+                if controller.loaded {
+                    controller.loadMessages()
+                }
             }
         }
     }
     
-    class func supportMessage(text: String, buzz: Bool) {
+    class func supportMessage(text: String, wasActive: Bool) {
+        if wasActive {
+            Global.showNotification(text)
+            
+            for (index, parent) in self.pagesController.controllers {
+                if let controller = parent.topViewController as? SupportController {
+                    if controller.loaded {
+                        controller.recievedMessage(text, buzz: wasActive)
+                    }
+                }
+            }
+        } else {
+            Global.slideToController(0, animated: true, direction: .Reverse)
+        }
+    }
+    
+    class func showNotification(text: String) {
         if self.pagesController.currentPage != 0 {
             var tempText = NSString(string: text)
             let length = min(20, tempText.length)
@@ -86,12 +108,6 @@ class Global {
             }
             
             self.pagesController.showNotification("Support: \(notification)")
-        }
-        
-        for (index, parent) in self.pagesController.controllers {
-            if let controller = parent.topViewController as? SupportController {
-                controller.recievedMessage(text, buzz: buzz)
-            }
         }
     }
     

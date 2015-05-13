@@ -9,6 +9,7 @@
 class QuestionsController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Instance Variables
+    var loaded = false
     private var user = User.current()
     private var questions: [Assignment] = []
     private var questionsFiltered: [Assignment] = []
@@ -71,6 +72,9 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         
         // Reload Questions
         self.reloadQuestions()
+        
+        // Set Load
+        self.loaded = true
     }
     
     override func viewDidAppear(animated: Bool) {

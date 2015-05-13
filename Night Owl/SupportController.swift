@@ -9,6 +9,7 @@
 class SupportController: JSQMessagesViewController {
 
     // MARK: Instance Variables
+    var loaded = false
     var messages: [JSQMessageData] = []
     private var user = User.current()
     private var spinner: UIActivityIndicatorView!
@@ -59,6 +60,9 @@ class SupportController: JSQMessagesViewController {
         
         // Load Messages
         self.loadMessages()
+        
+        // Set Load
+        self.loaded = true
     }
     
     override func viewDidAppear(animated: Bool) {

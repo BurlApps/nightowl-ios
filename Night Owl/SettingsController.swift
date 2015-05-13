@@ -9,6 +9,7 @@
 class SettingsController: UITableViewController {
     
     // MARK: Instance Variables
+    var loaded = false
     private var selectedRow: NSIndexPath!
     private var settings: Settings!
     private var user = User.current()
@@ -69,6 +70,9 @@ class SettingsController: UITableViewController {
         
         // Set Fetch User Info
         self.reloadUser()
+        
+        // Set Load
+        self.loaded = true
     }
     
     override func viewWillAppear(animated: Bool) {

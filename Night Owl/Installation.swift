@@ -35,4 +35,11 @@ class Installation: NSObject {
         self.parse["user"] = user.parse
         self.parse.saveInBackgroundWithBlock(nil)
     }
+    
+    func clearBadge() {
+        if self.parse.badge != 0 {
+            self.parse.badge = 0
+            self.parse.saveInBackgroundWithBlock(nil)
+        }
+    }
 }
