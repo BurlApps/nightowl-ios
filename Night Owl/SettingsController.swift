@@ -25,6 +25,9 @@ class SettingsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set Background
+        self.view.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1)
+        
         // Set Back Button Color
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         

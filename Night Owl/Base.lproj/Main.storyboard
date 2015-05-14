@@ -602,7 +602,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCb-qa-5Fj">
-                                <rect key="frame" x="95" y="219" width="130" height="35"/>
+                                <rect key="frame" x="95" y="267" width="130" height="35"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <state key="normal" title="scan your card">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -623,16 +623,53 @@
                                     <action selector="cardCVCChanged:" destination="RHD-wK-Peo" eventType="editingChanged" id="kWY-AH-bfo"/>
                                 </connections>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1z-fD-5k3">
+                                <rect key="frame" x="6" y="202" width="308" height="55"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="Zbr-PB-D8q"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="We will never see your credit card information, only our payment processor ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Stripe">
+                                        <attributes>
+                                            <color key="NSColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" will.">
+                                        <attributes>
+                                            <color key="NSColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="sCb-qa-5Fj" firstAttribute="top" secondItem="B1z-fD-5k3" secondAttribute="bottom" constant="10" id="28J-Ga-LqE"/>
                             <constraint firstItem="PdE-9d-SXY" firstAttribute="top" secondItem="2Ki-vE-jt2" secondAttribute="bottom" constant="-1" id="3X1-8w-gux"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PdE-9d-SXY" secondAttribute="trailing" constant="-17" id="780-w7-7lO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="62K-D7-Lq3" secondAttribute="trailing" constant="-17" id="84M-Sp-05z"/>
                             <constraint firstItem="62K-D7-Lq3" firstAttribute="leading" secondItem="IU8-20-sPi" secondAttribute="trailing" constant="-1" id="91e-9z-cqE"/>
-                            <constraint firstItem="sCb-qa-5Fj" firstAttribute="top" secondItem="62K-D7-Lq3" secondAttribute="bottom" constant="17" id="9cv-4o-M9l"/>
+                            <constraint firstItem="B1z-fD-5k3" firstAttribute="leading" secondItem="bl3-aR-LZT" secondAttribute="leadingMargin" constant="-10" id="Bua-v4-MUN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="B1z-fD-5k3" secondAttribute="trailing" constant="-10" id="Cpa-i2-uor"/>
                             <constraint firstItem="PdE-9d-SXY" firstAttribute="leading" secondItem="bl3-aR-LZT" secondAttribute="leadingMargin" constant="-17" id="ERc-DB-Tdj"/>
                             <constraint firstItem="IU8-20-sPi" firstAttribute="leading" secondItem="bl3-aR-LZT" secondAttribute="leadingMargin" constant="-17" id="MTv-1d-JCF"/>
+                            <constraint firstItem="B1z-fD-5k3" firstAttribute="top" secondItem="62K-D7-Lq3" secondAttribute="bottom" id="utb-Lm-il1"/>
                             <constraint firstItem="IU8-20-sPi" firstAttribute="top" secondItem="PdE-9d-SXY" secondAttribute="bottom" constant="-1" id="x7n-X4-1cp"/>
                             <constraint firstAttribute="centerX" secondItem="sCb-qa-5Fj" secondAttribute="centerX" id="xHj-uI-Bdo"/>
                             <constraint firstItem="62K-D7-Lq3" firstAttribute="top" secondItem="PdE-9d-SXY" secondAttribute="bottom" constant="-1" id="yVb-Wi-6y1"/>

@@ -24,6 +24,9 @@ class PaymentController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set Background
+        self.view.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1)
+        
         // Disable Save Button
         self.saveButton.enabled = false
         
@@ -44,9 +47,9 @@ class PaymentController: UIViewController {
         self.expirationInput.layer.borderWidth = 1
         self.cvcInput.layer.borderWidth = 1
         
-        self.cardInput.layer.borderColor = UIColor.lightGrayColor().CGColor
-        self.expirationInput.layer.borderColor = UIColor.lightGrayColor().CGColor
-        self.cvcInput.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.cardInput.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1).CGColor
+        self.expirationInput.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1).CGColor
+        self.cvcInput.layer.borderColor = UIColor(red:0.89, green:0.89, blue:0.89, alpha:1).CGColor
         
         // Card Input First Responder
         self.cardInput.becomeFirstResponder()
@@ -117,10 +120,15 @@ class PaymentController: UIViewController {
         
         if number.isPartiallyValid() {
             sender.text = number.formattedString()
+            sender.textColor = UIColor.blackColor()
             
             if number.isValid() {
                 self.expirationInput.becomeFirstResponder()
             }
+        } else if !number.isValid() {
+            var temp = NSString(string: sender.text)
+            sender.text = temp.substringToIndex(temp.length - 1) as String
+            sender.textColor = UIColor(red:0.89, green:0.1, blue:0.1, alpha:1)
         }
         
         self.updateButton()
@@ -131,10 +139,15 @@ class PaymentController: UIViewController {
         
         if expiration.isPartiallyValid() {
             sender.text = expiration.formattedString()
+            sender.textColor = UIColor.blackColor()
             
             if expiration.isValid() {
                 self.cvcInput.becomeFirstResponder()
             }
+        } else if !expiration.isValid() {
+            var temp = NSString(string: sender.text)
+            sender.text = temp.substringToIndex(temp.length - 1) as String
+            sender.textColor = UIColor(red:0.89, green:0.1, blue:0.1, alpha:1)
         }
         
         self.updateButton()
@@ -145,6 +158,11 @@ class PaymentController: UIViewController {
         
         if cvc.isPartiallyValid() {
             sender.text = cvc.formattedString()
+            sender.textColor = UIColor.blackColor()
+        } else if !cvc.isValid() {
+            var temp = NSString(string: sender.text)
+            sender.text = temp.substringToIndex(temp.length - 1) as String
+            sender.textColor = UIColor(red:0.89, green:0.1, blue:0.1, alpha:1)
         }
         
         self.updateButton()
