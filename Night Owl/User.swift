@@ -83,11 +83,9 @@ class User: NSObject {
             var referred = false
             var credits = 0
             
-            println(data.referringUser)
-            
             if data != nil && data.referringUser != nil {
                 referred = true
-                credits = data.referringUser.customData["credits"] as! Int
+                credits = data.customData["credits"] as! Int
                 
                 self.creditQuestions(credits)
                 

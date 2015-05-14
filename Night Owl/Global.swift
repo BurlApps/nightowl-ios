@@ -27,16 +27,15 @@ class Global {
     }
     
     class func slideToController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
-        pagesController?.unlockPageView()
-        pagesController?.setActiveChildController(index, animated: animated, direction: direction)
+        pagesController.setActiveChildController(index, animated: animated, direction: direction)
     }
     
     class func lockPageView() {
-        pagesController?.lockPageView()
+        pagesController.lockPageView()
     }
     
     class func unlockPageView() {
-        pagesController?.unlockPageView()
+        pagesController.unlockPageView()
     }
     
     class func cameraController(start: Bool) {
@@ -93,7 +92,7 @@ class Global {
                 }
             }
         } else {
-            Global.slideToController(0, animated: true, direction: .Reverse)
+            Global.slideToController(0, animated: false, direction: .Reverse)
         }
     }
     
@@ -131,11 +130,11 @@ class Global {
         mave.displayOptions.navigationBarCancelButton = button
         
         // Invite options
-        mave.displayOptions.inviteExplanationFont = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        mave.displayOptions.inviteExplanationFont = UIFont(name: "HelveticaNeue-Bold", size: 18)
         mave.displayOptions.inviteExplanationTextColor = UIColor.whiteColor()
         mave.displayOptions.inviteExplanationCellBackgroundColor = UIColor(red:0.21, green:0.73, blue:0.76, alpha:1)
-        mave.displayOptions.inviteExplanationShareButtonsColor = UIColor(red:0.25, green:0.29, blue:0.33, alpha:1)
-        mave.displayOptions.inviteExplanationShareButtonsFont = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        mave.displayOptions.inviteExplanationShareButtonsColor =  UIColor(red:0.98, green:0.99, blue:0.99, alpha:1)
+        mave.displayOptions.inviteExplanationShareButtonsFont = UIFont(name: "HelveticaNeue-Bold", size: 14)
         mave.displayOptions.inviteExplanationShareButtonsBackgroundColor = UIColor(red:0.21, green:0.73, blue:0.76, alpha:1)
         
         // Message and Send section options for invite page v1
@@ -150,6 +149,9 @@ class Global {
         mave.displayOptions.contactInlineSendButtonFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
         mave.displayOptions.contactInlineSendButtonTextColor = UIColor(red:0.22, green:0.6, blue:0.59, alpha:1)
         mave.displayOptions.contactInlineSendButtonDisabledTextColor = UIColor.grayColor()
+        
+        // Search
+        mave.displayOptions.searchBarBackgroundColor = UIColor(red:0.98, green:0.99, blue:0.99, alpha:1)
 
         // Contacts table options
         mave.displayOptions.contactCheckmarkColor = UIColor(red:0.22, green:0.6, blue:0.59, alpha:1)

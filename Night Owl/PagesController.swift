@@ -155,14 +155,6 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         var goToController = self.currentPage
         
         MaveSDK.sharedInstance().presentInvitePageModallyWithBlock({ (viewController: UIViewController!) -> Void in
-            if let inviteController = viewController.childViewControllers[0] as? MAVEInvitePageViewController {
-                self.inviteController = viewController as! UINavigationController
-                
-                self.inviteController.navigationBar.tintColor = UIColor.blackColor()
-                inviteController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action,
-                    target: self, action: Selector("additionalShare"))
-            }
-            
             self.presentViewController(viewController, animated: true, completion: { () -> Void in
                 UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
             })
@@ -173,17 +165,6 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
                 dismissed?(invites: Int(numberOfInvitesSent))
             })
         }, inviteContext: source)
-    }
-    
-    func additionalShare() {
-        var controller = MAVECustomSharePageViewController()
-        var invite = self.inviteController.childViewControllers[0] as? MAVEInvitePageViewController
-        
-        self.inviteController.navigationBar.translucent = true
-        self.inviteController.navigationBar.backgroundColor = UIColor.clearColor()
-        self.inviteController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.inviteController.navigationBar.shadowImage = UIImage()
-        self.inviteController.pushViewController(controller, animated: true)
     }
     
     func hideOnboarding() {
@@ -205,10 +186,17 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     }
     
     func setActiveChildController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
+        self.unlockPageView()
+        self.viewControllerAtIndex(self.currentPage).popToRootViewControllerAnimated(true)
+        
         self.setViewControllers([self.viewControllerAtIndex(index)],
             direction: direction, animated: animated, completion: { (success: Bool) -> Void in
                 self.currentPage = index
             })
+        
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.setActiveChildController(index, animated: false, direction: .Forward)
+        })
     }
     
     func viewControllerAtIndex(index: Int) -> PageController! {

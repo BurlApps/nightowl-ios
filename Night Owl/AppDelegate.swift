@@ -104,7 +104,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let action = userInfo["action"] as? String {
             switch(action) {
-                case "questionsController.reload": Global.reloadQuestionsController()
+                case "questionsController.reload":
+                    if(!wasActive) {
+                        Global.slideToController(1, animated: false, direction: .Reverse)
+                    }
+                
+                    Global.reloadQuestionsController()
                 case "settingsController.reload":
                     Settings.update(nil)
                     Global.reloadSettingsController()
