@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class SettingsController: UITableViewController {
+class SettingsController: UITableViewController, UIAlertViewDelegate {
     
     // MARK: Instance Variables
     var loaded = false
@@ -102,7 +102,7 @@ class SettingsController: UITableViewController {
         if self.selectedRow != nil {
             if self.selectedRow.section == 0 {
                 Global.cameraController(false)
-            } else if self.selectedRow.section == 2 {
+            } else if self.selectedRow.section == 1 {
                 let viewController = segue.destinationViewController as! WebController
                 
                 if self.selectedRow.row == 1 {
@@ -162,17 +162,30 @@ class SettingsController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 && indexPath.row == 3 {
+            showSharing()
+        } else if indexPath.section == 1 && indexPath.row == 3 {
+            var url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.settings.itunesId)")
+            UIApplication.sharedApplication().openURL(url!)
+        } else if indexPath.row == 0 {
             if indexPath.section == 1 {
-                showSharing()
-            } else if indexPath.section == 2 {
                 Global.slideToController(0, animated: true, direction: .Reverse)
+            } else if indexPath.section == 2 {
+                UIAlertView(title: "Log Out", message: "Are you sure you want to log out?",
+                    delegate: self, cancelButtonTitle: "Nope", otherButtonTitles: "Yes").show()
             }
         }
     }
     
-    // MARK: UITableViewController Methods
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.numberOfSections
+    }
+    
+    // MARK: UIAlertViewDelegate Methods
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+            self.user.logout()
+            Global.showHomeController()
+        }
     }
 }

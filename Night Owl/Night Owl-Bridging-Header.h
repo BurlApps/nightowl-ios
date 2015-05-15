@@ -9,7 +9,8 @@
 @import MobileCoreServices;
 
 #import <Parse/Parse.h>
-#import <PZSpeed/PZSpeed.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import <CHTTextView/CHTTextView.h>
 #import <LLSimpleCamera/LLSimpleCamera.h>
@@ -24,3 +25,4 @@
 #import "TTTTimeIntervalFormatter.h"
 #import "CardIO.h"
 #import "UIImage+fixOrientation.h"
+#import "FLAnimatedImage.h"

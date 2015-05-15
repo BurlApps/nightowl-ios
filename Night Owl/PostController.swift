@@ -90,7 +90,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.textEditor.frame.origin.x += 20
         self.textEditor.frame.origin.y += 90
         self.textEditor.scrollEnabled = false
-        self.textEditor.placeholder = "Give us a description (optional)"
+        self.textEditor.placeholder = "Tell us which question\n(optional)"
         self.textEditor.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
         self.textEditor.textColor = UIColor.whiteColor()
         self.textEditor.textAlignment = NSTextAlignment.Center
@@ -174,7 +174,6 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         
         self.user.updateSubject(self.subjectChosen)
         self.user.chargeQuestion()
-        self.navigationController?.popViewControllerAnimated(false)
         self.cameraController.slideToQuestions()
 
     }

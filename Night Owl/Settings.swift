@@ -12,6 +12,7 @@ var isInRelease = false
 class Settings: NSObject {
     
     // MARK: Instance Variables
+    var itunesId: String!
     var host: String!
     var supportUrl: String!
     var termsUrl: String!
@@ -26,6 +27,7 @@ class Settings: NSObject {
     convenience init(_ object: PFConfig) {
         self.init()
         
+        self.itunesId = object["itunesId"] as? String
         self.host = object["host"] as? String
         self.supportUrl = object["supportUrl"] as? String
         self.termsUrl = object["termsUrl"] as? String

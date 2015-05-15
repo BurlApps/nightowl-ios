@@ -27,91 +27,118 @@ class Global {
     }
     
     class func slideToController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
-        pagesController.setActiveChildController(index, animated: animated, direction: direction)
+        if self.pagesController != nil {
+            self.pagesController.setActiveChildController(index, animated: animated, direction: direction)
+        }
     }
     
     class func lockPageView() {
-        pagesController.lockPageView()
+        if self.pagesController != nil {
+            self.pagesController.lockPageView()
+        }
     }
     
     class func unlockPageView() {
-        pagesController.unlockPageView()
+        if self.pagesController != nil {
+            self.pagesController.unlockPageView()
+        }
+    }
+    
+    class func showHomeController() {
+        if self.pagesController != nil {
+            Global.cameraController(false)
+            self.pagesController.navigationController?.popToRootViewControllerAnimated(false)
+        }
     }
     
     class func cameraController(start: Bool) {
-        for (index, parent) in self.pagesController.controllers {
-            if let controller = parent.topViewController as? CameraController {
-                if start {
-                    controller.cameraView.start()
-                } else {
-                    controller.cameraView.stop()
+        if self.pagesController != nil {
+            for (index, parent) in self.pagesController.controllers {
+                if let controller = parent.topViewController as? CameraController {
+                    if start {
+                        controller.cameraView.start()
+                    } else {
+                        controller.cameraView.stop()
+                    }
                 }
             }
         }
     }
 
     class func reloadQuestionsController() {
-        for (index, parent) in self.pagesController.controllers {
-            if let controller = parent.topViewController as? QuestionsController {
-                if controller.loaded {
-                    controller.reloadQuestions()
+        if self.pagesController != nil {
+            for (index, parent) in self.pagesController.controllers {
+                if let controller = parent.topViewController as? QuestionsController {
+                    if controller.loaded {
+                        controller.reloadQuestions()
+                    }
                 }
             }
         }
     }
     
     class func reloadSettingsController() {
-        for (index, parent) in self.pagesController.controllers {
-            if let controller = parent.topViewController as? SettingsController {
-                if controller.loaded {
-                    controller.reloadUser()
+        if self.pagesController != nil {
+            for (index, parent) in self.pagesController.controllers {
+                if let controller = parent.topViewController as? SettingsController {
+                    if controller.loaded {
+                        controller.reloadUser()
+                    }
                 }
             }
         }
     }
     
     class func reloadSupportController() {
-        for (index, parent) in self.pagesController.controllers {
-            if let controller = parent.topViewController as? SupportController {
-                if controller.loaded {
-                    controller.loadMessages()
+        if self.pagesController != nil {
+            for (index, parent) in self.pagesController.controllers {
+                if let controller = parent.topViewController as? SupportController {
+                    if controller.loaded {
+                        controller.loadMessages()
+                    }
                 }
             }
         }
     }
     
     class func supportMessage(text: String, wasActive: Bool) {
-        if wasActive {
-            Global.showNotification(text)
-            
-            for (index, parent) in self.pagesController.controllers {
-                if let controller = parent.topViewController as? SupportController {
-                    if controller.loaded {
-                        controller.recievedMessage(text, buzz: wasActive)
+        if self.pagesController != nil {
+            if wasActive {
+                Global.showNotification(text)
+                
+                for (index, parent) in self.pagesController.controllers {
+                    if let controller = parent.topViewController as? SupportController {
+                        if controller.loaded {
+                            controller.recievedMessage(text, buzz: wasActive)
+                        }
                     }
                 }
+            } else {
+                Global.slideToController(0, animated: false, direction: .Reverse)
             }
-        } else {
-            Global.slideToController(0, animated: false, direction: .Reverse)
         }
     }
     
     class func showNotification(text: String) {
-        if self.pagesController.currentPage != 0 {
-            var tempText = NSString(string: text)
-            let length = min(20, tempText.length)
-            var notification = tempText.substringToIndex(length)
-            
-            if tempText.length > 20 {
-                notification = notification + "..."
+        if self.pagesController != nil {
+            if self.pagesController.currentPage != 0 {
+                var tempText = NSString(string: text)
+                let length = min(20, tempText.length)
+                var notification = tempText.substringToIndex(length)
+                
+                if tempText.length > 20 {
+                    notification = notification + "..."
+                }
+                
+                self.pagesController.showNotification("Support: \(notification)")
             }
-            
-            self.pagesController.showNotification("Support: \(notification)")
         }
     }
     
     class func showInvite(source: String, dismissed: ((invites: Int) -> ())!) {
-        self.pagesController.showInvite(source, dismissed: dismissed)
+        if self.pagesController != nil {
+            self.pagesController.showInvite(source, dismissed: dismissed)
+        }
     }
     
     class func configureMaveShare() {

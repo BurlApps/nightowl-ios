@@ -58,6 +58,11 @@
 		D3BCE0791AC4053500824004 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE0781AC4053500824004 /* ScanController.swift */; };
 		D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE07A1AC47E7900824004 /* PaymentController.swift */; };
 		D3BCE0811AC636FE00824004 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3BCE0801AC636FE00824004 /* Settings.bundle */; };
+		D3D6B3001B0555390020572C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D6B2FF1B0555390020572C /* HomeController.swift */; };
+		D3D6B30D1B05A7620020572C /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D6B3091B05A5740020572C /* ParseFacebookUtilsV4.framework */; };
+		D3D6B3111B05A7630020572C /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D6B30E1B05A7630020572C /* FBSDKCoreKit.framework */; };
+		D3D6B3121B05A7630020572C /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D6B30F1B05A7630020572C /* FBSDKLoginKit.framework */; };
+		D3D6B3151B05B8600020572C /* Logo.gif in Resources */ = {isa = PBXBuildFile; fileRef = D3D6B3141B05B8600020572C /* Logo.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +147,13 @@
 		D3BCE0781AC4053500824004 /* ScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanController.swift; sourceTree = "<group>"; };
 		D3BCE07A1AC47E7900824004 /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 		D3BCE0801AC636FE00824004 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		D3D6B2FF1B0555390020572C /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		D3D6B3081B05A5740020572C /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		D3D6B3091B05A5740020572C /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = Frameworks/ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		D3D6B30E1B05A7630020572C /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		D3D6B30F1B05A7630020572C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		D3D6B3101B05A7630020572C /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Frameworks/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		D3D6B3141B05B8600020572C /* Logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Logo.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +161,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3D6B3111B05A7630020572C /* FBSDKCoreKit.framework in Frameworks */,
+				D3D6B3121B05A7630020572C /* FBSDKLoginKit.framework in Frameworks */,
+				D3D6B30D1B05A7620020572C /* ParseFacebookUtilsV4.framework in Frameworks */,
 				D318A6D51AD471E7001B9957 /* CoreTelephony.framework in Frameworks */,
 				D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */,
 				D33EBA901ABFF1A3001E637D /* Bolts.framework in Frameworks */,
@@ -244,9 +259,10 @@
 		D33EBA631ABFEE0C001E637D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D3D6B3011B05553D0020572C /* Home Page */,
 				D39FC6A01AC64AC100B6416B /* Page Navigation */,
-				D37373811AEC5FC40060EE9A /* Support Page */,
 				D39FC6A11AC64AE300B6416B /* Camera Page */,
+				D37373811AEC5FC40060EE9A /* Support Page */,
 				D39FC6A21AC64AFB00B6416B /* Questions Page */,
 				D39FC6A31AC64B0700B6416B /* Settings Page */,
 			);
@@ -272,6 +288,7 @@
 		D33EBA651ABFEE38001E637D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D3D6B3141B05B8600020572C /* Logo.gif */,
 				D3BCE0801AC636FE00824004 /* Settings.bundle */,
 				D33EBA4C1ABFEDBC001E637D /* Images.xcassets */,
 				D33EBA4D1ABFEDBC001E637D /* Info.plist */,
@@ -283,6 +300,11 @@
 		D33EBA6A1ABFEFAE001E637D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3D6B30E1B05A7630020572C /* FBSDKCoreKit.framework */,
+				D3D6B30F1B05A7630020572C /* FBSDKLoginKit.framework */,
+				D3D6B3101B05A7630020572C /* FBSDKShareKit.framework */,
+				D3D6B3081B05A5740020572C /* ParseFacebookUtils.framework */,
+				D3D6B3091B05A5740020572C /* ParseFacebookUtilsV4.framework */,
 				D3504A951AED8DC1002D91D0 /* QuickLook.framework */,
 				D3504A921AED8DA2002D91D0 /* CoreText.framework */,
 				D318A6D81AD473C4001B9957 /* PZSpeed.framework */,
@@ -383,6 +405,14 @@
 				D327FB051ACC848B00FA554B /* AccountsController.swift */,
 			);
 			name = "Settings Page";
+			sourceTree = "<group>";
+		};
+		D3D6B3011B05553D0020572C /* Home Page */ = {
+			isa = PBXGroup;
+			children = (
+				D3D6B2FF1B0555390020572C /* HomeController.swift */,
+			);
+			name = "Home Page";
 			sourceTree = "<group>";
 		};
 		E23F6025443F7B4B4191F6B2 /* Pods */ = {
@@ -495,6 +525,7 @@
 				D39FC69C1AC6461D00B6416B /* Pods.debug.xcconfig in Resources */,
 				D39FC69D1AC6461F00B6416B /* Pods.release.xcconfig in Resources */,
 				D3BCE0811AC636FE00824004 /* Settings.bundle in Resources */,
+				D3D6B3151B05B8600020572C /* Logo.gif in Resources */,
 				D33EBA591ABFEDBC001E637D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -569,6 +600,7 @@
 				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
 				D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */,
 				D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */,
+				D3D6B3001B0555390020572C /* HomeController.swift in Sources */,
 				D37373831AEC606B0060EE9A /* SupportController.swift in Sources */,
 				D33EBA5D1ABFEDBC001E637D /* PagesController.swift in Sources */,
 				D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */,

@@ -13,11 +13,10 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
     var currentPage = 2
-    private let onboardTime: NSTimeInterval = 4
+    private var user = User.current()
     private let pages = 4
     private let startPage = 2
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
-    private var onboarding: UIView!
     private var startDate = NSDate()
     private var scrollView: UIScrollView!
     private var inviteController: UINavigationController!
@@ -30,28 +29,8 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         // Set Global
         Global.pagesController = self
         
-        // Login User
-        if let user = User.current() {
-            user.identifyMave()
-            user.fetch({ (user) -> Void in
-                self.hideOnboarding()
-            })
-        } else {         
-            User.register({ (user) -> Void in
-                self.hideOnboarding()
-                
-                user.identifyMave()
-                user.isReferral { (referred, credits) -> Void in
-                    if referred {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            UIAlertView(title: "You Are Awesome",
-                                message: "You and your friend both get \(credits) free questions for the referral!",
-                                delegate: nil, cancelButtonTitle: "Thanks!").show()
-                        })
-                    }
-                }
-            })
-        }
+        // Identitfy User
+        self.user.identifyMave()
         
         // Create Notification
         self.notification = CWStatusBarNotification()
@@ -66,36 +45,6 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
             self.notification.dismissNotification()
             self.setActiveChildController(0, animated: true, direction: .Reverse)
         }
-        
-        // Onboard User
-        self.onboarding = UIView(frame: self.view.frame)
-        self.onboarding.backgroundColor = UIColor(white: 0, alpha: 0.7)
-        
-        // Create Onboarding Label
-        var onboardLabel = UILabel(frame: CGRectMake(10, 10, self.view.bounds.width - 40, self.view.bounds.height - 40))
-        onboardLabel.textAlignment = NSTextAlignment.Center
-        onboardLabel.textColor = UIColor.whiteColor()
-        onboardLabel.shadowColor = UIColor(white: 0, alpha: 0.2)
-        onboardLabel.shadowOffset = CGSize(width: 0, height: 2)
-        onboardLabel.font = UIFont(name: "HelveticaNeue", size: 22)
-        onboardLabel.numberOfLines = 0
-        onboardLabel.adjustsFontSizeToFitWidth = true
-        
-        var text = "Take a photo\nSend us a math question and we'll solve it.\n\n"
-        text += "You get several answers (with steps) free on us. Enjoy!"
-        
-        var attributedText = NSMutableAttributedString(string: text)
-        var style = NSMutableParagraphStyle()
-        
-        style.lineSpacing = 8
-        style.alignment = .Center
-
-        attributedText.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, attributedText.length))
-        attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Bold", size: 30)!, range: NSMakeRange(0, 12))
-        onboardLabel.attributedText = attributedText
-        
-        self.onboarding.addSubview(onboardLabel)
-        self.view.addSubview(self.onboarding)
         
         // Create Page View Controller
         self.view.backgroundColor = UIColor.clearColor()
@@ -132,7 +81,7 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         super.viewWillAppear(animated)
         
         // Configure Status Bar
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
         // Remove Text From Back Button
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, -1000),
@@ -167,16 +116,6 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         }, inviteContext: source)
     }
     
-    func hideOnboarding() {
-        var delay = self.onboardTime - NSDate().timeIntervalSinceDate(self.startDate)
-        
-        UIView.animateWithDuration(0.5, delay: max(delay, 0), options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            self.onboarding.alpha = 0
-        }) { (success:Bool) -> Void in
-            self.onboarding.removeFromSuperview()
-        }
-    }
-    
     func lockPageView() {
         self.scrollView.scrollEnabled = false
     }
@@ -187,10 +126,10 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     
     func setActiveChildController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
         self.unlockPageView()
-        self.viewControllerAtIndex(self.currentPage).popToRootViewControllerAnimated(true)
         
         self.setViewControllers([self.viewControllerAtIndex(index)],
             direction: direction, animated: animated, completion: { (success: Bool) -> Void in
+                self.viewControllerAtIndex(self.currentPage).popToRootViewControllerAnimated(true)
                 self.currentPage = index
             })
         

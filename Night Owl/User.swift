@@ -13,6 +13,8 @@ class User: NSObject {
     // MARK: Instance Variables
     var freeQuestions: Int!
     var card: String!
+    var name: String!
+    var email: String!
     var subject: Subject!
     var parse: PFUser!
     
@@ -22,25 +24,41 @@ class User: NSObject {
         
         self.freeQuestions = object["freeQuestions"] as? Int
         self.card = object["card"] as? String
+        self.name = object["name"] as? String
+        self.email = object["email"] as? String
         self.subject = lastSubject
         self.parse = object
     }
     
     // MARK: Class Methods
-    class func register(callback: ((user: User) -> Void)!) {
+    class func register(callback: (user: User!) -> Void, referral: (credits: Int) -> Void) {
         Settings.sharedInstance { (settings) -> Void in
-            PFAnonymousUtils.logInWithBlock { (user: PFUser?, error: NSError?) -> Void in
+            PFFacebookUtils.logInInBackgroundWithReadPermissions([
+                "public_profile", "email"
+            ], block: { (user: PFUser?, error: NSError?) -> Void in
                 if var tempUser = user {
-                    tempUser["charges"] = 0
-                    tempUser["freeQuestions"] = settings.freeQuestions
-                    tempUser["source"] = "ios"
-                    
                     var userTemp = User(tempUser)
+                    
+                    tempUser["source"] = "ios"
+                    tempUser.saveInBackground()
+                    
                     userTemp.registerMave()
                     userTemp.setInstallation()
-                    callback?(user: userTemp)
+                    userTemp.facebookInformation()
+                    callback(user: userTemp)
+                    
+                    if tempUser.isNew {
+                        userTemp.isReferral({ (referred, credits) -> Void in                            
+                            if referred {
+                                referral(credits: credits)
+                            }
+                        })
+                    }
+                } else {
+                    callback(user: nil)
+                    println(error)
                 }
-            }
+            })
         }
     }
     
@@ -78,25 +96,45 @@ class User: NSObject {
         }
     }
     
+    func facebookInformation() {
+        if let token = FBSDKAccessToken.currentAccessToken() {
+            var request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+            
+            request.startWithCompletionHandler({ (connection: FBSDKGraphRequestConnection!, data: AnyObject!, error: NSError!) -> Void in
+                if data != nil && error == nil {
+                    self.parse["name"] = data["name"]
+                    self.parse["email"] = data["email"]
+                    self.parse.saveInBackground()
+                }
+            })
+        }
+    }
+    
     func isReferral(callback: (referred: Bool, credits: Int!) -> Void) {
         MaveSDK.sharedInstance().getReferringData { (data: MAVEReferringData!) -> Void in
             var referred = false
             var credits = 0
             
-            if data != nil && data.referringUser != nil {
-                referred = true
-                credits = data.customData["credits"] as! Int
-                
-                self.creditQuestions(credits)
-                
-                PFCloud.callFunctionInBackground("referredUser", withParameters: [
-                    "user": data.referringUser.userID,
-                    "credits": credits
-                ], block: nil)
+            if data != nil && data.customData != nil && data.referringUser != nil {
+                if let tempCredits = data.customData["credits"] as? Int {
+                    referred = true
+                    credits = tempCredits
+                    
+                    self.creditQuestions(credits)
+                    
+                    PFCloud.callFunctionInBackground("referredUser", withParameters: [
+                        "user": data.referringUser.userID,
+                        "credits": credits
+                    ], block: nil)
+                }
             }
             
             callback(referred: referred, credits: credits)
         }
+    }
+    
+    func becomeUser() {
+        PFUser.becomeInBackground(self.parse.sessionToken!)
     }
     
     func updateSubject(subject: Subject!) {
@@ -153,7 +191,7 @@ class User: NSObject {
         }
     }
     
-    func fetch(callback: ((user: User) -> Void)!) -> User {
+    func fetch(callback: ((user: User!) -> Void)!) -> User {
         self.parse.fetchInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
             if var tempObject = object {
                 self.freeQuestions = tempObject["freeQuestions"] as? Int
@@ -161,7 +199,7 @@ class User: NSObject {
                 callback!(user: self)
             } else {
                 User.logout()
-                User.register(callback)
+                Global.showHomeController()
             }
         }
         

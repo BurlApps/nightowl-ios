@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Initialize Parse
         let parseApplicationID = infoDictionary["ParseApplicationID"] as! String
         let parseClientKey = infoDictionary["ParseClientKey"] as! String
-        
         ParseCrashReporting.enable()
         Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
         // Initialize Stripe
         let stripeKey = infoDictionary["StripeClientKey"] as! String
@@ -90,6 +90,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         Installation.current().setDeviceToken(deviceToken)
     }
@@ -144,6 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents.activateApp()
         Installation.current().clearBadge()
     }
 

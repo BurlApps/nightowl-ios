@@ -56,11 +56,17 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
             self.cameraView.start()
             self.view.insertSubview(self.cameraView.view, belowSubview: self.captureButton)
             
-            UIView.animateWithDuration(0.5, delay: 0.3, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+            UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                 self.cameraView.view.alpha = 1
             }, completion: nil)
             
         })
+    }
+    
+    override func viewDidLayoutSubviews() {        
+        if self.cameraView != nil {
+            self.cameraView.view.frame = self.view.frame
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

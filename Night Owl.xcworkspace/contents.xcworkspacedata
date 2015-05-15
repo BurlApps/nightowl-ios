@@ -5,15 +5,6 @@
       location = "group:Night Owl.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../Juicy/iOS/Juicy.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../EnjoyPnd/iOS/EnjoyPnD.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../Treehouse/Ribbit/Ribbit.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
