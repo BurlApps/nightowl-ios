@@ -96,25 +96,28 @@ class SupportController: JSQMessagesViewController {
     // MARK: Instance Methods
     func loadMessages() {
         self.user = User.current()
-        self.sender = self.user.parse.objectId
-        self.spinner.startAnimating()
         
-        self.user.messages(self.messages.count, callback: { (messages) -> Void in
+        if self.user != nil {
+            self.sender = self.user.parse.objectId
+            self.spinner.startAnimating()
             
-            for message in messages {
-                var sender = "support"
+            self.user.messages(self.messages.count, callback: { (messages) -> Void in
                 
-                if message.type == 2 {
-                    sender = self.sender
+                for message in messages {
+                    var sender = "support"
+                    
+                    if message.type == 2 {
+                        sender = self.sender
+                    }
+                    
+                    var tempMessage = JSQMessage(text: message.text, sender: sender, date: message.created)
+                    self.messages.append(tempMessage)
                 }
                 
-                var tempMessage = JSQMessage(text: message.text, sender: sender, date: message.created)
-                self.messages.append(tempMessage)
-            }
-            
-            self.finishReceivingMessage()
-            self.spinner.stopAnimating()
-        })
+                self.finishReceivingMessage()
+                self.spinner.stopAnimating()
+            })
+        }
     }
     
     func recievedMessage(text: String, buzz: Bool) {

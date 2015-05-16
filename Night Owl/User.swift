@@ -36,18 +36,18 @@ class User: NSObject {
             PFFacebookUtils.logInInBackgroundWithReadPermissions([
                 "public_profile", "email"
             ], block: { (user: PFUser?, error: NSError?) -> Void in
-                if var tempUser = user {
-                    var userTemp = User(tempUser)
+                if user != nil && error == nil {
+                    var userTemp = User(user!)
                     
-                    tempUser["source"] = "ios"
-                    tempUser.saveInBackground()
+                    user!["source"] = "ios"
+                    user!.saveInBackground()
                     
                     userTemp.registerMave()
                     userTemp.setInstallation()
                     userTemp.facebookInformation()
                     callback(user: userTemp)
                     
-                    if tempUser.isNew {
+                    if user!.isNew {
                         userTemp.isReferral({ (referred, credits) -> Void in                            
                             if referred {
                                 referral(credits: credits)

@@ -44,9 +44,9 @@ class HomeController: UIViewController, UIAlertViewDelegate {
         self.onboardingLabel.adjustsFontSizeToFitWidth = true
         
         // Sytle Login Button
-        self.loginButton.backgroundColor = UIColor(red:0.23, green:0.35, blue:0.59, alpha:1)
+        self.loginButton.backgroundColor = UIColor(red:0.29, green:0.4, blue:0.62, alpha:1)
         self.loginButton.layer.cornerRadius = 7
-        self.loginButton.layer.shadowColor = UIColor(red:0.18, green:0.27, blue:0.45, alpha:1).CGColor
+        self.loginButton.layer.shadowColor = UIColor(red:0.14, green:0.22, blue:0.43, alpha:1).CGColor
         self.loginButton.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.loginButton.layer.shadowRadius = 0
         self.loginButton.layer.shadowOpacity = 1
