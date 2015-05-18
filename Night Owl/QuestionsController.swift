@@ -95,9 +95,9 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Instance Methods
     func reloadQuestions() {
-        if self.searchBar != nil {
-            self.user = User.current()
-            
+        self.user = User.current()
+        
+        if self.searchBar != nil && self.user != nil {
             self.user.assignments { (assignments) -> Void in
                 self.questions = assignments
                 self.filterQuestions(self.searchBar.text)

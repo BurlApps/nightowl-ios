@@ -32,40 +32,39 @@ class User: NSObject {
     
     // MARK: Class Methods
     class func register(callback: (user: User!) -> Void, referral: (credits: Int) -> Void) {
-        Settings.sharedInstance { (settings) -> Void in
-            PFFacebookUtils.logInInBackgroundWithReadPermissions([
-                "public_profile", "email"
-            ], block: { (user: PFUser?, error: NSError?) -> Void in
-                if user != nil && error == nil {
-                    var userTemp = User(user!)
-                    
-                    user!["source"] = "ios"
-                    user!.saveInBackground()
-                    
-                    userTemp.registerMave()
-                    userTemp.setInstallation()
-                    userTemp.facebookInformation()
-                    callback(user: userTemp)
-                    
-                    if user!.isNew {
-                        userTemp.isReferral({ (referred, credits) -> Void in                            
-                            if referred {
-                                referral(credits: credits)
-                            }
-                        })
-                    }
-                } else {
-                    callback(user: nil)
-                    println(error)
+        PFFacebookUtils.logInInBackgroundWithReadPermissions([
+            "public_profile", "email"
+        ], block: { (user: PFUser?, error: NSError?) -> Void in
+            if user != nil && error == nil {
+                var userTemp = User(user!)
+                
+                user!["source"] = "ios"
+                user!.saveInBackground()
+                
+                userTemp.registerMave()
+                userTemp.setInstallation()
+                userTemp.facebookInformation()
+                callback(user: userTemp)
+                
+                if user!.isNew {
+                    userTemp.isReferral({ (referred, credits) -> Void in                            
+                        if referred {
+                            referral(credits: credits)
+                        }
+                    })
                 }
-            })
-        }
+            } else {
+                callback(user: nil)
+                println(error)
+            }
+        })
     }
     
     class func current() -> User! {
         if let user = PFUser.currentUser() {
             return User(user)
         } else {
+            Global.showHomeController()
             return nil
         }
     }
@@ -104,7 +103,12 @@ class User: NSObject {
                 if data != nil && error == nil {
                     self.parse["name"] = data["name"]
                     self.parse["email"] = data["email"]
-                    self.parse.saveInBackground()
+                    self.parse.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
+                        if !success || error != nil {
+                            self.parse.removeObjectForKey("name")
+                            self.parse.removeObjectForKey("email")
+                        }
+                    })
                 }
             })
         }

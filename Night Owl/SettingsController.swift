@@ -123,9 +123,9 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
     }
     
     func reloadUser() {
-        if self.cardLabel != nil {
-            self.user = User.current()
-            
+        self.user = User.current()
+        
+        if self.cardLabel != nil && self.user != nil {
             self.user.fetch { (user) -> Void in
                 self.hideLabels()
                 

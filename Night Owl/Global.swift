@@ -176,15 +176,11 @@ class Global {
         mave.displayOptions.contactInlineSendButtonFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
         mave.displayOptions.contactInlineSendButtonTextColor = UIColor(red:0.22, green:0.6, blue:0.59, alpha:1)
         mave.displayOptions.contactInlineSendButtonDisabledTextColor = UIColor.grayColor()
-        
-        // Search
-        mave.displayOptions.searchBarBackgroundColor = UIColor(red:0.98, green:0.99, blue:0.99, alpha:1)
 
         // Contacts table options
         mave.displayOptions.contactCheckmarkColor = UIColor(red:0.22, green:0.6, blue:0.59, alpha:1)
         
-        // The client-side share page (the fallback if the normal
-        // invite page can't be displayed)
+        // The client-side share page (the fallback if the normal invite page can't be displayed)
         mave.displayOptions.sharePageBackgroundColor = UIColor(red:0.98, green:0.99, blue:0.99, alpha:1)
         mave.displayOptions.sharePageIconColor = UIColor(red:0.22, green:0.6, blue:0.59, alpha:1)
         mave.displayOptions.sharePageIconFont = UIFont(name: "HelveticaNeue", size: 14)
