@@ -203,6 +203,7 @@ class User: NSObject {
         var query = PFQuery(className: "Promo")
         
         query.whereKey("code", equalTo: code)
+        query.whereKey("enabled", equalTo: true)
         
         query.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
             if object != nil && error == nil {
