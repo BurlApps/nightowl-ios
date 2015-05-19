@@ -31,7 +31,7 @@ class User: NSObject {
     }
     
     // MARK: Class Methods
-    class func register(callback: (user: User!) -> Void, referral: (credits: Int) -> Void) {
+    class func register(callback: (user: User!) -> Void, referral: (credits: Int) -> Void, promo: () -> Void) {
         PFFacebookUtils.logInInBackgroundWithReadPermissions([
             "public_profile", "email"
         ], block: { (user: PFUser?, error: NSError?) -> Void in
@@ -50,6 +50,8 @@ class User: NSObject {
                     userTemp.isReferral({ (referred, credits) -> Void in                            
                         if referred {
                             referral(credits: credits)
+                        } else {
+                            promo()
                         }
                     })
                 }
@@ -121,15 +123,17 @@ class User: NSObject {
             
             if data != nil && data.customData != nil && data.referringUser != nil {
                 if let tempCredits = data.customData["credits"] as? Int {
-                    referred = true
-                    credits = tempCredits
-                    
-                    self.creditQuestions(credits)
-                    
-                    PFCloud.callFunctionInBackground("referredUser", withParameters: [
-                        "user": data.referringUser.userID,
-                        "credits": credits
-                    ], block: nil)
+                    if self.parse.objectId != data.referringUser.userID {
+                        referred = true
+                        credits = tempCredits
+                        
+                        self.creditQuestions(credits)
+                        
+                        PFCloud.callFunctionInBackground("referredUser", withParameters: [
+                            "user": data.referringUser.userID,
+                            "credits": credits
+                        ], block: nil)
+                    }
                 }
             }
             
@@ -192,6 +196,26 @@ class User: NSObject {
             user.freeQuestions = user.freeQuestions + freeAmount
             user.parse["freeQuestions"] = user.freeQuestions
             user.parse.saveInBackgroundWithBlock(nil)
+        }
+    }
+    
+    func promoCode(code: String, callback: ((promo: Promo!) -> Void)) {
+        var query = PFQuery(className: "Promo")
+        
+        query.whereKey("code", equalTo: code)
+        
+        query.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
+            if object != nil && error == nil {
+                var promo = Promo(object!)
+                
+                promo.addUser(self)
+                self.creditQuestions(promo.credits)
+                
+                callback(promo: promo)
+            } else {
+                println(error)
+                callback(promo: nil)
+            }
         }
     }
     

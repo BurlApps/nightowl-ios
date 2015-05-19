@@ -9,8 +9,15 @@
 
 class HomeController: UIViewController, UIAlertViewDelegate {
     
+    // MARK: Enum
+    enum AlertState {
+        case Referral, PromoCode, None
+    }
+    
     // MARK: Instance Variables
+    var user: User!
     var cameraView: LLSimpleCamera!
+    var alertState: AlertState = .None
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     // MARK: IBOutlets
@@ -64,7 +71,8 @@ class HomeController: UIViewController, UIAlertViewDelegate {
         
         // Move to Feed View if Logged In
         if let user = User.current() {
-            user.becomeUser()
+            self.user = user
+            self.user.becomeUser()
             self.performSegueWithIdentifier("finishedSegue", sender: self)
         } else {
             self.cameraView.start()
@@ -123,6 +131,7 @@ class HomeController: UIViewController, UIAlertViewDelegate {
         
         User.register({ (user) -> Void in
             if user != nil {
+                self.user = user
                 self.performSegueWithIdentifier("finishedSegue", sender: self)
             } else {
                 self.loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
@@ -131,15 +140,47 @@ class HomeController: UIViewController, UIAlertViewDelegate {
             }
         }, referral: { (credits) -> Void in
             dispatch_async(dispatch_get_main_queue(), {
+                self.alertState = .Referral
+                
                 UIAlertView(title: "You Are Awesome",
                     message: "You and your friend both get \(credits) free questions for the referral!",
                     delegate: self, cancelButtonTitle: "Thanks!").show()
+            })
+        }, promo: {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.alertState = .PromoCode
+                
+                var alert = UIAlertView(title: "Promo Code",
+                    message: "Have a promo code? You could get more free questions!",
+                    delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Enter")
+                alert.alertViewStyle = .PlainTextInput
+                alert.show()
             })
         })
     }
     
     // MARK: UIAlertViewDelegate Methods
     func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
-        self.performSegueWithIdentifier("finishedSegue", sender: self)
+        if self.alertState == .PromoCode {
+            self.alertState = .None
+            
+            if let code = alertView.textFieldAtIndex(0)?.text {
+                if NSString(string: code).length > 0 {
+                    self.user.promoCode(code, callback: { (promo) -> Void in
+                        var title = "Sorry :("
+                        var message = "We couldn't find your promo code."
+                        var button = "Okay"
+                        
+                        if promo != nil {
+                            title = "Nice!"
+                            message = "You get \(promo.credits) free questions for the \(promo.name) promo"
+                            button = "Thanks!"
+                        }
+                        
+                        UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: button).show()
+                    })
+                }
+            }
+        }
     }
 }

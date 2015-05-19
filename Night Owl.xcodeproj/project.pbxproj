@@ -13,6 +13,7 @@
 		D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */; };
 		D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB031ACC82E400FA554B /* DebugAccount.swift */; };
 		D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB051ACC848B00FA554B /* AccountsController.swift */; };
+		D32F7C1B1B0B046700713865 /* Promo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7C1A1B0B046700713865 /* Promo.swift */; };
 		D33EBA221ABFED0A001E637D /* Night_OwlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA211ABFED0A001E637D /* Night_OwlTests.swift */; };
 		D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA461ABFEDBC001E637D /* AppDelegate.swift */; };
 		D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA471ABFEDBC001E637D /* Assignment.swift */; };
@@ -87,6 +88,7 @@
 		D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		D327FB031ACC82E400FA554B /* DebugAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugAccount.swift; sourceTree = "<group>"; };
 		D327FB051ACC848B00FA554B /* AccountsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsController.swift; sourceTree = "<group>"; };
+		D32F7C1A1B0B046700713865 /* Promo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promo.swift; sourceTree = "<group>"; };
 		D33EBA061ABFED0A001E637D /* Night Owl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Night Owl.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33EBA1B1ABFED0A001E637D /* Night OwlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Night OwlTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33EBA201ABFED0A001E637D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				D33EBA531ABFEDBC001E637D /* User.swift */,
 				D3504A971AEE0261002D91D0 /* Message.swift */,
 				D33EBA9F1AC0F701001E637D /* Subject.swift */,
+				D32F7C1A1B0B046700713865 /* Promo.swift */,
 				D327FB031ACC82E400FA554B /* DebugAccount.swift */,
 				D3AF38771ACE241900B762B7 /* Global.swift */,
 			);
@@ -592,6 +595,7 @@
 				D33EBAA61AC1F406001E637D /* WebController.swift in Sources */,
 				D33EBA5B1ABFEDBC001E637D /* Installation.swift in Sources */,
 				D33EBA991AC0E5A8001E637D /* PostController.swift in Sources */,
+				D32F7C1B1B0B046700713865 /* Promo.swift in Sources */,
 				D33EBA951ABFFC3A001E637D /* SettingsController.swift in Sources */,
 				D33EBA601ABFEDBC001E637D /* User.swift in Sources */,
 				D33EBA5E1ABFEDBC001E637D /* Settings.swift in Sources */,

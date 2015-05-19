@@ -34,6 +34,11 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
             self.pages += 1
         }
         
+        // Check To Enable Flag
+        if self.question.state != 3 {
+            self.navigationItem.rightBarButtonItem = nil
+        }
+        
         // Create Page View Controller
         self.pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
         self.pageController.dataSource = self
@@ -43,6 +48,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         self.addChildViewController(self.pageController)
         self.pagesContainer.addSubview(self.pageController.view)
         self.pageController.didMoveToParentViewController(self)
+        self.updateLabel(0)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,10 +72,8 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     // MARK: Instance Methods
     func updateLabel(index: Int) {
         if self.pages == 1 || index == 1  {
-            self.flagButton.enabled = false
             self.title = "Question"
         } else {
-            self.flagButton.enabled = true
             self.title = "Solution"
         }
     }
@@ -97,7 +101,6 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
             self.controllers[index] = page
         }
         
-        self.updateLabel(index)
         return page
     }
     
