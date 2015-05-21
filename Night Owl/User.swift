@@ -149,7 +149,7 @@ class User: NSObject {
         lastSubject = subject
     }
     
-    func updateCard(card: CardIOCreditCardInfo, callback: ((error: NSError!) -> Void)!) {
+    func updateCard(card: CardIOCreditCardInfo, callback: (error: NSError!) -> Void) {
         let number = NSString(string: card.redactedCardNumber)
         self.card = number.substringFromIndex(number.length - 4)
         self.parse["card"] = self.card
@@ -162,7 +162,7 @@ class User: NSObject {
         stCard.cvc = card.cvv
         
         STPAPIClient.sharedClient().createTokenWithCard(stCard, completion: { (token: STPToken!, error: NSError!) -> Void in
-            callback!(error: error)
+            callback(error: error)
             
             if token != nil && error == nil {
                 PFCloud.callFunctionInBackground("addCard", withParameters: [

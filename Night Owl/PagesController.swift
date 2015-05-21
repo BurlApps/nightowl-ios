@@ -8,12 +8,13 @@
 
 import UIKit
 
-class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
+class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
 
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
     var currentPage = 2
     private var user = User.current()
+    private var settings: Settings!
     private let pages = 4
     private let startPage = 2
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -75,6 +76,11 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         }
         
         self.didMoveToParentViewController(self)
+        
+        // Get Settings
+        Settings.sharedInstance { (settings) -> Void in
+            self.settings = settings
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -96,6 +102,12 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
     }
     
     // MARK: Instance Methods
+    func showRateApp() {
+        UIAlertView(title: "Rate Our App",
+            message: "Would you mind rating our app?",
+            delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Sure!").show()
+    }
+    
     func showNotification(message: String) {
         self.notification.displayNotificationWithMessage(message, forDuration: 3)
     }
@@ -144,6 +156,14 @@ class PagesController: UIPageViewController, UIPageViewControllerDataSource, UIP
         }
         
         return self.controllers[index]
+    }
+    
+    // MARK: UIAlertViewDelegate
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+            var url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.settings.itunesId)")
+            UIApplication.sharedApplication().openURL(url!)
+        }
     }
     
     // MARK: Page View Controller Data Source

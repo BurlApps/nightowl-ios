@@ -119,6 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     Global.reloadSettingsController()
                 case "settings.reload": Settings.update(nil)
                 case "user.reload": User.current().fetch(nil)
+                case "user.rate": Global.showRateApp()
                 case "subjects.reload": Subject.subjects(false, callback: nil)
                 case "support.message":
                     Global.supportMessage(userInfo["message"] as! String, wasActive: wasActive)

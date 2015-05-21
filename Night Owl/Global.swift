@@ -119,6 +119,12 @@ class Global {
         }
     }
     
+    class func showRateApp() {
+        if self.pagesController != nil {
+            self.pagesController.showRateApp()
+        }
+    }
+    
     class func showNotification(text: String) {
         if self.pagesController != nil {
             if self.pagesController.currentPage != 0 {

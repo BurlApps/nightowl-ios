@@ -154,7 +154,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     // MARK: UIActionSheet Methods
     func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
         if buttonIndex != 3 {
-            UIAlertView(title: "Answer Has! Been Flagged",
+            UIAlertView(title: "Answer Has Been Flagged!",
                 message: "We are sorry for the inconvenience. This question have been assigned to a new tutor who will answer it shortly!",
                 delegate: nil, cancelButtonTitle: "Okay").show()
             self.navigationController?.popViewControllerAnimated(true)
