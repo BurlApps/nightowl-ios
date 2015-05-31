@@ -100,15 +100,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         var wasActive = true
+        var actions: [String]!
         
         if application.applicationState == UIApplicationState.Inactive {
             Track.appOpenedFromNotification(userInfo)
             wasActive = false
         }
         
-        if let tempAction = userInfo["action"] as? String {
-            var actions = tempAction.componentsSeparatedByString(",")
-            
+        if let tempActions = userInfo["actions"] as? String {
+            actions = tempActions.componentsSeparatedByString(",")
+        } else if let tempAction = userInfo["action"] as? String {
+            actions = [tempAction]
+        }
+        
+        if actions != nil && !actions.isEmpty {
             for (var action) in actions {
                 var title = userInfo["title"] as? String
                 var message = userInfo["message"] as? String
