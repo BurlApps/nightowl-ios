@@ -108,6 +108,11 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
             delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Sure!").show()
     }
     
+    func showAlert(title: String, message: String) {
+        UIAlertView(title: title, message: message, delegate: self,
+            cancelButtonTitle: "Thanks!").show()
+    }
+    
     func showNotification(message: String) {
         self.notification.displayNotificationWithMessage(message, forDuration: 3)
     }

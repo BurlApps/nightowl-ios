@@ -106,24 +106,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             wasActive = false
         }
         
-        if let action = userInfo["action"] as? String {
-            switch(action) {
-                case "questionsController.reload":
-                    if(!wasActive) {
-                        Global.slideToController(1, animated: false, direction: .Reverse)
-                    }
+        if let tempAction = userInfo["action"] as? String {
+            var actions = tempAction.componentsSeparatedByString(",")
+            
+            for (var action) in actions {
+                var title = userInfo["title"] as? String
+                var message = userInfo["message"] as? String
                 
-                    Global.reloadQuestionsController()
-                case "settingsController.reload":
-                    Settings.update(nil)
-                    Global.reloadSettingsController()
-                case "settings.reload": Settings.update(nil)
-                case "user.reload": User.current().fetch(nil)
-                case "user.rate": Global.showRateApp()
-                case "subjects.reload": Subject.subjects(false, callback: nil)
-                case "support.message":
-                    Global.supportMessage(userInfo["message"] as! String, wasActive: wasActive)
-                default: println(action)
+                action = action.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                
+                switch(action) {
+                    case "questionsController.reload":
+                        if(!wasActive) {
+                            Global.slideToController(1, animated: false, direction: .Reverse)
+                        }
+                    
+                        Global.reloadQuestionsController()
+                    case "settingsController.reload":
+                        Settings.update(nil)
+                        Global.reloadSettingsController()
+                    case "settings.reload": Settings.update(nil)
+                    case "user.reload": User.current().fetch(nil)
+                    case "user.rate": Global.showRateApp()
+                    case "user.message": Global.showAlert(title!, message: message!)
+                    case "subjects.reload": Subject.subjects(false, callback: nil)
+                    case "support.message": Global.supportMessage(message!, wasActive: wasActive)
+                    default: println(action)
+                }
             }
         }
         

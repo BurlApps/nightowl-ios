@@ -125,6 +125,12 @@ class Global {
         }
     }
     
+    class func showAlert(title: String, message: String) {
+        if self.pagesController != nil {
+            self.pagesController.showAlert(title, message: message)
+        }
+    }
+    
     class func showNotification(text: String) {
         if self.pagesController != nil {
             if self.pagesController.currentPage != 0 {
