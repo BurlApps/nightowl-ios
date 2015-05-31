@@ -128,9 +128,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     case "settings.reload": Settings.update(nil)
                     case "user.reload": User.current().fetch(nil)
                     case "user.rate": Global.showRateApp()
-                    case "user.message": Global.showAlert(title!, message: message!)
+                    case "user.message":
+                        if(title != nil && message != nil) {
+                            Global.showAlert(title!, message: message!)
+                        }
                     case "subjects.reload": Subject.subjects(false, callback: nil)
-                    case "support.message": Global.supportMessage(message!, wasActive: wasActive)
+                    case "support.message":
+                        if(message != nil) {
+                            Global.supportMessage(message!, wasActive: wasActive)
+                        }
                     default: println(action)
                 }
             }
