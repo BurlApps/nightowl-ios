@@ -123,7 +123,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                         Global.reloadQuestionsController()
                     case "settingsController.reload":
-                        Settings.update(nil)
                         Global.reloadSettingsController()
                     case "settings.reload": Settings.update(nil)
                     case "user.reload": User.current().fetch(nil)

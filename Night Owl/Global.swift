@@ -82,7 +82,7 @@ class Global {
             for (index, parent) in self.pagesController.controllers {
                 if let controller = parent.topViewController as? SettingsController {
                     if controller.loaded {
-                        controller.reloadUser()
+                        controller.reloadSettings()
                     }
                 }
             }

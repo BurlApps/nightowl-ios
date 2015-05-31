@@ -60,19 +60,13 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
         
         // Add Refresh
         self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: Selector("reloadUser"), forControlEvents: UIControlEvents.ValueChanged)
-        
-        // Get Settings
-        Settings.sharedInstance { (settings) -> Void in
-            self.settings = settings
-            self.questionPrice.text = settings.priceFormatted()
-        }
+        self.refreshControl?.addTarget(self, action: Selector("reloadSettings"), forControlEvents: UIControlEvents.ValueChanged)
         
         // Hide Labels
         self.hideLabels()
         
         // Set Fetch User Info
-        self.reloadUser()
+        self.reloadSettings()
         
         // Set Load
         self.loaded = true
@@ -122,7 +116,14 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
         self.freeQuestionsLabel.textColor = UIColor.clearColor()
     }
     
-    func reloadUser() {
+    func reloadSettings() {
+        // Get Settings
+        Settings.update { (settings) -> Void in
+            self.settings = settings
+            self.questionPrice.text = settings.priceFormatted()
+        }
+        
+        // Update Settings
         self.user = User.current()
         
         if self.cardLabel != nil && self.user != nil {
