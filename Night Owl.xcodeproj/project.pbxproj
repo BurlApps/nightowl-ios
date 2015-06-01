@@ -10,7 +10,6 @@
 		47D911A3208B9A324B0A0A83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980A9A7258115935D2425357 /* libPods.a */; };
 		D3156E281AEF090900101215 /* RBResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3156E271AEF090900101215 /* RBResizeImage.swift */; };
 		D318A6D51AD471E7001B9957 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D318A6D41AD471E7001B9957 /* CoreTelephony.framework */; };
-		D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */; };
 		D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB031ACC82E400FA554B /* DebugAccount.swift */; };
 		D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D327FB051ACC848B00FA554B /* AccountsController.swift */; };
 		D32F7C1B1B0B046700713865 /* Promo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F7C1A1B0B046700713865 /* Promo.swift */; };
@@ -84,8 +83,6 @@
 		D318A6D41AD471E7001B9957 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D318A6D61AD47202001B9957 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		D318A6D81AD473C4001B9957 /* PZSpeed.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PZSpeed.framework; path = Frameworks/PZSpeed.framework; sourceTree = "<group>"; };
-		D319352E1ACA5C5B00E2B236 /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
-		D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		D327FB031ACC82E400FA554B /* DebugAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugAccount.swift; sourceTree = "<group>"; };
 		D327FB051ACC848B00FA554B /* AccountsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountsController.swift; sourceTree = "<group>"; };
 		D32F7C1A1B0B046700713865 /* Promo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promo.swift; sourceTree = "<group>"; };
@@ -345,8 +342,6 @@
 		D33EBA9A1AC0EA7B001E637D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				D319352E1ACA5C5B00E2B236 /* UIImage+fixOrientation.h */,
-				D319352F1ACA5C7400E2B236 /* UIImage+fixOrientation.m */,
 				D3156E271AEF090900101215 /* RBResizeImage.swift */,
 			);
 			name = Utils;
@@ -599,7 +594,6 @@
 				D33EBA951ABFFC3A001E637D /* SettingsController.swift in Sources */,
 				D33EBA601ABFEDBC001E637D /* User.swift in Sources */,
 				D33EBA5E1ABFEDBC001E637D /* Settings.swift in Sources */,
-				D31935301ACA5CC900E2B236 /* UIImage+fixOrientation.m in Sources */,
 				D39FC69F1AC64A8900B6416B /* ImageController.swift in Sources */,
 				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
 				D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */,

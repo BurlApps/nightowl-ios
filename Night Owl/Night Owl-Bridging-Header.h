@@ -24,5 +24,4 @@
 #import "PTKCardNumber.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "CardIO.h"
-#import "UIImage+fixOrientation.h"
 #import "FLAnimatedImage.h"

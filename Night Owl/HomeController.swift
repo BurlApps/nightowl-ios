@@ -16,7 +16,6 @@ class HomeController: UIViewController, UIAlertViewDelegate {
     
     // MARK: Instance Variables
     var user: User!
-    var cameraView: LLSimpleCamera!
     var alertState: AlertState = .None
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
@@ -64,27 +63,14 @@ class HomeController: UIViewController, UIAlertViewDelegate {
         self.spinner.frame = CGRectMake(0, 0, 40, 40)
         self.loginButton.addSubview(spinner)
         
-        // Setup Camera
-        self.cameraView = LLSimpleCamera(quality: CameraQualityHigh, andPosition: CameraPositionBack)
-        self.cameraView.view.frame = self.view.frame
-        self.view.insertSubview(self.cameraView.view, belowSubview: self.container)
-        
         // Move to Feed View if Logged In
         if let user = User.current() {
             self.user = user
             self.user.becomeUser()
             self.performSegueWithIdentifier("finishedSegue", sender: self)
-        } else {
-            self.cameraView.start()
-            
-            UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                self.container.backgroundColor = UIColor(red:1, green:0.88, blue:0.2, alpha:0.9)
-            }, completion: nil)
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        self.cameraView.view.frame = self.view.frame
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -97,22 +83,8 @@ class HomeController: UIViewController, UIAlertViewDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        // Start Camera View
-        if self.cameraView != nil {
-            self.cameraView.view.frame = self.view.frame
-            self.cameraView.start()
-        
-            UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                self.container.backgroundColor = UIColor(red:1, green:0.88, blue:0.2, alpha:0.9)
-            }, completion: nil)
-        }
-        
         // Center Spinner
         self.spinner.center = CGPointMake(self.loginButton.frame.width/2, self.loginButton.frame.height/2)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        self.cameraView.stop()
     }
     
     override func viewDidDisappear(animated: Bool) {

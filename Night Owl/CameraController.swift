@@ -53,6 +53,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
             self.cameraView = LLSimpleCamera(quality: CameraQualityHigh, andPosition: CameraPositionBack)
             self.cameraView.view.frame = self.view.frame
             self.cameraView.view.alpha = 0
+            self.cameraView.fixOrientationAfterCapture = true
             self.cameraView.start()
             self.view.insertSubview(self.cameraView.view, belowSubview: self.captureButton)
             
@@ -118,7 +119,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
     @IBAction func captureImage(sender: UIButton) {
         self.cameraView.capture ({ (camera: LLSimpleCamera!, var image: UIImage!, metaInfo:[NSObject : AnyObject]!, error: NSError!) -> Void in
             if image != nil && error == nil {
-                self.capturedImage = image.fixOrientation()
+                self.capturedImage = image
                 self.performSegueWithIdentifier("postSegue", sender: self)
             } else {
                 UIAlertView(title: "Aww Snap!", message: "Sorry! We failed to take the picture.", delegate: nil, cancelButtonTitle: "Try Again").show()
@@ -149,7 +150,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
             UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
             
             // Post Segue
-            self.capturedImage = image.fixOrientation()
+            self.capturedImage = image
             self.performSegueWithIdentifier("postSegue", sender: self)
         })
     }
