@@ -28,6 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let stripeKey = infoDictionary["StripeClientKey"] as! String
         Stripe.setDefaultPublishableKey(stripeKey)
         
+        // Initialize Venmo
+        let venmoId = infoDictionary["VenmoID"] as! String
+        let venmoSecret = infoDictionary["VenmoSecret"] as! String
+        Venmo.startWithAppId(venmoId, secret: venmoSecret, name: "Night Owl")
+        Venmo.sharedInstance().defaultTransactionMethod = VENTransactionMethod.API
+        
         // Initialize Mave
         let maveKey = infoDictionary["MaveClientKey"] as! String
         MaveSDK.setupSharedInstanceWithApplicationID(maveKey)
@@ -91,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        return Venmo.sharedInstance().handleOpenURL(url) ||  FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

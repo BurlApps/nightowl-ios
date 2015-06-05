@@ -150,11 +150,6 @@ class User: NSObject {
     }
     
     func updateCard(card: CardIOCreditCardInfo, callback: (error: NSError!) -> Void) {
-        let number = NSString(string: card.redactedCardNumber)
-        self.card = number.substringFromIndex(number.length - 4)
-        self.parse["card"] = self.card
-        self.parse.saveInBackgroundWithBlock(nil)
-        
         var stCard = STPCard()
         stCard.number = card.cardNumber
         stCard.expMonth = card.expiryMonth
@@ -165,10 +160,44 @@ class User: NSObject {
             callback(error: error)
             
             if token != nil && error == nil {
+                let number = NSString(string: card.redactedCardNumber)
+                self.card = number.substringFromIndex(number.length - 4)
+                self.parse["card"] = self.card
+                self.parse.saveInBackgroundWithBlock(nil)
+                
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
                     "card":token.tokenId
                 ], block: nil)
             }
+        })
+    }
+    
+    func addApplePay(payment: PKPayment, callback: (error: NSError!) -> Void) {
+        STPAPIClient.sharedClient().createTokenWithPayment(payment, completion: { (token: STPToken!, error: NSError!) -> Void in
+            callback(error: error)
+            if token != nil && error == nil {
+                self.card = "Apple Pay"
+                self.parse["card"] = self.card
+                self.parse.saveInBackgroundWithBlock(nil)
+                
+                PFCloud.callFunctionInBackground("addCard", withParameters: [
+                    "card":token.tokenId
+                ], block: nil)
+            }
+        })
+    }
+    
+    func addVenmo(callback: (error: NSError!) -> Void) {
+        Venmo.sharedInstance().requestPermissions([
+            "make_payments"
+        ], withCompletionHandler: { (success: Bool, error: NSError!) -> Void in
+            if success && error == nil {
+                self.card = "Venmo"
+                self.parse["card"] = self.card
+                self.parse.saveInBackgroundWithBlock(nil)
+            }
+            
+            callback(error: error)
         })
     }
     
@@ -179,6 +208,19 @@ class User: NSObject {
                     user.freeQuestions = user.freeQuestions - 1
                     user.parse["freeQuestions"] = user.freeQuestions
                     Global.reloadSettingsController()
+                } else if self.card == "Venmo" {
+                    var amount = Int(settings.questionPrice * 100)
+                    
+                    Venmo.sharedInstance().sendPaymentTo(settings.venmo, amount: UInt(amount),
+                        note: "Math homework help!", audience: VENTransactionAudience.Public,
+                        completionHandler: { (transaction: VENTransaction!, success: Bool, error: NSError!) -> Void in
+                            if success && error == nil {
+                                let payed = user.parse["payed"] as! Float
+                                user.parse["payed"] = payed + settings.questionPrice
+                            } else {
+                                println(error)
+                            }
+                    })
                 } else {
                     let charges = user.parse["charges"] as! Float
                     user.parse["charges"] = charges + settings.questionPrice

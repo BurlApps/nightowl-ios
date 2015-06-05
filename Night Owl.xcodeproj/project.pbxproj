@@ -51,12 +51,13 @@
 		D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBAB61AC32C9D001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D3504A981AEE0261002D91D0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3504A971AEE0261002D91D0 /* Message.swift */; };
 		D37373831AEC606B0060EE9A /* SupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37373821AEC606B0060EE9A /* SupportController.swift */; };
+		D39BEC091B2176CE00D183D0 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39BEC081B2176CE00D183D0 /* PaymentController.swift */; };
 		D39FC69C1AC6461D00B6416B /* Pods.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */; };
 		D39FC69D1AC6461F00B6416B /* Pods.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1430730C15A9671CCBACB989 /* Pods.release.xcconfig */; };
 		D39FC69F1AC64A8900B6416B /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39FC69E1AC64A8900B6416B /* ImageController.swift */; };
 		D3AF38781ACE241900B762B7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AF38771ACE241900B762B7 /* Global.swift */; };
 		D3BCE0791AC4053500824004 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE0781AC4053500824004 /* ScanController.swift */; };
-		D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE07A1AC47E7900824004 /* PaymentController.swift */; };
+		D3BCE07B1AC47E7900824004 /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE07A1AC47E7900824004 /* CardController.swift */; };
 		D3BCE0811AC636FE00824004 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3BCE0801AC636FE00824004 /* Settings.bundle */; };
 		D3D6B3001B0555390020572C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D6B2FF1B0555390020572C /* HomeController.swift */; };
 		D3D6B30D1B05A7620020572C /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D6B3091B05A5740020572C /* ParseFacebookUtilsV4.framework */; };
@@ -136,6 +137,7 @@
 		D3504A951AED8DC1002D91D0 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		D3504A971AEE0261002D91D0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		D37373821AEC606B0060EE9A /* SupportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportController.swift; sourceTree = "<group>"; };
+		D39BEC081B2176CE00D183D0 /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 		D39FC69E1AC64A8900B6416B /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		D3AF38771ACE241900B762B7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		D3BCE06C1AC3F2A400824004 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -144,7 +146,7 @@
 		D3BCE0721AC3F2E900824004 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		D3BCE0741AC3F2F900824004 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D3BCE0781AC4053500824004 /* ScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanController.swift; sourceTree = "<group>"; };
-		D3BCE07A1AC47E7900824004 /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
+		D3BCE07A1AC47E7900824004 /* CardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
 		D3BCE0801AC636FE00824004 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D3D6B2FF1B0555390020572C /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		D3D6B3081B05A5740020572C /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -399,8 +401,9 @@
 				D33EBA941ABFFC3A001E637D /* SettingsController.swift */,
 				D33EBAA51AC1F406001E637D /* WebController.swift */,
 				D3BCE0781AC4053500824004 /* ScanController.swift */,
-				D3BCE07A1AC47E7900824004 /* PaymentController.swift */,
+				D3BCE07A1AC47E7900824004 /* CardController.swift */,
 				D327FB051ACC848B00FA554B /* AccountsController.swift */,
+				D39BEC081B2176CE00D183D0 /* PaymentController.swift */,
 			);
 			name = "Settings Page";
 			sourceTree = "<group>";
@@ -482,6 +485,9 @@
 								enabled = 0;
 							};
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.OMC = {
 								enabled = 1;
 							};
 							com.apple.Passbook = {
@@ -581,7 +587,7 @@
 				D33EBA551ABFEDBC001E637D /* AppDelegate.swift in Sources */,
 				D33EBA9E1AC0EC14001E637D /* NoAnimationSegue.swift in Sources */,
 				D327FB041ACC82E400FA554B /* DebugAccount.swift in Sources */,
-				D3BCE07B1AC47E7900824004 /* PaymentController.swift in Sources */,
+				D3BCE07B1AC47E7900824004 /* CardController.swift in Sources */,
 				D3156E281AEF090900101215 /* RBResizeImage.swift in Sources */,
 				D3AF38781ACE241900B762B7 /* Global.swift in Sources */,
 				D3504A981AEE0261002D91D0 /* Message.swift in Sources */,
@@ -599,6 +605,7 @@
 				D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */,
 				D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */,
 				D3D6B3001B0555390020572C /* HomeController.swift in Sources */,
+				D39BEC091B2176CE00D183D0 /* PaymentController.swift in Sources */,
 				D37373831AEC606B0060EE9A /* SupportController.swift in Sources */,
 				D33EBA5D1ABFEDBC001E637D /* PagesController.swift in Sources */,
 				D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */,
@@ -729,6 +736,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = STRIPE_ENABLE_APPLEPAY;
 				INFOPLIST_FILE = "Night Owl/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -760,6 +768,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = STRIPE_ENABLE_APPLEPAY;
 				INFOPLIST_FILE = "Night Owl/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

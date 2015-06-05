@@ -9,7 +9,7 @@
 class ScanController: UIViewController, CardIOViewDelegate {
     
     // MARK: Instance Variables
-    var paymentController: PaymentController!
+    var paymentController: CardController!
     private var user = User.current()
     
     // MARK: IBOutlets

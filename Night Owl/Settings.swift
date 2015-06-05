@@ -17,6 +17,7 @@ class Settings: NSObject {
     var supportUrl: String!
     var termsUrl: String!
     var privacyUrl: String!
+    var venmo: String!
     var freeQuestions: Int!
     var freeQuestionsCard: Int!
     var questionPrice: Float!
@@ -32,6 +33,7 @@ class Settings: NSObject {
         self.supportUrl = object["supportUrl"] as? String
         self.termsUrl = object["termsUrl"] as? String
         self.privacyUrl = object["privacyUrl"] as? String
+        self.venmo = object["venmo"] as? String
         self.freeQuestions = object["freeQuestions"] as? Int
         self.referralQuestions = object["referralQuestions"] as? Int
         self.freeQuestionsCard = object["freeQuestionsCard"] as? Int

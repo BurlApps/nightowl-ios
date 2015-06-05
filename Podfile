@@ -1,5 +1,8 @@
 pod 'Stripe'
+pod 'Stripe/ApplePay'
+pod 'ApplePayStubs', '~> 0.2'
 pod 'PaymentKit'
+pod 'Venmo-iOS-SDK', '~>1.3'
 pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMessagesViewController', :branch => 'version_5.3.2_patch'
 pod 'CHTTextView', '~> 0.1'
 pod 'LLSimpleCamera', '~> 2.2'

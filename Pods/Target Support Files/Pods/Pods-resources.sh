@@ -47,7 +47,8 @@ install_resource()
       ;;
   esac
 }
-          install_resource "FormatterKit/Localizations/ca.lproj"
+          install_resource "ApplePayStubs/ApplePayStubs/STPTestPaymentSummaryViewController.xib"
+                    install_resource "FormatterKit/Localizations/ca.lproj"
                     install_resource "FormatterKit/Localizations/cs.lproj"
                     install_resource "FormatterKit/Localizations/da.lproj"
                     install_resource "FormatterKit/Localizations/de.lproj"
