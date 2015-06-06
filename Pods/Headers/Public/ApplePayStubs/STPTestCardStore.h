@@ -1,1 +1,0 @@
-../../../ApplePayStubs/ApplePayStubs/STPTestCardStore.h

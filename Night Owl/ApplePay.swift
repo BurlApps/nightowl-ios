@@ -39,15 +39,9 @@ class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
     // MARK: Instance Methods
     func getModal() -> UIViewController! {
         if enabled {
-            #if DEBUG
-                var paymentController = STPTestPaymentAuthorizationViewController(paymentRequest: self.request)
-                paymentController.delegate = self
-                return paymentController
-            #else
-                var paymentController = PKPaymentAuthorizationViewController(paymentRequest: self.request)
-                paymentController.delegate = self
-                return paymentController
-            #endif
+            var paymentController = PKPaymentAuthorizationViewController(paymentRequest: self.request)
+            paymentController.delegate = self
+            return paymentController
         }
         
         return nil

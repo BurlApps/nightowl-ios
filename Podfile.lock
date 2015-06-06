@@ -1,5 +1,4 @@
 PODS:
-  - ApplePayStubs (0.2)
   - CardIO (5.0.3)
   - CCTemplate (0.2.0)
   - CHTTextView (0.1)
@@ -48,7 +47,6 @@ PODS:
     - VENCore (~> 3.0.0)
 
 DEPENDENCIES:
-  - ApplePayStubs
   - CardIO (~> 5.0)
   - CHTTextView (~> 0.1)
   - CWStatusBarNotification (~> 2.2.6)
@@ -73,7 +71,6 @@ CHECKOUT OPTIONS:
     :git: https://github.com/jessesquires/JSQMessagesViewController
 
 SPEC CHECKSUMS:
-  ApplePayStubs: 5dd63c36527d1117b2045939fb5b6581b4815433
   CardIO: 3b0cc447bd0dd3d9552159365ba5c7b7f1db586a
   CCTemplate: f00efa85dad31e12b8a766b8e8198eb772c71c4f
   CHTTextView: ceca52ee4c0a6e05c05a919c7135b82acdf8ed3f

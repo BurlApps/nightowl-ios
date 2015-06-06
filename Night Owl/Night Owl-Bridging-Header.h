@@ -20,7 +20,6 @@
 
 #import "CWStatusBarNotification.h"
 #import "Stripe.h"
-#import "ApplePayStubs.h"
 #import "PTKCardExpiry.h"
 #import "PTKCardCVC.h"
 #import "PTKCardNumber.h"
