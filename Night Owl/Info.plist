@@ -40,7 +40,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>${FACEBOOK_ID}</string>
 	<key>FacebookDisplayName</key>
@@ -55,10 +55,6 @@
 	<string>${PARSE_CLIENT_KEY}</string>
 	<key>StripeClientKey</key>
 	<string>${STRIPE_CLIENT_KEY}</string>
-	<key>VenmoID</key>
-	<string>${VENMO_ID}</string>
-	<key>VenmoSecret</key>
-	<string>${VENMO_SECRET}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -75,5 +71,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>VenmoID</key>
+	<string>${VENMO_ID}</string>
+	<key>VenmoSecret</key>
+	<string>${VENMO_SECRET}</string>
 </dict>
 </plist>

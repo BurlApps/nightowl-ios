@@ -103,8 +103,14 @@ class User: NSObject {
             
             request.startWithCompletionHandler({ (connection: FBSDKGraphRequestConnection!, data: AnyObject!, error: NSError!) -> Void in
                 if data != nil && error == nil {
-                    self.parse["name"] = data["name"]
-                    self.parse["email"] = data["email"]
+                    if let name = data["name"] as? String {
+                        self.parse["name"] = name
+                    }
+                    
+                    if let email = data["email"] as? String {
+                        self.parse["email"] = email
+                    }
+                    
                     self.parse.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         if !success || error != nil {
                             self.parse.removeObjectForKey("name")
