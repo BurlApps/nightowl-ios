@@ -233,7 +233,11 @@ class User: NSObject {
                                 note: note, audience: VENTransactionAudience.Public,
                                 completionHandler: { (transaction: VENTransaction!, success: Bool, error: NSError!) -> Void in
                                     if success && error == nil {
-                                        let payed = user.parse["payed"] as! Float
+                                        var payed: Float = 0
+                            
+                                        if var payedTemp = user.parse["payed"] as? Float {
+                                            payed = payedTemp
+                                        }
                                         
                                         user.parse["payed"] = payed + settings.questionPrice
                                         user.parse.saveInBackgroundWithBlock(nil)

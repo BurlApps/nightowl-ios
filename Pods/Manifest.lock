@@ -48,7 +48,7 @@ PODS:
     - VENCore (~> 3.0.0)
 
 DEPENDENCIES:
-  - ApplePayStubs (~> 0.2)
+  - ApplePayStubs
   - CardIO (~> 5.0)
   - CHTTextView (~> 0.1)
   - CWStatusBarNotification (~> 2.2.6)

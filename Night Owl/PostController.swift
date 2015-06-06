@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate {
+class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate {
     
     // MARK: Instance Variables
     var capturedImage: UIImage!
@@ -20,6 +20,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     private var settings: Settings!
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var alertMode: AlertMode!
+    private var applePay: ApplePay!
     
     // MARK: Enums
     enum AlertMode {
@@ -124,6 +125,10 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
                 NSFontAttributeName: font
                 ], forState: UIControlState.Normal)
         }
+        
+        // Create Apple Pay
+        self.applePay = ApplePay(user: self.user)
+        self.applePay.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -165,9 +170,11 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             editorText = nil
         }
         
-        self.user.chargeQuestion(editorText as? String, callback: { (error) -> Void in
+        var description = editorText as? String
+        
+        self.user.chargeQuestion(description, callback: { (error) -> Void in
             if error == nil {
-                Assignment.create(editorText as? String, question: self.capturedImage, creator: self.user, subject: self.subjectChosen)
+                Assignment.create(description, question: self.capturedImage, creator: self.user, subject: self.subjectChosen)
                 
                 self.user.updateSubject(self.subjectChosen)
                 self.cameraController.slideToQuestions()
@@ -182,8 +189,8 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     
     func cardAdded() {
         self.alertMode = .ThankYou
-        UIAlertView(title: "Thank You For Adding Your Card!",
-            message: "As promised, \(self.settings.freeQuestionsCard) free solutions have been added to your account!",
+        UIAlertView(title: "Thank You For Adding Your Information!",
+            message: "As promised, this answer is completely on us!",
             delegate: self, cancelButtonTitle: "Okay").show()
     }
 
@@ -193,12 +200,12 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     }
     
     @IBAction func createPost(sender: AnyObject) {
-        if self.user.freeQuestions < 1 && self.user.card == nil {
+        if self.user.freeQuestions < 1 && self.settings.questionPrice > 0 && self.user.card == nil {
             self.alertMode = .AskForCard
             
-            UIAlertView(title: "Get \(self.settings.freeQuestionsCard) Free Solutions",
-                message: "Want this answer free? Add your credit card to get this one us! Don't worry, we won't charge your card until you use up your free questions.",
-                delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Card").show()
+            UIAlertView(title: "Want This Answer Free?",
+                message: "Add your payment information to get this one us! Don't worry, we WON'T charge you until you use up your free questions.",
+                delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Info").show()
         } else {
             self.createAssignment()
         }
@@ -210,12 +217,16 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             if buttonIndex == 0 {
                 self.navigationController?.popViewControllerAnimated(false)
             } else {
-                var paymentController = self.storyBoard.instantiateViewControllerWithIdentifier("PaymentController") as? PaymentController
-                paymentController?.postController = self
-                self.navigationController?.pushViewController(paymentController!, animated: true)
+                if self.applePay.enabled {
+                    self.presentViewController(self.applePay.getModal(), animated: true, completion: nil)
+                } else {
+                    var paymentController = self.storyBoard.instantiateViewControllerWithIdentifier("PaymentController") as? PaymentController
+                    paymentController?.postController = self
+                    self.navigationController?.pushViewController(paymentController!, animated: true)
+                }
             }
         } else if self.alertMode == .ThankYou {
-            self.user.creditQuestions(self.settings.freeQuestionsCard)
+            self.user.creditQuestions(1)
             self.createAssignment()
         } else {
             self.navigationController?.popViewControllerAnimated(false)
@@ -278,5 +289,18 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         }
         
         return true
+    }
+    
+    // MARK: Payment Methods
+    func applePayAuthorized(authorized: Bool) {
+        self.cardWasAdded = authorized
+    }
+    
+    func applePayClose() {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            if self.cardWasAdded {
+                self.cardAdded()
+            }
+        })
     }
 }

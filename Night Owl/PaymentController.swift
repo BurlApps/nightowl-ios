@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class PaymentController: UITableViewController, PKPaymentAuthorizationViewControllerDelegate {
+class PaymentController: UITableViewController, ApplePayDelegate {
     
     // MARK: Instance Variables
     var postController: PostController!
     private var user = User.current()
     private var navBorder: UIView!
-    private var request: PKPaymentRequest!
+    private var applePay: ApplePay!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +20,9 @@ class PaymentController: UITableViewController, PKPaymentAuthorizationViewContro
         // Set Background
         self.view.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1)
         
-        // Create Payment
-        if var request = Stripe.paymentRequestWithMerchantIdentifier("merchant.com.vallelungabrian.Night-Owl") {
-            self.request = request
-            
-            self.request.paymentSummaryItems = [
-                PKPaymentSummaryItem(label: "With Night Owl", amount: 0.01)
-            ]
-        }
+        // Create Apple Pay
+        self.applePay = ApplePay(user: self.user)
+        self.applePay.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -98,7 +93,7 @@ class PaymentController: UITableViewController, PKPaymentAuthorizationViewContro
     
     // MARK: UITableViewController Methods
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 1 && !Stripe.canSubmitPaymentRequest(self.request) {
+        if indexPath.row == 1 && !self.applePay.enabled {
             return 0
         }
         
@@ -110,15 +105,7 @@ class PaymentController: UITableViewController, PKPaymentAuthorizationViewContro
         
         if indexPath.row == 1 {
             // Apple Pay
-            #if DEBUG
-                var paymentController = STPTestPaymentAuthorizationViewController(paymentRequest: self.request)
-                paymentController.delegate = self
-                self.presentViewController(paymentController, animated: true, completion: nil)
-            #else
-                var paymentController = PKPaymentAuthorizationViewController(paymentRequest: self.request)
-                paymentController.delegate = self
-                self.presentViewController(paymentController, animated: true, completion: nil)
-            #endif
+            self.presentViewController(self.applePay.getModal(), animated: true, completion: nil)
         } else if indexPath.row == 2 {
             // Venmo
             self.user.addVenmo({ (error) -> Void in
@@ -128,18 +115,13 @@ class PaymentController: UITableViewController, PKPaymentAuthorizationViewContro
     }
     
     // MARK: Payment Methods
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didAuthorizePayment payment: PKPayment!, completion: ((PKPaymentAuthorizationStatus) -> Void)!) {        
-        self.user.addApplePay(payment, callback: { (error) -> Void in
-            if error == nil {
-                completion(.Success)
-            } else {
-                completion(.Failure)
-            }
-        })
+    func applePayAuthorized(authorized: Bool) {
+        if authorized {
+            self.setCheckMark()
+        }
     }
     
-    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController!) {
+    func applePayClose() {
         self.dismissViewControllerAnimated(true, completion: nil)
-        self.setCheckMark()
     }
 }
