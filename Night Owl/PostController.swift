@@ -23,7 +23,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
     
     // MARK: Enums
     enum AlertMode {
-        case AskForCard, ThankYou
+        case AskForCard, ThankYou, PaymentError
     }
     
     // MARK: IBOutlets
@@ -90,7 +90,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         self.textEditor.frame.origin.x += 20
         self.textEditor.frame.origin.y += 90
         self.textEditor.scrollEnabled = false
-        self.textEditor.placeholder = "Tell us which question\n(optional)"
+        self.textEditor.placeholder = "Tell us which problem\n(optional)"
         self.textEditor.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
         self.textEditor.textColor = UIColor.whiteColor()
         self.textEditor.textAlignment = NSTextAlignment.Center
@@ -105,9 +105,6 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
         // Set Current Price
         Settings.sharedInstance { (settings) -> Void in
             self.settings = settings
-            
-            self.postButton.title = "POST"
-            self.postBigButton.setTitle("POST QUESTION", forState: UIControlState.Normal)
 
             if self.user.freeQuestions > 0 {
                 self.title = "\(self.user.freeQuestions) Free Left"
@@ -115,8 +112,6 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
                 self.title = "Free Right Now!"
             } else {
                 self.title = "Price: \(settings.priceFormatted())"
-                self.postButton.title = "REQUEST"
-                self.postBigButton.setTitle("REQUEST SOLUTION", forState: UIControlState.Normal)
             }
             
             self.postButton.tintColor = UIColor(white: 1, alpha: 1)
@@ -170,12 +165,19 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             editorText = nil
         }
         
-        Assignment.create(editorText as? String, question: self.capturedImage, creator: self.user, subject: self.subjectChosen)
-        
-        self.user.updateSubject(self.subjectChosen)
-        self.user.chargeQuestion()
-        self.cameraController.slideToQuestions()
-
+        self.user.chargeQuestion(editorText as? String, callback: { (error) -> Void in
+            if error == nil {
+                Assignment.create(editorText as? String, question: self.capturedImage, creator: self.user, subject: self.subjectChosen)
+                
+                self.user.updateSubject(self.subjectChosen)
+                self.cameraController.slideToQuestions()
+            } else {
+                self.alertMode = .PaymentError
+                UIAlertView(title: "Payment Error",
+                    message: "An error occurred processing your payment. Please update your payment information!",
+                    delegate: self, cancelButtonTitle: "Okay").show()
+            }
+        })
     }
     
     func cardAdded() {
@@ -195,7 +197,7 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
             self.alertMode = .AskForCard
             
             UIAlertView(title: "Get \(self.settings.freeQuestionsCard) Free Solutions",
-                message: "Want this answer free? Add your credit card to get this and the next on us! Don't worry, we won't charge your card until you use up your free questions.",
+                message: "Want this answer free? Add your credit card to get this one us! Don't worry, we won't charge your card until you use up your free questions.",
                 delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Card").show()
         } else {
             self.createAssignment()
@@ -212,9 +214,11 @@ class PostController: UIViewController, UITextViewDelegate, UIPickerViewDataSour
                 paymentController?.postController = self
                 self.navigationController?.pushViewController(paymentController!, animated: true)
             }
-        } else {
+        } else if self.alertMode == .ThankYou {
             self.user.creditQuestions(self.settings.freeQuestionsCard)
             self.createAssignment()
+        } else {
+            self.navigationController?.popViewControllerAnimated(false)
         }
         
         self.alertMode = nil

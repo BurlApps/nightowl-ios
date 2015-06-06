@@ -59,13 +59,10 @@ class SupportController: JSQMessagesViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.spinner)
         
         // Load Messages
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             self.loadMessages()
         }
-        
-        // Set Load
-        self.loaded = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -102,6 +99,7 @@ class SupportController: JSQMessagesViewController {
             self.spinner.startAnimating()
             
             self.user.messages(self.messages.count, callback: { (messages) -> Void in
+                self.loaded = true
                 
                 for message in messages {
                     var sender = "support"
@@ -120,12 +118,10 @@ class SupportController: JSQMessagesViewController {
         }
     }
     
-    func recievedMessage(text: String, buzz: Bool) {
+    func recievedMessage(text: String) {
         var message = JSQMessage(text: text, sender: "support", date: NSDate())
         
-        if buzz {
-            JSQSystemSoundPlayer.jsq_playMessageReceivedAlert()
-        }
+        JSQSystemSoundPlayer.jsq_playMessageReceivedAlert()
         
         self.messages.append(message)
         self.finishReceivingMessage()

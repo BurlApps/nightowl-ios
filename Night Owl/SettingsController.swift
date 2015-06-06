@@ -67,9 +67,6 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
         
         // Set Fetch User Info
         self.reloadSettings()
-        
-        // Set Load
-        self.loaded = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -119,6 +116,7 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
     func reloadSettings() {
         // Get Settings
         Settings.update { (settings) -> Void in
+            self.loaded = true
             self.settings = settings
             self.questionPrice.text = settings.priceFormatted()
         }
@@ -154,7 +152,7 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
         Global.slideToController(2, animated: true, direction: .Reverse)
     }
     
-    // MARK: UITableViewController Methods
+    // MARK: UITableViewController Methods    
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         self.selectedRow = indexPath
         return indexPath

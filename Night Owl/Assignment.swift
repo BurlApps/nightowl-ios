@@ -77,7 +77,6 @@ class Assignment: NSObject {
                 println(error)
             }
         }
-        
     }
     
     // MARK: Instance Methods

@@ -71,13 +71,10 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         self.refreshControl?.addTarget(self, action: Selector("reloadQuestions"), forControlEvents: UIControlEvents.ValueChanged)
         
         // Reload Questions
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC)))
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             self.reloadQuestions()
         }
-        
-        // Set Load
-        self.loaded = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -99,6 +96,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         
         if self.searchBar != nil && self.user != nil {
             self.user.assignments { (assignments) -> Void in
+                self.loaded = true
                 self.questions = assignments
                 self.filterQuestions(self.searchBar.text)
                 self.refreshControl?.endRefreshing()

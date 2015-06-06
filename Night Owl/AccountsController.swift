@@ -12,9 +12,16 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
     private var accounts: [DebugAccount] = []
     private var cellIdentifier = "cell"
     private var account: DebugAccount!
+    private var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add Spinner
+        self.spinner = UIActivityIndicatorView(frame: CGRectMake(0, 0, 20, 20))
+        self.spinner.center = CGPointMake(self.view.frame.width/2, self.view.frame.height/2)
+        self.spinner.startAnimating()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.spinner)
         
         // Add Refresh
         self.refreshControl = UIRefreshControl()
@@ -30,6 +37,7 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
             self.accounts = accounts
             self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
+            self.spinner.stopAnimating()
         }
     }
     
@@ -81,7 +89,6 @@ class AccountsController: UITableViewController, UIAlertViewDelegate {
         }
         
         cell.textLabel?.text = account.name
-        
         return cell
     }
 }

@@ -149,6 +149,12 @@ class User: NSObject {
         lastSubject = subject
     }
     
+    func changeCard(card: String) {
+        self.card = card
+        self.parse["card"] = self.card
+        self.parse.saveInBackgroundWithBlock(nil)
+    }
+    
     func updateCard(card: CardIOCreditCardInfo, callback: (error: NSError!) -> Void) {
         var stCard = STPCard()
         stCard.number = card.cardNumber
@@ -157,76 +163,97 @@ class User: NSObject {
         stCard.cvc = card.cvv
         
         STPAPIClient.sharedClient().createTokenWithCard(stCard, completion: { (token: STPToken!, error: NSError!) -> Void in
-            callback(error: error)
-            
             if token != nil && error == nil {
-                let number = NSString(string: card.redactedCardNumber)
-                self.card = number.substringFromIndex(number.length - 4)
-                self.parse["card"] = self.card
-                self.parse.saveInBackgroundWithBlock(nil)
-                
+                self.changeCard(token.card.last4)
+
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
                     "card":token.tokenId
                 ], block: nil)
             }
+            
+            callback(error: error)
         })
     }
     
     func addApplePay(payment: PKPayment, callback: (error: NSError!) -> Void) {
         STPAPIClient.sharedClient().createTokenWithPayment(payment, completion: { (token: STPToken!, error: NSError!) -> Void in
-            callback(error: error)
             if token != nil && error == nil {
-                self.card = "Apple Pay"
-                self.parse["card"] = self.card
-                self.parse.saveInBackgroundWithBlock(nil)
+                self.changeCard("Apple Pay")
                 
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
                     "card":token.tokenId
                 ], block: nil)
-            }
-        })
-    }
-    
-    func addVenmo(callback: (error: NSError!) -> Void) {
-        Venmo.sharedInstance().requestPermissions([
-            "make_payments"
-        ], withCompletionHandler: { (success: Bool, error: NSError!) -> Void in
-            if success && error == nil {
-                self.card = "Venmo"
-                self.parse["card"] = self.card
-                self.parse.saveInBackgroundWithBlock(nil)
             }
             
             callback(error: error)
         })
     }
     
-    func chargeQuestion() {
+    func addVenmo(callback: (error: NSError!) -> Void) {
+        if Venmo.sharedInstance().session.user != nil {
+            self.changeCard("Venmo")
+            
+            callback(error: nil)
+        } else {
+            Venmo.sharedInstance().requestPermissions([
+                "make_payments"
+            ], withCompletionHandler: { (success: Bool, error: NSError!) -> Void in
+                if success && error == nil {
+                    self.changeCard("Venmo")
+                }
+                
+                callback(error: error)
+            })
+        }
+    }
+    
+    func chargeQuestion(description: String!, callback: (error: NSError!) -> Void) {
         Settings.sharedInstance { (settings) -> Void in
             self.fetch { (user) -> Void in
                 if user.freeQuestions > 0 {
                     user.freeQuestions = user.freeQuestions - 1
                     user.parse["freeQuestions"] = user.freeQuestions
+                    user.parse.saveInBackgroundWithBlock(nil)
+                    
                     Global.reloadSettingsController()
+                    callback(error: nil)
                 } else if self.card == "Venmo" {
                     var amount = Int(settings.questionPrice * 100)
+                    var note = "Thanks for the math help!"
                     
-                    Venmo.sharedInstance().sendPaymentTo(settings.venmo, amount: UInt(amount),
-                        note: "Math homework help!", audience: VENTransactionAudience.Public,
-                        completionHandler: { (transaction: VENTransaction!, success: Bool, error: NSError!) -> Void in
-                            if success && error == nil {
-                                let payed = user.parse["payed"] as! Float
-                                user.parse["payed"] = payed + settings.questionPrice
-                            } else {
-                                println(error)
-                            }
+                    if description != nil {
+                        note = "Help with \(description)"
+                    }
+                    
+                    note = "\(note) \(settings.host)/d"
+                    
+                    self.addVenmo({ (error) -> Void in
+                        if error == nil {
+                            Venmo.sharedInstance().sendPaymentTo(settings.venmo, amount: UInt(amount),
+                                note: note, audience: VENTransactionAudience.Public,
+                                completionHandler: { (transaction: VENTransaction!, success: Bool, error: NSError!) -> Void in
+                                    if success && error == nil {
+                                        let payed = user.parse["payed"] as! Float
+                                        
+                                        user.parse["payed"] = payed + settings.questionPrice
+                                        user.parse.saveInBackgroundWithBlock(nil)
+                                    } else {
+                                        println(error)
+                                    }
+                                    
+                                    callback(error: error)
+                            })
+                        } else {
+                            callback(error: error)
+                        }
                     })
                 } else {
                     let charges = user.parse["charges"] as! Float
+                    
                     user.parse["charges"] = charges + settings.questionPrice
+                    user.parse.saveInBackgroundWithBlock(nil)
+                    callback(error: nil)
                 }
-                
-                user.parse.saveInBackgroundWithBlock(nil)
             }
             
             return ()

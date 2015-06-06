@@ -64,10 +64,10 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
             var page: PageController!
             
             switch(index) {
-            case 0: page = storyBoard.instantiateViewControllerWithIdentifier("SupportController") as? PageController
-            case 1: page = storyBoard.instantiateViewControllerWithIdentifier("QuestionsController") as? PageController
-            case 2: page = storyBoard.instantiateViewControllerWithIdentifier("CameraController") as? PageController
-            default: page = storyBoard.instantiateViewControllerWithIdentifier("SettingsController") as? PageController
+            case 0: page = self.storyBoard.instantiateViewControllerWithIdentifier("SupportController") as? PageController
+            case 1: page = self.storyBoard.instantiateViewControllerWithIdentifier("QuestionsController") as? PageController
+            case 2: page = self.storyBoard.instantiateViewControllerWithIdentifier("CameraController") as? PageController
+            default: page = self.storyBoard.instantiateViewControllerWithIdentifier("SettingsController") as? PageController
             }
             
             page?.view.frame = self.view.frame
@@ -192,7 +192,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {        
         var index = (viewController as! PageController).pageIndex
         
-        if index == NSNotFound || (index + 1) == self.pages {
+        if index == NSNotFound || index >= self.pages {
             return nil
         }
         

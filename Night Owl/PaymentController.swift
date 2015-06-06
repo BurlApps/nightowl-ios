@@ -12,7 +12,6 @@ class PaymentController: UITableViewController, PKPaymentAuthorizationViewContro
     var postController: PostController!
     private var user = User.current()
     private var navBorder: UIView!
-    private var numberOfRows = 3
     private var request: PKPaymentRequest!
 
     override func viewDidLoad() {
@@ -22,17 +21,12 @@ class PaymentController: UITableViewController, PKPaymentAuthorizationViewContro
         self.view.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1)
         
         // Create Payment
-        self.request = Stripe.paymentRequestWithMerchantIdentifier("merchant.com.vallelungabrian.Night-Owl")
-        self.request.paymentSummaryItems = [
-            PKPaymentSummaryItem(label: "Night Owl", amount: 0.01)
-        ]
-        
-        if(!Stripe.canSubmitPaymentRequest(self.request)) {
-            self.numberOfRows -= 1
+        if var request = Stripe.paymentRequestWithMerchantIdentifier("merchant.com.vallelungabrian.Night-Owl") {
+            self.request = request
             
-            self.tableView.deleteRowsAtIndexPaths([
-                NSIndexPath(forRow: 0, inSection: 0)
-            ], withRowAnimation: .None)
+            self.request.paymentSummaryItems = [
+                PKPaymentSummaryItem(label: "With Night Owl", amount: 0.01)
+            ]
         }
     }
     
@@ -103,6 +97,14 @@ class PaymentController: UITableViewController, PKPaymentAuthorizationViewContro
     }
     
     // MARK: UITableViewController Methods
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row == 1 && !Stripe.canSubmitPaymentRequest(self.request) {
+            return 0
+        }
+        
+        return 60
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         

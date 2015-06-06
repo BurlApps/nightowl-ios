@@ -109,7 +109,7 @@ class Global {
                 for (index, parent) in self.pagesController.controllers {
                     if let controller = parent.topViewController as? SupportController {
                         if controller.loaded {
-                            controller.recievedMessage(text, buzz: wasActive)
+                            controller.recievedMessage(text)
                         }
                     }
                 }

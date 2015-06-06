@@ -39,19 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MaveSDK.setupSharedInstanceWithApplicationID(maveKey)
         Global.configureMaveShare()
         
-        // Register for Push Notitications, if running iOS 8
-        if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
-            let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-            let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-            
-            // Register for Push Notifications before iOS 8
-        } else {
-            let notificationTypes = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
-            application.registerForRemoteNotificationTypes(notificationTypes)
-        }
-        
         // Track an app open here if we launch with a push, unless
         // "content_available" was used to trigger a background push (introduced
         // in iOS 7). In that case, we skip tracking here to avoid double

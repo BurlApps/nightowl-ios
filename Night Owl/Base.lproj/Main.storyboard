@@ -254,7 +254,7 @@
                                     <constraint firstAttribute="height" constant="95" id="qCI-DN-8b7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" title="loading...">
+                                <state key="normal" title="SEND QUESTION">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -280,7 +280,7 @@
                                 <action selector="canelPost:" destination="set-Iy-g4I" id="lFu-gZ-a96"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="POST" id="sHz-Hj-j7q">
+                        <barButtonItem key="rightBarButtonItem" title="SEND" id="sHz-Hj-j7q">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="createPost:" destination="set-Iy-g4I" id="qVr-1G-joR"/>
@@ -570,7 +570,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cxU-JD-G93" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3094" y="1816"/>
+            <point key="canvasLocation" x="3094" y="1766"/>
         </scene>
         <!--Debug Accounts-->
         <scene sceneID="n5N-2G-whS">
@@ -597,7 +597,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hl2-fu-o4l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1762" y="1816"/>
+            <point key="canvasLocation" x="1762" y="1766"/>
         </scene>
         <!--Payment-->
         <scene sceneID="VfX-y3-fPm">
@@ -610,7 +610,7 @@
                         <sections>
                             <tableViewSection headerTitle="Payment methods" id="Xlq-Mc-bU0">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="SfK-3B-lcO" imageView="Fzg-zr-1j7" rowHeight="60" style="IBUITableViewCellStyleDefault" id="4uW-tv-GOv">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="SfK-3B-lcO" imageView="Fzg-zr-1j7" style="IBUITableViewCellStyleDefault" id="4uW-tv-GOv">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4uW-tv-GOv" id="ATW-i0-Llv">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -630,7 +630,7 @@
                                             <segue destination="RHD-wK-Peo" kind="push" identifier="creditCard" id="ckT-Cr-4kw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="cKo-PQ-EcH" imageView="lzw-SC-rzQ" rowHeight="60" style="IBUITableViewCellStyleDefault" id="5UU-Cp-hKE">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="cKo-PQ-EcH" imageView="lzw-SC-rzQ" style="IBUITableViewCellStyleDefault" id="5UU-Cp-hKE">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5UU-Cp-hKE" id="IZK-RS-A9D">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -647,7 +647,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="gFa-Bs-uXf" imageView="r15-qj-tJf" rowHeight="60" style="IBUITableViewCellStyleDefault" id="UXj-pR-Gud">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="gFa-Bs-uXf" imageView="r15-qj-tJf" style="IBUITableViewCellStyleDefault" id="UXj-pR-Gud">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UXj-pR-Gud" id="B1X-5h-QAT">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -676,7 +676,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jp-Np-Jlf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2210" y="1816"/>
+            <point key="canvasLocation" x="2210" y="1766"/>
         </scene>
         <!--Credit Card-->
         <scene sceneID="Deh-dA-dcf">
@@ -807,7 +807,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFA-pi-ohb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2666" y="1816"/>
+            <point key="canvasLocation" x="2666" y="1766"/>
         </scene>
         <!--loading...-->
         <scene sceneID="wXn-z7-guF">
@@ -844,10 +844,10 @@
             </objects>
             <point key="canvasLocation" x="2210" y="1049"/>
         </scene>
-        <!--Home Controller-->
+        <!--Home Login Controller-->
         <scene sceneID="Wvv-gm-srK">
             <objects>
-                <viewController id="3O5-ek-dlP" customClass="HomeController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeLoginController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3O5-ek-dlP" customClass="HomeLoginController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gee-pR-FFE"/>
                         <viewControllerLayoutGuide type="bottom" id="O0o-uQ-EdZ"/>
@@ -871,49 +871,15 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="createPost:" destination="set-Iy-g4I" eventType="touchUpInside" id="Hjc-X5-Cgi"/>
                                             <action selector="loginUpInside:" destination="3O5-ek-dlP" eventType="touchUpInside" id="Alt-q0-f7C"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAI-Dm-WUv">
                                         <rect key="frame" x="16" y="210" width="288" height="248"/>
                                         <attributedString key="attributedText">
-                                            <fragment content="Take a photo">
+                                            <fragment content="Stuck on a math problem?  Send us your questions and our tutors will solve them!">
                                                 <attributes>
-                                                    <font key="NSFont" size="38" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" ">
-                                                <attributes>
-                                                    <font key="NSFont" size="30" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" ">
-                                                <attributes>
-                                                    <font key="NSFont" size="22" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Send us a math question  and we'll solve it.  You get several answers">
-                                                <attributes>
-                                                    <font key="NSFont" size="26" name="HelveticaNeue"/>
-                                                    <font key="NSOriginalFont" size="26" name="HelveticaNeue"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" ">
-                                                <attributes>
-                                                    <font key="NSFont" size="26" name="HelveticaNeue-Bold"/>
-                                                    <font key="NSOriginalFont" size="26" name="HelveticaNeue-Bold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="(with steps) free on us.  Enjoy!">
-                                                <attributes>
-                                                    <font key="NSFont" size="26" name="HelveticaNeue"/>
-                                                    <font key="NSOriginalFont" size="26" name="HelveticaNeue"/>
+                                                    <font key="NSFont" size="28" name="HelveticaNeue"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
                                             </fragment>
@@ -957,12 +923,25 @@
                         <outlet property="loginButton" destination="DN1-aL-AMr" id="cxz-Ri-P3p"/>
                         <outlet property="logoView" destination="JuA-s7-XEf" id="GAH-el-TYF"/>
                         <outlet property="onboardingLabel" destination="eAI-Dm-WUv" id="8ly-uE-4OA"/>
-                        <segue destination="2KH-bD-tFs" kind="custom" identifier="finishedSegue" customClass="NoAnimationSegue" id="M86-xj-hOe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPm-mu-JD6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="428" y="395"/>
+            <point key="canvasLocation" x="432" y="-253"/>
+        </scene>
+        <!--Home Controller-->
+        <scene sceneID="4Aq-Pb-Buy">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="IcC-JF-Fw1" customClass="HomeController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7gM-J7-vdV"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <segue destination="2KH-bD-tFs" kind="custom" identifier="finishedSegue" customClass="NoAnimationSegue" id="epZ-pP-2Wn"/>
+                    </connections>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e3H-7g-c0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="432" y="395"/>
         </scene>
         <!--Pages Controller-->
         <scene sceneID="5oL-8a-vWQ">
@@ -1010,6 +989,144 @@
             </objects>
             <point key="canvasLocation" x="1292" y="395"/>
         </scene>
+        <!--Home Notifications Controller-->
+        <scene sceneID="iuF-D0-6Vu">
+            <objects>
+                <viewController storyboardIdentifier="HomeNotificationsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m3J-Nt-beF" customClass="HomeNotificationsController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4yn-fo-XqC"/>
+                        <viewControllerLayoutGuide type="bottom" id="3P2-fx-2EU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TcN-eU-iV9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NotificationLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bdG-Jb-2No" customClass="FLAnimatedImageView">
+                                <rect key="frame" x="80" y="70" width="160" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="K7i-es-odh"/>
+                                    <constraint firstAttribute="height" constant="160" id="LR9-3i-RIo"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuW-eU-Jsr">
+                                <rect key="frame" x="20" y="478" width="280" height="70"/>
+                                <color key="backgroundColor" red="0.23137254900000001" green="0.35294117650000001" blue="0.59215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="DkY-Z9-ZUq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="ENABLE NOTIFICATIONS">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="m3J-Nt-beF" eventType="touchUpInside" id="jeL-0z-Frk"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHK-Mo-ed9">
+                                <rect key="frame" x="16" y="230" width="288" height="228"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Want to get notified when the tutor solves your question?">
+                                        <attributes>
+                                            <font key="NSFont" size="28" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="bdG-Jb-2No" secondAttribute="centerX" id="7nA-bz-R0K"/>
+                            <constraint firstItem="zuW-eU-Jsr" firstAttribute="leading" secondItem="TcN-eU-iV9" secondAttribute="leading" constant="20" id="Uqd-Jo-wnC"/>
+                            <constraint firstItem="UHK-Mo-ed9" firstAttribute="trailing" secondItem="TcN-eU-iV9" secondAttribute="trailingMargin" id="W0z-si-VIX"/>
+                            <constraint firstItem="UHK-Mo-ed9" firstAttribute="leading" secondItem="TcN-eU-iV9" secondAttribute="leadingMargin" id="YES-Z8-zDa"/>
+                            <constraint firstItem="UHK-Mo-ed9" firstAttribute="top" secondItem="bdG-Jb-2No" secondAttribute="bottom" id="Ytd-yX-dNy"/>
+                            <constraint firstItem="bdG-Jb-2No" firstAttribute="top" secondItem="4yn-fo-XqC" secondAttribute="bottom" constant="50" id="dlv-hP-x7h"/>
+                            <constraint firstItem="zuW-eU-Jsr" firstAttribute="top" secondItem="UHK-Mo-ed9" secondAttribute="bottom" constant="20" id="kcL-Rb-pXY"/>
+                            <constraint firstAttribute="trailing" secondItem="zuW-eU-Jsr" secondAttribute="trailing" constant="20" id="n1n-UT-rgd"/>
+                            <constraint firstItem="3P2-fx-2EU" firstAttribute="top" secondItem="zuW-eU-Jsr" secondAttribute="bottom" constant="20" id="yAv-da-5OF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="onboardButton" destination="zuW-eU-Jsr" id="dXS-3S-mgE"/>
+                        <outlet property="onboardLabel" destination="UHK-Mo-ed9" id="zbN-aK-OEv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pXi-by-qiE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="432" y="1049"/>
+        </scene>
+        <!--Home Camera Controller-->
+        <scene sceneID="Jeb-wM-qMK">
+            <objects>
+                <viewController storyboardIdentifier="HomeCameraController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="58v-dX-gDf" customClass="HomeCameraController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1tO-1F-Bb6"/>
+                        <viewControllerLayoutGuide type="bottom" id="aqT-YS-VII"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wMb-hX-kXn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUh-jx-0cj">
+                                <rect key="frame" x="20" y="478" width="280" height="70"/>
+                                <color key="backgroundColor" red="0.23137254900000001" green="0.35294117650000001" blue="0.59215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="x9C-WA-J67"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="TURN ON CAMERA">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="58v-dX-gDf" eventType="touchUpInside" id="VKV-W3-sAw"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqS-nz-MPb">
+                                <rect key="frame" x="16" y="230" width="288" height="228"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="We use the camera to take pictures of what  you need help on.">
+                                        <attributes>
+                                            <font key="NSFont" size="28" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraLarge" translatesAutoresizingMaskIntoConstraints="NO" id="8fX-Ge-Da5" customClass="FLAnimatedImageView">
+                                <rect key="frame" x="80" y="70" width="160" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="paO-sI-XFf"/>
+                                    <constraint firstAttribute="height" constant="160" id="tI7-yZ-JKe"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KUh-jx-0cj" secondAttribute="trailing" constant="20" id="C4S-c2-NuS"/>
+                            <constraint firstItem="EqS-nz-MPb" firstAttribute="trailing" secondItem="wMb-hX-kXn" secondAttribute="trailingMargin" id="G6i-0Y-14m"/>
+                            <constraint firstItem="8fX-Ge-Da5" firstAttribute="top" secondItem="1tO-1F-Bb6" secondAttribute="bottom" constant="50" id="MwA-Yn-f9Z"/>
+                            <constraint firstItem="EqS-nz-MPb" firstAttribute="top" secondItem="8fX-Ge-Da5" secondAttribute="bottom" id="RdN-AB-mrX"/>
+                            <constraint firstItem="EqS-nz-MPb" firstAttribute="leading" secondItem="wMb-hX-kXn" secondAttribute="leadingMargin" id="cda-Oe-Gvl"/>
+                            <constraint firstItem="aqT-YS-VII" firstAttribute="top" secondItem="KUh-jx-0cj" secondAttribute="bottom" constant="20" id="j4P-Ut-8QB"/>
+                            <constraint firstAttribute="centerX" secondItem="8fX-Ge-Da5" secondAttribute="centerX" id="lnk-OL-6Yg"/>
+                            <constraint firstItem="KUh-jx-0cj" firstAttribute="top" secondItem="EqS-nz-MPb" secondAttribute="bottom" constant="20" id="o6G-xc-vTM"/>
+                            <constraint firstItem="KUh-jx-0cj" firstAttribute="leading" secondItem="wMb-hX-kXn" secondAttribute="leading" constant="20" id="vO7-FM-UpE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="onboardButton" destination="KUh-jx-0cj" id="NKV-aF-6wk"/>
+                        <outlet property="onboardLabel" destination="EqS-nz-MPb" id="MSi-dY-Yac"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TJm-vu-oQD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="432" y="1766"/>
+        </scene>
         <!--Page Controller-->
         <scene sceneID="4nd-Hb-zcr">
             <objects>
@@ -1039,20 +1156,22 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="3O5-ek-dlP" kind="relationship" relationship="rootViewController" id="lkm-Zy-w6s"/>
+                        <segue destination="IcC-JF-Fw1" kind="relationship" relationship="rootViewController" id="2Iv-La-BaJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PGn-rl-Tra" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-20" y="395"/>
+            <point key="canvasLocation" x="12" y="395"/>
         </scene>
     </scenes>
     <resources>
         <image name="ApplePay" width="100" height="64"/>
+        <image name="CameraLarge" width="300" height="300"/>
         <image name="Card" width="100" height="64"/>
         <image name="Flag" width="60" height="60"/>
         <image name="Gift" width="70" height="70"/>
         <image name="Library" width="80" height="80"/>
+        <image name="NotificationLarge" width="300" height="300"/>
         <image name="Owl" width="1024" height="1024"/>
         <image name="Questions" width="60" height="60"/>
         <image name="QuestionsSmall" width="50" height="50"/>
