@@ -26,18 +26,11 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Check if Logged In
-        if let user = User.current() {
-            self.user = user
-            self.user.becomeUser()
-            self.performSegueWithIdentifier("finishedSegue", sender: self)
-        }
-        
         // Configure Page Controller
         var imageView = UIImageView(frame: self.view.frame)
         
         imageView.image = UIImage(named: "Background")
-        imageView.alpha = 0.03
+        imageView.alpha = 0.05
         imageView.contentMode = .ScaleAspectFill
         
         self.navigationController?.navigationBarHidden = true
@@ -52,9 +45,28 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
                 scrollView.scrollEnabled = false
             }
         }
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        // Create Login Page
-        self.createPage("HomeLoginController")
+        // Configure Status Bar
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    
+        // Clear Controllers
+        self.controllers.removeAll(keepCapacity: false)
+        
+        // Login Controller
+        if let user = User.current() {
+            self.user = user
+            self.user.becomeUser()
+        } else {
+            self.createPage("HomeLoginController")
+        }
         
         // Check If Notifications Are Enabled
         var notificationsEnabled: Bool
@@ -76,24 +88,14 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
             self.createPage("HomeCameraController")
         }
         
-        self.didMoveToParentViewController(self)
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Configure Status Bar
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
+        // Check if Logged In
+        if self.controllers.isEmpty {
+            self.performSegueWithIdentifier("finishedSegue", sender: self)
+        } else {
+            self.showController()
+        }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Set Start Page
-        self.showController()
-    }
-    
-    // MARK: Instance Methods
     func createPage(name: String) {
         var page = self.storyBoard.instantiateViewControllerWithIdentifier(name) as? HomePageController
         
@@ -116,7 +118,7 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
     
     func showController() {
         if let controller = self.viewControllerAtIndex(self.currentPage) {
-            self.setViewControllers([controller], direction: .Forward, animated: true, completion: nil)
+            self.setViewControllers([controller], direction: .Forward, animated: self.currentPage != 0, completion: nil)
         }
     }
     

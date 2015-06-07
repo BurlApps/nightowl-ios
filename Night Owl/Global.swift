@@ -9,6 +9,7 @@
 class Global {
     
     // MARK: Instance Variables
+    static var homeController: HomeController!
     static var pagesController: PagesController!
     
     // MARK: Class Methods
