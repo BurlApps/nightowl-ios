@@ -13,6 +13,7 @@ class PaymentController: UITableViewController, ApplePayDelegate {
     private var user = User.current()
     private var navBorder: UIView!
     private var applePay: ApplePay!
+    private var previousValue: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.22, green:0.35, blue:0.41, alpha:1)
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
         
         if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
@@ -62,10 +63,12 @@ class PaymentController: UITableViewController, ApplePayDelegate {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-
         self.postController?.cardWasAdded = (self.user.card != nil && !self.user.card.isEmpty)
         self.navBorder.removeFromSuperview()
-        Global.reloadSettingsController()
+        
+        if self.previousValue != self.user.card {
+            Global.reloadSettingsController()
+        }
     }
     
     // MARK: Instance Methods
@@ -88,6 +91,10 @@ class PaymentController: UITableViewController, ApplePayDelegate {
             } else if !self.user.card.isEmpty {
                 cell0?.accessoryType = UITableViewCellAccessoryType.Checkmark
             }
+        }
+        
+        if self.previousValue == nil {
+            self.previousValue = self.user.card
         }
     }
     

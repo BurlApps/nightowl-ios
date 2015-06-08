@@ -12,12 +12,18 @@ class HomeCameraController: HomePageController {
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     // MARK: IBOutlets
+    @IBOutlet weak var onboardImage: UIImageView!
     @IBOutlet weak var onboardLabel: UILabel!
     @IBOutlet weak var onboardButton: UIButton!
     
     // MARK: UIViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Remove Image If Height Is To Small
+        if self.view.frame.height <= 480 {
+            self.onboardImage.removeFromSuperview()
+        }
         
         // Style Onboarding Label
         self.onboardLabel.textAlignment = NSTextAlignment.Center

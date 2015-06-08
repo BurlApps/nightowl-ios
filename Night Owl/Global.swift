@@ -172,10 +172,10 @@ class Global {
         // Invite options
         mave.displayOptions.inviteExplanationFont = UIFont(name: "HelveticaNeue-Bold", size: 18)
         mave.displayOptions.inviteExplanationTextColor = UIColor.whiteColor()
-        mave.displayOptions.inviteExplanationCellBackgroundColor = UIColor(red:0.21, green:0.73, blue:0.76, alpha:1)
+        mave.displayOptions.inviteExplanationCellBackgroundColor = UIColor(red:0.09, green:0.56, blue:0.78, alpha:1)
         mave.displayOptions.inviteExplanationShareButtonsColor =  UIColor(red:0.98, green:0.99, blue:0.99, alpha:1)
         mave.displayOptions.inviteExplanationShareButtonsFont = UIFont(name: "HelveticaNeue-Bold", size: 14)
-        mave.displayOptions.inviteExplanationShareButtonsBackgroundColor = UIColor(red:0.21, green:0.73, blue:0.76, alpha:1)
+        mave.displayOptions.inviteExplanationShareButtonsBackgroundColor = UIColor(red:0.09, green:0.56, blue:0.78, alpha:1)
         
         // Message and Send section options for invite page v1
         mave.displayOptions.messageFieldFont = UIFont.systemFontOfSize(16)

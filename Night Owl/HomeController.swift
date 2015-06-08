@@ -30,7 +30,7 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
         var imageView = UIImageView(frame: self.view.frame)
         
         imageView.image = UIImage(named: "Background")
-        imageView.alpha = 0.05
+        imageView.alpha = 0.04
         imageView.contentMode = .ScaleAspectFill
         
         self.navigationController?.navigationBarHidden = true
@@ -118,7 +118,7 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
     
     func showController() {
         if let controller = self.viewControllerAtIndex(self.currentPage) {
-            self.setViewControllers([controller], direction: .Forward, animated: self.currentPage != 0, completion: nil)
+            self.setViewControllers([controller], direction: .Forward, animated: self.currentPage > 0, completion: nil)
         }
     }
     

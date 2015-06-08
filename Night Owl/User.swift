@@ -223,7 +223,7 @@ class User: NSObject {
                     
                     Global.reloadSettingsController()
                     callback(error: nil)
-                } else if self.card == "Venmo" {
+                } else if self.card != nil && self.card == "Venmo" {
                     var amount = Int(settings.questionPrice * 100)
                     var note = "Thanks for the math help!"
                     

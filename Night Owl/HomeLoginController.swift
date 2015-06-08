@@ -37,6 +37,11 @@ class HomeLoginController: HomePageController, UIAlertViewDelegate {
         var imageData = NSData(contentsOfURL: imageUrl!)
         self.logoView.animatedImage = FLAnimatedImage(animatedGIFData: imageData)
         
+        // Remove Image If Height Is To Small
+        if self.view.frame.height <= 480 {
+            self.logoView.removeFromSuperview()
+        }
+        
         // Style Onboarding Label
         self.onboardingLabel.textAlignment = NSTextAlignment.Center
         self.onboardingLabel.textColor = UIColor.blackColor()

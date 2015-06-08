@@ -47,7 +47,7 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.22, green:0.35, blue:0.41, alpha:1)
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
         
         if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
@@ -109,16 +109,21 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
     
     // MARK: InstanceMethods
     func hideLabels() {
+        self.questionPrice.textColor = UIColor.clearColor()
         self.cardLabel.textColor = UIColor.clearColor()
         self.freeQuestionsLabel.textColor = UIColor.clearColor()
     }
     
     func reloadSettings() {
+        // Hide Labels
+        self.hideLabels()
+        
         // Get Settings
         Settings.update { (settings) -> Void in
             self.loaded = true
             self.settings = settings
             self.questionPrice.text = settings.priceFormatted()
+            self.questionPrice.textColor = UIColor.grayColor()
         }
         
         // Update Settings
@@ -126,8 +131,6 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
         
         if self.cardLabel != nil && self.user != nil {
             self.user.fetch { (user) -> Void in
-                self.hideLabels()
-                
                 if self.user.card != nil {
                     self.cardLabel.text = self.user.card
                     self.cardLabel.textColor = UIColor.grayColor()

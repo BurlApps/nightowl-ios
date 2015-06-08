@@ -220,9 +220,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
                 if self.applePay.enabled {
                     self.presentViewController(self.applePay.getModal(), animated: true, completion: nil)
                 } else {
-                    var paymentController = self.storyBoard.instantiateViewControllerWithIdentifier("PaymentController") as? PaymentController
-                    paymentController?.postController = self
-                    self.navigationController?.pushViewController(paymentController!, animated: true)
+                    self.paymentsControllerShow()
                 }
             }
         } else if self.alertMode == .ThankYou {
@@ -292,6 +290,12 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     }
     
     // MARK: Payment Methods
+    func paymentsControllerShow() {
+        var paymentController = self.storyBoard.instantiateViewControllerWithIdentifier("PaymentController") as? PaymentController
+        paymentController?.postController = self
+        self.navigationController?.pushViewController(paymentController!, animated: true)
+    }
+    
     func applePayAuthorized(authorized: Bool) {
         self.cardWasAdded = authorized
     }
@@ -300,6 +304,8 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             if self.cardWasAdded {
                 self.cardAdded()
+            } else {
+                self.paymentsControllerShow()
             }
         })
     }
