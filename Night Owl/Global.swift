@@ -170,10 +170,10 @@ class Global {
         mave.displayOptions.navigationBarCancelButton = button
         
         // Invite options
-        mave.displayOptions.inviteExplanationFont = UIFont(name: "HelveticaNeue-Bold", size: 18)
+        mave.displayOptions.inviteExplanationFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
         mave.displayOptions.inviteExplanationTextColor = UIColor.whiteColor()
         mave.displayOptions.inviteExplanationCellBackgroundColor = UIColor(red:0.09, green:0.56, blue:0.78, alpha:1)
-        mave.displayOptions.inviteExplanationShareButtonsColor =  UIColor(red:0.98, green:0.99, blue:0.99, alpha:1)
+        mave.displayOptions.inviteExplanationShareButtonsColor =  UIColor(white: 1, alpha: 0.8)
         mave.displayOptions.inviteExplanationShareButtonsFont = UIFont(name: "HelveticaNeue-Bold", size: 14)
         mave.displayOptions.inviteExplanationShareButtonsBackgroundColor = UIColor(red:0.09, green:0.56, blue:0.78, alpha:1)
         

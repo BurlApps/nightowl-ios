@@ -508,6 +508,9 @@
 							com.apple.Passbook = {
 								enabled = 1;
 							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
 						};
 					};
 					D33EBA1A1ABFED0A001E637D = {
