@@ -124,7 +124,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         Global.reloadSettingsController()
                     case "settings.reload": Settings.update(nil)
                     case "user.reload": User.current().fetch(nil)
-                    case "user.rate": Global.showRateApp()
+                    case "user.rate":
+                        if(message != nil) {
+                            message = "Would you mind rating our app?"
+                        }
+                    
+                        Global.showRateApp(message!)
                     case "user.message":
                         if(title != nil && message != nil) {
                             Global.showAlert(title!, message: message!)

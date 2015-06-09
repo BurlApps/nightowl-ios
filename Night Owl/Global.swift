@@ -120,9 +120,9 @@ class Global {
         }
     }
     
-    class func showRateApp() {
+    class func showRateApp(message: String) {
         if self.pagesController != nil {
-            self.pagesController.showRateApp()
+            self.pagesController.showRateApp(message)
         }
     }
     

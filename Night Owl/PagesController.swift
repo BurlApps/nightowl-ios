@@ -102,10 +102,9 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     }
     
     // MARK: Instance Methods
-    func showRateApp() {
-        UIAlertView(title: "Rate Our App",
-            message: "Would you mind rating our app?",
-            delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Sure!").show()
+    func showRateApp(message: String) {
+        UIAlertView(title: "Rate Our App", message: message, delegate: self,
+            cancelButtonTitle: "No Thanks", otherButtonTitles: "Sure!").show()
     }
     
     func showAlert(title: String, message: String) {
