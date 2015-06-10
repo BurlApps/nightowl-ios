@@ -29,7 +29,7 @@ class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
             self.request = request
             
             self.request.paymentSummaryItems = [
-                PKPaymentSummaryItem(label: "With Night Owl", amount: 0.01)
+                PKPaymentSummaryItem(label: "Night Owl", amount: 0.01)
             ]
             
             enabled = Stripe.canSubmitPaymentRequest(self.request)
