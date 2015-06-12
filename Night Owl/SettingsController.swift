@@ -16,9 +16,9 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
     private var numberOfSections = 4
     
     // MARK: IBOutlets
+    @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var freeQuestionsLabel: UILabel!
     @IBOutlet weak var cardLabel: UILabel!
-    @IBOutlet weak var questionPrice: UILabel!
     @IBOutlet weak var debugAccount: UILabel!
 
     // MARK: UIViewController Overrides
@@ -109,7 +109,7 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
     
     // MARK: InstanceMethods
     func hideLabels() {
-        self.questionPrice.textColor = UIColor.clearColor()
+        self.userName.textColor = UIColor.clearColor()
         self.cardLabel.textColor = UIColor.clearColor()
         self.freeQuestionsLabel.textColor = UIColor.clearColor()
     }
@@ -117,20 +117,19 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
     func reloadSettings() {
         // Hide Labels
         self.hideLabels()
-        
-        // Get Settings
-        Settings.update { (settings) -> Void in
-            self.loaded = true
-            self.settings = settings
-            self.questionPrice.text = settings.priceFormatted()
-            self.questionPrice.textColor = UIColor.grayColor()
-        }
-        
+                
         // Update Settings
         self.user = User.current()
         
         if self.cardLabel != nil && self.user != nil {
             self.user.fetch { (user) -> Void in
+                self.loaded = true
+                
+                if self.user.name != nil {
+                    self.userName.text = self.user.name
+                    self.userName.textColor = UIColor.grayColor()
+                }
+                
                 if self.user.card != nil {
                     self.cardLabel.text = self.user.card
                     self.cardLabel.textColor = UIColor.grayColor()
@@ -164,18 +163,30 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        if indexPath.section == 0 && indexPath.row == 3 {
-            showSharing()
-        } else if indexPath.section == 1 && indexPath.row == 3 {
-            var url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.settings.itunesId)")
-            UIApplication.sharedApplication().openURL(url!)
-        } else if indexPath.row == 0 {
-            if indexPath.section == 1 {
+        switch("\(indexPath.section):\(indexPath.row)") {
+            case "0:0":
+                var alert = UIAlertView(title: "What Should We Call You?",
+                    message: "Share your name with us so our tutors know how to address you!",
+                    delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Save")
+                alert.alertViewStyle = .PlainTextInput
+                alert.textFieldAtIndex(0)?.autocapitalizationType = UITextAutocapitalizationType.Words
+                alert.show()
+        
+            case "0:3":
+                self.showSharing()
+            
+            case "1:0":
                 Global.slideToController(0, animated: true, direction: .Reverse)
-            } else if indexPath.section == 2 {
+            
+            case "1:3":
+                var url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.settings.itunesId)")
+                UIApplication.sharedApplication().openURL(url!)
+            
+            case "2:0":
                 UIAlertView(title: "Log Out", message: "Are you sure you want to log out?",
                     delegate: self, cancelButtonTitle: "Nope", otherButtonTitles: "Yes").show()
-            }
+            
+            default: return
         }
     }
     
@@ -185,7 +196,12 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
     
     // MARK: UIAlertViewDelegate Methods
     func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
-        if buttonIndex == 1 {
+        if let name = alertView.textFieldAtIndex(0)?.text {
+            if !name.isEmpty {
+                self.user.updateName(name)
+                self.userName.text = name
+            }
+        } else if buttonIndex == 1 {
             self.user.logout()
             Global.showHomeController()
         }

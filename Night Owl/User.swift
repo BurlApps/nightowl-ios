@@ -155,6 +155,12 @@ class User: NSObject {
         lastSubject = subject
     }
     
+    func updateName(name: String) {
+        self.name = name
+        self.parse["name"] = self.name
+        self.parse.saveInBackgroundWithBlock(nil)
+    }
+    
     func changeCard(card: String) {
         self.card = card
         self.parse["card"] = self.card
@@ -213,7 +219,7 @@ class User: NSObject {
         }
     }
     
-    func chargeQuestion(description: String!, callback: (error: NSError!) -> Void) {
+    func chargeQuestion(description: String!, price: Float!, callback: (error: NSError!) -> Void) {
         Settings.sharedInstance { (settings) -> Void in
             self.fetch { (user) -> Void in
                 if user.freeQuestions > 0 {
@@ -224,7 +230,7 @@ class User: NSObject {
                     Global.reloadSettingsController()
                     callback(error: nil)
                 } else if self.card != nil && self.card == "Venmo" {
-                    var amount = Int(settings.questionPrice * 100)
+                    var amount = Int(price * 100)
                     var note = "Thanks for the math help!"
                     
                     if description != nil {
@@ -245,7 +251,7 @@ class User: NSObject {
                                             payed = payedTemp
                                         }
                                         
-                                        user.parse["payed"] = payed + settings.questionPrice
+                                        user.parse["payed"] = payed + price
                                         user.parse.saveInBackgroundWithBlock(nil)
                                     } else {
                                         println(error)
@@ -260,7 +266,7 @@ class User: NSObject {
                 } else {
                     let charges = user.parse["charges"] as! Float
                     
-                    user.parse["charges"] = charges + settings.questionPrice
+                    user.parse["charges"] = charges + price
                     user.parse.saveInBackgroundWithBlock(nil)
                     callback(error: nil)
                 }

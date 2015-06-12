@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class SupportController: JSQMessagesViewController {
+class SupportController: JSQMessagesViewController, UIAlertViewDelegate {
 
     // MARK: Instance Variables
     var loaded = false
@@ -58,20 +58,20 @@ class SupportController: JSQMessagesViewController {
         self.spinner.center = CGPointMake(self.view.frame.width/2, self.view.frame.height/2)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.spinner)
         
-        // Load Messages
+        // Get Name or Load Messages
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
-            self.loadMessages()
-        }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
-        // Focus Text Box
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
-            self.inputToolbar.contentView.textView.becomeFirstResponder()
+            if self.user.name == nil || self.user.name.isEmpty {
+                var alert = UIAlertView(title: "What Should We Call You?",
+                    message: "Share your name with us so our tutors know how to address you!",
+                    delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Save")
+                alert.alertViewStyle = .PlainTextInput
+                alert.textFieldAtIndex(0)?.autocapitalizationType = UITextAutocapitalizationType.Words
+                alert.show()
+            } else {
+                self.loadMessages()
+            }
         }
     }
     
@@ -217,5 +217,16 @@ class SupportController: JSQMessagesViewController {
         } else {
             return CGFloat(0.0)
         }
+    }
+    
+    // MARK: UIAlertViewDelegate Methods
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
+        if let name = alertView.textFieldAtIndex(0)?.text {
+            if !name.isEmpty {
+                self.user.updateName(name)
+            }
+        }
+        
+        self.loadMessages()
     }
 }

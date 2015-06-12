@@ -106,6 +106,7 @@ class HomeLoginController: HomePageController, UIAlertViewDelegate {
                     message: "Have a promo code? You could get more free questions!",
                     delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Enter")
                 alert.alertViewStyle = .PlainTextInput
+                alert.textFieldAtIndex(0)?.autocapitalizationType = UITextAutocapitalizationType.AllCharacters
                 alert.show()
             })
         })
@@ -117,7 +118,7 @@ class HomeLoginController: HomePageController, UIAlertViewDelegate {
             self.alertState = .None
             
             if let code = alertView.textFieldAtIndex(0)?.text {
-                if NSString(string: code).length > 0 {
+                if !code.isEmpty {
                     self.user.promoCode(code, callback: { (promo) -> Void in
                         var title = "Sorry :("
                         var message = "We couldn't find your promo code."

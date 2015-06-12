@@ -107,6 +107,11 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
             cancelButtonTitle: "No Thanks", otherButtonTitles: "Sure!").show()
     }
     
+    func showDownloadApp(message: String) {
+        UIAlertView(title: "Update The App", message: message, delegate: self,
+            cancelButtonTitle: "No Thanks", otherButtonTitles: "Sure!").show()
+    }
+    
     func showAlert(title: String, message: String) {
         UIAlertView(title: title, message: message, delegate: self,
             cancelButtonTitle: "Thanks!").show()

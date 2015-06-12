@@ -16,7 +16,7 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
     }
     
     // MARK: Instance Variables
-    var application = UIApplication.sharedApplication()
+    var notifications = Notifications()
     private var currentPage = 0
     private var user: User!
     private var controllers: [HomePageController] = []
@@ -69,15 +69,9 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
         }
         
         // Check If Notifications Are Enabled
-        var notificationsEnabled: Bool
-        
-        if self.application.respondsToSelector(Selector("isRegisteredForRemoteNotifications")) {
-            notificationsEnabled = self.application.isRegisteredForRemoteNotifications()
-        }  else {
-            notificationsEnabled = self.application.enabledRemoteNotificationTypes() != .None
-        }
-        
-        if !notificationsEnabled {
+        if self.notifications.enabled {
+            self.notifications.register()
+        } else {
             self.createPage("HomeNotificationsController")
         }
         

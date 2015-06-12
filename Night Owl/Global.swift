@@ -126,6 +126,12 @@ class Global {
         }
     }
     
+    class func showDownloadApp(message: String) {
+        if self.pagesController != nil {
+            self.pagesController.showDownloadApp(message)
+        }
+    }
+    
     class func showAlert(title: String, message: String) {
         if self.pagesController != nil {
             self.pagesController.showAlert(title, message: message)

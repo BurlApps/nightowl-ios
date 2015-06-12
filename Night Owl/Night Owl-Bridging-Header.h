@@ -17,6 +17,7 @@
 #import <JSQMessagesViewController/JSQMessages.h>
 #import <MaveSDK.h>
 #import <Venmo-iOS-SDK/Venmo.h>
+#import <Ouralabs/Ouralabs.h>
 
 #import "CWStatusBarNotification.h"
 #import "Stripe.h"

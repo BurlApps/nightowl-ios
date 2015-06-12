@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
+        // Initialize Debugger
+        Ouralabs.initWithKey("a9bc1a8ae5ca66e51eb2942e81bc9ac0")
+        //OULogDebug("App Delegate", "Hello World", NSError())
+        
         //Initialize Parse
         let parseApplicationID = infoDictionary["ParseApplicationID"] as! String
         let parseClientKey = infoDictionary["ParseClientKey"] as! String
@@ -125,11 +129,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     case "settings.reload": Settings.update(nil)
                     case "user.reload": User.current().fetch(nil)
                     case "user.rate":
-                        if(message != nil) {
+                        if(message == nil) {
                             message = "Would you mind rating our app?"
                         }
                     
                         Global.showRateApp(message!)
+                    case "user.download":
+                        if(message == nil) {
+                            message = "An update just became available!"
+                        }
+                        
+                        Global.showDownloadApp(message!)
                     case "user.message":
                         if(title != nil && message != nil) {
                             Global.showAlert(title!, message: message!)

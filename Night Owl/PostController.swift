@@ -17,7 +17,6 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     private var subjects: [Subject] = []
     private var subjectChosen: Subject!
     private var user: User = User.current()
-    private var settings: Settings!
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var alertMode: AlertMode!
     private var applePay: ApplePay!
@@ -61,9 +60,13 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
                 }
             }
             
-            self.subjectChosen = subjects[index]
+            self.selectSubject(subjects[index])
             self.subjectPicker.reloadAllComponents()
             self.subjectPicker.selectRow(index, inComponent: 0, animated: false)
+            
+            self.postButton.tintColor = UIColor(white: 1, alpha: 1)
+            self.postButton.enabled = true
+            self.postBigButton.enabled = true
         })
         
         // Add Post Button Style
@@ -102,23 +105,6 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
         self.textEditor.layer.shadowRadius = 0
         self.textEditor.returnKeyType = .Done
         self.view.insertSubview(self.textEditor, belowSubview: self.subjectPicker)
-        
-        // Set Current Price
-        Settings.sharedInstance { (settings) -> Void in
-            self.settings = settings
-
-            if self.user.freeQuestions > 0 {
-                self.title = "\(self.user.freeQuestions) Free Left"
-            } else if settings.questionPrice == 0 {
-                self.title = "Free Right Now!"
-            } else {
-                self.title = "Price: \(settings.priceFormatted())"
-            }
-            
-            self.postButton.tintColor = UIColor(white: 1, alpha: 1)
-            self.postButton.enabled = true
-            self.postBigButton.enabled = true
-        }
         
         if let font = UIFont(name: "HelveticaNeue", size: 20) {
             self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
@@ -163,6 +149,18 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     }
     
     // MARK: Instance Methods
+    func selectSubject(subject: Subject) {
+        self.subjectChosen = subject
+        
+        if self.user.freeQuestions > 0 {
+            self.title = "\(self.user.freeQuestions) Free Left"
+        } else if subject.price == 0 {
+            self.title = "Free Right Now!"
+        } else {
+            self.title = "Price: \(subject.priceFormatted())"
+        }
+    }
+    
     func createAssignment() {
         var editorText: NSString! = self.textEditor.text
         
@@ -172,7 +170,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
         
         var description = editorText as? String
         
-        self.user.chargeQuestion(description, callback: { (error) -> Void in
+        self.user.chargeQuestion(description, price: self.subjectChosen.price, callback: { (error) -> Void in
             if error == nil {
                 Assignment.create(description, question: self.capturedImage, creator: self.user, subject: self.subjectChosen)
                 
@@ -200,7 +198,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     }
     
     @IBAction func createPost(sender: AnyObject) {
-        if self.user.freeQuestions < 1 && self.settings.questionPrice > 0 && self.user.card == nil {
+        if self.user.freeQuestions < 1 && self.subjectChosen.price > 0 && self.user.card == nil {
             self.alertMode = .AskForCard
             
             UIAlertView(title: "Want This Answer Free?",
@@ -255,7 +253,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.subjectChosen = self.subjects[row]
+        self.selectSubject(self.subjects[row])
     }
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {

@@ -50,6 +50,7 @@
 		D33EBAA61AC1F406001E637D /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA51AC1F406001E637D /* WebController.swift */; };
 		D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBAB61AC32C9D001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D3504A981AEE0261002D91D0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3504A971AEE0261002D91D0 /* Message.swift */; };
+		D37196D71B2B92F4000BDDA0 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37196D61B2B92F4000BDDA0 /* Notifications.swift */; };
 		D37373831AEC606B0060EE9A /* SupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37373821AEC606B0060EE9A /* SupportController.swift */; };
 		D39BEC091B2176CE00D183D0 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39BEC081B2176CE00D183D0 /* PaymentController.swift */; };
 		D39BEC0B1B2285B600D183D0 /* HomeCameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39BEC0A1B2285B600D183D0 /* HomeCameraController.swift */; };
@@ -141,6 +142,7 @@
 		D3504A921AED8DA2002D91D0 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D3504A951AED8DC1002D91D0 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		D3504A971AEE0261002D91D0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		D37196D61B2B92F4000BDDA0 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D37373821AEC606B0060EE9A /* SupportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportController.swift; sourceTree = "<group>"; };
 		D39BEC081B2176CE00D183D0 /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 		D39BEC0A1B2285B600D183D0 /* HomeCameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCameraController.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			children = (
 				D3156E271AEF090900101215 /* RBResizeImage.swift */,
 				D39BEC121B239CF800D183D0 /* ApplePay.swift */,
+				D37196D61B2B92F4000BDDA0 /* Notifications.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				D3D6B3001B0555390020572C /* HomeLoginController.swift in Sources */,
 				D39BEC091B2176CE00D183D0 /* PaymentController.swift in Sources */,
 				D37373831AEC606B0060EE9A /* SupportController.swift in Sources */,
+				D37196D71B2B92F4000BDDA0 /* Notifications.swift in Sources */,
 				D33EBA5D1ABFEDBC001E637D /* PagesController.swift in Sources */,
 				D39BEC131B239CF800D183D0 /* ApplePay.swift in Sources */,
 				D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */,

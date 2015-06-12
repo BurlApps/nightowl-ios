@@ -20,7 +20,6 @@ class Settings: NSObject {
     var venmo: String!
     var freeQuestions: Int!
     var freeQuestionsCard: Int!
-    var questionPrice: Float!
     var referralQuestions: Int!
     var parse: PFConfig!
     
@@ -37,7 +36,6 @@ class Settings: NSObject {
         self.freeQuestions = object["freeQuestions"] as? Int
         self.referralQuestions = object["referralQuestions"] as? Int
         self.freeQuestionsCard = object["freeQuestionsCard"] as? Int
-        self.questionPrice = object["questionPrice"] as? Float
         self.parse = object
     }
     
@@ -71,17 +69,6 @@ class Settings: NSObject {
             } else {
                 callback?(settings: Settings(PFConfig.currentConfig()))
             }
-        }
-    }
-    
-    // MARK: Instance Variables
-    func priceFormatted() -> String {
-        if self.questionPrice == 0 {
-            return "Free"
-        } else if self.questionPrice < 1 {
-            return String(format: "%.0f¢", self.questionPrice*100)
-        } else {
-            return String(format: "$%.2f", self.questionPrice)
         }
     }
 }

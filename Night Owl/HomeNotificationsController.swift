@@ -68,18 +68,7 @@ class HomeNotificationsController: HomePageController {
         self.onboardButton.setTitleColor(UIColor.clearColor(), forState: UIControlState.Normal)
         self.spinner.startAnimating()
         
-        if self.homeController.application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
-            let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-            let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
-            self.homeController.application.registerUserNotificationSettings(settings)
-            self.homeController.application.registerForRemoteNotifications()
-            
-            // Register for Push Notifications before iOS 8
-        } else {
-            let notificationTypes = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
-            self.homeController.application.registerForRemoteNotificationTypes(notificationTypes)
-        }
-        
+        self.homeController.notifications.register()
         self.homeController.nextController()
     }
 }

@@ -14,7 +14,7 @@ protocol ApplePayDelegate {
 class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
     
     // MARK: Instance Variables
-    var enabled: Bool = false
+    var enabled = false
     var delegate: ApplePayDelegate!
     private var user: User!
     private var request: PKPaymentRequest!
