@@ -1,1 +1,0 @@
-PODS_OURALABS_OTHER_LDFLAGS = -l"z" -framework "SystemConfiguration"

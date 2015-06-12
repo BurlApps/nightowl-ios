@@ -16,11 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        
-        // Initialize Debugger
-        Ouralabs.initWithKey("a9bc1a8ae5ca66e51eb2942e81bc9ac0")
-        //OULogDebug("App Delegate", "Hello World", NSError())
-        
+
         //Initialize Parse
         let parseApplicationID = infoDictionary["ParseApplicationID"] as! String
         let parseClientKey = infoDictionary["ParseClientKey"] as! String
