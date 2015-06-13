@@ -307,9 +307,12 @@ class User: NSObject {
     
     func fetch(callback: ((user: User!) -> Void)!) -> User {
         self.parse.fetchInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
-            if var tempObject = object {
+            if var tempObject = object as? PFUser {
                 self.freeQuestions = tempObject["freeQuestions"] as? Int
                 self.card = tempObject["card"] as? String
+                self.name = tempObject["name"] as? String
+                self.email = tempObject["email"] as? String
+                self.subject = lastSubject
                 callback!(user: self)
             } else {
                 User.logout()

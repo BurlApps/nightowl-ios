@@ -125,18 +125,18 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
             self.user.fetch { (user) -> Void in
                 self.loaded = true
                 
-                if self.user.name != nil {
-                    self.userName.text = self.user.name
+                if user.name != nil && !user.name.isEmpty {                    
+                    self.userName.text = user.name
                     self.userName.textColor = UIColor.grayColor()
                 }
                 
-                if self.user.card != nil {
-                    self.cardLabel.text = self.user.card
+                if user.card != nil && !user.card.isEmpty {
+                    self.cardLabel.text = user.card
                     self.cardLabel.textColor = UIColor.grayColor()
                 }
                 
-                if self.user.freeQuestions != nil {
-                    self.freeQuestionsLabel.text = "\(self.user.freeQuestions)"
+                if user.freeQuestions != nil {
+                    self.freeQuestionsLabel.text = "\(user.freeQuestions)"
                     self.freeQuestionsLabel.textColor = UIColor.grayColor()
                 }
                 
