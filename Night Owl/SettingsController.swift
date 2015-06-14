@@ -65,6 +65,11 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
         // Hide Labels
         self.hideLabels()
         
+        // Fetch Settings
+        Settings.sharedInstance { (settings) -> Void in
+            self.settings = settings
+        }
+        
         // Set Fetch User Info
         self.reloadSettings()
     }
