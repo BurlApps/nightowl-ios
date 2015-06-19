@@ -201,24 +201,6 @@ class User: NSObject {
         })
     }
     
-    func addVenmo(callback: (error: NSError!) -> Void) {
-        if Venmo.sharedInstance().session.user != nil {
-            self.changeCard("Venmo")
-            
-            callback(error: nil)
-        } else {
-            Venmo.sharedInstance().requestPermissions([
-                "make_payments"
-            ], withCompletionHandler: { (success: Bool, error: NSError!) -> Void in
-                if success && error == nil {
-                    self.changeCard("Venmo")
-                }
-                
-                callback(error: error)
-            })
-        }
-    }
-    
     func chargeQuestion(description: String!, price: Float!, callback: (error: NSError!) -> Void) {
         Settings.sharedInstance { (settings) -> Void in
             self.fetch { (user) -> Void in
@@ -229,40 +211,6 @@ class User: NSObject {
                     
                     Global.reloadSettingsController()
                     callback(error: nil)
-                } else if self.card != nil && self.card == "Venmo" {
-                    var amount = Int(price * 100)
-                    var note = "Thanks for the math help!"
-                    
-                    if description != nil {
-                        note = "Help with \(description)"
-                    }
-                    
-                    note = "\(note) \(settings.host)/d"
-                    
-                    self.addVenmo({ (error) -> Void in
-                        if error == nil {
-                            Venmo.sharedInstance().sendPaymentTo(settings.venmo, amount: UInt(amount),
-                                note: note, audience: VENTransactionAudience.Public,
-                                completionHandler: { (transaction: VENTransaction!, success: Bool, error: NSError!) -> Void in
-                                    if success && error == nil {
-                                        var payed: Float = 0
-                            
-                                        if var payedTemp = user.parse["payed"] as? Float {
-                                            payed = payedTemp
-                                        }
-                                        
-                                        user.parse["payed"] = payed + price
-                                        user.parse.saveInBackgroundWithBlock(nil)
-                                    } else {
-                                        println(error)
-                                    }
-                                    
-                                    callback(error: error)
-                            })
-                        } else {
-                            callback(error: error)
-                        }
-                    })
                 } else {
                     let charges = user.parse["charges"] as! Float
                     

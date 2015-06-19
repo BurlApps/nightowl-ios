@@ -18,12 +18,6 @@
 #define COCOAPODS_VERSION_MINOR_CHTTextView 1
 #define COCOAPODS_VERSION_PATCH_CHTTextView 0
 
-// CMDQueryStringSerialization
-#define COCOAPODS_POD_AVAILABLE_CMDQueryStringSerialization
-#define COCOAPODS_VERSION_MAJOR_CMDQueryStringSerialization 0
-#define COCOAPODS_VERSION_MINOR_CMDQueryStringSerialization 2
-#define COCOAPODS_VERSION_PATCH_CMDQueryStringSerialization 0
-
 // CWStatusBarNotification
 #define COCOAPODS_POD_AVAILABLE_CWStatusBarNotification
 #define COCOAPODS_VERSION_MAJOR_CWStatusBarNotification 2
@@ -132,12 +126,6 @@
 #define COCOAPODS_VERSION_MINOR_PaymentKit 1
 #define COCOAPODS_VERSION_PATCH_PaymentKit 1
 
-// SSKeychain
-#define COCOAPODS_POD_AVAILABLE_SSKeychain
-#define COCOAPODS_VERSION_MAJOR_SSKeychain 1
-#define COCOAPODS_VERSION_MINOR_SSKeychain 2
-#define COCOAPODS_VERSION_PATCH_SSKeychain 3
-
 // Stripe
 #define COCOAPODS_POD_AVAILABLE_Stripe
 #define COCOAPODS_VERSION_MAJOR_Stripe 3
@@ -155,18 +143,6 @@
 #define COCOAPODS_VERSION_MAJOR_Stripe_Core 3
 #define COCOAPODS_VERSION_MINOR_Stripe_Core 1
 #define COCOAPODS_VERSION_PATCH_Stripe_Core 0
-
-// VENCore
-#define COCOAPODS_POD_AVAILABLE_VENCore
-#define COCOAPODS_VERSION_MAJOR_VENCore 3
-#define COCOAPODS_VERSION_MINOR_VENCore 0
-#define COCOAPODS_VERSION_PATCH_VENCore 1
-
-// Venmo-iOS-SDK
-#define COCOAPODS_POD_AVAILABLE_Venmo_iOS_SDK
-#define COCOAPODS_VERSION_MAJOR_Venmo_iOS_SDK 1
-#define COCOAPODS_VERSION_MINOR_Venmo_iOS_SDK 3
-#define COCOAPODS_VERSION_PATCH_Venmo_iOS_SDK 0
 
 // libPhoneNumber-iOS
 #define COCOAPODS_POD_AVAILABLE_libPhoneNumber_iOS

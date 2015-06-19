@@ -77,17 +77,13 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         
         var cell0 = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
         var cell1 = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
-        var cell2 = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))
         
         cell0?.accessoryType = .None
         cell1?.accessoryType = .None
-        cell2?.accessoryType = .None
         
         if self.user.card != nil {
             if(self.user.card == "Apple Pay") {
                 cell1?.accessoryType = UITableViewCellAccessoryType.Checkmark
-            } else if(self.user.card == "Venmo") {
-                cell2?.accessoryType = UITableViewCellAccessoryType.Checkmark
             } else if !self.user.card.isEmpty {
                 cell0?.accessoryType = UITableViewCellAccessoryType.Checkmark
             }
@@ -113,11 +109,6 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         if indexPath.row == 1 {
             // Apple Pay
             self.presentViewController(self.applePay.getModal(), animated: true, completion: nil)
-        } else if indexPath.row == 2 {
-            // Venmo
-            self.user.addVenmo({ (error) -> Void in
-                self.setCheckMark()
-            })
         }
     }
     

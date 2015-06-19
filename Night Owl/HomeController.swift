@@ -52,10 +52,6 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
         
         // Configure Status Bar
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
     
         // Clear Controllers
         self.controllers.removeAll(keepCapacity: false)

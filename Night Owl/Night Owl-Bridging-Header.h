@@ -16,7 +16,6 @@
 #import <LLSimpleCamera/LLSimpleCamera.h>
 #import <JSQMessagesViewController/JSQMessages.h>
 #import <MaveSDK.h>
-#import <Venmo-iOS-SDK/Venmo.h>
 
 #import "CWStatusBarNotification.h"
 #import "Stripe.h"
