@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 Mave Technologies, Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 #import "MAVEMerkleTree.h"
+#import "MAVEContactPhoneNumber.h"
+#import "MAVEContactEmail.h"
 
 typedef NS_ENUM(NSInteger, MAVEInviteSendingStatus) {
     MAVEInviteSendingStatusUnsent,
@@ -21,14 +23,23 @@ typedef NS_ENUM(NSInteger, MAVEInviteSendingStatus) {
 // A Person object that is much simpler than an ABRecordRef - has just the fields we care about
 // and is an NSObject with helper methods to access fields we want.
 
-@property (nonatomic, assign) NSInteger recordID;
+@property (nonatomic, assign) int32_t recordID;
 @property (nonatomic, assign) uint64_t hashedRecordID;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) UIImage *picture;
 @property (nonatomic, strong) NSArray *phoneNumbers;   // Array of NSStrings
 @property (nonatomic, strong) NSArray *phoneNumberLabels;  //Array of NSStrings of localized labels
 @property (nonatomic, strong) NSArray *emailAddresses; // Array of NSStrings
+@property (nonatomic, strong) NSArray *phoneObjects; // Array of MAVEContactPhones
+@property (nonatomic, strong) NSArray *emailObjects; // Array of MAVEContactEmails
 
+// Special properties for suggested invites
+@property (nonatomic, assign) NSUInteger numberFriendsOnApp;
+
+//
+// Flags used related to invite page/sending invites
+//
 // This field is true if the contact as returned from the API as a suggested invite
 @property (nonatomic, assign) BOOL isSuggestedContact;
 // This field is only true if the contact was clicked on in the top
@@ -37,8 +48,9 @@ typedef NS_ENUM(NSInteger, MAVEInviteSendingStatus) {
 // even if the contact was a suggested invite.
 @property (nonatomic, assign) BOOL selectedFromSuggestions;
 
-@property (atomic, assign) BOOL selected;
-@property (atomic, assign) MAVEInviteSendingStatus sendingStatus;
+@property (nonatomic, assign) BOOL selected;
+@property (nonatomic, assign) MAVEInviteSendingStatus sendingStatus;
+
 
 // initFromABRecordRef factory creates and does some validation
 //   - one of firstName, lastName are required, if both are missing returns nil
@@ -72,9 +84,17 @@ typedef NS_ENUM(NSInteger, MAVEInviteSendingStatus) {
 // (last name if it exists, otherwise first name)
 - (NSString *)firstLetter;
 - (NSString *)fullName;
+- (NSString *)initials;
 
 // Returns the mobile or main phone or the first one in the list if there are phones, otherwise nil
 - (NSString *)bestPhone;
+// Return a list of contact identifiers for this user, and another method to get a sorted list
+- (NSArray *)allContactIdentifiers;
+- (NSArray *)rankedContactIdentifiersIncludeEmails:(BOOL)includeEmails includePhones:(BOOL)includePhones;
+- (NSArray *)selectedContactIdentifiers;
+
+- (BOOL)isAtLeastOneContactIdentifierSelected;
+- (void)selectTopContactIdentifierIfNoneSelected;
 
 + (NSString *)normalizePhoneNumber:(NSString *)phoneNumber;
 
@@ -83,13 +103,7 @@ typedef NS_ENUM(NSInteger, MAVEInviteSendingStatus) {
 
 // Private
 - (void)setPhoneNumbersFromABRecordRef:(ABRecordRef)record;
-+ (NSArray *)emailAddressesFromABRecordRef:(ABRecordRef)record;
+- (void)setEmailAddressesFromABRecordRef:(ABRecordRef) record;
 - (NSString *)nameForCompareNames;
-
-@end
-
-@interface MAVEABPersonRow :MAVEABPerson
-
-@property BOOL selected;
 
 @end

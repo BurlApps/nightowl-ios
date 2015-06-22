@@ -42,6 +42,73 @@ NSString * const MAVEABPermissionStatusUnprompted = @"unprompted";
     return (NSArray *)result;
 }
 
++ (NSArray *)filterAddressBook:(NSArray *)addressBook
+         removeIfMissingPhones:(BOOL)removeIfMissingPhones
+         removeIfMissingEmails:(BOOL)removeIfMissingEmails {
+    if (!addressBook) {
+        return nil;
+    }
+    NSMutableArray *returnval = [[NSMutableArray alloc] initWithCapacity:[addressBook count]];
+    for (MAVEABPerson *person in addressBook) {
+        if (removeIfMissingPhones && [person.phoneNumbers count] == 0) {
+            continue;
+        }
+        if (removeIfMissingEmails && [person.emailAddresses count] == 0) {
+            continue;
+        }
+        [returnval addObject:person];
+    }
+    return [NSArray arrayWithArray:returnval];
+}
+
+static ABAddressBookRef addressBook;
++ (UIImage *)getImageLookingUpPersonByRecordID:(ABRecordID)recordID {
+    UIImage *image;
+//    ABAddressBookRef addressBook;
+    CFDataRef dataCF = nil;
+    @try {
+        if (![[self addressBookPermissionStatus] isEqualToString:MAVEABPermissionStatusAllowed]) {
+            return nil;
+        }
+        if (!recordID) {
+            return nil;
+        }
+        CFErrorRef accessErrorCF = NULL;
+        if (!addressBook) {
+            addressBook = ABAddressBookCreateWithOptions(NULL, &accessErrorCF);
+            if (accessErrorCF) {
+                return nil;
+            }
+            // Use the dispatch semaphore to make the async method sync. Won't block b/c we know we have permission
+            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+            __block BOOL granted = NO;
+            ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool _granted, CFErrorRef error) {
+                granted = _granted;
+                dispatch_semaphore_signal(semaphore);
+            });
+            dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC));
+            if (!granted || !addressBook) {
+                return nil;
+            }
+        }
+        ABRecordRef recordRef = ABAddressBookGetPersonWithRecordID(addressBook, recordID);
+        if (!recordRef) {
+            return nil;
+        }
+        dataCF = ABPersonCopyImageData(recordRef);
+        if (!dataCF || CFDataGetLength(dataCF) == 0) {
+            return nil;
+        }
+        image = [UIImage imageWithData:(__bridge NSData *)dataCF];
+    } @catch (NSException *exception) {
+        image = nil;
+    } @finally {
+//        if (addressBook) CFRelease(addressBook);
+        if (dataCF) CFRelease(dataCF);
+        return image;
+    }
+}
+
 + (void)sortMAVEABPersonArray:(NSMutableArray *)input {
     [input sortUsingSelector:@selector(compareNames:)];
 }
@@ -71,7 +138,7 @@ NSString * const MAVEABPermissionStatusUnprompted = @"unprompted";
                                             andAllContacts:(NSArray *)persons {
     NSDictionary *index = [self indexABPersonArrayByHashedRecordID:persons];
     NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:[hridTuples count]];
-    NSArray *tuple; NSString *hrid; MAVEABPerson *personTmp;
+    NSArray *tuple; NSString *hrid; MAVEABPerson *personTmp; NSUInteger numFriendsTmp;
     for (id obj in hridTuples) {
         if (![obj isKindOfClass:[NSArray class]]) {
             continue;
@@ -81,8 +148,10 @@ NSString * const MAVEABPermissionStatusUnprompted = @"unprompted";
             continue;
         }
         hrid = [tuple objectAtIndex:0];
+        numFriendsTmp = [[tuple objectAtIndex:1] integerValue];
         personTmp = [index objectForKey:hrid];
         if (personTmp) {
+            personTmp.numberFriendsOnApp = numFriendsTmp;
             [output addObject:personTmp];
         }
     }
@@ -98,6 +167,8 @@ NSString * const MAVEABPermissionStatusUnprompted = @"unprompted";
         stringKey = [NSString stringWithFormat:@"%llu", person.hashedRecordID];
         queriedPerson = [contactsIndexByHRID objectForKey:stringKey];
         if (queriedPerson) {
+            // copy suggested invite related attributes over to the new instance of the object
+            queriedPerson.numberFriendsOnApp = person.numberFriendsOnApp;
             [output addObject:queriedPerson];
         }
     }

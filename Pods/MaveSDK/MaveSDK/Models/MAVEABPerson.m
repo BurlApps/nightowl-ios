@@ -12,6 +12,7 @@
 #import "MAVEMerkleTreeHashUtils.h"
 #import "NBPhoneNumber.h"
 #import "NBPhoneNumberUtil.h"
+#import "MAVEABUtils.h"
 
 @implementation MAVEABPerson
 
@@ -33,10 +34,10 @@
                 return nil;
             }
             [self setPhoneNumbersFromABRecordRef:record];
-            if ([self.phoneNumbers count] == 0) {
+            [self setEmailAddressesFromABRecordRef:record];
+            if ([self.phoneNumbers count] == 0 && [self.emailAddresses count] == 0){
                 return nil;
             }
-            self.emailAddresses = [[self class] emailAddressesFromABRecordRef:record];
         }
         @catch (NSException *exception) {
             self = nil;
@@ -45,10 +46,23 @@
     return self;
 }
 
-- (void)setRecordID:(NSInteger)recordID {
+- (void)setRecordID:(int32_t)recordID {
     // record ID is actually a 32 bit integer
     _recordID = recordID;
-    self.hashedRecordID = [[self class] computeHashedRecordID:(ABRecordID)recordID];
+    self.hashedRecordID = [[self class] computeHashedRecordID:recordID];
+}
+
+- (void)setSelected:(BOOL)selected {
+    if (selected) {
+        [self selectTopContactIdentifierIfNoneSelected];
+    } else {
+        for (MAVEContactIdentifierBase *rec in self.allContactIdentifiers) {
+            if (rec.selected) {
+                rec.selected = NO;
+            }
+        }
+    }
+    _selected = selected;
 }
 
 
@@ -98,6 +112,7 @@
     NSUInteger numPhones = ABMultiValueGetCount(phoneMultiValue);
     NSMutableArray *phoneNumbers = [[NSMutableArray alloc] initWithCapacity:numPhones];
     NSMutableArray *phoneNumberLabels = [[NSMutableArray alloc] initWithCapacity:numPhones];
+    NSMutableArray *phoneNumberObjects = [[NSMutableArray alloc] initWithCapacity:numPhones];
     
     NSString *pn; NSString *label;
     NSInteger insertIndex = 0;
@@ -110,27 +125,39 @@
             if (label == nil) {
                 label = (__bridge_transfer NSString *) kABPersonPhoneOtherFAXLabel;
             }
-            [phoneNumberLabels insertObject: label atIndex:insertIndex];
+            [phoneNumberLabels insertObject:label atIndex:insertIndex];
+
+            MAVEContactPhoneNumber *pnObj = [[MAVEContactPhoneNumber alloc] initWithValue:pn andLabel:label];
+            if (pnObj) {
+                [phoneNumberObjects addObject:pnObj];
+            }
             insertIndex += 1;
         }
     }
     if (phoneMultiValue != NULL) CFRelease(phoneMultiValue);
     self.phoneNumbers = phoneNumbers;
     self.phoneNumberLabels = phoneNumberLabels;
+    self.phoneObjects = [NSArray arrayWithArray:phoneNumberObjects];
 }
 
-+ (NSArray *)emailAddressesFromABRecordRef:(ABRecordRef)record {
+- (void)setEmailAddressesFromABRecordRef:(ABRecordRef) record{
     ABMultiValueRef emailMultiValue = ABRecordCopyValue(record, kABPersonEmailProperty);
     NSUInteger numEmails = ABMultiValueGetCount(emailMultiValue);
     NSMutableArray *emailAddresses = [[NSMutableArray alloc] initWithCapacity:numEmails];
+    NSMutableArray *emailObjects = [[NSMutableArray alloc] initWithCapacity:numEmails];
     for (NSUInteger i=0; i < numEmails; i++) {
-        [emailAddresses
-         insertObject:(__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailMultiValue, i)
-         atIndex:i];
+        NSString *emailAddress = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emailMultiValue, i);
+        if (emailAddress) {
+            [emailAddresses addObject:emailAddress];
+            MAVEContactEmail *emailObj = [[MAVEContactEmail alloc] initWithValue:emailAddress];
+            [emailObjects addObject:emailObj];
+        }
     }
     if (emailMultiValue != NULL) CFRelease(emailMultiValue);
-    return (NSArray *)emailAddresses;
+    self.emailAddresses = [NSArray arrayWithArray:emailAddresses];
+    self.emailObjects = [NSArray arrayWithArray:emailObjects];
 }
+
 
 + (uint64_t)computeHashedRecordID:(ABRecordID)recordID {
     NSData *recIDData = [MAVEMerkleTreeHashUtils dataFromInt32:recordID];
@@ -139,8 +166,19 @@
     return [MAVEMerkleTreeHashUtils UInt64FromData:hashedTruncatedData];
 }
 
+- (UIImage *)picture {
+    if (_picture) {
+        return _picture;
+    } else {
+        return [MAVEABUtils getImageLookingUpPersonByRecordID:self.recordID];
+    }
+}
+
 - (NSString *)firstLetter {
     NSString *compName = [self nameForCompareNames];
+    if ([compName length] < 1) {
+        return @"";
+    }
     NSString *letter = [compName substringToIndex:1];
     letter = [letter uppercaseString];
     return letter;
@@ -156,6 +194,67 @@
         name = self.lastName;
     }
     return name;
+}
+
+- (NSString *)initials {
+    NSString *returnval = @"";
+    if (self.firstName && [self.firstName length] > 0) {
+        returnval = [returnval stringByAppendingString:[self.firstName substringWithRange:NSMakeRange(0, 1)]];
+    }
+    if (self.lastName && [self.lastName length] > 0) {
+        returnval = [returnval stringByAppendingString:[self.lastName substringWithRange:NSMakeRange(0, 1)]];
+    }
+    return returnval;
+}
+
+- (NSArray *)allContactIdentifiers {
+    NSArray *result = @[];
+    result = [result arrayByAddingObjectsFromArray:self.phoneObjects];
+    result = [result arrayByAddingObjectsFromArray:self.emailObjects];
+    return result;
+}
+
+- (NSArray *)rankedContactIdentifiersIncludeEmails:(BOOL)includeEmails includePhones:(BOOL)includePhones {
+    NSArray *unranked = @[];
+    if (includePhones && includeEmails) {
+        unranked = [self allContactIdentifiers];
+    } else if (includePhones) {
+        unranked = [self phoneObjects];
+    } else if (includeEmails) {
+        unranked = [self emailObjects];
+    }
+    return [unranked sortedArrayUsingSelector:@selector(compareContactIdentifiers:)];
+}
+
+- (NSArray *)selectedContactIdentifiers {
+    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:[self.allContactIdentifiers count]];
+    for (MAVEContactIdentifierBase *rec in [self allContactIdentifiers]) {
+        if (rec.selected) {
+            [output addObject:rec];
+        }
+    }
+    return [NSArray arrayWithArray:output];
+}
+
+- (BOOL)isAtLeastOneContactIdentifierSelected {
+    BOOL returnval = NO;
+    for (MAVEContactIdentifierBase *rec in [self allContactIdentifiers]) {
+        if (rec.selected) {
+            returnval = YES;
+            break;
+        }
+    }
+    return returnval;
+}
+
+- (void)selectTopContactIdentifierIfNoneSelected {
+    if (![self isAtLeastOneContactIdentifierSelected]) {
+        NSArray *rankedIdentifiers = [self rankedContactIdentifiersIncludeEmails:YES includePhones:YES];
+        if ([rankedIdentifiers count] > 0) {
+            MAVEContactIdentifierBase *topRec = [rankedIdentifiers objectAtIndex:0];
+            topRec.selected = YES;
+        }
+    }
 }
 
 // Use the libPhoneNumber-iOS library to normalize phone numbers based on the

@@ -28,7 +28,7 @@
 #define COCOAPODS_POD_AVAILABLE_CardIO
 #define COCOAPODS_VERSION_MAJOR_CardIO 5
 #define COCOAPODS_VERSION_MINOR_CardIO 0
-#define COCOAPODS_VERSION_PATCH_CardIO 3
+#define COCOAPODS_VERSION_PATCH_CardIO 6
 
 // FLAnimatedImage
 #define COCOAPODS_POD_AVAILABLE_FLAnimatedImage
@@ -117,8 +117,8 @@
 // MaveSDK
 #define COCOAPODS_POD_AVAILABLE_MaveSDK
 #define COCOAPODS_VERSION_MAJOR_MaveSDK 0
-#define COCOAPODS_VERSION_MINOR_MaveSDK 6
-#define COCOAPODS_VERSION_PATCH_MaveSDK 2
+#define COCOAPODS_VERSION_MINOR_MaveSDK 7
+#define COCOAPODS_VERSION_PATCH_MaveSDK 1
 
 // PaymentKit
 #define COCOAPODS_POD_AVAILABLE_PaymentKit
@@ -128,25 +128,31 @@
 
 // Stripe
 #define COCOAPODS_POD_AVAILABLE_Stripe
-#define COCOAPODS_VERSION_MAJOR_Stripe 3
-#define COCOAPODS_VERSION_MINOR_Stripe 1
-#define COCOAPODS_VERSION_PATCH_Stripe 0
+#define COCOAPODS_VERSION_MAJOR_Stripe 4
+#define COCOAPODS_VERSION_MINOR_Stripe 0
+#define COCOAPODS_VERSION_PATCH_Stripe 3
 
 // Stripe/ApplePay
 #define COCOAPODS_POD_AVAILABLE_Stripe_ApplePay
-#define COCOAPODS_VERSION_MAJOR_Stripe_ApplePay 3
-#define COCOAPODS_VERSION_MINOR_Stripe_ApplePay 1
-#define COCOAPODS_VERSION_PATCH_Stripe_ApplePay 0
+#define COCOAPODS_VERSION_MAJOR_Stripe_ApplePay 4
+#define COCOAPODS_VERSION_MINOR_Stripe_ApplePay 0
+#define COCOAPODS_VERSION_PATCH_Stripe_ApplePay 3
+
+// Stripe/Checkout
+#define COCOAPODS_POD_AVAILABLE_Stripe_Checkout
+#define COCOAPODS_VERSION_MAJOR_Stripe_Checkout 4
+#define COCOAPODS_VERSION_MINOR_Stripe_Checkout 0
+#define COCOAPODS_VERSION_PATCH_Stripe_Checkout 3
 
 // Stripe/Core
 #define COCOAPODS_POD_AVAILABLE_Stripe_Core
-#define COCOAPODS_VERSION_MAJOR_Stripe_Core 3
-#define COCOAPODS_VERSION_MINOR_Stripe_Core 1
-#define COCOAPODS_VERSION_PATCH_Stripe_Core 0
+#define COCOAPODS_VERSION_MAJOR_Stripe_Core 4
+#define COCOAPODS_VERSION_MINOR_Stripe_Core 0
+#define COCOAPODS_VERSION_PATCH_Stripe_Core 3
 
 // libPhoneNumber-iOS
 #define COCOAPODS_POD_AVAILABLE_libPhoneNumber_iOS
 #define COCOAPODS_VERSION_MAJOR_libPhoneNumber_iOS 0
 #define COCOAPODS_VERSION_MINOR_libPhoneNumber_iOS 8
-#define COCOAPODS_VERSION_PATCH_libPhoneNumber_iOS 4
+#define COCOAPODS_VERSION_PATCH_libPhoneNumber_iOS 5
 

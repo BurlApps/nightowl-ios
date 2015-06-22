@@ -17,6 +17,7 @@
 #import "MAVECustomSharePageViewController.h"
 #import "MAVESuggestedInvites.h"
 #import "MAVEABUtils.h"
+#import "MAVEABPermissionPromptHandler.h"
 
 @implementation MaveSDK {
     // Controller
@@ -125,6 +126,22 @@ static dispatch_once_t sharedInstanceonceToken;
 
 
 - (NSArray *)suggestedInvitesWithFullContactsList:(NSArray *)contacts delay:(CGFloat)seconds {
+    // Pick randomly from the contacts list if debugging
+    if (self.debug) {
+        CGFloat debugDelay = MIN(self.debugSuggestedInvitesDelaySeconds, seconds);
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        dispatch_semaphore_wait(sema, dispatch_time(DISPATCH_TIME_NOW, debugDelay * NSEC_PER_SEC));
+        NSMutableArray *debugSuggestions = [NSMutableArray arrayWithCapacity:self.debugNumberOfRandomSuggestedInvites];
+        NSMutableArray *mutableContacts =[NSMutableArray arrayWithArray:contacts];
+        NSInteger numToReturn = MIN(self.debugNumberOfRandomSuggestedInvites, [mutableContacts count]);
+        for (NSInteger i = 0; i < numToReturn; i++) {
+            NSUInteger index = arc4random() % [mutableContacts count];
+            [debugSuggestions addObject:[mutableContacts objectAtIndex:index]];
+            [mutableContacts removeObjectAtIndex:index];
+        }
+        return [NSArray arrayWithArray:debugSuggestions];
+    }
+
     MAVESuggestedInvites *suggestedInvites = (MAVESuggestedInvites *)[self.suggestedInvitesBuilder createObjectSynchronousWithTimeout:seconds];
     // At this point we don't know when the suggestion objects were created, and bc of
     // how the contacts invite page is designed we need them to be instances of the
@@ -186,9 +203,35 @@ static dispatch_once_t sharedInstanceonceToken;
 // Methods to get data from our sdk
 //
 - (void)getReferringData:(void (^)(MAVEReferringData *))referringDataHandler {
+    if (self.debug && referringDataHandler) {
+        referringDataHandler(self.debugFakeReferringData);
+        return;
+    }
     [self.referringDataBuilder createObjectWithTimeout:4 completionBlock:^(id object) {
         referringDataHandler((MAVEReferringData *)object);
     }];
+}
+
+- (void)getSuggestedInvites:(void (^)(NSArray *))suggestedInvitesHandler
+                    timeout:(CGFloat)timeout {
+    if (![[MAVEABUtils addressBookPermissionStatus] isEqual:MAVEABPermissionStatusAllowed]) {
+        suggestedInvitesHandler(nil);
+        return;
+    }
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        __block NSArray *contacts;
+        // not actually going to prompt because we already have permission
+        [MAVEABPermissionPromptHandler promptForContactsWithCompletionBlock:^(NSArray *_contacts) {
+            contacts = _contacts;
+            dispatch_semaphore_signal(sema);
+        }];
+        // not going to be long because we already have contacts permission
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+
+        suggestedInvitesHandler([self suggestedInvitesWithFullContactsList:contacts delay:timeout]);
+    });
 }
 
 //
@@ -303,6 +346,24 @@ static dispatch_once_t sharedInstanceonceToken;
                                       MAVEInfoLog(@"Sent %lu SMS invites", [recipientPhoneNumbers count]);
                                   }
                               }];
+}
+
+#pragma mark - Debug/ testing properties
+- (void)setDebug:(BOOL)debug {
+    if (debug) {
+        MAVEErrorLog(@"MAVE IS SET TO DEBUG MODE, MAKE SURE TO DISABLE IT BEFORE RELEASING");
+    }
+    _debug = debug;
+}
+
++(MAVEReferringData *)generateFakeReferringDataForTestingWithCustomData:(NSDictionary *)customData {
+    MAVEReferringData *rd = [[MAVEReferringData alloc] init];
+    rd.currentUser = [[MAVEUserData alloc] init];
+    rd.currentUser.phone = @"+12125559999";
+    rd.referringUser = [[MAVEUserData alloc] initWithUserID:@"100" firstName:@"Danny" lastName:@"Example" email:@"danny@example.com" phone:@"+18085551111"];
+    rd.referringUser.picture = [NSURL URLWithString:@"http://mave.io/images/giraffe-face.jpg"];
+    rd.customData = customData;
+    return rd;
 }
 
 

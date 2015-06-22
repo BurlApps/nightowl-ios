@@ -14,8 +14,6 @@
 #import "MAVEABUtils.h"
 #import "MAVERemoteConfiguration.h"
 #import "MAVEInvitePageViewController.h"
-#import "MAVECustomSharePageViewController.h"
-#import "MAVEContactsInvitePageV2ViewController.h"
 #import "MAVEDisplayOptions.h"
 
 NSString * const MAVEInvitePageTypeContactList = @"contact_list";
@@ -52,6 +50,14 @@ NSString * const MAVEInvitePagePresentFormatPush = @"push";
 
 
 - (UIViewController *)chooseAndCreateInvitePageViewController {
+    // Debug mode
+    MaveSDK *mave = [MaveSDK sharedInstance];
+    if (mave.debug && mave.debugInvitePageType != MAVEInvitePageTypeNone) {
+        UIViewController *vc = [self createViewControllerOfType:mave.debugInvitePageType];
+        self.activeViewController = vc;
+        return vc;
+    }
+
     // Based on the primary and fallback page configuration options,
     // display the appropriate invite page.
     MAVERemoteConfigurationInvitePageChoice *invitePageConfig = [MaveSDK sharedInstance].remoteConfiguration.invitePageChoice;
@@ -75,6 +81,8 @@ NSString * const MAVEInvitePagePresentFormatPush = @"push";
             return [self createContactsInvitePageIfAllowed];
         case MAVEInvitePageTypeContactsInvitePageV2:
             return [self createContactsInvitePageV2IfAllowed];
+        case MAVEInvitePageTypeContactsInvitePageV3:
+            return [self createContactsInvitePageV3IfAllowed];
         case MAVEInvitePageTypeSharePage:
             return [[MAVECustomSharePageViewController alloc] init];
         case MAVEInvitePageTypeClientSMS:
@@ -99,6 +107,15 @@ NSString * const MAVEInvitePagePresentFormatPush = @"push";
         return nil;
     }
 }
+
+- (MAVEContactsInvitePageV3ViewController *)createContactsInvitePageV3IfAllowed {
+    if ([self isAnyServerSideContactsInvitePageAllowed]) {
+        return [[MAVEContactsInvitePageV3ViewController alloc] init];
+    } else {
+        return nil;
+    }
+}
+
 
 - (BOOL)isAnyServerSideContactsInvitePageAllowed {
     // Once we fully support client-side invite send method, incorporate that option
@@ -226,6 +243,7 @@ NSString * const MAVEInvitePagePresentFormatPush = @"push";
     if (!button) {
         button = [[UIBarButtonItem alloc] init];
         button.style = UIBarButtonItemStylePlain;
+        button.tintColor = [MAVEDisplayOptions colorAppleDarkGray];
         button.title = @"Cancel";
     }
     button.target = self;

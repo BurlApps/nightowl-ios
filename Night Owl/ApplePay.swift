@@ -54,7 +54,7 @@ class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
     // MARK: Payment Methods
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didAuthorizePayment payment: PKPayment!, completion: ((PKPaymentAuthorizationStatus) -> Void)!) {
         self.user.addApplePay(payment, callback: { (error) -> Void in
-            self.delegate.applePayAuthorized!(error == nil)
+            self.delegate.applePayAuthorized?(error == nil)
             
             if error == nil {
                 completion(.Success)
@@ -66,6 +66,6 @@ class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
     }
     
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController!) {
-        self.delegate.applePayClose!()
+        self.delegate.applePayClose?()
     }
 }

@@ -14,7 +14,9 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "MAVEInvitePageViewController.h"
+#import "MAVERemoteConfigurationInvitePageChoice.h"
 #import "MAVEContactsInvitePageV2ViewController.h"
+#import "MAVEContactsInvitePageV3ViewController.h"
 
 typedef void (^MAVEInvitePagePresentBlock)(UIViewController *inviteController);
 typedef void (^MAVEInvitePageDismissBlock)(UIViewController *controller, NSUInteger numberOfInvitesSent);
@@ -44,8 +46,11 @@ extern NSString * const MAVEInvitePagePresentFormatPush;
 
 // Choose which invite page to present and initialize is view controller
 - (UIViewController *)chooseAndCreateInvitePageViewController;
+// Helpers
+- (UIViewController *)createViewControllerOfType:(MAVEInvitePageType)invitePageType;
 - (MAVEInvitePageViewController *)createContactsInvitePageIfAllowed;
 - (MAVEContactsInvitePageV2ViewController *)createContactsInvitePageV2IfAllowed;
+- (MAVEContactsInvitePageV3ViewController *)createContactsInvitePageV3IfAllowed;
 - (MFMessageComposeViewController *)createClientSMSInvitePage;
 
 // Helpers for business logic
