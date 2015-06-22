@@ -82,7 +82,7 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         cell1?.accessoryType = .None
         
         if self.user.card != nil {
-            if(self.user.card == "Apple Pay") {
+            if(self.user.getCardName() == "Apple Pay") {
                 cell1?.accessoryType = UITableViewCellAccessoryType.Checkmark
             } else if !self.user.card.isEmpty {
                 cell0?.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -108,7 +108,12 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         
         if indexPath.row == 1 {
             // Apple Pay
-            self.presentViewController(self.applePay.getModal(), animated: true, completion: nil)
+            if self.postController == nil {
+                self.user.changeCard("Apple Pay,0")
+            } else {
+                var modal = self.applePay.getModal(self.postController.subjectChosen.price)
+                self.presentViewController(modal, animated: true, completion: nil)
+            }
         }
     }
     

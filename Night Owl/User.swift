@@ -32,9 +32,7 @@ class User: NSObject {
     
     // MARK: Class Methods
     class func register(callback: (user: User!) -> Void, referral: (credits: Int) -> Void, promo: () -> Void) {
-        PFFacebookUtils.logInInBackgroundWithReadPermissions([
-            "public_profile", "email"
-        ], block: { (user: PFUser?, error: NSError?) -> Void in
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(nil, block: { (user: PFUser?, error: NSError?) -> Void in
             if user != nil && error == nil {
                 var userTemp = User(user!)
                 
@@ -161,6 +159,10 @@ class User: NSObject {
         self.parse.saveInBackgroundWithBlock(nil)
     }
     
+    func getCardName() -> String {
+        return (split(self.card) {$0 == ","})[0]
+    }
+    
     func changeCard(card: String) {
         self.card = card
         self.parse["card"] = self.card
@@ -190,7 +192,7 @@ class User: NSObject {
     func addApplePay(payment: PKPayment, callback: (error: NSError!) -> Void) {
         STPAPIClient.sharedClient().createTokenWithPayment(payment, completion: { (token: STPToken!, error: NSError!) -> Void in
             if token != nil && error == nil {
-                self.changeCard("Apple Pay")
+                self.changeCard("Apple Pay,1")
                 
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
                     "card":token.tokenId

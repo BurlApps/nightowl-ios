@@ -136,7 +136,7 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
                 }
                 
                 if user.card != nil && !user.card.isEmpty {
-                    self.cardLabel.text = user.card
+                    self.cardLabel.text = user.getCardName()
                     self.cardLabel.textColor = UIColor.grayColor()
                 }
                 

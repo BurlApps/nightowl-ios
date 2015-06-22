@@ -12,14 +12,15 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     var capturedImage: UIImage!
     var cameraController: CameraController!
     var cardWasAdded = false
+    var subjectChosen: Subject!
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
     private var subjects: [Subject] = []
-    private var subjectChosen: Subject!
     private var user: User = User.current()
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var alertMode: AlertMode!
     private var applePay: ApplePay!
+    private var cardWasNil = false
     
     // MARK: Enums
     enum AlertMode {
@@ -115,6 +116,9 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
         // Create Apple Pay
         self.applePay = ApplePay(user: self.user)
         self.applePay.delegate = self
+        
+        // Check User Card
+        self.cardWasNil = self.user.card == nil
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -204,6 +208,9 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
             UIAlertView(title: "Want This Answer Free?",
                 message: "Add your payment information to get this one us! Don't worry, we WON'T charge you until you use up your free questions.",
                 delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Info").show()
+        } else if self.user.card == "Apple Play,0" {
+            var modal = self.applePay.getModal(self.subjectChosen.price)
+            self.presentViewController(modal, animated: true, completion: nil)
         } else {
             self.createAssignment()
         }
@@ -216,7 +223,8 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
                 self.navigationController?.popViewControllerAnimated(false)
             } else {
                 if self.applePay.enabled {
-                    self.presentViewController(self.applePay.getModal(), animated: true, completion: nil)
+                    var modal = self.applePay.getModal(self.subjectChosen.price)
+                    self.presentViewController(modal, animated: true, completion: nil)
                 } else {
                     self.paymentsControllerShow()
                 }
@@ -301,7 +309,11 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     func applePayClose() {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             if self.cardWasAdded {
-                self.cardAdded()
+                if self.cardWasNil {
+                    self.cardAdded()
+                } else {
+                    self.createAssignment()
+                }
             } else {
                 self.paymentsControllerShow()
             }
