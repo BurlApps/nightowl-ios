@@ -32,7 +32,7 @@ class User: NSObject {
     
     // MARK: Class Methods
     class func register(callback: (user: User!) -> Void, referral: (credits: Int) -> Void, promo: () -> Void) {
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(nil, block: { (user: PFUser?, error: NSError?) -> Void in
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(nil, block: { (user: PFUser?, error: NSError?) -> Void in        
             if user != nil && error == nil {
                 var userTemp = User(user!)
                 
@@ -111,8 +111,8 @@ class User: NSObject {
                     
                     self.parse.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         if !success || error != nil {
-                            self.parse.removeObjectForKey("name")
-                            self.parse.removeObjectForKey("email")
+                            self.parse["name"] = nil
+                            self.parse["email"] = nil
                         }
                     })
                 }
@@ -176,12 +176,12 @@ class User: NSObject {
         stCard.expYear = card.expiryYear
         stCard.cvc = card.cvv
         
-        STPAPIClient.sharedClient().createTokenWithCard(stCard, completion: { (token: STPToken!, error: NSError!) -> Void in
-            if token != nil && error == nil {
-                self.changeCard(token.card.last4)
+        STPAPIClient.sharedClient().createTokenWithCard(stCard, completion: { (token: STPToken?, error: NSError?) -> Void in
+            if let newToken = token {
+                self.changeCard(newToken.card!.last4!)
 
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
-                    "card":token.tokenId
+                    "card": newToken.tokenId
                 ], block: nil)
             }
             
@@ -190,12 +190,12 @@ class User: NSObject {
     }
     
     func addApplePay(payment: PKPayment, callback: (error: NSError!) -> Void) {
-        STPAPIClient.sharedClient().createTokenWithPayment(payment, completion: { (token: STPToken!, error: NSError!) -> Void in
-            if token != nil && error == nil {
+        STPAPIClient.sharedClient().createTokenWithPayment(payment, completion: { (token: STPToken?, error: NSError?) -> Void in
+            if let newToken = token {
                 self.changeCard("Apple Pay,1")
                 
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
-                    "card":token.tokenId
+                    "card": newToken.tokenId
                 ], block: nil)
             }
             

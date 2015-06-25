@@ -61,6 +61,7 @@
 		D39FC69C1AC6461D00B6416B /* Pods.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1BB10C9D1C6BDFF39D60A /* Pods.debug.xcconfig */; };
 		D39FC69D1AC6461F00B6416B /* Pods.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1430730C15A9671CCBACB989 /* Pods.release.xcconfig */; };
 		D39FC69F1AC64A8900B6416B /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39FC69E1AC64A8900B6416B /* ImageController.swift */; };
+		D3A059B91B3B84800010BDA7 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A059B81B3B84800010BDA7 /* Rating.swift */; };
 		D3AF38781ACE241900B762B7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AF38771ACE241900B762B7 /* Global.swift */; };
 		D3BCE0791AC4053500824004 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE0781AC4053500824004 /* ScanController.swift */; };
 		D3BCE07B1AC47E7900824004 /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BCE07A1AC47E7900824004 /* CardController.swift */; };
@@ -151,6 +152,7 @@
 		D39BEC101B228AFD00D183D0 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		D39BEC121B239CF800D183D0 /* ApplePay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplePay.swift; sourceTree = "<group>"; };
 		D39FC69E1AC64A8900B6416B /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
+		D3A059B81B3B84800010BDA7 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		D3AF38771ACE241900B762B7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		D3BCE06C1AC3F2A400824004 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D3BCE06E1AC3F2C600824004 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -295,6 +297,7 @@
 				D32F7C1A1B0B046700713865 /* Promo.swift */,
 				D327FB031ACC82E400FA554B /* DebugAccount.swift */,
 				D3AF38771ACE241900B762B7 /* Global.swift */,
+				D3A059B81B3B84800010BDA7 /* Rating.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */,
 				D327FB061ACC848B00FA554B /* AccountsController.swift in Sources */,
 				D33EBA931ABFFC31001E637D /* QuestionsController.swift in Sources */,
+				D3A059B91B3B84800010BDA7 /* Rating.swift in Sources */,
 				D3D6B3001B0555390020572C /* HomeLoginController.swift in Sources */,
 				D39BEC091B2176CE00D183D0 /* PaymentController.swift in Sources */,
 				D37373831AEC606B0060EE9A /* SupportController.swift in Sources */,

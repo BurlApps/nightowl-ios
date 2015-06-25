@@ -25,3 +25,4 @@
 #import "TTTTimeIntervalFormatter.h"
 #import "CardIO.h"
 #import "FLAnimatedImage.h"
+#import "CNPPopupController.h"

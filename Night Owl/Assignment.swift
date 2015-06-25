@@ -17,6 +17,7 @@ class Assignment: NSObject {
     var state: Int!
     var creator: User!
     var subject: Subject!
+    var rating: Rating!
     var created: NSDate!
     var parse: PFObject!
     
@@ -98,6 +99,12 @@ class Assignment: NSObject {
         var subject = self.parse["subject"] as? PFObject
         self.subject = Subject.subject(subject!.objectId!)
         callback?(subject: self.subject)
+    }
+    
+    func getRating(callback: ((rating: Rating) -> Void)!) {
+        var rating = self.parse["tutorRating"] as? PFObject
+        self.rating = Rating(rating!)
+        callback?(rating: self.rating)
     }
     
     func nameFormatted(limit: Int = 20) -> String {

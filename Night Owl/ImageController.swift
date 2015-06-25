@@ -19,6 +19,7 @@ class ImageController: UIViewController, UIScrollViewDelegate {
     var imageType: Assignment.ImageType!
     var spinner: UIActivityIndicatorView!
     
+    // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -2,6 +2,7 @@ PODS:
   - CardIO (5.0.6)
   - CCTemplate (0.2.0)
   - CHTTextView (0.1)
+  - CNPPopupController (0.2.1)
   - CWStatusBarNotification (2.2.6)
   - FLAnimatedImage (1.0.8)
   - FormatterKit (1.8.0):
@@ -28,7 +29,7 @@ PODS:
   - JSQSystemSoundPlayer (1.5.2)
   - libPhoneNumber-iOS (0.8.5)
   - LLSimpleCamera (2.2.0)
-  - MaveSDK (0.7.1):
+  - MaveSDK (0.7.2):
     - CCTemplate (= 0.2.0)
     - libPhoneNumber-iOS (~> 0.8.3)
   - PaymentKit (1.1.1)
@@ -44,15 +45,16 @@ PODS:
 DEPENDENCIES:
   - CardIO (~> 5.0)
   - CHTTextView (~> 0.1)
+  - CNPPopupController
   - CWStatusBarNotification (~> 2.2.6)
   - FLAnimatedImage (~> 1.0)
   - FormatterKit (~> 1.8)
   - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController`,
     branch `version_5.3.2_patch`)
   - LLSimpleCamera (~> 2.2)
-  - MaveSDK
+  - MaveSDK (~> 0.7.1)
   - PaymentKit
-  - Stripe
+  - Stripe (~> 4.0)
   - Stripe/ApplePay
 
 EXTERNAL SOURCES:
@@ -69,6 +71,7 @@ SPEC CHECKSUMS:
   CardIO: 3fb62d56651d80e8f98e9572bfbe589ebf13d706
   CCTemplate: f00efa85dad31e12b8a766b8e8198eb772c71c4f
   CHTTextView: ceca52ee4c0a6e05c05a919c7135b82acdf8ed3f
+  CNPPopupController: 4dcb4e5a70beb0ffcfe425cf462c3e808d3f2aa3
   CWStatusBarNotification: b7d08c63bbfcceee08b63cab041560a6f5cdefb6
   FLAnimatedImage: f9422f796135aff80d8c00b2afc48015bb746e24
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
@@ -76,7 +79,7 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: 443466bd5f4537d0b7f15a0184244169ae65f8e5
   libPhoneNumber-iOS: b8ccd23576379caca37c7cbdd554addf384459ed
   LLSimpleCamera: 360c9647008f3cc8062748dbe7e4ebc7b4fbde04
-  MaveSDK: 0c4150261cdaf96260c00796440d4bc1eea0cb72
+  MaveSDK: 6aa558dd1be91a6b3023f26785a01b5da561adc5
   PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
   Stripe: 43a4307dc789483a61668d187c4a917d1348b0b6
 

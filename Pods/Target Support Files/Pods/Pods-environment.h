@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_CHTTextView 1
 #define COCOAPODS_VERSION_PATCH_CHTTextView 0
 
+// CNPPopupController
+#define COCOAPODS_POD_AVAILABLE_CNPPopupController
+#define COCOAPODS_VERSION_MAJOR_CNPPopupController 0
+#define COCOAPODS_VERSION_MINOR_CNPPopupController 2
+#define COCOAPODS_VERSION_PATCH_CNPPopupController 1
+
 // CWStatusBarNotification
 #define COCOAPODS_POD_AVAILABLE_CWStatusBarNotification
 #define COCOAPODS_VERSION_MAJOR_CWStatusBarNotification 2
@@ -118,7 +124,7 @@
 #define COCOAPODS_POD_AVAILABLE_MaveSDK
 #define COCOAPODS_VERSION_MAJOR_MaveSDK 0
 #define COCOAPODS_VERSION_MINOR_MaveSDK 7
-#define COCOAPODS_VERSION_PATCH_MaveSDK 1
+#define COCOAPODS_VERSION_PATCH_MaveSDK 2
 
 // PaymentKit
 #define COCOAPODS_POD_AVAILABLE_PaymentKit

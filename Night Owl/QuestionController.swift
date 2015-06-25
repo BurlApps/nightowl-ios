@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
-class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate, CNPPopupControllerDelegate {
     
     // MARK: Instance Variable
     var question: Assignment!
@@ -17,6 +17,7 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
     private var buttonState: Int!
     private var controllers = Dictionary<Int, ImageController>()
     private var pageController: UIPageViewController!
+    private var rateController: CNPPopupController!
     
     // MARK: IBOutlets
     @IBOutlet weak var flagButton: UIBarButtonItem!
@@ -49,6 +50,91 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         self.pagesContainer.addSubview(self.pageController.view)
         self.pageController.didMoveToParentViewController(self)
         self.updateLabel(0)
+        
+        // Rate Popup Controller
+        var title = UILabel(frame: CGRectMake(0, 0, self.view.frame.width, 60))
+        title.text = "How'd The Tutor Do?"
+        title.textAlignment = NSTextAlignment.Center
+        title.textColor = UIColor(red:0.26, green:0.27, blue:0.27, alpha:1)
+        title.font = UIFont.boldSystemFontOfSize(24)
+        title.backgroundColor = UIColor(red:0.97, green:0.99, blue:0.99, alpha:1)
+        
+        var birdSize: CGFloat = 115
+        var ratingView = UIView(frame: CGRectMake(0, 20, birdSize*3, birdSize + 25))
+        
+        // Angry Bird
+        var angryButton = CNPPopupButton(frame: CGRectMake(0, 0, birdSize, birdSize + 25))
+        var angryBird = UIImageView(frame: CGRectMake(0, 0, birdSize, birdSize))
+        var angryLabel = UILabel(frame: CGRectMake(0, birdSize, birdSize, 25))
+        
+        angryLabel.text = "Horrible!"
+        angryLabel.textAlignment = NSTextAlignment.Center
+        angryLabel.textColor = UIColor(red:0.97, green:0.65, blue:0.16, alpha:1)
+        angryLabel.font = UIFont.boldSystemFontOfSize(20)
+        
+        angryBird.image = UIImage(named: "AngryBird")
+        angryBird.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        angryButton.addSubview(angryLabel)
+        angryButton.addSubview(angryBird)
+        
+//        angryButton.selectionHandler = { (button: CNPPopupButton) in
+//            self.rateController.dismissPopupControllerAnimated(true)
+//        }
+        
+        ratingView.addSubview(angryButton)
+        
+        // Neutral Bird
+        var neutralButton = CNPPopupButton(frame: CGRectMake(birdSize, 0, birdSize, birdSize + 25))
+        var neutralBird = UIImageView(frame: CGRectMake(0, 0, birdSize, birdSize))
+        var neutralLabel = UILabel(frame: CGRectMake(0, birdSize, birdSize, 25))
+        
+        neutralLabel.text = "Alright"
+        neutralLabel.textAlignment = NSTextAlignment.Center
+        neutralLabel.textColor = UIColor(red:0.25, green:0.7, blue:0.31, alpha:1)
+        neutralLabel.font = UIFont.boldSystemFontOfSize(20)
+        
+        neutralBird.image = UIImage(named: "NeutralBird")
+        neutralBird.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        neutralButton.addSubview(neutralLabel)
+        neutralButton.addSubview(neutralBird)
+        
+        //        neutralButton.selectionHandler = { (button: CNPPopupButton) in
+        //            self.rateController.dismissPopupControllerAnimated(true)
+        //        }
+        
+        ratingView.addSubview(neutralButton)
+        
+        
+        // Happy Bird
+        var happyButton = CNPPopupButton(frame: CGRectMake(birdSize*2, 0, birdSize, birdSize + 25))
+        var happyBird = UIImageView(frame: CGRectMake(0, 0, birdSize, birdSize))
+        var happyLabel = UILabel(frame: CGRectMake(0, birdSize, birdSize, 25))
+        
+        happyLabel.text = "Amazing!"
+        happyLabel.textAlignment = NSTextAlignment.Center
+        happyLabel.textColor = UIColor(red:0.22, green:0.68, blue:0.64, alpha:1)
+        happyLabel.font = UIFont.boldSystemFontOfSize(20)
+        
+        happyBird.image = UIImage(named: "HappyBird")
+        happyBird.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        happyButton.addSubview(happyLabel)
+        happyButton.addSubview(happyBird)
+        
+        //        happyButton.selectionHandler = { (button: CNPPopupButton) in
+        //            self.rateController.dismissPopupControllerAnimated(true)
+        //        }
+        
+        ratingView.addSubview(happyButton)
+        
+        self.rateController = CNPPopupController(contents: [title, ratingView])
+        self.rateController.theme = CNPPopupTheme.defaultTheme()
+        self.rateController.theme.popupContentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        self.rateController.theme.popupStyle = CNPPopupStyle.ActionSheet
+        self.rateController.delegate = self
+        self.rateController.presentPopupControllerAnimated(true)
     }
     
     override func viewWillAppear(animated: Bool) {
