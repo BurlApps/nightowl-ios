@@ -169,6 +169,10 @@ class User: NSObject {
         self.parse.saveInBackgroundWithBlock(nil)
     }
     
+    func isApplePayActive() -> Bool {
+        return (split(self.card) {$0 == ","})[1] == "1"
+    }
+    
     func updateCard(card: CardIOCreditCardInfo, callback: (error: NSError!) -> Void) {
         var stCard = STPCard()
         stCard.number = card.cardNumber
@@ -176,12 +180,12 @@ class User: NSObject {
         stCard.expYear = card.expiryYear
         stCard.cvc = card.cvv
         
-        STPAPIClient.sharedClient().createTokenWithCard(stCard, completion: { (token: STPToken!, error: NSError!) -> Void in
+        STPAPIClient.sharedClient().createTokenWithCard(stCard, completion: { (token: STPToken?, error: NSError?) -> Void in
             if token != nil && error == nil {
-                self.changeCard(token.card.last4)
+                self.changeCard(token!.card!.last4!)
 
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
-                    "card":token.tokenId
+                    "card": token!.tokenId
                 ], block: nil)
             }
             
@@ -190,12 +194,12 @@ class User: NSObject {
     }
     
     func addApplePay(payment: PKPayment, callback: (error: NSError!) -> Void) {
-        STPAPIClient.sharedClient().createTokenWithPayment(payment, completion: { (token: STPToken!, error: NSError!) -> Void in
+        STPAPIClient.sharedClient().createTokenWithPayment(payment, completion: { (token: STPToken?, error: NSError?) -> Void in
             if token != nil && error == nil {
                 self.changeCard("Apple Pay,1")
                 
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
-                    "card":token.tokenId
+                    "card": token!.tokenId
                 ], block: nil)
             }
             

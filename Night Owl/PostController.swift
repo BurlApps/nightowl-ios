@@ -148,7 +148,11 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
         super.viewDidAppear(animated)
         
         if self.cardWasAdded {
-            self.cardAdded()
+            if self.cardWasNil {
+                self.cardAdded()
+            } else {
+                self.createAssignment()
+            }
         }
     }
     
@@ -202,18 +206,31 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     }
     
     @IBAction func createPost(sender: AnyObject) {
-        if self.user.freeQuestions < 1 && self.subjectChosen.price > 0 && self.user.card == nil {
-            self.alertMode = .AskForCard
-            
-            UIAlertView(title: "Want This Answer Free?",
-                message: "Add your payment information to get this one us! Don't worry, we WON'T charge you until you use up your free questions.",
-                delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Info").show()
-        } else if self.user.card == "Apple Play,0" {
-            var modal = self.applePay.getModal(self.subjectChosen.price)
-            self.presentViewController(modal, animated: true, completion: nil)
-        } else {
-            self.createAssignment()
+        if self.subjectChosen.price > 0 {
+            if self.user.freeQuestions < 1 {
+                if self.user.card == nil {
+                    self.alertMode = .AskForCard
+                    
+                    UIAlertView(title: "Want This Answer Free?",
+                        message: "Add your payment information to get this one us! Don't worry, we WON'T charge you until you use up your free questions.",
+                        delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Info").show()
+                    
+                    return
+                } else if !self.user.isApplePayActive() {
+                    var modal = self.applePay.getModal(self.subjectChosen.price)
+                    
+                    if modal != nil {
+                        self.presentViewController(modal, animated: true, completion: nil)
+                    } else {
+                        self.paymentsControllerShow()
+                    }
+                    
+                    return
+                }
+            }
         }
+        
+        self.createAssignment()
     }
     
     // MARK: UIAlertView Methods

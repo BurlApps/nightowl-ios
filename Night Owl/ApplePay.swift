@@ -32,7 +32,7 @@ class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
                 PKPaymentSummaryItem(label: "Night Owl", amount: 0.01)
             ]
             
-            enabled = Stripe.canSubmitPaymentRequest(self.request)
+            self.enabled = Stripe.canSubmitPaymentRequest(self.request)
         }
     }
     
@@ -43,9 +43,12 @@ class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
                 PKPaymentSummaryItem(label: "Night Owl", amount: NSDecimalNumber(float: price))
             ]
             
-            var paymentController = PKPaymentAuthorizationViewController(paymentRequest: self.request)
-            paymentController.delegate = self
-            return paymentController
+            if var paymentController = PKPaymentAuthorizationViewController(paymentRequest: self.request) {
+                paymentController.delegate = self
+                return paymentController
+            } else {
+                return nil
+            }
         }
         
         return nil

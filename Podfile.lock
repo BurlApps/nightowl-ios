@@ -28,7 +28,7 @@ PODS:
   - JSQSystemSoundPlayer (1.5.2)
   - libPhoneNumber-iOS (0.8.5)
   - LLSimpleCamera (2.2.0)
-  - MaveSDK (0.7.1):
+  - MaveSDK (0.7.2):
     - CCTemplate (= 0.2.0)
     - libPhoneNumber-iOS (~> 0.8.3)
   - PaymentKit (1.1.1)
@@ -50,9 +50,9 @@ DEPENDENCIES:
   - JSQMessagesViewController (from `https://github.com/jessesquires/JSQMessagesViewController`,
     branch `version_5.3.2_patch`)
   - LLSimpleCamera (~> 2.2)
-  - MaveSDK
+  - MaveSDK (~> 0.7.1)
   - PaymentKit
-  - Stripe
+  - Stripe (~> 4.0.2)
   - Stripe/ApplePay
 
 EXTERNAL SOURCES:
@@ -76,7 +76,7 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: 443466bd5f4537d0b7f15a0184244169ae65f8e5
   libPhoneNumber-iOS: b8ccd23576379caca37c7cbdd554addf384459ed
   LLSimpleCamera: 360c9647008f3cc8062748dbe7e4ebc7b4fbde04
-  MaveSDK: 0c4150261cdaf96260c00796440d4bc1eea0cb72
+  MaveSDK: 6aa558dd1be91a6b3023f26785a01b5da561adc5
   PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
   Stripe: 43a4307dc789483a61668d187c4a917d1348b0b6
 

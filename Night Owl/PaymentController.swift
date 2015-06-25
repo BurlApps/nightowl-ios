@@ -57,13 +57,24 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         }
         
         // Set CheckMark
-        self.setCheckMark()
+        if self.postController == nil {
+            self.setCheckMark(false)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.postController?.cardWasAdded = (self.user.card != nil && !self.user.card.isEmpty)
+        if self.user.card != nil {
+            var isApplePay = self.user.getCardName() == "Apple Pay"
+            var applePay = isApplePay && self.user.isApplePayActive()
+            var card = !isApplePay && !self.user.card.isEmpty
+            
+            self.postController?.cardWasAdded = applePay || card
+        } else {
+            self.postController?.cardWasAdded = false
+        }
+        
         self.navBorder.removeFromSuperview()
         
         if self.previousValue != self.user.card {
@@ -72,7 +83,7 @@ class PaymentController: UITableViewController, ApplePayDelegate {
     }
     
     // MARK: Instance Methods
-    func setCheckMark() {
+    func setCheckMark(trigger: Bool) {
         self.user = User.current()
         
         var cell0 = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
@@ -82,7 +93,7 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         cell1?.accessoryType = .None
         
         if self.user.card != nil {
-            if(self.user.getCardName() == "Apple Pay") {
+            if self.user.getCardName() == "Apple Pay" && self.applePay.enabled {
                 cell1?.accessoryType = UITableViewCellAccessoryType.Checkmark
             } else if !self.user.card.isEmpty {
                 cell0?.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -91,6 +102,11 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         
         if self.previousValue == nil {
             self.previousValue = self.user.card
+        }
+        
+        if self.postController != nil && trigger {
+            self.applePayClose()
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
     
@@ -109,7 +125,10 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         if indexPath.row == 1 {
             // Apple Pay
             if self.postController == nil {
-                self.user.changeCard("Apple Pay,0")
+                if self.user.getCardName() != "Apple Pay" {
+                    self.user.changeCard("Apple Pay,0")
+                    self.setCheckMark(true)
+                }
             } else {
                 var modal = self.applePay.getModal(self.postController.subjectChosen.price)
                 self.presentViewController(modal, animated: true, completion: nil)
@@ -120,7 +139,7 @@ class PaymentController: UITableViewController, ApplePayDelegate {
     // MARK: Payment Methods
     func applePayAuthorized(authorized: Bool) {
         if authorized {
-            self.setCheckMark()
+            self.setCheckMark(true)
         }
     }
     
