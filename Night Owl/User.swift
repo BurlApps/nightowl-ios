@@ -14,6 +14,7 @@ class User: NSObject {
     var freeQuestions: Int = 0
     var charges: Float = 0
     var questions: Int = 0
+    var messages: Int = 0
     var card: String!
     var name: String!
     var email: String!
@@ -27,6 +28,10 @@ class User: NSObject {
         
         if let questions = object["questions"] as? Int {
             self.questions = questions
+        }
+        
+        if let messages = object["messages"] as? Int {
+            self.messages = messages
         }
         
         if let freeQuestions = object["freeQuestions"] as? Int {
@@ -145,7 +150,8 @@ class User: NSObject {
                     var properties: [NSObject: AnyObject] = [
                         "Free Questions": self.freeQuestions,
                         "Charges": self.charges,
-                        "Questions": self.questions
+                        "Questions": self.questions,
+                        "Messages": self.messages
                     ]
                     
                     if var id = self.parse.objectId {
@@ -163,7 +169,6 @@ class User: NSObject {
                     }
                     
                     self.mixpanel.people.set(properties)
-                    
                     self.parse.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         if !success || error != nil {
                             self.parse.removeObjectForKey("name")
@@ -209,7 +214,7 @@ class User: NSObject {
     func updateName(name: String) {
         self.name = name
         self.parse["name"] = self.name
-        self.parse.saveInBackgroundWithBlock(nil)
+        self.parse.saveInBackground()
         self.mixpanel.track("MOBILE: User Changed Name")
     }
     
@@ -224,7 +229,7 @@ class User: NSObject {
     func changeCard(card: String) {
         self.card = card
         self.parse["card"] = self.card
-        self.parse.saveInBackgroundWithBlock(nil)
+        self.parse.saveInBackground()
     }
     
     func isApplePayActive() -> Bool {
@@ -254,7 +259,7 @@ class User: NSObject {
                     "card": token!.tokenId
                 ], block: nil)
                 
-                self.mixpanel.track("MOBILE: Added Credit Card")
+                self.mixpanel.track("MOBILE: Credit Card Added")
                 self.mixpanel.people.set("Card", to: stCard.last4!)
             }
             
@@ -271,7 +276,7 @@ class User: NSObject {
                     "card": token!.tokenId
                 ], block: nil)
                 
-                self.mixpanel.track("MOBILE: Added Apple Pay")
+                self.mixpanel.track("MOBILE: Apple Pay Added")
                 self.mixpanel.people.set("Card", to: "Apple Pay")
             }
             
@@ -282,9 +287,6 @@ class User: NSObject {
     func chargeQuestion(price: Float!, callback: (paid: Bool, error: NSError!) -> Void) {
         Settings.sharedInstance { (settings) -> Void in
             self.fetch { (user) -> Void in
-                self.questions = self.questions + 1
-                self.parse["questions"] = self.questions
-                
                 if self.freeQuestions > 0 {
                     self.creditQuestions(-1)
                     
@@ -293,15 +295,13 @@ class User: NSObject {
                 } else {
                     self.charges = self.charges + price
                     self.parse["charges"] = self.charges
+                    self.parse.saveInBackground()
                     
                     var newCharges = NSNumber(float: price)
                     self.mixpanel.people.trackCharge(newCharges)
                     
                     callback(paid: true, error: nil)
                 }
-                
-                self.parse.saveInBackgroundWithBlock(nil)
-                self.mixpanel.people.set("Questions", to: self.questions)
             }
         }
     }
@@ -310,7 +310,7 @@ class User: NSObject {
         self.fetch { (user) -> Void in
             user.freeQuestions = user.freeQuestions + freeAmount
             user.parse["freeQuestions"] = user.freeQuestions
-            user.parse.saveInBackgroundWithBlock(nil)
+            user.parse.saveInBackground()
             
             self.mixpanel.people.set("Free Questions", to: user.freeQuestions)
         }
@@ -357,6 +357,10 @@ class User: NSObject {
                     self.questions = questions
                 }
                 
+                if let messages = tempObject["messages"] as? Int {
+                    self.messages = messages
+                }
+                
                 if let freeQuestions = tempObject["freeQuestions"] as? Int {
                     self.freeQuestions = freeQuestions
                 }
@@ -374,7 +378,8 @@ class User: NSObject {
                 var properties: [NSObject: AnyObject] = [
                     "Free Questions": self.freeQuestions,
                     "Charges": self.charges,
-                    "Questions": self.questions
+                    "Questions": self.questions,
+                    "Messages": self.messages
                 ]
                 
                 if var id = self.parse.objectId {

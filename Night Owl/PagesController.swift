@@ -36,9 +36,6 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         // Set Global
         Global.pagesController = self
         
-        // Identitfy User
-        self.user.identifyMave()
-        
         // Create Notification
         self.notification = CWStatusBarNotification()
         self.notification.notificationAnimationInStyle = .Top
@@ -147,7 +144,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
             
             if numberOfInvitesSent > 0 {
                 self.user.mixpanel.track("MOBILE: Referrals Sent", properties: [
-                    "Referrals": numberOfInvitesSent
+                    "Invites": numberOfInvitesSent
                 ])
             }
         }, inviteContext: source)

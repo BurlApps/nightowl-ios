@@ -40,7 +40,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>${FACEBOOK_ID}</string>
 	<key>FacebookDisplayName</key>
@@ -49,14 +49,14 @@
 	<true/>
 	<key>MaveClientKey</key>
 	<string>${MAVE_CLIENT_KEY}</string>
+	<key>MixpanelToken</key>
+	<string>${MIXPANEL_TOKEN}</string>
 	<key>ParseApplicationID</key>
 	<string>${PARSE_APPLICATION_ID}</string>
 	<key>ParseClientKey</key>
 	<string>${PARSE_CLIENT_KEY}</string>
 	<key>StripeClientKey</key>
 	<string>${STRIPE_CLIENT_KEY}</string>
-	<key>MixpanelToken</key>
-	<string>${MIXPANEL_TOKEN}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

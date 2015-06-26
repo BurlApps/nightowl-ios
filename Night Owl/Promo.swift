@@ -28,6 +28,6 @@ class Promo: NSObject {
     func addUser(user: User) {
         var promoUsers = self.parse.relationForKey("users")
         promoUsers.addObject(user.parse)
-        self.parse.saveInBackgroundWithBlock(nil)
+        self.parse.saveInBackground()
     }
 }

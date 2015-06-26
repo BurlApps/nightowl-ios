@@ -44,7 +44,7 @@ class Assignment: NSObject {
     }
     
     // MARK: Class Methods
-    class func create(name: String!, image: UIImage, creator: User, subject: Subject, callback: (question: Assignment) -> Void) {
+    class func create(var name: String!, image: UIImage, imageSource: String, creator: User, subject: Subject, paid: Bool) {
         var assignment = PFObject(className: "Assignment")
         
         if name != nil {
@@ -76,7 +76,32 @@ class Assignment: NSObject {
                     creator.mixpanel.track("MOBILE: Question Image Upload")
                 }
                 
-                callback(question: instance)
+                if let id = assignment.objectId {
+                    if let subjectId = subject.parse.objectId {
+                        if let userId = creator.parse.objectId {
+                            creator.questions = creator.questions + 1
+                            creator.parse["questions"] = creator.questions
+                            creator.parse.saveInBackground()
+                            creator.mixpanel.people.set("Questions", to: creator.questions)
+                            
+                            var properties: [NSObject : AnyObject] = [
+                                "ID": id,
+                                "Source": imageSource,
+                                "Paid": paid,
+                                "Subject ID": subjectId,
+                                "Subject Name": subject.name,
+                                "Subject Price": subject.price,
+                                "User ID": userId
+                            ]
+                            
+                            if let description = name {
+                                properties["Name"] = description
+                            }
+                            
+                            creator.mixpanel.track("MOBILE: Question Created", properties: properties)
+                        }
+                    }
+                }
             } else {
                 println(error)
             }
@@ -133,7 +158,7 @@ class Assignment: NSObject {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
                     var flaggedAssignments = tutor.relationForKey("flaggedAssignments")
                     flaggedAssignments.addObject(self.parse)
-                    tutor.saveInBackgroundWithBlock(nil)
+                    tutor.saveInBackground()
                 })
             }
         }

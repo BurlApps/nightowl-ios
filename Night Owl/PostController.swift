@@ -179,21 +179,8 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
         
         self.user.chargeQuestion(self.subjectChosen.price, callback: { (paid, error) -> Void in
             if error == nil {
-                Assignment.create(editorText, image: self.capturedImage, creator: self.user, subject: self.subjectChosen, callback: { (question) -> Void in
-                    if let id = question.parse.objectId {
-                        if let subjectId = self.subjectChosen.parse.objectId {
-                            self.user.mixpanel.track("MOBILE: Question Created", properties: [
-                                "ID": id,
-                                "Source": self.imageSource,
-                                "Name": self.textEditor.text,
-                                "Price": self.subjectChosen.price,
-                                "Paid": paid,
-                                "Subject ID": subjectId,
-                                "Subject Name": self.subjectChosen.name
-                            ])
-                        }
-                    }
-                })
+                Assignment.create(editorText, image: self.capturedImage, imageSource: self.imageSource,
+                    creator: self.user, subject: self.subjectChosen, paid: paid)
                 
                 self.user.updateSubject(self.subjectChosen)
                 self.cameraController.slideToQuestions()
@@ -202,7 +189,6 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
                 UIAlertView(title: "Payment Error",
                     message: "An error occurred processing your payment. Please update your payment information!",
                     delegate: self, cancelButtonTitle: "Okay").show()
-                self.user.mixpanel.track("MOBILE: Payment Error")
             }
         })
     }
@@ -212,6 +198,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
         UIAlertView(title: "Thank You For Adding Your Information!",
             message: "As promised, this answer is completely on us!",
             delegate: self, cancelButtonTitle: "Okay").show()
+        self.user.mixpanel.track("MOBILE: Payment Added Popup")
     }
 
     // MARK: IBActions
@@ -225,10 +212,10 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
                 if self.user.card == nil {
                     self.alertMode = .AskForCard
                     
-                    self.user.mixpanel.track("MOBILE: Payment Info Popup")
                     UIAlertView(title: "Want This Answer Free?",
                         message: "Add your payment information to get this one us! Don't worry, we WON'T charge you until you use up your free questions.",
                         delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Info").show()
+                    self.user.mixpanel.track("MOBILE: Payment Info Popup")
                     
                     return
                 } else if !self.user.isApplePayActive() {

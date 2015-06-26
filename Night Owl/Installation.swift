@@ -28,20 +28,20 @@ class Installation: NSObject {
         self.parse.setDeviceTokenFromData(token)
         self.parse.setObject(Global.appVersion(), forKey: "appVersionNumber")
         self.parse.setObject(Global.appBuildVersion(), forKey: "appVersionBuild")
-        self.parse.saveInBackgroundWithBlock(nil)
+        self.parse.saveInBackground()
         
         Mixpanel.sharedInstance().people.addPushDeviceToken(token)
     }
     
     func setUser(user: User) {
         self.parse["user"] = user.parse
-        self.parse.saveInBackgroundWithBlock(nil)
+        self.parse.saveInBackground()
     }
     
     func clearBadge() {
         if self.parse.badge != 0 {
             self.parse.badge = 0
-            self.parse.saveInBackgroundWithBlock(nil)
+            self.parse.saveInBackground()
         }
     }
 }

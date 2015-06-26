@@ -31,6 +31,23 @@ class Message: NSObject {
         message["user"] = user.parse
         message["type"] = 2
         
-        message.saveInBackgroundWithBlock(nil)
+        message.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            if success && error == nil {
+                user.messages = user.messages + 1
+                user.parse["messages"] = user.messages
+                user.parse.saveInBackground()
+                
+                user.mixpanel.people.set("Messages", to: user.messages)
+                
+                if let id = message.objectId {
+                    if let userId = user.parse.objectId {
+                        user.mixpanel.track("MOBILE: Message Created", properties: [
+                            "ID": id,
+                            "User ID": userId
+                        ])
+                    }
+                }
+            }
+        }
     }
 }
