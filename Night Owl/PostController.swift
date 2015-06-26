@@ -9,6 +9,7 @@
 class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate {
     
     // MARK: Instance Variables
+    var imageSource: String = ""
     var capturedImage: UIImage!
     var cameraController: CameraController!
     var cardWasAdded = false
@@ -170,17 +171,29 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     }
     
     func createAssignment() {
-        var editorText: NSString! = self.textEditor.text
+        var editorText: String! = self.textEditor.text
         
-        if editorText.length == 0 {
+        if editorText.isEmpty {
             editorText = nil
         }
         
-        var description = editorText as? String
-        
-        self.user.chargeQuestion(description, price: self.subjectChosen.price, callback: { (error) -> Void in
+        self.user.chargeQuestion(self.subjectChosen.price, callback: { (paid, error) -> Void in
             if error == nil {
-                Assignment.create(description, question: self.capturedImage, creator: self.user, subject: self.subjectChosen)
+                Assignment.create(editorText, image: self.capturedImage, creator: self.user, subject: self.subjectChosen, callback: { (question) -> Void in
+                    if let id = question.parse.objectId {
+                        if let subjectId = self.subjectChosen.parse.objectId {
+                            self.user.mixpanel.track("MOBILE: Question Created", properties: [
+                                "ID": id,
+                                "Source": self.imageSource,
+                                "Name": self.textEditor.text,
+                                "Price": self.subjectChosen.price,
+                                "Paid": paid,
+                                "Subject ID": subjectId,
+                                "Subject Name": self.subjectChosen.name
+                            ])
+                        }
+                    }
+                })
                 
                 self.user.updateSubject(self.subjectChosen)
                 self.cameraController.slideToQuestions()
@@ -189,6 +202,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
                 UIAlertView(title: "Payment Error",
                     message: "An error occurred processing your payment. Please update your payment information!",
                     delegate: self, cancelButtonTitle: "Okay").show()
+                self.user.mixpanel.track("MOBILE: Payment Error")
             }
         })
     }
@@ -211,6 +225,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
                 if self.user.card == nil {
                     self.alertMode = .AskForCard
                     
+                    self.user.mixpanel.track("MOBILE: Payment Info Popup")
                     UIAlertView(title: "Want This Answer Free?",
                         message: "Add your payment information to get this one us! Don't worry, we WON'T charge you until you use up your free questions.",
                         delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Info").show()

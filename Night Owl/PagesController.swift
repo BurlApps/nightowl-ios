@@ -10,6 +10,11 @@ import UIKit
 
 class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
 
+    // MARK: Enums
+    enum AlertMode {
+        case RateApp, UpdateApp
+    }
+
     // MARK: Instance Variables
     var controllers = Dictionary<Int, PageController>()
     var currentPage = 2
@@ -17,6 +22,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     private var settings: Settings!
     private let pages = 4
     private let startPage = 2
+    private var alertMode: AlertMode!
     private var storyBoard = UIStoryboard(name: "Main", bundle: nil)
     private var startDate = NSDate()
     private var scrollView: UIScrollView!
@@ -103,11 +109,13 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     
     // MARK: Instance Methods
     func showRateApp(message: String) {
+        self.alertMode = .RateApp
         UIAlertView(title: "Rate Our App", message: message, delegate: self,
             cancelButtonTitle: "No Thanks", otherButtonTitles: "Sure!").show()
     }
     
     func showDownloadApp(message: String) {
+        self.alertMode = .UpdateApp
         UIAlertView(title: "Update The App", message: message, delegate: self,
             cancelButtonTitle: "No Thanks", otherButtonTitles: "Sure!").show()
     }
@@ -128,12 +136,18 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
             self.presentViewController(viewController, animated: true, completion: { () -> Void in
                 UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
             })
+            
+            self.user.mixpanel.track("MOBILE: Referral Popup")
         }, dismissBlock: { (viewController: UIViewController!, numberOfInvitesSent: UInt) -> Void in
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
                 self.setActiveChildController(goToController, animated: false, direction: .Forward)
                 dismissed?(invites: Int(numberOfInvitesSent))
             })
+            
+            self.user.mixpanel.track("MOBILE: Referrals Sent", properties: [
+                "Referrals": numberOfInvitesSent
+            ])
         }, inviteContext: source)
     }
     
@@ -170,6 +184,13 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
     // MARK: UIAlertViewDelegate
     func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
         if buttonIndex == 1 {
+            var verb = "Rate"
+            
+            if self.alertMode == .UpdateApp {
+                verb = "Update"
+            }
+            
+            self.user.mixpanel.track("MOBILE: \(verb) App Popup")
             var url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.settings.itunesId)")
             UIApplication.sharedApplication().openURL(url!)
         }

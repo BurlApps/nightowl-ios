@@ -9,7 +9,8 @@
 class HomeNotificationsController: HomePageController {
     
     // MARK: Instance Variables
-    var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    private var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    private var user = User.current()
     
     // MARK: IBOutlets
     @IBOutlet weak var onboardImage: UIImageView!
@@ -70,5 +71,11 @@ class HomeNotificationsController: HomePageController {
         
         self.homeController.notifications.register()
         self.homeController.nextController()
+        
+        if Notifications().enabled {
+            self.user.mixpanel.track("MOBILE: Notifications Authorized")
+        } else {
+            self.user.mixpanel.track("MOBILE: Notifications Denied")
+        }
     }
 }

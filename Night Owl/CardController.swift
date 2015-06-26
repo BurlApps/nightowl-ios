@@ -9,6 +9,7 @@
 class CardController: UIViewController {
     
     // MARK: Instance Variables
+    var paymentController: PaymentController!
     private var user = User.current()
     
     // MARK: IBoutlets
@@ -56,6 +57,9 @@ class CardController: UIViewController {
         if !CardIOUtilities.canReadCardWithCamera() {
             self.scanButton.hidden = true
         }
+        
+        // Track Event
+        self.user.mixpanel.track("MOBILE: Card Page")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -146,6 +150,7 @@ class CardController: UIViewController {
         self.user.updateCard(card, callback: { (error) -> Void in
             if error == nil {
                 self.navigationController?.popViewControllerAnimated(true)
+                self.paymentController.setCheckMark(true)
                 Global.reloadSettingsController()
             } else {
                 UIAlertView(title: "Credit Card Error", message: error.localizedDescription,

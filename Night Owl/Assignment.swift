@@ -44,7 +44,7 @@ class Assignment: NSObject {
     }
     
     // MARK: Class Methods
-    class func create(name: String!, question: UIImage, creator: User, subject: Subject) {
+    class func create(name: String!, image: UIImage, creator: User, subject: Subject, callback: (question: Assignment) -> Void) {
         var assignment = PFObject(className: "Assignment")
         
         if name != nil {
@@ -59,12 +59,13 @@ class Assignment: NSObject {
             if success && error == nil {
                 var instance = Assignment(assignment)
                 var cachedImages = instance.getCachedImages()
-                var imageData = UIImageJPEGRepresentation(question, 0.7)
+                var imageData = UIImageJPEGRepresentation(image, 0.7)
                 var imageFile = PFFile(name: "image.jpeg", data: imageData)
                
                 assignment["question"] = imageFile
-                cachedImages.question = question
+                cachedImages.question = image
                 instance.setCachedImages(cachedImages)
+                creator.mixpanel.timeEvent("MOBILE: Question Image Upload")
                 Global.reloadQuestionsController()
                 
                 assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
@@ -72,7 +73,10 @@ class Assignment: NSObject {
                     assignment.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         Global.reloadQuestionsController()
                     })
+                    creator.mixpanel.track("MOBILE: Question Image Upload")
                 }
+                
+                callback(question: instance)
             } else {
                 println(error)
             }

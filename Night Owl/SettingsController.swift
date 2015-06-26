@@ -140,10 +140,8 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
                     self.cardLabel.textColor = UIColor.grayColor()
                 }
                 
-                if user.freeQuestions != nil {
-                    self.freeQuestionsLabel.text = "\(user.freeQuestions)"
-                    self.freeQuestionsLabel.textColor = UIColor.grayColor()
-                }
+                self.freeQuestionsLabel.text = "\(user.freeQuestions)"
+                self.freeQuestionsLabel.textColor = UIColor.grayColor()
                 
                 self.refreshControl?.endRefreshing()
             }
@@ -184,6 +182,7 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
                 Global.slideToController(0, animated: true, direction: .Reverse)
             
             case "1:3":
+                self.user.mixpanel.track("MOBILE: Rate App Button")
                 var url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.settings.itunesId)")
                 UIApplication.sharedApplication().openURL(url!)
             
@@ -208,6 +207,7 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
             }
         } else if buttonIndex == 1 {
             self.user.logout()
+            self.user.mixpanel.track("MOBILE: User Logout")
             Global.showHomeController()
         }
     }

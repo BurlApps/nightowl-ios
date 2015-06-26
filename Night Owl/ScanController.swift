@@ -28,6 +28,9 @@ class ScanController: UIViewController, CardIOViewDelegate {
         } else {
             self.performSegueWithIdentifier("manualSegue", sender: self)
         }
+        
+        // Track Event
+        self.user.mixpanel.track("MOBILE: Scan Card Page")
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -29,6 +29,8 @@ class Installation: NSObject {
         self.parse.setObject(Global.appVersion(), forKey: "appVersionNumber")
         self.parse.setObject(Global.appBuildVersion(), forKey: "appVersionBuild")
         self.parse.saveInBackgroundWithBlock(nil)
+        
+        Mixpanel.sharedInstance().people.addPushDeviceToken(token)
     }
     
     func setUser(user: User) {

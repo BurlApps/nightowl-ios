@@ -33,6 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MaveSDK.setupSharedInstanceWithApplicationID(maveKey)
         Global.configureMaveShare()
         
+        // Initialize Mixpanel
+        let mixpanelToken = infoDictionary["MixpanelToken"] as! String
+        var mixpanel = Mixpanel.sharedInstanceWithToken(mixpanelToken, launchOptions: launchOptions)
+        mixpanel.miniNotificationPresentationTime = 10
+        mixpanel.identify(mixpanel.distinctId)
+        
         // Track an app open here if we launch with a push, unless
         // "content_available" was used to trigger a background push (introduced
         // in iOS 7). In that case, we skip tracking here to avoid double
@@ -43,7 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let noPushPayload = (launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] == nil)
             
             if preBackgroundPush || oldPushHandlerOnly || noPushPayload {
-                Track.appOpened(launchOptions)
+                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
+                mixpanel.track("MOBILE: App Open")
             }
         }
         
@@ -90,7 +97,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var actions: [String]!
         
         if application.applicationState == UIApplicationState.Inactive {
-            Track.appOpenedFromNotification(userInfo)
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayloadInBackground(userInfo, block: nil)
+            Mixpanel.sharedInstance().trackPushNotification(userInfo)
             wasActive = false
         }
         

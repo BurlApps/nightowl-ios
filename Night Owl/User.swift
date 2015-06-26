@@ -11,27 +11,44 @@ private var lastSubject: Subject!
 class User: NSObject {
     
     // MARK: Instance Variables
-    var freeQuestions: Int!
+    var freeQuestions: Int = 0
+    var charges: Float = 0
+    var questions: Int = 0
     var card: String!
     var name: String!
     var email: String!
     var subject: Subject!
+    var mixpanel: Mixpanel!
     var parse: PFUser!
     
     // MARK: Convenience Methods
     convenience init(_ object: PFUser) {
         self.init()
         
-        self.freeQuestions = object["freeQuestions"] as? Int
+        if let questions = object["questions"] as? Int {
+            self.questions = questions
+        }
+        
+        if let freeQuestions = object["freeQuestions"] as? Int {
+            self.freeQuestions = freeQuestions
+        }
+        
+        if let charges = object["charges"] as? Float {
+            self.charges = charges
+        }
+        
         self.card = object["card"] as? String
         self.name = object["name"] as? String
         self.email = object["email"] as? String
+        self.mixpanel = Mixpanel.sharedInstance()
         self.subject = lastSubject
         self.parse = object
     }
     
     // MARK: Class Methods
     class func register(callback: (user: User!) -> Void, referral: (credits: Int) -> Void, promo: () -> Void) {
+        var mixpanel = Mixpanel.sharedInstance()
+        
         PFFacebookUtils.logInInBackgroundWithReadPermissions(nil, block: { (user: PFUser?, error: NSError?) -> Void in
             if user != nil && error == nil {
                 var userTemp = User(user!)
@@ -42,19 +59,30 @@ class User: NSObject {
                 userTemp.registerMave()
                 userTemp.setInstallation()
                 userTemp.facebookInformation()
+                userTemp.indentifyMixpanel()
                 callback(user: userTemp)
                 
                 if user!.isNew {
-                    userTemp.isReferral({ (referred, credits) -> Void in                            
+                    userTemp.isReferral({ (referred, credits, referree) -> Void in
                         if referred {
                             referral(credits: credits)
+                            
+                            mixpanel.track("MOBILE: Registered", properties: [
+                                "Referral": referred,
+                                "Credits": credits,
+                                "Referree": referree
+                            ])
                         } else {
                             promo()
+                            mixpanel.track("MOBILE: Registered")
                         }
                     })
+                } else {
+                    mixpanel.track("MOBILE: Logged In")
                 }
             } else {
                 callback(user: nil)
+                mixpanel.track("MOBILE: Failed Authentication")
                 println(error)
             }
         })
@@ -76,6 +104,19 @@ class User: NSObject {
     // MARK: Instance Methods
     func logout() {
         User.logout()
+    }
+    
+    
+    func becomeUser() {
+        PFUser.becomeInBackground(self.parse.sessionToken!)
+        
+        self.setInstallation()
+        self.identifyMave()
+        self.indentifyMixpanel()
+    }
+    
+    func indentifyMixpanel() {
+        self.mixpanel.createAlias(self.parse.objectId, forDistinctID: self.mixpanel.distinctId)
     }
     
     func setInstallation() {
@@ -101,13 +142,27 @@ class User: NSObject {
             
             request.startWithCompletionHandler({ (connection: FBSDKGraphRequestConnection!, data: AnyObject!, error: NSError!) -> Void in
                 if data != nil && error == nil {
+                    var properties: [NSObject: AnyObject] = [
+                        "Free Questions": self.freeQuestions,
+                        "Charges": self.charges,
+                        "Questions": self.questions
+                    ]
+                    
+                    if var id = self.parse.objectId {
+                        properties["ID"] = id
+                    }
+                    
                     if let name = data["name"] as? String {
                         self.parse["name"] = name
+                        properties["$name"] = name
                     }
                     
                     if let email = data["email"] as? String {
                         self.parse["email"] = email
+                        properties["$email"] = email
                     }
+                    
+                    self.mixpanel.people.set(properties)
                     
                     self.parse.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         if !success || error != nil {
@@ -120,33 +175,31 @@ class User: NSObject {
         }
     }
     
-    func isReferral(callback: (referred: Bool, credits: Int!) -> Void) {
+    func isReferral(callback: (referred: Bool, credits: Int, referree: String) -> Void) {
         MaveSDK.sharedInstance().getReferringData { (data: MAVEReferringData!) -> Void in
             var referred = false
             var credits = 0
+            var referree = ""
             
             if data != nil && data.customData != nil && data.referringUser != nil {
                 if let tempCredits = data.customData["credits"] as? Int {
                     if self.parse.objectId != data.referringUser.userID {
                         referred = true
                         credits = tempCredits
+                        referree = data.referringUser.userID
                         
                         self.creditQuestions(credits)
                         
                         PFCloud.callFunctionInBackground("referredUser", withParameters: [
-                            "user": data.referringUser.userID,
+                            "user": referree,
                             "credits": credits
                         ], block: nil)
                     }
                 }
             }
             
-            callback(referred: referred, credits: credits)
+            callback(referred: referred, credits: credits, referree: referree)
         }
-    }
-    
-    func becomeUser() {
-        PFUser.becomeInBackground(self.parse.sessionToken!)
     }
     
     func updateSubject(subject: Subject!) {
@@ -157,9 +210,14 @@ class User: NSObject {
         self.name = name
         self.parse["name"] = self.name
         self.parse.saveInBackgroundWithBlock(nil)
+        self.mixpanel.track("MOBILE: User Changed Name")
     }
     
-    func getCardName() -> String {
+    func getCardName() -> String! {
+        if self.card == nil {
+            return nil
+        }
+        
         return (split(self.card) {$0 == ","})[0]
     }
     
@@ -170,7 +228,15 @@ class User: NSObject {
     }
     
     func isApplePayActive() -> Bool {
-        return (split(self.card) {$0 == ","})[1] == "1"
+        if self.card != nil {
+            var splitCard = split(self.card) {$0 == ","}
+            
+            if splitCard.count > 1 {
+                return splitCard[1] == "1"
+            }
+        }
+        
+        return false
     }
     
     func updateCard(card: CardIOCreditCardInfo, callback: (error: NSError!) -> Void) {
@@ -182,11 +248,14 @@ class User: NSObject {
         
         STPAPIClient.sharedClient().createTokenWithCard(stCard, completion: { (token: STPToken?, error: NSError?) -> Void in
             if token != nil && error == nil {
-                self.changeCard(token!.card!.last4!)
+                self.changeCard(stCard.last4!)
 
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
                     "card": token!.tokenId
                 ], block: nil)
+                
+                self.mixpanel.track("MOBILE: Added Credit Card")
+                self.mixpanel.people.set("Card", to: stCard.last4!)
             }
             
             callback(error: error)
@@ -201,32 +270,39 @@ class User: NSObject {
                 PFCloud.callFunctionInBackground("addCard", withParameters: [
                     "card": token!.tokenId
                 ], block: nil)
+                
+                self.mixpanel.track("MOBILE: Added Apple Pay")
+                self.mixpanel.people.set("Card", to: "Apple Pay")
             }
             
             callback(error: error)
         })
     }
     
-    func chargeQuestion(description: String!, price: Float!, callback: (error: NSError!) -> Void) {
+    func chargeQuestion(price: Float!, callback: (paid: Bool, error: NSError!) -> Void) {
         Settings.sharedInstance { (settings) -> Void in
             self.fetch { (user) -> Void in
-                if user.freeQuestions > 0 {
-                    user.freeQuestions = user.freeQuestions - 1
-                    user.parse["freeQuestions"] = user.freeQuestions
-                    user.parse.saveInBackgroundWithBlock(nil)
+                self.questions = self.questions + 1
+                self.parse["questions"] = self.questions
+                
+                if self.freeQuestions > 0 {
+                    self.creditQuestions(-1)
                     
                     Global.reloadSettingsController()
-                    callback(error: nil)
+                    callback(paid: false, error: nil)
                 } else {
-                    let charges = user.parse["charges"] as! Float
+                    self.charges = self.charges + price
+                    self.parse["charges"] = self.charges
                     
-                    user.parse["charges"] = charges + price
-                    user.parse.saveInBackgroundWithBlock(nil)
-                    callback(error: nil)
+                    var newCharges = NSNumber(float: price)
+                    self.mixpanel.people.trackCharge(newCharges)
+                    
+                    callback(paid: true, error: nil)
                 }
+                
+                self.parse.saveInBackgroundWithBlock(nil)
+                self.mixpanel.people.set("Questions", to: self.questions)
             }
-            
-            return ()
         }
     }
     
@@ -235,12 +311,14 @@ class User: NSObject {
             user.freeQuestions = user.freeQuestions + freeAmount
             user.parse["freeQuestions"] = user.freeQuestions
             user.parse.saveInBackgroundWithBlock(nil)
+            
+            self.mixpanel.people.set("Free Questions", to: user.freeQuestions)
         }
     }
     
     func promoCode(code: String, callback: ((promo: Promo!) -> Void)) {
         var query = PFQuery(className: "Promo")
-        
+
         query.whereKey("code", equalTo: code)
         query.whereKey("enabled", equalTo: true)
         
@@ -252,9 +330,22 @@ class User: NSObject {
                 self.creditQuestions(promo.credits)
                 
                 callback(promo: promo)
+                
+                if let id = promo.parse.objectId {
+                    self.mixpanel.track("MOBILE: Promo Code Successful", properties: [
+                        "ID": id,
+                        "Credits": promo.credits,
+                        "Name": promo.name,
+                        "Code": promo.code
+                    ])
+                }
             } else {
                 println(error)
                 callback(promo: nil)
+                
+                self.mixpanel.track("MOBILE: Promo Code Failure", properties: [
+                    "Code": code
+                ])
             }
         }
     }
@@ -262,12 +353,48 @@ class User: NSObject {
     func fetch(callback: ((user: User!) -> Void)!) -> User {
         self.parse.fetchInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
             if var tempObject = object as? PFUser {
-                self.freeQuestions = tempObject["freeQuestions"] as? Int
+                if let questions = tempObject["questions"] as? Int {
+                    self.questions = questions
+                }
+                
+                if let freeQuestions = tempObject["freeQuestions"] as? Int {
+                    self.freeQuestions = freeQuestions
+                }
+                
+                if let charges = tempObject["charges"] as? Float {
+                    self.charges = charges
+                }
+                
                 self.card = tempObject["card"] as? String
                 self.name = tempObject["name"] as? String
                 self.email = tempObject["email"] as? String
                 self.subject = lastSubject
                 callback!(user: self)
+                
+                var properties: [NSObject: AnyObject] = [
+                    "Free Questions": self.freeQuestions,
+                    "Charges": self.charges,
+                    "Questions": self.questions
+                ]
+                
+                if var id = self.parse.objectId {
+                    properties["ID"] = id
+                }
+                
+                if var card = self.card {
+                    properties["Card"] = card
+                }
+                
+                if var name = self.name {
+                    properties["$name"] = name
+                }
+                
+                
+                if var email = self.email {
+                    properties["$email"] = email
+                }
+                
+                self.mixpanel.people.set(properties)
             } else {
                 User.logout()
                 Global.showHomeController()

@@ -31,6 +31,11 @@ PODS:
   - MaveSDK (0.7.2):
     - CCTemplate (= 0.2.0)
     - libPhoneNumber-iOS (~> 0.8.3)
+  - Mixpanel (2.8.1):
+    - Mixpanel/Mixpanel (= 2.8.1)
+  - Mixpanel/Mixpanel (2.8.1):
+    - Mixpanel/MPCategoryHelpers
+  - Mixpanel/MPCategoryHelpers (2.8.1)
   - PaymentKit (1.1.1)
   - Stripe (4.0.3):
     - Stripe/Checkout (= 4.0.3)
@@ -51,8 +56,9 @@ DEPENDENCIES:
     branch `version_5.3.2_patch`)
   - LLSimpleCamera (~> 2.2)
   - MaveSDK (~> 0.7.1)
+  - Mixpanel (~> 2.8)
   - PaymentKit
-  - Stripe (~> 4.0.2)
+  - Stripe (~> 4.0.3)
   - Stripe/ApplePay
 
 EXTERNAL SOURCES:
@@ -77,6 +83,7 @@ SPEC CHECKSUMS:
   libPhoneNumber-iOS: b8ccd23576379caca37c7cbdd554addf384459ed
   LLSimpleCamera: 360c9647008f3cc8062748dbe7e4ebc7b4fbde04
   MaveSDK: 6aa558dd1be91a6b3023f26785a01b5da561adc5
+  Mixpanel: 93c4825025e6380ced273ed7178496282e385077
   PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
   Stripe: 43a4307dc789483a61668d187c4a917d1348b0b6
 

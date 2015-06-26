@@ -24,6 +24,15 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         // Create Apple Pay
         self.applePay = ApplePay(user: self.user)
         self.applePay.delegate = self
+        
+        // Track Event
+        var properties: [NSObject : AnyObject] = [:]
+        
+        if self.postController != nil {
+            properties["Price"] = self.postController.subjectChosen.price
+        }
+        
+        self.user.mixpanel.track("MOBILE: Payments Page", properties: properties)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -80,6 +89,11 @@ class PaymentController: UITableViewController, ApplePayDelegate {
         if self.previousValue != self.user.card {
             Global.reloadSettingsController()
         }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var controller = segue.destinationViewController as! CardController
+        controller.paymentController = self
     }
     
     // MARK: Instance Methods

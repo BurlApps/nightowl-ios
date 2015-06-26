@@ -22,7 +22,6 @@
 		D33EBA5C1ABFEDBC001E637D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA4F1ABFEDBC001E637D /* PageController.swift */; };
 		D33EBA5D1ABFEDBC001E637D /* PagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA501ABFEDBC001E637D /* PagesController.swift */; };
 		D33EBA5E1ABFEDBC001E637D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA511ABFEDBC001E637D /* Settings.swift */; };
-		D33EBA5F1ABFEDBC001E637D /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA521ABFEDBC001E637D /* Track.swift */; };
 		D33EBA601ABFEDBC001E637D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA531ABFEDBC001E637D /* User.swift */; };
 		D33EBA6D1ABFEFC8001E637D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA6B1ABFEFC8001E637D /* Parse.framework */; };
 		D33EBA6E1ABFEFC8001E637D /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBA6C1ABFEFC8001E637D /* ParseCrashReporting.framework */; };
@@ -107,7 +106,6 @@
 		D33EBA4F1ABFEDBC001E637D /* PageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
 		D33EBA501ABFEDBC001E637D /* PagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesController.swift; sourceTree = "<group>"; };
 		D33EBA511ABFEDBC001E637D /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		D33EBA521ABFEDBC001E637D /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		D33EBA531ABFEDBC001E637D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		D33EBA681ABFEE9A001E637D /* Night Owl-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Night Owl-Bridging-Header.h"; sourceTree = "<group>"; };
 		D33EBA6B1ABFEFC8001E637D /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
@@ -288,7 +286,6 @@
 				D33EBA471ABFEDBC001E637D /* Assignment.swift */,
 				D33EBA4E1ABFEDBC001E637D /* Installation.swift */,
 				D33EBA511ABFEDBC001E637D /* Settings.swift */,
-				D33EBA521ABFEDBC001E637D /* Track.swift */,
 				D33EBA531ABFEDBC001E637D /* User.swift */,
 				D3504A971AEE0261002D91D0 /* Message.swift */,
 				D33EBA9F1AC0F701001E637D /* Subject.swift */,
@@ -416,8 +413,8 @@
 				D33EBAA51AC1F406001E637D /* WebController.swift */,
 				D3BCE0781AC4053500824004 /* ScanController.swift */,
 				D3BCE07A1AC47E7900824004 /* CardController.swift */,
-				D327FB051ACC848B00FA554B /* AccountsController.swift */,
 				D39BEC081B2176CE00D183D0 /* PaymentController.swift */,
+				D327FB051ACC848B00FA554B /* AccountsController.swift */,
 			);
 			name = "Settings Page";
 			sourceTree = "<group>";
@@ -615,7 +612,6 @@
 				D39BEC111B228AFD00D183D0 /* HomePageController.swift in Sources */,
 				D3504A981AEE0261002D91D0 /* Message.swift in Sources */,
 				D3BCE0791AC4053500824004 /* ScanController.swift in Sources */,
-				D33EBA5F1ABFEDBC001E637D /* Track.swift in Sources */,
 				D33EBAA61AC1F406001E637D /* WebController.swift in Sources */,
 				D33EBA5B1ABFEDBC001E637D /* Installation.swift in Sources */,
 				D33EBA991AC0E5A8001E637D /* PostController.swift in Sources */,

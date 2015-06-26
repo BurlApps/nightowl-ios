@@ -14,6 +14,8 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
     // MARK: Instance Variables
     var cameraView: LLSimpleCamera!
     private var capturedImage: UIImage!
+    private var user = User.current()
+    private var imageSource: String = ""
     
     // MARK: IBOutlets Variables
     @IBOutlet weak var toolbar: UIToolbar!
@@ -86,10 +88,15 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         let viewController = segue.destinationViewController as! PostController
         
+        viewController.imageSource = self.imageSource
         viewController.capturedImage = self.capturedImage
         viewController.cameraController = self
         
         Global.lockPageView()
+        
+        self.user.mixpanel.track("MOBILE: Image Captured", properties: [
+            "Image Source": self.imageSource
+        ])
     }
     
     // MARK: IBActions
@@ -120,6 +127,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
         self.cameraView.capture ({ (camera: LLSimpleCamera!, var image: UIImage!, metaInfo:[NSObject : AnyObject]!, error: NSError!) -> Void in
             if image != nil && error == nil {
                 self.capturedImage = image
+                self.imageSource = "Camera"
                 self.performSegueWithIdentifier("postSegue", sender: self)
             } else {
                 UIAlertView(title: "Aww Snap!", message: "Sorry! We failed to take the picture.", delegate: nil, cancelButtonTitle: "Try Again").show()
@@ -151,6 +159,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
             
             // Post Segue
             self.capturedImage = image
+            self.imageSource = "Library"
             self.performSegueWithIdentifier("postSegue", sender: self)
         })
     }

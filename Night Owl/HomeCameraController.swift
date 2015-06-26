@@ -9,7 +9,8 @@
 class HomeCameraController: HomePageController {
 
     // MARK: Instance Variables
-    var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    private var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    private var user = User.current()
     
     // MARK: IBOutlets
     @IBOutlet weak var onboardImage: UIImageView!
@@ -70,5 +71,13 @@ class HomeCameraController: HomePageController {
         
         AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: nil)
         self.homeController.nextController()
+        
+        var cameraStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        
+        if cameraStatus == .Authorized  {
+            self.user.mixpanel.track("MOBILE: Camera Authorized")
+        } else {
+            self.user.mixpanel.track("MOBILE: Camera Denied")
+        }
     }
 }

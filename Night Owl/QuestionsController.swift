@@ -110,6 +110,8 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         if filter.isEmpty {
             self.questionsFiltered = self.questions
         } else {
+            self.user.mixpanel.track("MOBILE: Filter Questions")
+            
             for question in self.questions {
                 let containsName = NSString(string: question.nameFormatted()).containsString(filter)
                 let containsSubject = NSString(string: question.subject.name).containsString(filter)

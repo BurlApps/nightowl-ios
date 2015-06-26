@@ -29,7 +29,7 @@ class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
             self.request = request
             
             self.request.paymentSummaryItems = [
-                PKPaymentSummaryItem(label: "Night Owl", amount: 0.01)
+                PKPaymentSummaryItem(label: "Night Owl", amount: 0.99)
             ]
             
             self.enabled = Stripe.canSubmitPaymentRequest(self.request)
@@ -45,6 +45,11 @@ class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
             
             if var paymentController = PKPaymentAuthorizationViewController(paymentRequest: self.request) {
                 paymentController.delegate = self
+                
+                self.user.mixpanel.track("MOBILE: Apple Pay Page", properties: [
+                    "Price": price
+                ])
+                
                 return paymentController
             } else {
                 return nil

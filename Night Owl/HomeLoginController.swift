@@ -15,9 +15,9 @@ class HomeLoginController: HomePageController, UIAlertViewDelegate {
     }
     
     // MARK: Instance Variables
-    var user: User!
-    var alertState: AlertState = .None
-    var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    private var user: User!
+    private var alertState: AlertState = .None
+    private var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     // MARK: IBOutlets
     @IBOutlet weak var logoView: FLAnimatedImageView!
@@ -119,7 +119,7 @@ class HomeLoginController: HomePageController, UIAlertViewDelegate {
             
             if let code = alertView.textFieldAtIndex(0)?.text {
                 if !code.isEmpty {
-                    self.user.promoCode(code, callback: { (promo) -> Void in
+                    self.user.promoCode(code.uppercaseString, callback: { (promo) -> Void in
                         var title = "Sorry :("
                         var message = "We couldn't find your promo code."
                         var button = "Okay"

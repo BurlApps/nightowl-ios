@@ -16,6 +16,7 @@
 #import <LLSimpleCamera/LLSimpleCamera.h>
 #import <JSQMessagesViewController/JSQMessages.h>
 #import <MaveSDK.h>
+#import <Mixpanel.h>
 
 #import "CWStatusBarNotification.h"
 #import "Stripe.h"
