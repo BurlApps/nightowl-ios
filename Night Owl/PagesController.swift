@@ -137,7 +137,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
                 UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
             })
             
-            self.user.mixpanel.track("MOBILE: Referral Popup")
+            self.user.mixpanel.track("MOBILE: Referrals Page")
         }, dismissBlock: { (viewController: UIViewController!, numberOfInvitesSent: UInt) -> Void in
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
@@ -145,9 +145,11 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
                 dismissed?(invites: Int(numberOfInvitesSent))
             })
             
-            self.user.mixpanel.track("MOBILE: Referrals Sent", properties: [
-                "Referrals": numberOfInvitesSent
-            ])
+            if numberOfInvitesSent > 0 {
+                self.user.mixpanel.track("MOBILE: Referrals Sent", properties: [
+                    "Referrals": numberOfInvitesSent
+                ])
+            }
         }, inviteContext: source)
     }
     

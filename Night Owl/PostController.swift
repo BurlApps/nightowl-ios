@@ -173,7 +173,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     func createAssignment() {
         var editorText: String! = self.textEditor.text
         
-        if editorText.isEmpty {
+        if editorText != nil && editorText.isEmpty {
             editorText = nil
         }
         

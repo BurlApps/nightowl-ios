@@ -354,7 +354,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z7C-D5-oee" id="aDd-qa-LKZ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Payment Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tn7-oy-BHy">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Payment Method" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tn7-oy-BHy">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -599,7 +599,7 @@
             </objects>
             <point key="canvasLocation" x="1762" y="1766"/>
         </scene>
-        <!--Payment-->
+        <!--Payment Methods-->
         <scene sceneID="VfX-y3-fPm">
             <objects>
                 <tableViewController storyboardIdentifier="PaymentController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wXf-Lf-QQW" customClass="PaymentController" customModule="Night_Owl" customModuleProvider="target" sceneMemberID="viewController">
@@ -655,7 +655,7 @@
                             <outlet property="delegate" destination="wXf-Lf-QQW" id="36f-rh-Ove"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Payment" id="56b-GO-PHd"/>
+                    <navigationItem key="navigationItem" title="Payment Methods" id="56b-GO-PHd"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jp-Np-Jlf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
