@@ -46,7 +46,7 @@ class ApplePay: NSObject, PKPaymentAuthorizationViewControllerDelegate {
             if var paymentController = PKPaymentAuthorizationViewController(paymentRequest: self.request) {
                 paymentController.delegate = self
                 
-                self.user.mixpanel.track("MOBILE: Apple Pay Page", properties: [
+                self.user.mixpanel.track("Mobile.Apple Pay.Page", properties: [
                     "Price": price
                 ])
                 

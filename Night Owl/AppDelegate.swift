@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if preBackgroundPush || oldPushHandlerOnly || noPushPayload {
                 PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
-                mixpanel.track("MOBILE: App Open")
+                mixpanel.track("Mobile.App.Open")
             }
         }
         

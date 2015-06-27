@@ -47,7 +47,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         self.notification.notificationLabelFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
         self.notification.notificationTappedBlock = {
             self.notification.dismissNotification()
-            self.setActiveChildController(0, animated: true, direction: .Reverse)
+            self.setActiveChildController(0, animated: true, gotToRoot: true, direction: .Reverse)
         }
         
         // Create Page View Controller
@@ -101,7 +101,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         super.viewDidAppear(animated)
         
         // Set Start Page
-        self.setActiveChildController(self.startPage, animated: false, direction: .Forward)
+        self.setActiveChildController(self.startPage, animated: false, gotToRoot: true, direction: .Forward)
     }
     
     // MARK: Instance Methods
@@ -134,17 +134,20 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
                 UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
             })
             
-            self.user.mixpanel.track("MOBILE: Referrals Page")
+            self.user.mixpanel.track("Mobile.Referrals.Page", properties: [
+                "Source": source
+            ])
         }, dismissBlock: { (viewController: UIViewController!, numberOfInvitesSent: UInt) -> Void in
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
-                self.setActiveChildController(goToController, animated: false, direction: .Forward)
+                self.setActiveChildController(goToController, animated: false, gotToRoot: false, direction: .Forward)
                 dismissed?(invites: Int(numberOfInvitesSent))
             })
             
             if numberOfInvitesSent > 0 {
-                self.user.mixpanel.track("MOBILE: Referrals Sent", properties: [
-                    "Invites": numberOfInvitesSent
+                self.user.mixpanel.track("Mobile.Referrals.Sent", properties: [
+                    "Invites": numberOfInvitesSent,
+                    "Source": source
                 ])
             }
         }, inviteContext: source)
@@ -158,17 +161,20 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         self.scrollView.scrollEnabled = true
     }
     
-    func setActiveChildController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
+    func setActiveChildController(index: Int, animated: Bool, gotToRoot: Bool, direction: UIPageViewControllerNavigationDirection) {
         self.unlockPageView()
         
         self.setViewControllers([self.viewControllerAtIndex(index)],
             direction: direction, animated: animated, completion: { (success: Bool) -> Void in
-                self.viewControllerAtIndex(self.currentPage).popToRootViewControllerAnimated(true)
+                if gotToRoot {
+                    self.viewControllerAtIndex(self.currentPage).popToRootViewControllerAnimated(true)
+                }
+                
                 self.currentPage = index
             })
         
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            self.setActiveChildController(index, animated: false, direction: .Forward)
+            self.setActiveChildController(index, animated: false, gotToRoot: gotToRoot, direction: .Forward)
         })
     }
     
@@ -189,7 +195,7 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
                 verb = "Update"
             }
             
-            self.user.mixpanel.track("MOBILE: \(verb) App Popup")
+            self.user.mixpanel.track("Mobile.\(verb).Popup")
             var url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.settings.itunesId)")
             UIApplication.sharedApplication().openURL(url!)
         }

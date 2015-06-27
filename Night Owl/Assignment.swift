@@ -61,11 +61,12 @@ class Assignment: NSObject {
                 var cachedImages = instance.getCachedImages()
                 var imageData = UIImageJPEGRepresentation(image, 0.7)
                 var imageFile = PFFile(name: "image.jpeg", data: imageData)
+                var dateStart = NSDate()
                
                 assignment["question"] = imageFile
                 cachedImages.question = image
                 instance.setCachedImages(cachedImages)
-                creator.mixpanel.timeEvent("MOBILE: Question Image Upload")
+                
                 Global.reloadQuestionsController()
                 
                 assignment.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
@@ -73,35 +74,36 @@ class Assignment: NSObject {
                     assignment.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
                         Global.reloadQuestionsController()
                     })
-                    creator.mixpanel.track("MOBILE: Question Image Upload")
-                }
-                
-                if let id = assignment.objectId {
-                    if let subjectId = subject.parse.objectId {
-                        if let userId = creator.parse.objectId {
-                            creator.questions = creator.questions + 1
-                            creator.parse["questions"] = creator.questions
-                            creator.parse.saveInBackground()
-                            creator.mixpanel.people.set("Questions", to: creator.questions)
-                            
-                            var properties: [NSObject : AnyObject] = [
-                                "ID": id,
-                                "Source": imageSource,
-                                "Paid": paid,
-                                "Subject ID": subjectId,
-                                "Subject Name": subject.name,
-                                "Subject Price": subject.price,
-                                "User ID": userId
-                            ]
-                            
-                            if let description = name {
-                                properties["Name"] = description
+                    
+                    if let id = assignment.objectId {
+                        if let subjectId = subject.parse.objectId {
+                            if let userId = creator.parse.objectId {
+                                var dateEnd = NSDate()
+                                var properties: [NSObject : AnyObject] = [
+                                    "ID": id,
+                                    "Source": imageSource,
+                                    "Paid": paid,
+                                    "Subject ID": subjectId,
+                                    "Subject Name": subject.name,
+                                    "Subject Price": subject.price,
+                                    "User ID": userId,
+                                    "Upload Time": dateEnd.timeIntervalSinceDate(dateStart)
+                                ]
+                                
+                                if let description = name {
+                                    properties["Name"] = description
+                                }
+                                
+                                creator.mixpanel.track("Mobile.Question.Created", properties: properties)
                             }
-                            
-                            creator.mixpanel.track("MOBILE: Question Created", properties: properties)
                         }
                     }
                 }
+                
+                creator.questions = creator.questions + 1
+                creator.parse["questions"] = creator.questions
+                creator.parse.saveInBackground()
+                creator.mixpanel.people.set("Questions", to: creator.questions)
             } else {
                 println(error)
             }

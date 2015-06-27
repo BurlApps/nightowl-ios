@@ -30,7 +30,7 @@ class ScanController: UIViewController, CardIOViewDelegate {
         }
         
         // Track Event
-        self.user.mixpanel.track("MOBILE: Scan Card Page")
+        self.user.mixpanel.track("Mobile.Card.Scan")
     }
     
     override func viewWillAppear(animated: Bool) {

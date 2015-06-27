@@ -110,7 +110,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         if filter.isEmpty {
             self.questionsFiltered = self.questions
         } else {
-            self.user.mixpanel.track("MOBILE: Filter Questions")
+            self.user.mixpanel.track("Mobile.Questions.Filter")
             
             for question in self.questions {
                 let containsName = NSString(string: question.nameFormatted()).containsString(filter)
@@ -162,7 +162,33 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         
         if question.state > 0 {
             self.question = question
-            self.performSegueWithIdentifier("questionSegue", sender: self)
+            
+            if question.state == 3 && !self.user.hasReferred && TweakValue.questionShareModal() {
+                let source = "Question Page"
+        
+                MaveSDK.sharedInstance().presentInvitePagePushWithBlock({ (viewController: UIViewController!) -> Void in
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                    
+                    self.user.mixpanel.track("Mobile.Referrals.Page", properties: [
+                        "Source": source
+                    ])
+                }, forwardBlock: { (viewController: UIViewController!, numberOfInvitesSent: UInt) -> Void in
+                    self.performSegueWithIdentifier("questionSegue", sender: self)
+                    self.navigationController?.viewControllers.removeAtIndex(1)
+                    
+                    if numberOfInvitesSent > 0 {
+                        self.user.referredUser()
+                        self.user.mixpanel.track("Mobile.Referrals.Sent", properties: [
+                            "Invites": numberOfInvitesSent,
+                            "Source": source
+                        ])
+                    }
+                }, backBlock: { (viewController: UIViewController!, numberOfInvitesSent: UInt) -> Void in
+                    self.navigationController?.popViewControllerAnimated(true)
+                }, inviteContext: source)
+            } else {
+                self.performSegueWithIdentifier("questionSegue", sender: self)
+            }
         }
     }
     

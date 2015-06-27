@@ -20,34 +20,15 @@ class User: NSObject {
     var email: String!
     var subject: Subject!
     var mixpanel: Mixpanel!
+    var hasReferred: Bool = false
     var parse: PFUser!
     
     // MARK: Convenience Methods
     convenience init(_ object: PFUser) {
         self.init()
         
-        if let questions = object["questions"] as? Int {
-            self.questions = questions
-        }
-        
-        if let messages = object["messages"] as? Int {
-            self.messages = messages
-        }
-        
-        if let freeQuestions = object["freeQuestions"] as? Int {
-            self.freeQuestions = freeQuestions
-        }
-        
-        if let charges = object["charges"] as? Float {
-            self.charges = charges
-        }
-        
-        self.card = object["card"] as? String
-        self.name = object["name"] as? String
-        self.email = object["email"] as? String
         self.mixpanel = Mixpanel.sharedInstance()
-        self.subject = lastSubject
-        self.parse = object
+        self.loadProperties(object, callback: nil)
     }
     
     // MARK: Class Methods
@@ -72,22 +53,22 @@ class User: NSObject {
                         if referred {
                             referral(credits: credits)
                             
-                            mixpanel.track("MOBILE: Registered", properties: [
+                            mixpanel.track("Mobile.User.Registered", properties: [
                                 "Referral": referred,
                                 "Credits": credits,
                                 "Referree": referree
                             ])
                         } else {
                             promo()
-                            mixpanel.track("MOBILE: Registered")
+                            mixpanel.track("Mobile.User.Registered")
                         }
                     })
                 } else {
-                    mixpanel.track("MOBILE: Logged In")
+                    mixpanel.track("Mobile.User.Logged In")
                 }
             } else {
                 callback(user: nil)
-                mixpanel.track("MOBILE: Failed Authentication")
+                mixpanel.track("Mobile.User.Failed Authentication")
                 println(error)
             }
         })
@@ -110,7 +91,6 @@ class User: NSObject {
     func logout() {
         User.logout()
     }
-    
     
     func becomeUser() {
         PFUser.becomeInBackground(self.parse.sessionToken!)
@@ -151,7 +131,8 @@ class User: NSObject {
                         "Free Questions": self.freeQuestions,
                         "Charges": self.charges,
                         "Questions": self.questions,
-                        "Messages": self.messages
+                        "Messages": self.messages,
+                        "Has Referred": self.hasReferred
                     ]
                     
                     if var id = self.parse.objectId {
@@ -178,6 +159,81 @@ class User: NSObject {
                 }
             })
         }
+    }
+    
+    func loadProperties(object: PFUser, callback: ((user: User!) -> Void)!) {
+        if let questions = object["questions"] as? Int {
+            self.questions = questions
+        }
+        
+        if let messages = object["messages"] as? Int {
+            self.messages = messages
+        }
+        
+        if let freeQuestions = object["freeQuestions"] as? Int {
+            self.freeQuestions = freeQuestions
+        }
+        
+        if let charges = object["charges"] as? Float {
+            self.charges = charges
+        }
+        
+        if let hasReferred = object["hasReferred"] as? Bool {
+            self.hasReferred = hasReferred
+        }
+        
+        self.card = object["card"] as? String
+        self.name = object["name"] as? String
+        self.email = object["email"] as? String
+        self.subject = lastSubject
+        self.parse = object
+        callback?(user: self)
+        
+        var properties: [NSObject: AnyObject] = [
+            "Free Questions": self.freeQuestions,
+            "Charges": self.charges,
+            "Questions": self.questions,
+            "Messages": self.messages,
+            "Has Referred": self.hasReferred
+        ]
+        
+        if var id = self.parse.objectId {
+            properties["ID"] = id
+        }
+        
+        if var card = self.card {
+            properties["Card"] = card
+        }
+        
+        if var name = self.name {
+            properties["$name"] = name
+        }
+        
+        
+        if var email = self.email {
+            properties["$email"] = email
+        }
+        
+        self.mixpanel.people.set(properties)
+    }
+    
+    func fetch(callback: ((user: User!) -> Void)!) -> User {
+        self.parse.fetchInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
+            if var tempObject = object as? PFUser {
+                self.loadProperties(tempObject, callback: callback)
+            } else {
+                User.logout()
+                Global.showHomeController()
+            }
+        }
+        
+        return self
+    }
+    
+    func referredUser() {
+        self.hasReferred = true
+        self.parse["hasReferred"] = true
+        self.parse.saveInBackground()
     }
     
     func isReferral(callback: (referred: Bool, credits: Int, referree: String) -> Void) {
@@ -215,7 +271,7 @@ class User: NSObject {
         self.name = name
         self.parse["name"] = self.name
         self.parse.saveInBackground()
-        self.mixpanel.track("MOBILE: User Changed Name")
+        self.mixpanel.track("Mobile.User.Name.Changed")
     }
     
     func getCardName() -> String! {
@@ -259,7 +315,7 @@ class User: NSObject {
                     "card": token!.tokenId
                 ], block: nil)
                 
-                self.mixpanel.track("MOBILE: Credit Card Added")
+                self.mixpanel.track("Mobile.User.Card.Added")
                 self.mixpanel.people.set("Card", to: stCard.last4!)
             }
             
@@ -276,7 +332,7 @@ class User: NSObject {
                     "card": token!.tokenId
                 ], block: nil)
                 
-                self.mixpanel.track("MOBILE: Apple Pay Added")
+                self.mixpanel.track("Mobile.User.Apple Pay.Added")
                 self.mixpanel.people.set("Card", to: "Apple Pay")
             }
             
@@ -332,7 +388,7 @@ class User: NSObject {
                 callback(promo: promo)
                 
                 if let id = promo.parse.objectId {
-                    self.mixpanel.track("MOBILE: Promo Code Successful", properties: [
+                    self.mixpanel.track("Mobile.User.Promo.Successful", properties: [
                         "ID": id,
                         "Credits": promo.credits,
                         "Name": promo.name,
@@ -343,70 +399,11 @@ class User: NSObject {
                 println(error)
                 callback(promo: nil)
                 
-                self.mixpanel.track("MOBILE: Promo Code Failure", properties: [
+                self.mixpanel.track("Mobile.User.Promo.Failure", properties: [
                     "Code": code
                 ])
             }
         }
-    }
-    
-    func fetch(callback: ((user: User!) -> Void)!) -> User {
-        self.parse.fetchInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
-            if var tempObject = object as? PFUser {
-                if let questions = tempObject["questions"] as? Int {
-                    self.questions = questions
-                }
-                
-                if let messages = tempObject["messages"] as? Int {
-                    self.messages = messages
-                }
-                
-                if let freeQuestions = tempObject["freeQuestions"] as? Int {
-                    self.freeQuestions = freeQuestions
-                }
-                
-                if let charges = tempObject["charges"] as? Float {
-                    self.charges = charges
-                }
-                
-                self.card = tempObject["card"] as? String
-                self.name = tempObject["name"] as? String
-                self.email = tempObject["email"] as? String
-                self.subject = lastSubject
-                callback!(user: self)
-                
-                var properties: [NSObject: AnyObject] = [
-                    "Free Questions": self.freeQuestions,
-                    "Charges": self.charges,
-                    "Questions": self.questions,
-                    "Messages": self.messages
-                ]
-                
-                if var id = self.parse.objectId {
-                    properties["ID"] = id
-                }
-                
-                if var card = self.card {
-                    properties["Card"] = card
-                }
-                
-                if var name = self.name {
-                    properties["$name"] = name
-                }
-                
-                
-                if var email = self.email {
-                    properties["$email"] = email
-                }
-                
-                self.mixpanel.people.set(properties)
-            } else {
-                User.logout()
-                Global.showHomeController()
-            }
-        }
-        
-        return self
     }
     
     func assignments(callback: ((assignments: [Assignment]) -> Void)) {

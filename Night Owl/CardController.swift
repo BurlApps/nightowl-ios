@@ -59,7 +59,7 @@ class CardController: UIViewController {
         }
         
         // Track Event
-        self.user.mixpanel.track("MOBILE: Card Page")
+        self.user.mixpanel.track("Mobile.Card.Page")
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -75,9 +75,9 @@ class HomeCameraController: HomePageController {
         var cameraStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
         
         if cameraStatus == .Authorized  {
-            self.user.mixpanel.track("MOBILE: Camera Authorized")
+            self.user.mixpanel.track("Mobile.Camera.Authorized")
         } else {
-            self.user.mixpanel.track("MOBILE: Camera Denied")
+            self.user.mixpanel.track("Mobile.Camera.Denied")
         }
     }
 }

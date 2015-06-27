@@ -17,6 +17,7 @@
 #import <JSQMessagesViewController/JSQMessages.h>
 #import <MaveSDK.h>
 #import <Mixpanel.h>
+#import <Mixpanel/MPTweakInline.h>
 
 #import "CWStatusBarNotification.h"
 #import "Stripe.h"
@@ -26,3 +27,4 @@
 #import "TTTTimeIntervalFormatter.h"
 #import "CardIO.h"
 #import "FLAnimatedImage.h"
+#import "TweakValue.h"

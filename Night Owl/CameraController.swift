@@ -94,7 +94,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         Global.lockPageView()
         
-        self.user.mixpanel.track("MOBILE: Image Captured", properties: [
+        self.user.mixpanel.track("Mobile.Question.Captured", properties: [
             "Image Source": self.imageSource
         ])
     }
@@ -120,7 +120,7 @@ class CameraController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
 
     @IBAction func shareFriends(sender: UIBarButtonItem) {
-        Global.showInvite("cameraController", dismissed: nil)
+        Global.showInvite("Camera Page", dismissed: nil)
     }
     
     @IBAction func captureImage(sender: UIButton) {

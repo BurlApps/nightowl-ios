@@ -73,9 +73,9 @@ class HomeNotificationsController: HomePageController {
         self.homeController.nextController()
         
         if Notifications().enabled {
-            self.user.mixpanel.track("MOBILE: Notifications Authorized")
+            self.user.mixpanel.track("Mobile.Notifications.Authorized")
         } else {
-            self.user.mixpanel.track("MOBILE: Notifications Denied")
+            self.user.mixpanel.track("Mobile.Notifications.Denied")
         }
     }
 }

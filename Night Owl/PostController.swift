@@ -161,10 +161,11 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     func selectSubject(subject: Subject) {
         self.subjectChosen = subject
         
-        if self.user.freeQuestions > 0 {
-            self.title = "\(self.user.freeQuestions) Free Left"
-        } else if subject.price == 0 {
+        
+        if subject.price == 0 {
             self.title = "Free Right Now!"
+        } else if self.user.freeQuestions > 0 {
+            self.title = "\(self.user.freeQuestions) Free Left"
         } else {
             self.title = "Price: \(subject.priceFormatted())"
         }
@@ -198,7 +199,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
         UIAlertView(title: "Thank You For Adding Your Information!",
             message: "As promised, this answer is completely on us!",
             delegate: self, cancelButtonTitle: "Okay").show()
-        self.user.mixpanel.track("MOBILE: Payment Added Popup")
+        self.user.mixpanel.track("Mobile.Payments.Popup.Added")
     }
 
     // MARK: IBActions
@@ -215,7 +216,7 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
                     UIAlertView(title: "Want This Answer Free?",
                         message: "Add your payment information to get this one us! Don't worry, we WON'T charge you until you use up your free questions.",
                         delegate: self, cancelButtonTitle: "No Thanks", otherButtonTitles: "Add Info").show()
-                    self.user.mixpanel.track("MOBILE: Payment Info Popup")
+                    self.user.mixpanel.track("Mobile.Payments.Popup.Ask")
                     
                     return
                 } else if !self.user.isApplePayActive() {

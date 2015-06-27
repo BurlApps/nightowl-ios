@@ -29,7 +29,7 @@ class Global {
     
     class func slideToController(index: Int, animated: Bool, direction: UIPageViewControllerNavigationDirection) {
         if self.pagesController != nil {
-            self.pagesController.setActiveChildController(index, animated: animated, direction: direction)
+            self.pagesController.setActiveChildController(index, animated: animated, gotToRoot: true, direction: direction)
         }
     }
     
@@ -178,10 +178,10 @@ class Global {
         // Invite options
         mave.displayOptions.inviteExplanationFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
         mave.displayOptions.inviteExplanationTextColor = UIColor.whiteColor()
-        mave.displayOptions.inviteExplanationCellBackgroundColor = UIColor(red:0.09, green:0.56, blue:0.78, alpha:1)
+        mave.displayOptions.inviteExplanationCellBackgroundColor = UIColor(red:0, green:0.71, blue:0.65, alpha:1)
         mave.displayOptions.inviteExplanationShareButtonsColor =  UIColor(white: 1, alpha: 0.8)
         mave.displayOptions.inviteExplanationShareButtonsFont = UIFont(name: "HelveticaNeue-Bold", size: 14)
-        mave.displayOptions.inviteExplanationShareButtonsBackgroundColor = UIColor(red:0.09, green:0.56, blue:0.78, alpha:1)
+        mave.displayOptions.inviteExplanationShareButtonsBackgroundColor = UIColor(red:0, green:0.71, blue:0.65, alpha:1)
         
         // Message and Send section options for invite page v1
         mave.displayOptions.messageFieldFont = UIFont.systemFontOfSize(16)

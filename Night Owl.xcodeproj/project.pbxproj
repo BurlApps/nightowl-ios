@@ -51,6 +51,7 @@
 		D3504A981AEE0261002D91D0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3504A971AEE0261002D91D0 /* Message.swift */; };
 		D37196D71B2B92F4000BDDA0 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37196D61B2B92F4000BDDA0 /* Notifications.swift */; };
 		D37373831AEC606B0060EE9A /* SupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37373821AEC606B0060EE9A /* SupportController.swift */; };
+		D38E75711B3E26DF00416854 /* TweakValue.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E75701B3E26DF00416854 /* TweakValue.m */; };
 		D39BEC091B2176CE00D183D0 /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39BEC081B2176CE00D183D0 /* PaymentController.swift */; };
 		D39BEC0B1B2285B600D183D0 /* HomeCameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39BEC0A1B2285B600D183D0 /* HomeCameraController.swift */; };
 		D39BEC0D1B22860900D183D0 /* HomeNotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39BEC0C1B22860900D183D0 /* HomeNotificationsController.swift */; };
@@ -142,6 +143,8 @@
 		D3504A971AEE0261002D91D0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		D37196D61B2B92F4000BDDA0 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D37373821AEC606B0060EE9A /* SupportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportController.swift; sourceTree = "<group>"; };
+		D38E756F1B3E26DF00416854 /* TweakValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweakValue.h; sourceTree = "<group>"; };
+		D38E75701B3E26DF00416854 /* TweakValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweakValue.m; sourceTree = "<group>"; };
 		D39BEC081B2176CE00D183D0 /* PaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
 		D39BEC0A1B2285B600D183D0 /* HomeCameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCameraController.swift; sourceTree = "<group>"; };
 		D39BEC0C1B22860900D183D0 /* HomeNotificationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNotificationsController.swift; sourceTree = "<group>"; };
@@ -149,6 +152,7 @@
 		D39BEC101B228AFD00D183D0 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		D39BEC121B239CF800D183D0 /* ApplePay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplePay.swift; sourceTree = "<group>"; };
 		D39FC69E1AC64A8900B6416B /* ImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
+		D3A059BC1B3DD5BB0010BDA7 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; };
 		D3AF38771ACE241900B762B7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		D3BCE06C1AC3F2A400824004 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D3BCE06E1AC3F2C600824004 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -304,6 +308,7 @@
 				D33EBA4C1ABFEDBC001E637D /* Images.xcassets */,
 				D33EBA4D1ABFEDBC001E637D /* Info.plist */,
 				D33EBA681ABFEE9A001E637D /* Night Owl-Bridging-Header.h */,
+				D3A059BC1B3DD5BB0010BDA7 /* Playground.playground */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -356,6 +361,8 @@
 				D3156E271AEF090900101215 /* RBResizeImage.swift */,
 				D39BEC121B239CF800D183D0 /* ApplePay.swift */,
 				D37196D61B2B92F4000BDDA0 /* Notifications.swift */,
+				D38E756F1B3E26DF00416854 /* TweakValue.h */,
+				D38E75701B3E26DF00416854 /* TweakValue.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -599,6 +606,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38E75711B3E26DF00416854 /* TweakValue.m in Sources */,
 				D33EBA581ABFEDBC001E637D /* CameraController.swift in Sources */,
 				D33EBAA01AC0F702001E637D /* Subject.swift in Sources */,
 				D33EBA561ABFEDBC001E637D /* Assignment.swift in Sources */,

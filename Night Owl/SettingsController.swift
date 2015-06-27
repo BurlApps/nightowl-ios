@@ -176,13 +176,13 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
                 alert.show()
         
             case "0:3":
-                self.showSharing()
+                Global.showInvite("Settings Page", dismissed: nil)
             
             case "1:0":
                 Global.slideToController(0, animated: true, direction: .Reverse)
             
             case "1:3":
-                self.user.mixpanel.track("MOBILE: Rate App Button")
+                self.user.mixpanel.track("Mobile.Rate.Button")
                 var url = NSURL(string: "itms-apps://itunes.apple.com/app/id\(self.settings.itunesId)")
                 UIApplication.sharedApplication().openURL(url!)
             
@@ -207,7 +207,7 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
             }
         } else if buttonIndex == 1 {
             self.user.logout()
-            self.user.mixpanel.track("MOBILE: User Logout")
+            self.user.mixpanel.track("Mobile.User.Logout")
             Global.showHomeController()
         }
     }

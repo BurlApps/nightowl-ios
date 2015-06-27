@@ -41,7 +41,7 @@ class Message: NSObject {
                 
                 if let id = message.objectId {
                     if let userId = user.parse.objectId {
-                        user.mixpanel.track("MOBILE: Message Created", properties: [
+                        user.mixpanel.track("Mobile.Message.Created", properties: [
                             "ID": id,
                             "User ID": userId
                         ])

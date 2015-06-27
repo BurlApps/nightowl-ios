@@ -32,7 +32,7 @@ class PaymentController: UITableViewController, ApplePayDelegate {
             properties["Price"] = self.postController.subjectChosen.price
         }
         
-        self.user.mixpanel.track("MOBILE: Payments Page", properties: properties)
+        self.user.mixpanel.track("Mobile.Payments.Page", properties: properties)
     }
     
     override func viewWillAppear(animated: Bool) {
