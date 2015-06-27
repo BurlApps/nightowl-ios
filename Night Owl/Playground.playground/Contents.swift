@@ -3,6 +3,7 @@
 import Cocoa
 
 var dateStart = NSDate()
-sleep(4)
+sleep(2)
 var dateEnd = NSDate()
-dateEnd.timeIntervalSinceDate(dateStart)
+var interval = dateEnd.timeIntervalSinceDate(dateStart)
+round(1000*interval)/1000

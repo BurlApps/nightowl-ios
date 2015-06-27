@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mixpanelToken = infoDictionary["MixpanelToken"] as! String
         var mixpanel = Mixpanel.sharedInstanceWithToken(mixpanelToken, launchOptions: launchOptions)
         mixpanel.miniNotificationPresentationTime = 10
-        mixpanel.identify(mixpanel.distinctId)
         
         // Track an app open here if we launch with a push, unless
         // "content_available" was used to trigger a background push (introduced
@@ -71,6 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if buildType == "debug" {
             versionBuild = (versionBuild as String) + " - Debug"
             devBuild = true
+            mixpanel.flushInterval = 20
         }
         
         if devBuild && versionBuild != previousVersionBuild {

@@ -49,6 +49,24 @@ class QuestionController: UIViewController, UIActionSheetDelegate, UIPageViewCon
         self.pagesContainer.addSubview(self.pageController.view)
         self.pageController.didMoveToParentViewController(self)
         self.updateLabel(0)
+        
+        // Track Event
+        if let id = self.question.parse.objectId {
+            self.question.getSubject({ (subject) -> Void in
+                if let subjectId = self.question.subject.parse.objectId {
+                    if let userId = self.user.parse.objectId {
+                        self.user.mixpanel.track("Mobile.Question.Viewed", properties: [
+                            "ID": id,
+                            "User ID": userId,
+                            "Subject ID": subjectId,
+                            "Subject Name": subject.name,
+                            "Subject Price": subject.price,
+                            "State": self.question.state
+                        ])
+                    }
+                }
+            })
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

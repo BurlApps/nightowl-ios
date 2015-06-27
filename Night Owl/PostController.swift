@@ -161,7 +161,6 @@ class PostController: UIViewController, ApplePayDelegate, UITextViewDelegate, UI
     func selectSubject(subject: Subject) {
         self.subjectChosen = subject
         
-        
         if subject.price == 0 {
             self.title = "Free Right Now!"
         } else if self.user.freeQuestions > 0 {

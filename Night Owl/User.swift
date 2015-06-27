@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Brian Vallelunga. All rights reserved.
 //
 
+private var currentInstance: User!
 private var lastSubject: Subject!
 
 class User: NSObject {
@@ -13,6 +14,7 @@ class User: NSObject {
     // MARK: Instance Variables
     var freeQuestions: Int = 0
     var charges: Float = 0
+    var payed: Float = 0
     var questions: Int = 0
     var messages: Int = 0
     var card: String!
@@ -45,7 +47,7 @@ class User: NSObject {
                 userTemp.registerMave()
                 userTemp.setInstallation()
                 userTemp.facebookInformation()
-                userTemp.indentifyMixpanel()
+                userTemp.aliasMixpanel()
                 callback(user: userTemp)
                 
                 if user!.isNew {
@@ -75,8 +77,12 @@ class User: NSObject {
     }
     
     class func current() -> User! {
-        if let user = PFUser.currentUser() {
-            return User(user)
+        if currentInstance != nil {
+            return currentInstance
+        } else if let object = PFUser.currentUser() {
+            var user = User(object)
+            currentInstance = user
+            return user
         } else {
             Global.showHomeController()
             return nil
@@ -84,11 +90,14 @@ class User: NSObject {
     }
     
     class func logout() {
+        currentInstance = nil
         PFUser.logOut()
     }
     
     // MARK: Instance Methods
     func logout() {
+        self.mixpanel.track("Mobile.User.Logout")
+        self.mixpanel.reset()
         User.logout()
     }
     
@@ -97,10 +106,9 @@ class User: NSObject {
         
         self.setInstallation()
         self.identifyMave()
-        self.indentifyMixpanel()
     }
     
-    func indentifyMixpanel() {
+    func aliasMixpanel() {
         self.mixpanel.createAlias(self.parse.objectId, forDistinctID: self.mixpanel.distinctId)
     }
     
@@ -178,6 +186,10 @@ class User: NSObject {
             self.charges = charges
         }
         
+        if let payed = object["payed"] as? Float {
+            self.payed = payed
+        }
+        
         if let hasReferred = object["hasReferred"] as? Bool {
             self.hasReferred = hasReferred
         }
@@ -191,7 +203,7 @@ class User: NSObject {
         
         var properties: [NSObject: AnyObject] = [
             "Free Questions": self.freeQuestions,
-            "Charges": self.charges,
+            "Charges": self.charges + self.payed,
             "Questions": self.questions,
             "Messages": self.messages,
             "Has Referred": self.hasReferred
@@ -234,6 +246,8 @@ class User: NSObject {
         self.hasReferred = true
         self.parse["hasReferred"] = true
         self.parse.saveInBackground()
+        
+        self.mixpanel.people.set("Has Referred", to: true)
     }
     
     func isReferral(callback: (referred: Bool, credits: Int, referree: String) -> Void) {
@@ -343,7 +357,9 @@ class User: NSObject {
     func chargeQuestion(price: Float!, callback: (paid: Bool, error: NSError!) -> Void) {
         Settings.sharedInstance { (settings) -> Void in
             self.fetch { (user) -> Void in
-                if self.freeQuestions > 0 {
+                if price == 0 {
+                    callback(paid: false, error: nil)
+                } else if self.freeQuestions > 0 {
                     self.creditQuestions(-1)
                     
                     Global.reloadSettingsController()

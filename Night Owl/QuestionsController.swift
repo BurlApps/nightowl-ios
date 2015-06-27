@@ -163,11 +163,14 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         if question.state > 0 {
             self.question = question
             
+            println(self.user.hasReferred)
+            
             if question.state == 3 && !self.user.hasReferred && TweakValue.questionShareModal() {
                 let source = "Question Page"
         
                 MaveSDK.sharedInstance().presentInvitePagePushWithBlock({ (viewController: UIViewController!) -> Void in
                     self.navigationController?.pushViewController(viewController, animated: true)
+                    Global.lockPageView()
                     
                     self.user.mixpanel.track("Mobile.Referrals.Page", properties: [
                         "Source": source
@@ -185,6 +188,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
                     }
                 }, backBlock: { (viewController: UIViewController!, numberOfInvitesSent: UInt) -> Void in
                     self.navigationController?.popViewControllerAnimated(true)
+                    Global.unlockPageView()
                 }, inviteContext: source)
             } else {
                 self.performSegueWithIdentifier("questionSegue", sender: self)

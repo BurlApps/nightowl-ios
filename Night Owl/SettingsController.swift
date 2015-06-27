@@ -207,7 +207,6 @@ class SettingsController: UITableViewController, UIAlertViewDelegate {
             }
         } else if buttonIndex == 1 {
             self.user.logout()
-            self.user.mixpanel.track("Mobile.User.Logout")
             Global.showHomeController()
         }
     }

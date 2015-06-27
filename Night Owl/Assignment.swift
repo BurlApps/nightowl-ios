@@ -79,6 +79,7 @@ class Assignment: NSObject {
                         if let subjectId = subject.parse.objectId {
                             if let userId = creator.parse.objectId {
                                 var dateEnd = NSDate()
+                                var interval = dateEnd.timeIntervalSinceDate(dateStart)
                                 var properties: [NSObject : AnyObject] = [
                                     "ID": id,
                                     "Source": imageSource,
@@ -87,7 +88,7 @@ class Assignment: NSObject {
                                     "Subject Name": subject.name,
                                     "Subject Price": subject.price,
                                     "User ID": userId,
-                                    "Upload Time": dateEnd.timeIntervalSinceDate(dateStart)
+                                    "Upload Time (sec)": round(1000 * interval) / 1000
                                 ]
                                 
                                 if let description = name {
