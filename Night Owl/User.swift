@@ -106,6 +106,7 @@ class User: NSObject {
         
         self.setInstallation()
         self.identifyMave()
+        self.aliasMixpanel()
     }
     
     func aliasMixpanel() {
