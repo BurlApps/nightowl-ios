@@ -377,7 +377,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FjC-yy-YIB" id="NVd-mE-BR4">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Share For Free Questions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cNT-9z-QqD">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Share The Love" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cNT-9z-QqD">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.21176470588235294" green="0.72941176470588232" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>

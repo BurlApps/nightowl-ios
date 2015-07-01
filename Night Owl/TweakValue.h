@@ -11,6 +11,6 @@
 
 @interface TweakValue : NSObject
 
-+ (BOOL)questionShareModal;
++ (BOOL)questionReferModal;
 
 @end

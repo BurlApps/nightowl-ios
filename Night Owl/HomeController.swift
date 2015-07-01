@@ -57,6 +57,7 @@ class HomeController: UIPageViewController, UIPageViewControllerDataSource, UIPa
         self.controllers.removeAll(keepCapacity: false)
         
         // Login Controller
+        User.logout()
         if let user = User.current() {
             self.user = user
             self.user.becomeUser()

@@ -10,8 +10,8 @@
 
 @implementation TweakValue
 
-+ (BOOL)questionShareModal {
-    return MPTweakValue(@"Question Answer Refer Modal", false);
++ (BOOL)questionReferModal {
+    return MPTweakValue(@"Question Refer Modal", false);
 }
 
 @end

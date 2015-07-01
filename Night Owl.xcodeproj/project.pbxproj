@@ -47,7 +47,6 @@
 		D33EBAA01AC0F702001E637D /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBA9F1AC0F701001E637D /* Subject.swift */; };
 		D33EBAA41AC16CCB001E637D /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA31AC16CCB001E637D /* QuestionController.swift */; };
 		D33EBAA61AC1F406001E637D /* WebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EBAA51AC1F406001E637D /* WebController.swift */; };
-		D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D33EBAB61AC32C9D001E637D /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D3504A981AEE0261002D91D0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3504A971AEE0261002D91D0 /* Message.swift */; };
 		D37196D71B2B92F4000BDDA0 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37196D61B2B92F4000BDDA0 /* Notifications.swift */; };
 		D37373831AEC606B0060EE9A /* SupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37373821AEC606B0060EE9A /* SupportController.swift */; };
@@ -137,7 +136,6 @@
 		D33EBAB11AC28128001E637D /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D33EBAB21AC2812F001E637D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D33EBAB31AC295CD001E637D /* Night Owl.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Night Owl.entitlements"; sourceTree = "<group>"; };
-		D33EBAB61AC32C9D001E637D /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		D3504A921AED8DA2002D91D0 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D3504A951AED8DC1002D91D0 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		D3504A971AEE0261002D91D0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 				D3D6B3121B05A7630020572C /* FBSDKLoginKit.framework in Frameworks */,
 				D3D6B30D1B05A7620020572C /* ParseFacebookUtilsV4.framework in Frameworks */,
 				D318A6D51AD471E7001B9957 /* CoreTelephony.framework in Frameworks */,
-				D33EBAB71AC32C9D001E637D /* PassKit.framework in Frameworks */,
 				D33EBA901ABFF1A3001E637D /* Bolts.framework in Frameworks */,
 				D33EBA8E1ABFF16D001E637D /* Social.framework in Frameworks */,
 				D33EBA8C1ABFF167001E637D /* Accounts.framework in Frameworks */,
@@ -331,7 +328,6 @@
 				D3BCE0701AC3F2D200824004 /* CoreVideo.framework */,
 				D3BCE06E1AC3F2C600824004 /* CoreMedia.framework */,
 				D3BCE06C1AC3F2A400824004 /* AVFoundation.framework */,
-				D33EBAB61AC32C9D001E637D /* PassKit.framework */,
 				D33EBAA11AC13784001E637D /* libPods-CameraManager.a */,
 				D33EBA8F1ABFF1A3001E637D /* Bolts.framework */,
 				D33EBA8D1ABFF16D001E637D /* Social.framework */,
@@ -510,10 +506,10 @@
 								enabled = 1;
 							};
 							com.apple.OMC = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Passbook = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.iCloud = {
 								enabled = 0;

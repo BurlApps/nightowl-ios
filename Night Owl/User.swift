@@ -123,9 +123,25 @@ class User: NSObject {
     
     func identifyMave() {
         Settings.sharedInstance { (settings) -> Void in
+            var name = "Night Owl"
+            var email = "heynightowlteam@gmail.com"
+            
+            if let tempName = self.name {
+                name = tempName
+            }
+            
+            if let tempEmail = self.email {
+                email = tempEmail
+            }
+            
             var maveData = MAVEUserData(automaticallyFromDeviceName: ())
             maveData.userID = self.parse.objectId
-            maveData.customData = ["credits": settings.referralQuestions]
+            maveData.customData = [
+                "credits": settings.referralQuestions,
+                "host": settings.host,
+                "name": name,
+                "email": email
+            ]
             MaveSDK.sharedInstance().identifyUser(maveData)
         }
     }
@@ -202,6 +218,7 @@ class User: NSObject {
         self.parse = object
         callback?(user: self)
         
+        var superProperties: [NSObject: AnyObject] = [:]
         var properties: [NSObject: AnyObject] = [
             "Free Questions": self.freeQuestions,
             "Charges": self.charges + self.payed,
@@ -212,6 +229,7 @@ class User: NSObject {
         
         if var id = self.parse.objectId {
             properties["ID"] = id
+            superProperties["User ID"] = id
         }
         
         if var card = self.card {
@@ -220,14 +238,17 @@ class User: NSObject {
         
         if var name = self.name {
             properties["$name"] = name
+            superProperties["User Name"] = name
         }
         
         
         if var email = self.email {
             properties["$email"] = email
+            superProperties["User Email"] = email
         }
         
         self.mixpanel.people.set(properties)
+        self.mixpanel.registerSuperProperties(superProperties)
     }
     
     func fetch(callback: ((user: User!) -> Void)!) -> User {

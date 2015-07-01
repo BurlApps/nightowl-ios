@@ -164,16 +164,22 @@ class Global {
         var mave = MaveSDK.sharedInstance()
         
         // Create Cancel/Back Button
-        var button = UIBarButtonItem()
-        button.title = "Cancel"
-        button.tintColor = UIColor.blackColor()
+        var forwardButton = UIBarButtonItem()
+        forwardButton.title = "Skip"
+        forwardButton.tintColor = UIColor.whiteColor()
+        
+        var backButton = UIBarButtonItem()
+        backButton.title = "Cancel"
+        backButton.tintColor = UIColor.whiteColor()
         
         // Navigation bar options
-        mave.displayOptions.statusBarStyle = UIStatusBarStyle.Default
-        mave.displayOptions.navigationBarTitleCopy = "Invite Friends"
-        mave.displayOptions.navigationBarTitleFont = UIFont(name: "HelveticaNeue-Bold", size: 18)
-        mave.displayOptions.navigationBarTitleTextColor = UIColor(red:0.25, green:0.29, blue:0.33, alpha:1)
-        mave.displayOptions.navigationBarCancelButton = button
+        mave.displayOptions.statusBarStyle = UIStatusBarStyle.LightContent
+        mave.displayOptions.navigationBarTitleCopy = "Share The Love"
+        mave.displayOptions.navigationBarTitleFont = UIFont(name: "HelveticaNeue-Bold", size: 22)
+        mave.displayOptions.navigationBarTitleTextColor = UIColor.whiteColor()
+        mave.displayOptions.navigationBarBackgroundColor = UIColor(red:0.08, green:0.58, blue:0.53, alpha:1)
+        mave.displayOptions.navigationBarForwardButton = forwardButton
+        mave.displayOptions.navigationBarCancelButton = backButton
         
         // Invite options
         mave.displayOptions.inviteExplanationFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
@@ -198,6 +204,7 @@ class Global {
 
         // Contacts table options
         mave.displayOptions.contactCheckmarkColor = UIColor(red:0.22, green:0.6, blue:0.59, alpha:1)
+        mave.displayOptions.invitePageV3TintColor = UIColor(red:0.22, green:0.6, blue:0.59, alpha:1)
         
         // The client-side share page (the fallback if the normal invite page can't be displayed)
         mave.displayOptions.sharePageBackgroundColor = UIColor(red:0.98, green:0.99, blue:0.99, alpha:1)

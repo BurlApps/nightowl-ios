@@ -67,6 +67,7 @@ class HomeNotificationsController: HomePageController {
     // MARK: IBActions
     @IBAction func buttonPressed(sender: UIButton) {
         self.onboardButton.setTitleColor(UIColor.clearColor(), forState: UIControlState.Normal)
+        self.spinner.center = CGPointMake(self.onboardButton.frame.width/2, self.onboardButton.frame.height/2)
         self.spinner.startAnimating()
         
         self.homeController.notifications.register()

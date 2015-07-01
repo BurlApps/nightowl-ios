@@ -163,9 +163,7 @@ class QuestionsController: UITableViewController, UISearchBarDelegate {
         if question.state > 0 {
             self.question = question
             
-            println(self.user.hasReferred)
-            
-            if question.state == 3 && !self.user.hasReferred && TweakValue.questionShareModal() {
+            if question.state == 3 && !self.user.hasReferred && TweakValue.questionReferModal() {
                 let source = "Question Page"
         
                 MaveSDK.sharedInstance().presentInvitePagePushWithBlock({ (viewController: UIViewController!) -> Void in

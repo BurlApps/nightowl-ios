@@ -130,16 +130,13 @@ class PagesController: UIPageViewController, UIAlertViewDelegate, UIPageViewCont
         var goToController = self.currentPage
         
         MaveSDK.sharedInstance().presentInvitePageModallyWithBlock({ (viewController: UIViewController!) -> Void in
-            self.presentViewController(viewController, animated: true, completion: { () -> Void in
-                UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
-            })
+            self.presentViewController(viewController, animated: true, completion: nil)
             
             self.user.mixpanel.track("Mobile.Referrals.Page", properties: [
                 "Source": source
             ])
         }, dismissBlock: { (viewController: UIViewController!, numberOfInvitesSent: UInt) -> Void in
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
                 self.setActiveChildController(goToController, animated: false, gotToRoot: false, direction: .Forward)
                 dismissed?(invites: Int(numberOfInvitesSent))
             })
